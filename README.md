@@ -35,14 +35,16 @@ npm run build   # génère le site final dans dist/
 npm run preview # sert dist/ pour vérifier le build
 ```
 
-## Déployer sur Cloudflare Pages
+## Déployer sur Cloudflare
 
-1. Pousser ce dépôt sur GitHub (ou GitLab).
-2. Sur [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages → Create → Pages → Connect to Git**, choisir le dépôt.
-3. Réglages de build :
-   - **Build command** : `npm run build`
-   - **Build output directory** : `dist`
-4. Chaque `git push` sur `main` redéploie automatiquement le site.
+Le dépôt est connecté au projet Cloudflare **Workers** `site-internet-amaafe` (le `wrangler.toml` sert les fichiers statiques de `dist/`). Réglages nécessaires dans le tableau de bord (Paramètres → Build) :
+
+- **Commande de build** : `npm run build`
+- **Commande de déploiement** : `npx wrangler deploy` (valeur par défaut)
+
+Chaque `git push` sur `main` redéploie automatiquement le site.
+
+> Variante « Pages » : si un jour le projet est recréé via **Workers & Pages → Pages → Connect to Git**, il suffit d'indiquer build `npm run build` et dossier de sortie `dist` (et de remettre `pages_build_output_dir = "dist"` dans `wrangler.toml` à la place de la section `[assets]`).
 
 Dès que le domaine définitif est acquis :
 - l'ajouter dans Cloudflare Pages (**Custom domains**) ;

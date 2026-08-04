@@ -1,5 +1,9 @@
-# Configuration Cloudflare Pages (déploiement avec `wrangler pages deploy`
-# ou via le tableau de bord — voir README, section « Déployer »).
-name = "site-centre-rahma"
+# Configuration Cloudflare (projet Workers avec ressources statiques).
+# Le nom doit correspondre au service créé dans le tableau de bord Cloudflare.
+# Dans les réglages du projet, la commande de build doit être : npm run build
+name = "site-internet-amaafe"
 compatibility_date = "2026-08-01"
-pages_build_output_dir = "dist"
+
+[assets]
+directory = "./dist"
+not_found_handling = "404-page"
