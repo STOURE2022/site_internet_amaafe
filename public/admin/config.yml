@@ -8,7 +8,7 @@
 # =====================================================================
 backend:
   name: github
-  repo: A-COMPLETER/site-centre-rahma   # ex. amaafe/site-centre-rahma
+  repo: STOURE2022/site_internet_amaafe
   branch: main
   # base_url: https://VOTRE-PROXY-OAUTH  # nécessaire sur Cloudflare Pages (voir README)
 
