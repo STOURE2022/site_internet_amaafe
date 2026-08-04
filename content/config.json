@@ -12,6 +12,16 @@
     "nomComplet": "Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant",
     "sigle": "AMAAFE",
     "slogan": "Femmes et Enfants au cœur de l'AMAAFE",
+    "valeurs": ["Solidarité", "Dignité", "Éducation", "Compassion", "Transparence", "Responsabilité"],
+    "perspectives2030": [
+      "Construire des salles de classe pour la médersa",
+      "Développer le programme de parrainage",
+      "Accueillir davantage d'enfants",
+      "Renforcer les actions en faveur des femmes",
+      "Poursuivre le creusement des forages",
+      "Élargir les distributions alimentaires",
+      "Créer de nouveaux partenariats internationaux"
+    ],
     "domainesAction": [
       "Promotion de la santé des populations",
       "Lutte contre le mariage précoce et forcé",
@@ -78,8 +88,8 @@
     "realisations": [
       { "valeur": "30", "libelle": "campagnes de sensibilisation menées (santé, hygiène, droits), plus de 1 500 personnes touchées" },
       { "valeur": "832", "libelle": "enfants accompagnés vers la scolarisation, dans 4 écoles" },
-      { "valeur": "1 198", "libelle": "kits alimentaires (iftar) distribués pendant le Ramadan" },
-      { "valeur": "1 100", "libelle": "bénéficiaires directs de l'aide alimentaire trimestrielle, dans 6 communes (9 539 bénéficiaires indirects)" },
+      { "valeur": "1 198", "libelle": "kits alimentaires (iftar) distribués pendant le Ramadan — opération Babou Râyyan, depuis 2025" },
+      { "valeur": "1 100", "libelle": "bénéficiaires directs de l'aide alimentaire trimestrielle dans 6 communes, en partenariat avec Zakat Foundation of America (9 539 bénéficiaires indirects)" },
       { "valeur": "2", "libelle": "forages réalisés pour l'accès à l'eau potable, plus de 200 personnes desservies" },
       { "valeur": "52", "libelle": "femmes et 76 jeunes accompagnés vers l'autonomie, 2 projets financés" }
     ]

@@ -19,6 +19,9 @@ const temoignagesRendus = await Promise.all(
     <span class="eyebrow eyebrow--d">L'association porteuse</span>
     <h1>{config.amaafe.slogan}</h1>
     <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
+    <div class="tags">
+      {config.amaafe.valeurs.map((valeur) => <span class="tag">{valeur}</span>)}
+    </div>
   </section>
 
   <!-- ===== PRÉSENTATION + DOMAINES ===== -->
@@ -58,6 +61,20 @@ const temoignagesRendus = await Promise.all(
             <p style="font-size:14px;color:var(--gris);margin-top:10px;line-height:1.6">{r.libelle}</p>
           </div>
         ))}
+      </div>
+      <div class="rv" style="margin-top:46px">
+        <div class="head" style="margin-bottom:0">
+          <div>
+            <span class="eyebrow eyebrow--d">Perspectives</span>
+            <h2>Cap sur 2030</h2>
+          </div>
+          <p class="lead" style="max-width:40ch">Les priorités que l'association s'est fixées pour les prochaines années.</p>
+        </div>
+        <div class="eng">
+          {config.amaafe.perspectives2030.map((perspective) => (
+            <div class="eng__i"><span class="eng__c">✓</span><div><b>{perspective}</b></div></div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
