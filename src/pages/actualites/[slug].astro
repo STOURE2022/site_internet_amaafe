@@ -29,7 +29,9 @@ const { Content } = await render(article);
             : <span class="tbd">date à préciser</span>}
         </div>
         <h1 style="color:var(--vert);font-size:clamp(30px,4vw,46px)">{article.data.titre}</h1>
-        <div class="photo photo--p" style="aspect-ratio:16/9;margin-top:28px">Photo — {article.data.titre}</div>
+        {article.data.image
+          ? <img class="art__img" src={article.data.image} alt="" width="1200" height="675" />
+          : <div class="photo photo--p" style="aspect-ratio:16/9;margin-top:28px">Photo — {article.data.titre}</div>}
         <div class="prose">
           <Content />
         </div>

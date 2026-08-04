@@ -24,7 +24,9 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
       <div class="g3">
         {articles.map((article, i) => (
           <article class="card post rv">
-            <div class={`photo ${i % 2 === 0 ? 'photo--p' : 'photo--s'}`}>Photo — {article.data.titre}</div>
+            {article.data.image
+              ? <img class="post__img" src={article.data.image} alt="" loading="lazy" width="800" height="450" />
+              : <div class={`photo ${i % 2 === 0 ? 'photo--p' : 'photo--s'}`}>Photo — {article.data.titre}</div>}
             <div class="post__b">
               <div class="post__m">
                 <i>{article.data.categorie}</i>

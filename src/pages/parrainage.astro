@@ -67,7 +67,9 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
       <div class="g4">
         {enfants.map((enfant, i) => (
           <article class="card child rv">
-            <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>
+            {enfant.data.photo
+              ? <img class="child__p" src={enfant.data.photo} alt={enfant.data.prenom ? `Photo de ${enfant.data.prenom}` : "Photo de l'enfant"} loading="lazy" width="160" height="160" />
+              : <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>}
             <h3>{enfant.data.prenom ?? 'Enfant à parrainer'}</h3>
             <p>
               {enfant.data.age != null || enfant.data.niveau || enfant.data.anneeEntree != null

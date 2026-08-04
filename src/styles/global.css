@@ -283,6 +283,9 @@ p{margin:0}
 /* ---- actualités ---- */
 .post{overflow:hidden;display:flex;flex-direction:column}
 .post .photo{aspect-ratio:16/9;border-radius:0}
+.post__img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.art__img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);margin-top:28px}
+.child__p{width:80px;height:80px;border-radius:50%;object-fit:cover}
 .post__b{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
 .post__m{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap}
 .post__m i{padding:5px 9px;border-radius:99px;background:var(--vert-pale);color:var(--vert);font-style:normal}

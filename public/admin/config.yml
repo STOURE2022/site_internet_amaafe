@@ -165,7 +165,8 @@ collections:
       - { name: extrait, label: "Extrait (1 ou 2 phrases)", widget: text }
       - { name: date, label: "Date (laisser vide si inconnue)", widget: string, required: false,
           hint: "Format AAAA-MM-JJ, ex. 2026-03-12" }
-      - { name: image, label: "Image (avec autorisation uniquement)", widget: image, required: false }
+      - { name: image, label: "Image (avec autorisation uniquement)", widget: image, required: false,
+          hint: "Compresser l'image avant l'envoi (squoosh.app, format WebP ou JPEG, moins de 200 Ko) — le site doit rester léger pour les connexions lentes." }
       - { name: publie, label: "Publié", widget: boolean, default: true }
       - { name: body, label: "Texte de l'article", widget: markdown }
 
@@ -185,6 +186,7 @@ collections:
       - { name: age, label: "Âge", widget: number, required: false }
       - { name: niveau, label: "Niveau", widget: string, required: false }
       - { name: anneeEntree, label: "Année d'entrée au centre", widget: number, required: false }
-      - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false }
+      - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false,
+          hint: "Compresser la photo avant l'envoi (squoosh.app, moins de 200 Ko). Elle s'affiche en rond sur les fiches." }
       - { name: publie, label: "Publié", widget: boolean, default: true }
       - { name: body, label: "Description", widget: markdown }
