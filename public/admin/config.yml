@@ -176,6 +176,7 @@ collections:
     folder: "content/enfants"
     create: true
     slug: "enfant-{{slug}}"
+    summary: "{{filename}} — {{prenom}}"
     fields:
       - { name: prenom, label: "Prénom (avec autorisation écrite uniquement)", widget: string, required: false }
       - { name: age, label: "Âge", widget: number, required: false }
