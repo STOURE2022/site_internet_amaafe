@@ -73,7 +73,7 @@
   "medersa": {
     "_aide": "Objectif de collecte en euros. La jauge d'avancement se calcule automatiquement depuis montantCollecteFCFA ; ne remplir pourcentageAvancement que pour forcer une autre valeur.",
     "budgetTotalEUR": 30000,
-    "montantCollecteFCFA": null,
+    "montantCollecteFCFA": 15000,
     "pourcentageAvancement": null
   },
   "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
