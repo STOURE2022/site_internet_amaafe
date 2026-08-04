@@ -73,7 +73,7 @@
   "medersa": {
     "_aide": "Objectif de collecte en euros. La jauge d'avancement se calcule automatiquement depuis montantCollecteFCFA ; ne remplir pourcentageAvancement que pour forcer une autre valeur.",
     "budgetTotalEUR": 30000,
-    "montantCollecteFCFA": 15000,
+    "montantCollecteFCFA": 10000000,
     "pourcentageAvancement": null
   },
   "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
@@ -110,9 +110,9 @@
       "titulaire": null
     },
     "virementFrance": {
-      "iban": null,
-      "bic": null,
-      "titulaire": null
+      "iban": "FR76 1027 8063 1800 0216 5210 105",
+      "bic": "CMCIFR2A",
+      "titulaire": "AMAAFE/FRANCE"
     },
     "motif": "DON RAHMA - VOTRE NOM"
   },
@@ -257,9 +257,9 @@
     "benevoles": 7,
     "_aide": "Sources : rapport d'impact 2010-2025 et document métier 2026.",
     "enfants": 33,
-    "coutMensuelParEnfantFCFA": 15000,
+    "coutMensuelParEnfantFCFA": 20000,
     "suiviJusquaAge": 16,
-    "coutAnnuelParEnfantFCFA": 180000
+    "coutAnnuelParEnfantFCFA": 240000
   },
   "formulaires": {
     "_aide": "URLs des formulaires externes (Tally, Google Forms…). Tant qu'une URL est à null, le site propose uniquement le canal WhatsApp ou e-mail correspondant.",
