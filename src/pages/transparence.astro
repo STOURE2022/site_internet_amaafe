@@ -72,7 +72,36 @@ const { mali, france } = config.entites;
           <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Reporté sur l'exercice suivant, au service des projets</p>
         </div>
       </div>
-      <p class="rv" style="font-size:13.5px;color:var(--gris);margin-top:18px">
+      <div class="g2 rv" style="margin-top:26px">
+        <div class="card entity">
+          <div class="entity__t">D'où vient l'argent</div>
+          <div class="dl" style="margin-top:14px">
+            {config.finances.detailRecettes.map((ligne) => (
+              <div><em>{ligne.libelle}</em><span>{ligne.montantEUR} €</span></div>
+            ))}
+            <div><em><strong>Total des recettes</strong></em><span><strong>{config.finances.recettesEUR} €</strong></span></div>
+          </div>
+        </div>
+        <div class="card entity">
+          <div class="entity__t">Où va l'argent</div>
+          <h3 style="font-size:15px;margin-top:14px">Actions humanitaires — {config.finances.sousTotalActionsEUR} €</h3>
+          <div class="dl" style="margin-top:10px">
+            {config.finances.detailDepensesActions.map((ligne) => (
+              <div><em>{ligne.libelle}</em><span>{ligne.montantEUR} €</span></div>
+            ))}
+          </div>
+          <h3 style="font-size:15px;margin-top:18px">Fonctionnement — {config.finances.sousTotalFonctionnementEUR} €</h3>
+          <div class="dl" style="margin-top:10px">
+            {config.finances.detailDepensesFonctionnement.map((ligne) => (
+              <div><em>{ligne.libelle}</em><span>{ligne.montantEUR} €</span></div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p class="rv" style="font-size:14.5px;color:var(--encre);margin-top:18px">
+        Sur cet exercice, <strong>les actions humanitaires représentent près de 80 % des dépenses</strong> ; le fonctionnement (administration, personnel du centre, frais bancaires) en représente à peine plus de 20 %.
+      </p>
+      <p class="rv" style="font-size:13.5px;color:var(--gris);margin-top:10px">
         Bureau de l'association — Présidente : <strong>{config.dirigeants.presidente}</strong> · Trésorier : <strong>{config.dirigeants.tresorier}</strong>. Le détail complet figure dans le document ci-dessous.
       </p>
     </div>

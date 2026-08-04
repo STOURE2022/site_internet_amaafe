@@ -23,16 +23,17 @@
       "Créer de nouveaux partenariats internationaux"
     ],
     "domainesAction": [
-      "Promotion de la santé des populations",
+      "Droits et protection de l'enfant",
       "Lutte contre le mariage précoce et forcé",
-      "Droits de l'enfant",
-      "Scolarisation des filles",
+      "Droits et épanouissement des femmes",
+      "Entrepreneuriat féminin",
+      "Éducation et scolarisation des filles",
       "Éducation islamique",
-      "Sorties éducatives et récréatives",
-      "Centres de jeux pour enfants",
-      "Assainissement et cadre de vie",
-      "Épanouissement des femmes",
-      "Entrepreneuriat féminin"
+      "Sorties éducatives, récréatives et centres de jeux pour enfants",
+      "Santé communautaire et sécurité alimentaire",
+      "Accès à l'eau potable, assainissement et cadre de vie (WASH)",
+      "Sensibilisation et formation pour le développement communautaire",
+      "Accompagnement social"
     ]
   },
 
@@ -107,7 +108,30 @@
     "exercice": "2024/2025",
     "recettesEUR": "9 490,00",
     "depensesEUR": "7 990,65",
-    "excedentEUR": "1 499,35"
+    "excedentEUR": "1 499,35",
+    "detailRecettes": [
+      { "libelle": "Cotisations des membres", "montantEUR": "600,00" },
+      { "libelle": "Dons des particuliers", "montantEUR": "3 960,00" },
+      { "libelle": "Parrainages", "montantEUR": "4 680,00" },
+      { "libelle": "Produits des événements", "montantEUR": "250,00" }
+    ],
+    "detailDepensesActions": [
+      { "libelle": "Soutien aux familles démunies", "montantEUR": "2 000,00" },
+      { "libelle": "Aide aux orphelinats", "montantEUR": "1 680,00" },
+      { "libelle": "Fournitures et uniformes scolaires", "montantEUR": "910,00" },
+      { "libelle": "Aide alimentaire du Ramadan", "montantEUR": "808,70" },
+      { "libelle": "Autres actions sociales", "montantEUR": "950,00" }
+    ],
+    "sousTotalActionsEUR": "6 348,70",
+    "detailDepensesFonctionnement": [
+      { "libelle": "Personnel du Centre Coranique Rahma", "montantEUR": "1 097,63" },
+      { "libelle": "Fournitures administratives", "montantEUR": "150,00" },
+      { "libelle": "Déplacements", "montantEUR": "150,00" },
+      { "libelle": "Téléphone / Internet", "montantEUR": "100,00" },
+      { "libelle": "Frais bancaires", "montantEUR": "94,32" },
+      { "libelle": "Communication", "montantEUR": "50,00" }
+    ],
+    "sousTotalFonctionnementEUR": "1 641,95"
   },
 
   "parrainage": {

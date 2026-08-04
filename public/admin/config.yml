@@ -42,6 +42,8 @@ collections:
               - { name: nomComplet, label: "Nom complet", widget: string }
               - { name: sigle, label: "Sigle", widget: string }
               - { name: slogan, label: "Slogan", widget: string }
+              - { name: valeurs, label: "Valeurs", widget: list }
+              - { name: perspectives2030, label: "Perspectives 2030", widget: list }
               - { name: domainesAction, label: "Domaines d'action", widget: list }
           - name: entites
             label: "Entités déclarées"
@@ -125,6 +127,26 @@ collections:
               - { name: recettesEUR, label: "Recettes (€)", widget: string }
               - { name: depensesEUR, label: "Dépenses (€)", widget: string }
               - { name: excedentEUR, label: "Excédent (€)", widget: string }
+              - name: detailRecettes
+                label: "Détail des recettes"
+                widget: list
+                fields:
+                  - { name: libelle, label: "Libellé", widget: string }
+                  - { name: montantEUR, label: "Montant (€)", widget: string }
+              - name: detailDepensesActions
+                label: "Dépenses — actions humanitaires"
+                widget: list
+                fields:
+                  - { name: libelle, label: "Libellé", widget: string }
+                  - { name: montantEUR, label: "Montant (€)", widget: string }
+              - { name: sousTotalActionsEUR, label: "Sous-total actions (€)", widget: string }
+              - name: detailDepensesFonctionnement
+                label: "Dépenses — fonctionnement"
+                widget: list
+                fields:
+                  - { name: libelle, label: "Libellé", widget: string }
+                  - { name: montantEUR, label: "Montant (€)", widget: string }
+              - { name: sousTotalFonctionnementEUR, label: "Sous-total fonctionnement (€)", widget: string }
           - name: parrainage
             label: "Parrainage"
             widget: object
