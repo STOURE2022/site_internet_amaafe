@@ -6,6 +6,22 @@
     "adresse": "Yirimadio — Bamako, Mali",
     "horairesVisite": "du lundi au jeudi de 8 h à 17 h, le vendredi de 8 h à 12 h"
   },
+  "photos": {
+    "equipeAmaafe": null,
+    "uniformes": null,
+    "hangar": null,
+    "courCentre": null,
+    "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
+    "familleCentre": "/images/uploads/profe_04.jpg",
+    "detente": null,
+    "unCours": null,
+    "elevesUniforme": null,
+    "sensibilisation": null,
+    "recitation": null,
+    "remiseFournitures": null,
+    "planMedersa": null,
+    "sortieEducative": null
+  },
   "entites": {
     "mali": {
       "nom": "AMAAFE / Mali",
@@ -87,22 +103,6 @@
     "cotisationsAnnuellesFCFA": 360000,
     "partFonctionnementCouturePct": 30,
     "partActionsPct": 70
-  },
-  "photos": {
-    "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
-    "familleCentre": null,
-    "elevesUniforme": null,
-    "unCours": null,
-    "sortieEducative": null,
-    "courCentre": null,
-    "hangar": null,
-    "remiseFournitures": null,
-    "recitation": null,
-    "uniformes": null,
-    "detente": null,
-    "sensibilisation": null,
-    "equipeAmaafe": null,
-    "planMedersa": null
   },
   "paiement": {
     "orangeMoney": {
