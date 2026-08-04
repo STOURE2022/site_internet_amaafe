@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Tbd from '../components/Tbd.astro';
+import config from '../../content/config.json';
+
+const messageWa = encodeURIComponent('Bonjour, je vous contacte depuis le site du Centre Coranique Rahma.');
+const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
+---
+<Base
+  titre="Contact — Centre Coranique Rahma, Yirimadio (Bamako)"
+  description="Contactez le Centre Coranique Rahma : téléphone au Mali et en France, e-mail, WhatsApp. Une question, une visite, un partenariat — nous restons à votre disposition."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Contact</span>
+    <h1>Parlons de votre soutien.</h1>
+    <p class="lead">Une question, une visite, un partenariat : nous restons à votre disposition pour tout échange, au Mali comme en France.</p>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap contact__g">
+      <div class="cbox rv">
+        <div class="cline"><i aria-hidden="true">◉</i><div><b>Adresse du centre</b><span>{config.contact.adresse}</span></div></div>
+        <div class="cline"><i aria-hidden="true">✆</i><div><b>Téléphone Mali</b><span><a href={`tel:${config.contact.telMali.replace(/ /g, '')}`}>{config.contact.telMali}</a></span></div></div>
+        <div class="cline"><i aria-hidden="true">✆</i><div><b>Téléphone France</b><span><a href={`tel:${config.contact.telFrance.replace(/ /g, '')}`}>{config.contact.telFrance}</a></span></div></div>
+        <div class="cline"><i aria-hidden="true">✉</i><div><b>Courriel</b><span><a href={`mailto:${config.contact.email}`}>{config.contact.email}</a></span></div></div>
+        <div class="cline"><i aria-hidden="true">☰</i><div><b>Horaires de visite</b><span><Tbd valeur={config.contact.horairesVisite} label="à préciser" /></span></div></div>
+        <a class="btn btn--full btn--lg wa" href={lienWa} rel="noopener">Écrire directement sur WhatsApp</a>
+      </div>
+
+      <div class="cbox rv">
+        {config.formulaires.contactUrl ? (
+          <form action={config.formulaires.contactUrl} method="post">
+            <div class="cbox">
+              <label class="fl" for="c-nom" style="margin-top:0">Votre nom</label>
+              <div class="input"><input id="c-nom" name="nom" type="text" autocomplete="name" required></div>
+              <label class="fl" for="c-mail" style="margin-top:0">Votre e-mail</label>
+              <div class="input"><input id="c-mail" name="email" type="email" autocomplete="email" required></div>
+              <label class="fl" for="c-msg" style="margin-top:0">Votre message</label>
+              <div class="input"><textarea id="c-msg" name="message" required></textarea></div>
+              <button class="btn btn--vert btn--full" type="submit">Envoyer le message</button>
+            </div>
+          </form>
+        ) : (
+          <form id="form-contact">
+            <div class="cbox">
+              <label class="fl" for="c-nom" style="margin-top:0">Votre nom</label>
+              <div class="input"><input id="c-nom" type="text" autocomplete="name" required></div>
+              <label class="fl" for="c-mail" style="margin-top:0">Votre e-mail</label>
+              <div class="input"><input id="c-mail" type="email" autocomplete="email" required></div>
+              <label class="fl" for="c-msg" style="margin-top:0">Votre message</label>
+              <div class="input"><textarea id="c-msg" required></textarea></div>
+              <button class="btn btn--vert btn--full" type="submit">Envoyer le message</button>
+            </div>
+          </form>
+        )}
+        <p style="font-size:12.6px;color:var(--gris);line-height:1.5">Les informations transmises ne sont utilisées que pour répondre à votre message. Elles ne sont ni cédées, ni utilisées à d'autres fins. Voir la <a href="/confidentialite/" style="color:var(--vert);text-decoration:underline">politique de confidentialité</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  {!config.formulaires.contactUrl && (
+    <script is:inline define:vars={{ email: config.contact.email }}>
+      // Sans service de formulaire configuré, l'envoi ouvre le client
+      // e-mail du visiteur avec le message pré-rempli.
+      document.getElementById('form-contact').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nom = document.getElementById('c-nom').value.trim();
+        var mail = document.getElementById('c-mail').value.trim();
+        var msg = document.getElementById('c-msg').value.trim();
+        var sujet = encodeURIComponent('Message depuis le site — ' + nom);
+        var corps = encodeURIComponent(msg + '\n\n— ' + nom + ' (' + mail + ')');
+        location.href = 'mailto:' + email + '?subject=' + sujet + '&body=' + corps;
+      });
+    </script>
+  )}
+
+</Base>

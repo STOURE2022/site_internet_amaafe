@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+
+const { mali, france } = config.entites;
+---
+<Base
+  titre="L'AMAAFE — L'association qui porte le Centre Rahma"
+  description="L'Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant (AMAAFE) agit depuis 2010 pour les femmes et les enfants au Mali. Elle porte le Centre Coranique Rahma."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">L'association porteuse</span>
+    <h1>{config.amaafe.slogan}</h1>
+    <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
+  </section>
+
+  <!-- ===== PRÉSENTATION + DOMAINES ===== -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap about">
+      <div class="rv">
+        <img class="logo-amaafe" src="/images/logo-amaafe.png" alt={`Logo de l'AMAAFE — ${config.amaafe.slogan}`} width="220" height="220" style="width:160px" loading="lazy" />
+        <h2 style="margin-top:20px;color:var(--vert)">Le Centre Rahma n'est qu'une de ses actions</h2>
+        <hr class="rule">
+        <p class="lead">Depuis sa création au Mali en 2010, puis en France en 2012, l'AMAAFE intervient auprès des femmes et des enfants sur dix domaines d'action :</p>
+        <div class="tags">
+          {config.amaafe.domainesAction.map((domaine) => <span class="tag">{domaine}</span>)}
+        </div>
+      </div>
+      <div class="gal rv">
+        <div class="photo photo--s">Photo — une action de sensibilisation</div>
+        <div class="photo photo--p">Photo — l'équipe AMAAFE</div>
+        <div class="photo photo--p">Photo — une sortie éducative</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LES DEUX ENTITÉS ===== -->
+  <section class="sec trust">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Deux entités déclarées</span>
+          <h2>Une association, deux ancrages</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">L'entité malienne agit sur le terrain à Bamako ; l'entité française relaie l'action auprès de la diaspora et des partenaires en Europe.</p>
+      </div>
+      <div class="g2">
+        <div class="card entity rv">
+          <div class="entity__t">Entité malienne</div>
+          <h3>{mali.nom}</h3>
+          <div class="dl">
+            <div><em>Date de création</em><span>{mali.dateCreation}</span></div>
+            <div><em>Référence</em><span>{mali.reference}</span></div>
+            <div><em>Siège social</em><span>{mali.siege}</span></div>
+            <div><em>Régime</em><span>{mali.regime}</span></div>
+            <div><em>Porte</em><span>Le Centre Rahma</span></div>
+          </div>
+        </div>
+        <div class="card entity rv">
+          <div class="entity__t">Entité française</div>
+          <h3>{france.nom}</h3>
+          <div class="dl">
+            <div><em>Date de création</em><span>{france.dateCreation}</span></div>
+            <div><em>Référence</em><span>{france.reference}</span></div>
+            <div><em>Siège social</em><span>{france.siege}</span></div>
+            <div><em>Régime</em><span>{france.regime}</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv" style="margin-top:26px;text-align:center">
+        <a class="btn btn--ghost" href="/transparence/">Voir toutes nos références et documents</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPEL ===== -->
+  <section class="sec">
+    <div class="wrap" style="text-align:center">
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Agir avec nous</span>
+        <h2 style="margin-top:14px;color:var(--vert)">Rejoignez l'action de l'AMAAFE</h2>
+        <p class="lead" style="max-width:56ch;margin:18px auto 0">Adhésion, bénévolat, partenariat ou soutien au Centre Rahma : chaque engagement compte.</p>
+        <div class="hero__act" style="justify-content:center">
+          <a class="btn btn--or btn--lg" href="/faire-un-don/">Soutenir le Centre Rahma</a>
+          <a class="btn btn--ghost btn--lg" href="/contact/">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

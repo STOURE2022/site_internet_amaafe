@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import Tbd from '../components/Tbd.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Le centre — Histoire, mission et engagements | Centre Coranique Rahma"
+  description="Histoire et mission du Centre Coranique Rahma : une école coranique externe et entièrement gratuite à Yirimadio (Bamako), créée en 2023 par l'AMAAFE."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Le centre</span>
+    <h1>Une école née d'un constat, portée par une conviction.</h1>
+    <p class="lead">Créé en {config.site.anneeCreation} à Yirimadio par l'AMAAFE, le Centre Coranique Rahma accueille gratuitement les enfants que la pauvreté tient éloignés de l'école.</p>
+  </section>
+
+  <!-- ===== HISTOIRE ===== -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap about">
+      <div class="gal rv">
+        <div class="photo photo--p">Photo — les élèves en uniforme</div>
+        <div class="photo photo--s">Photo — un cours au centre</div>
+        <div class="photo photo--p">Photo — la cour du centre</div>
+      </div>
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Notre histoire</span>
+        <h2 style="margin-top:15px;color:var(--vert)">D'un constat de terrain à un centre dédié</h2>
+        <hr class="rule">
+        <p class="lead">En accompagnant les familles les plus vulnérables de Bamako, les équipes de l'AMAAFE ont fait le même constat, encore et encore : des enfants privés d'école faute de moyens, exposés à l'exclusion et à la précarité.</p>
+        <p class="lead" style="margin-top:16px">Plutôt que de le déplorer, l'association a créé en {config.site.anneeCreation} un centre entièrement dédié à ces enfants. Sa devise — <strong>{config.site.devise}</strong> — résume l'esprit du lieu : chaque enfant y apprend, y grandit et y construit son avenir dans la dignité.</p>
+        <div class="note">
+          <strong>Une école externe.</strong> Le Centre Rahma est une école coranique <strong>externe et gratuite</strong> : les enfants vivent dans leurs familles. Il n'y a ni internat, ni dortoir, ni repas servis. Le centre offre gratuitement la scolarité, les fournitures et les uniformes.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LES 4 ENGAGEMENTS ===== -->
+  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Notre mission</span>
+          <h2>Quatre engagements, tenus depuis le premier jour</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">La gratuité totale est la condition pour que les enfants des familles les plus démunies franchissent la porte — et y restent.</p>
+      </div>
+      <div class="eng rv" style="margin-top:0">
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>La scolarité est entièrement gratuite</b><p>Aucune contribution n'est demandée aux familles, quelle que soit leur situation.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Fournitures et uniformes offerts</b><p>Chaque élève reçoit son matériel et sa tenue, sans frais.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Un accompagnement éducatif et moral</b><p>Les élèves sont suivis individuellement, au-delà du seul enseignement.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Accueil sans distinction</b><p>Chaque enfant est accueilli sans distinction de situation sociale.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LE PARCOURS DE L'ENFANT ===== -->
+  <section class="sec" id="vision">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Notre vision</span>
+          <h2>Le parcours de l'enfant, de l'école au métier</h2>
+        </div>
+        <p class="lead" style="max-width:38ch">Le but est de rompre durablement le cycle de la pauvreté : par l'éducation d'abord, par le métier ensuite.</p>
+      </div>
+      <div class="path">
+        <div class="step rv"><div class="step__d">1</div><b>Enseignement coranique</b><p>Apprentissage et mémorisation du Saint Coran, encadrés au quotidien.</p></div>
+        <div class="step rv"><div class="step__d">2</div><b>Éducation morale et citoyenne</b><p>Discipline, solidarité et respect, appris et pratiqués chaque jour.</p></div>
+        <div class="step rv"><div class="step__d">3</div><b>Suivi jusqu'à {config.chiffres.suiviJusquaAge} ans</b><p>L'enfant est accompagné sans interruption tout au long de son parcours.</p></div>
+        <div class="step step--last rv"><div class="step__d">4</div><b>Formation professionnelle</b><p>À partir de {config.chiffres.suiviJusquaAge} ans, orientation vers un métier adapté à ses aptitudes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALERIE ===== -->
+  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Galerie</span>
+          <h2>Le centre en images</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">Les photos seront publiées après recueil des autorisations parentales, sans jamais permettre d'identifier un enfant sans accord écrit.</p>
+      </div>
+      <div class="g3 rv">
+        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — un cours sous le hangar</div>
+        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — remise des fournitures</div>
+        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — sortie éducative</div>
+        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — la récitation</div>
+        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — les uniformes</div>
+        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — moment de détente</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPEL ===== -->
+  <section class="sec">
+    <div class="wrap" style="text-align:center">
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Nous soutenir</span>
+        <h2 style="margin-top:14px;color:var(--vert)">Le centre vit de la générosité de ses donateurs</h2>
+        <p class="lead" style="max-width:56ch;margin:18px auto 0">Horaires de visite : <Tbd valeur={config.contact.horairesVisite} label="à préciser" />. Vous pouvez aussi nous écrire ou venir rencontrer l'équipe sur place, à Yirimadio.</p>
+        <div class="hero__act" style="justify-content:center">
+          <a class="btn btn--or btn--lg" href="/faire-un-don/">Faire un don</a>
+          <a class="btn btn--ghost btn--lg" href="/contact/">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+import { getCollection } from 'astro:content';
+import { fmtNombre } from '../lib/format.js';
+
+const enfants = await getCollection('enfants', ({ data }) => data.publie);
+
+const sujetMail = encodeURIComponent('Demande de parrainage — Centre Rahma');
+const corpsMail = encodeURIComponent(
+  'Bonjour,\n\nJe souhaite parrainer un enfant du Centre Coranique Rahma.\n\nNom : \nTéléphone (avec indicatif) : \nPays : \n\nMerci de me recontacter pour la mise en relation.'
+);
+const lienMail = `mailto:${config.contact.email}?subject=${sujetMail}&body=${corpsMail}`;
+const messageWa = encodeURIComponent('Bonjour, je souhaite parrainer un enfant du Centre Coranique Rahma. Pouvez-vous me recontacter pour la mise en relation ?');
+const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
+---
+<Base
+  titre="Parrainage — Accompagnez un enfant sur la durée | Centre Coranique Rahma"
+  description="Parrainez un enfant du Centre Coranique Rahma : votre soutien mensuel finance sa scolarité, ses fournitures et son accompagnement éducatif jusqu'à la formation professionnelle."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Parrainage solidaire</span>
+    <h1>Accompagnez un enfant sur la durée.</h1>
+    <p class="lead">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours, de l'école jusqu'au métier.</p>
+  </section>
+
+  <!-- ===== FONCTIONNEMENT ===== -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Comment ça marche</span>
+          <h2>Un parrainage simple et suivi</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">Le montant mensuel du parrainage sera fixé par le bureau à partir du coût réel par enfant, puis publié ici : <span class="tbd">montant / mois</span>.</p>
+      </div>
+      <div class="g3">
+        <div class="card rv" style="padding:26px">
+          <div class="step__d" style="border-color:var(--blanc)">1</div>
+          <h3 style="margin-top:14px">Vous vous faites connaître</h3>
+          <p style="font-size:14.5px;color:var(--gris);margin-top:8px">Par le formulaire, par WhatsApp ou par e-mail. L'équipe du centre vous recontacte et vous présente un enfant à accompagner.</p>
+        </div>
+        <div class="card rv" style="padding:26px">
+          <div class="step__d" style="border-color:var(--blanc)">2</div>
+          <h3 style="margin-top:14px">Vous versez votre soutien mensuel</h3>
+          <p style="font-size:14.5px;color:var(--gris);margin-top:8px">Par Orange Money, Wave ou virement, selon les mêmes canaux que les dons. Votre soutien couvre scolarité, fournitures et accompagnement.</p>
+        </div>
+        <div class="card rv" style="padding:26px">
+          <div class="step__d" style="border-color:var(--blanc)">3</div>
+          <h3 style="margin-top:14px">Vous suivez son parcours</h3>
+          <p style="font-size:14.5px;color:var(--gris);margin-top:8px">Le centre vous donne régulièrement des nouvelles de l'enfant, jusqu'à son orientation vers une formation professionnelle à {config.chiffres.suiviJusquaAge} ans.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FICHES ENFANTS ===== -->
+  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Les enfants</span>
+          <h2>Ils attendent un parrain ou une marraine</h2>
+        </div>
+      </div>
+      <div class="g4">
+        {enfants.map((enfant, i) => (
+          <article class="card child rv">
+            <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>
+            <h3>{enfant.data.prenom ?? 'Enfant à parrainer'}</h3>
+            <p>
+              {enfant.data.age != null || enfant.data.niveau || enfant.data.anneeEntree != null
+                ? [
+                    enfant.data.age != null ? `${enfant.data.age} ans` : null,
+                    enfant.data.niveau,
+                    enfant.data.anneeEntree != null ? `au centre depuis ${enfant.data.anneeEntree}` : null,
+                  ].filter(Boolean).join(' · ')
+                : "Fiche à compléter : prénom, âge, niveau, année d'entrée au centre."}
+            </p>
+            <b>
+              {config.parrainage.montantMensuelFCFA != null
+                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois`
+                : <span class="tbd">montant / mois</span>}
+            </b>
+            <a class="btn btn--ghost" href="#devenir-parrain">Parrainer</a>
+          </article>
+        ))}
+      </div>
+      <div class="note rv" style="max-width:760px;margin-inline:auto">
+        <strong>Protection des enfants.</strong> Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants sont présentés sans photo ni nom complet — comme c'est le cas actuellement.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MISE EN RELATION ===== -->
+  <section class="sec" id="devenir-parrain">
+    <div class="wrap contact__g">
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Devenir parrain ou marraine</span>
+        <h2 style="margin-top:14px;color:var(--vert)">Faites-vous connaître, on s'occupe du reste</h2>
+        <p class="lead" style="margin-top:16px">Laissez vos coordonnées : l'équipe du centre vous recontacte, répond à vos questions et vous met en relation avec un enfant à accompagner. Aucun engagement avant cet échange.</p>
+        <p class="lead" style="margin-top:12px;font-size:14.5px">Vos coordonnées ne sont utilisées que pour cette mise en relation. Elles ne sont ni cédées, ni utilisées à d'autres fins.</p>
+      </div>
+      <div class="cbox rv">
+        <a class="btn btn--vert btn--full btn--lg wa" href={lienWa} rel="noopener">Se faire connaître sur WhatsApp</a>
+        {config.formulaires.parrainageUrl ? (
+          <a class="btn btn--ghost btn--full btn--lg" href={config.formulaires.parrainageUrl} rel="noopener">Remplir le formulaire de parrainage</a>
+        ) : (
+          <a class="btn btn--ghost btn--full btn--lg" href={lienMail}>Écrire par e-mail</a>
+        )}
+        <p style="font-size:13px;color:var(--gris-2);text-align:center">WhatsApp est le canal le plus rapide pour joindre l'équipe, au Mali comme depuis la France.</p>
+      </div>
+    </div>
+  </section>
+
+</Base>

@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Mentions légales | Centre Coranique Rahma"
+  description="Mentions légales du site du Centre Coranique Rahma, édité par l'AMAAFE (Mali et France)."
+>
+  <section class="sec" style="padding-top:clamp(36px,5vw,64px)">
+    <div class="wrap" style="max-width:860px">
+      <span class="eyebrow eyebrow--d">Informations légales</span>
+      <h1 style="color:var(--vert);font-size:clamp(30px,4vw,46px);margin-top:14px">Mentions légales</h1>
+      <div class="prose">
+        <h2>Éditeur du site</h2>
+        <p>Ce site est édité par l'<strong>{config.amaafe.nomComplet}</strong> ({config.amaafe.sigle}), qui existe sous deux entités déclarées :</p>
+        <ul>
+          <li><strong>{config.entites.mali.nom}</strong> — association déclarée le {config.entites.mali.dateCreation}, {config.entites.mali.reference}, siège social à {config.entites.mali.siege}.</li>
+          <li><strong>{config.entites.france.nom}</strong> — association loi 1901 déclarée le {config.entites.france.dateCreation}, {config.entites.france.reference}, siège social à {config.entites.france.siege}.</li>
+        </ul>
+        <p>Contact : <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a> — {config.contact.telMali} (Mali) — {config.contact.telFrance} (France).</p>
+
+        <h2>Directeur de la publication</h2>
+        <p><span class="tbd">à désigner</span> — le nom du directeur de la publication sera indiqué ici dès sa désignation par le bureau de l'association.</p>
+
+        <h2>Hébergement</h2>
+        <p><span class="tbd">à préciser</span> — le nom et les coordonnées de l'hébergeur seront indiqués ici lors de la mise en ligne (hébergement prévu : Cloudflare Pages, Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, États-Unis).</p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>L'ensemble des contenus de ce site (textes, images, logo) est la propriété de l'AMAAFE, sauf mention contraire. Toute reproduction sans autorisation préalable est interdite.</p>
+
+        <h2>Photographies des enfants</h2>
+        <p>Aucune photographie permettant d'identifier un enfant, ni aucun prénom réel, n'est publié sans l'autorisation écrite préalable de ses parents ou représentants légaux.</p>
+
+        <h2>Signaler un problème</h2>
+        <p>Pour signaler une erreur ou un contenu problématique : <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a>.</p>
+      </div>
+    </div>
+  </section>
+</Base>

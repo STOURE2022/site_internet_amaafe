@@ -1,0 +1,249 @@
+---
+import Base from '../layouts/Base.astro';
+import BlocDon from '../components/BlocDon.astro';
+import DonConfig from '../components/DonConfig.astro';
+import Tbd from '../components/Tbd.astro';
+import config from '../../content/config.json';
+import { getCollection } from 'astro:content';
+import { fmtDate, fmtNombre } from '../lib/format.js';
+
+const actualites = (await getCollection('actualites', ({ data }) => data.publie)).slice(0, 3);
+const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slice(0, 4);
+const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURIComponent('Inscription à la lettre d’information')}`;
+---
+<Base
+  titre="Centre Coranique Rahma — École coranique gratuite à Yirimadio, Bamako | AMAAFE"
+  description="Le Centre Coranique Rahma accueille gratuitement les enfants des familles démunies de Yirimadio (Bamako, Mali) : scolarité, fournitures et uniformes offerts. Une initiative de l'AMAAFE."
+>
+
+  <!-- ===== HERO ===== -->
+  <section class="sec hero">
+    <div class="wrap hero__grid">
+      <div class="rv">
+        <span class="eyebrow">École coranique gratuite — depuis {config.site.anneeCreation}</span>
+        <h1>Aucun enfant ne devrait être privé d'école <em>faute de moyens.</em></h1>
+        <p class="lead">Le Centre Coranique Rahma accueille gratuitement les enfants des familles les plus démunies de Yirimadio. Scolarité, fournitures et uniformes offerts — jusqu'à l'apprentissage d'un métier.</p>
+        <div class="hero__act">
+          <a class="btn btn--or btn--lg" href="/faire-un-don/">Faire un don</a>
+          <a class="btn btn--ghost btn--lg" href="/parrainage/">Parrainer un enfant</a>
+        </div>
+        <div class="hero__pay"><span>Orange Money</span><span>Wave</span><span>Virement France</span><span>Virement Mali</span></div>
+      </div>
+      <div class="tablet rv" role="img" aria-label="Planchette coranique portant le mot Rahma, la miséricorde">
+        <div class="tablet__in">
+          <div class="tablet__ar" lang="ar">رحمة</div>
+          <div class="tablet__tr">Rahma — la miséricorde</div>
+          <div class="photo">Photo — les élèves du centre, photo de famille</div>
+          <div class="tablet__ft">
+            <div class="tablet__st"><b class="num">{config.chiffres.enfants ?? '—'}</b><span>enfants accueillis</span></div>
+            <div class="tablet__st"><b class="num">{config.chiffres.enseignants ?? '—'}</b><span>enseignants</span></div>
+            <div class="tablet__st"><b class="num">{config.site.anneeCreation}</b><span>année de création</span></div>
+            <div class="tablet__st"><b class="num">100 %</b><span>gratuit</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHIFFRES CLÉS ===== -->
+  <section class="proof" aria-label="Chiffres clés">
+    <div class="wrap proof__g">
+      <div class="proof__i rv"><b><Tbd valeur={config.chiffres.enfants} /></b><span>enfants scolarisés gratuitement</span></div>
+      <div class="proof__i rv"><b><Tbd valeur={config.chiffres.enseignants} /></b><span>enseignants et encadrants</span></div>
+      <div class="proof__i rv"><b class="num">{config.chiffres.suiviJusquaAge} ans</b><span>âge jusqu'auquel l'enfant est suivi</span></div>
+      <div class="proof__i rv"><b class="num">0 FCFA</b><span>demandés aux familles</span></div>
+    </div>
+  </section>
+
+  <!-- ===== QUI SOMMES-NOUS ===== -->
+  <section class="sec" id="apropos">
+    <div class="wrap about">
+      <div class="gal rv">
+        <div class="photo photo--p">Photo — les élèves en uniforme</div>
+        <div class="photo photo--s">Photo — sortie éducative</div>
+        <div class="photo photo--p">Photo — un cours</div>
+      </div>
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Qui sommes-nous</span>
+        <h2 style="margin-top:15px;color:var(--vert)">Né d'un constat, pas d'une idée.</h2>
+        <hr class="rule">
+        <p class="lead">En accompagnant les familles les plus vulnérables de Bamako, les équipes de l'AMAAFE ont fait le même constat, encore et encore : des enfants privés d'école faute de moyens, exposés à l'exclusion et à la précarité.</p>
+        <p class="lead" style="margin-top:16px">Plutôt que de le déplorer, l'association a créé en {config.site.anneeCreation} un centre entièrement dédié à ces enfants. Le Centre Rahma est devenu un lieu où chaque enfant peut apprendre, grandir et construire son avenir dans la dignité.</p>
+        <div class="eng">
+          <div class="eng__i"><span class="eng__c">✓</span><div><b>La scolarité est entièrement gratuite</b><p>Aucune contribution n'est demandée aux familles, quelle que soit leur situation.</p></div></div>
+          <div class="eng__i"><span class="eng__c">✓</span><div><b>Fournitures et uniformes offerts</b><p>Chaque élève reçoit son matériel et sa tenue, sans frais.</p></div></div>
+          <div class="eng__i"><span class="eng__c">✓</span><div><b>Un accompagnement éducatif et moral</b><p>Les élèves sont suivis individuellement, au-delà du seul enseignement.</p></div></div>
+          <div class="eng__i"><span class="eng__c">✓</span><div><b>Accueil sans distinction</b><p>Chaque enfant est accueilli sans distinction de situation sociale.</p></div></div>
+        </div>
+        <div class="hero__act">
+          <a class="btn btn--ghost" href="/le-centre/">Découvrir le centre</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NOTRE VISION / PARCOURS ===== -->
+  <section class="sec" id="vision" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Notre vision</span>
+          <h2>Former des femmes et des hommes utiles à leur communauté</h2>
+        </div>
+        <p class="lead" style="max-width:38ch">Le Centre Rahma ne se limite pas à l'enseignement du Saint Coran. Notre but est de rompre durablement le cycle de la pauvreté par l'éducation et la formation.</p>
+      </div>
+      <div class="path path--blanc">
+        <div class="step rv"><div class="step__d">1</div><b>Enseignement coranique</b><p>Apprentissage et mémorisation du Saint Coran, encadrés au quotidien.</p></div>
+        <div class="step rv"><div class="step__d">2</div><b>Éducation morale et citoyenne</b><p>Discipline, solidarité et respect, appris et pratiqués chaque jour.</p></div>
+        <div class="step rv"><div class="step__d">3</div><b>Suivi jusqu'à {config.chiffres.suiviJusquaAge} ans</b><p>L'enfant est accompagné sans interruption tout au long de son parcours.</p></div>
+        <div class="step step--last rv"><div class="step__d">4</div><b>Formation professionnelle</b><p>À partir de {config.chiffres.suiviJusquaAge} ans, orientation vers un métier adapté à ses aptitudes.</p></div>
+      </div>
+      <p class="lead rv" style="margin-top:34px;text-align:center;max-width:60ch;margin-inline:auto">
+        Cette dernière étape est décisive : elle donne au jeune une autonomie financière et fait de lui un adulte capable de subvenir à ses besoins et de contribuer au développement de sa communauté.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== NOS DÉFIS ===== -->
+  <section class="sec chal" id="defis">
+    <div class="wrap chal__g">
+      <div class="rv">
+        <span class="eyebrow eyebrow--r">Nos défis aujourd'hui</span>
+        <h2 style="margin-top:15px">Nos élèves étudient dans un hangar en tôle.</h2>
+        <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.7)">Faute de moyens, les cours se tiennent sous une tôle installée provisoirement sur une parcelle prêtée par la mosquée du quartier. Les enfants y viennent chaque jour, avec courage et motivation.</p>
+        <ul class="chal__l">
+          <li><i></i><span>Aucune véritable salle de classe</span></li>
+          <li><i></i><span>Chaleur difficilement supportable en saison sèche</span></li>
+          <li><i></i><span>Risques réels pendant la saison des pluies</span></li>
+          <li><i></i><span>Bruit permanent et inconfort</span></li>
+          <li><i></i><span>Manque d'espace et de mobilier adapté</span></li>
+        </ul>
+      </div>
+      <div class="photo rv">Photo — les cours sous le hangar en tôle</div>
+    </div>
+  </section>
+
+  <!-- ===== PROJET MÉDERSA ===== -->
+  <section class="sec" id="medersa">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Notre projet prioritaire</span>
+          <h2>Un terrain, puis une médersa</h2>
+        </div>
+        <a class="btn btn--ghost" href="/notre-projet/">Découvrir le projet</a>
+      </div>
+      <div class="proj rv">
+        <div class="proj__b">
+          <h3 style="font-size:24px">Acquérir un terrain et construire un vrai centre</h3>
+          <p class="lead" style="margin-top:14px">Notre priorité absolue est aujourd'hui l'acquisition d'un terrain, afin d'y bâtir une médersa moderne, adaptée aux besoins des enfants et à la croissance du centre.</p>
+          <div class="rooms">
+            <div class="room"><i></i>Des salles de classe</div>
+            <div class="room"><i></i>Une salle de mémorisation</div>
+            <div class="room"><i></i>Une bibliothèque</div>
+            <div class="room"><i></i>Des bureaux administratifs</div>
+            <div class="room"><i></i>Des sanitaires</div>
+            <div class="room"><i></i>Une cour de récréation</div>
+            <div class="room" style="grid-column:1/-1"><i></i>Des espaces dédiés à la future formation professionnelle</div>
+          </div>
+          <div class="bar"><i data-fill={config.medersa.pourcentageAvancement ?? 0}></i></div>
+          <div class="sums">
+            <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
+            <span>sur un objectif de <Tbd valeur={config.medersa.budgetTotalFCFA} label="budget à chiffrer" suffixe=" FCFA" /></span>
+          </div>
+          <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Les montants seront affichés dès que le budget du projet aura été arrêté par le bureau.</p>
+        </div>
+        <div class="proj__side">
+          <div class="photo">Plan ou vue d'artiste de la future médersa</div>
+          <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,.85)">« Chaque contribution, quelle qu'en soit l'importance, représente une pierre supplémentaire vers la réalisation de ce projet. »</p>
+          <a class="btn btn--or btn--full" href="/faire-un-don/">Poser une pierre</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARRAINAGE (APERÇU) ===== -->
+  <section class="sec" id="parrainage" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Parrainage solidaire</span>
+          <h2>Accompagnez un enfant sur la durée</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours.</p>
+      </div>
+      <div class="g4">
+        {enfants.map((enfant, i) => (
+          <article class="card child rv">
+            <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>
+            <h3>{enfant.data.prenom ?? 'Enfant à parrainer'}</h3>
+            <p>
+              {enfant.data.age != null || enfant.data.niveau
+                ? [enfant.data.age != null ? `${enfant.data.age} ans` : null, enfant.data.niveau].filter(Boolean).join(' · ')
+                : "Fiche à compléter : prénom, âge, niveau, année d'entrée au centre."}
+            </p>
+            <b>
+              {config.parrainage.montantMensuelFCFA != null
+                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois`
+                : <span class="tbd">montant / mois</span>}
+            </b>
+            <a class="btn btn--ghost" href="/parrainage/">Parrainer</a>
+          </article>
+        ))}
+      </div>
+      <p class="rv" style="margin-top:26px;font-size:13.5px;color:var(--gris-2);text-align:center">
+        Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants seront présentés sans photo ni nom complet.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== BLOC DON ===== -->
+  <BlocDon />
+
+  <!-- ===== ACTUALITÉS RÉCENTES + NEWSLETTER ===== -->
+  <section class="sec" id="actualites" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Actualités</span>
+          <h2>La vie du centre</h2>
+        </div>
+        <a class="btn btn--ghost" href="/actualites/">Toutes les actualités</a>
+      </div>
+      <div class="g3">
+        {actualites.map((article, i) => (
+          <article class="card post rv">
+            <div class={`photo ${i % 2 === 0 ? 'photo--p' : 'photo--s'}`}>Photo — {article.data.titre}</div>
+            <div class="post__b">
+              <div class="post__m">
+                <i>{article.data.categorie}</i>
+                {article.data.date
+                  ? <span>{fmtDate(article.data.date)}</span>
+                  : <span class="tbd">date à préciser</span>}
+              </div>
+              <h3>{article.data.titre}</h3>
+              <p>{article.data.extrait}</p>
+              <a class="post__l" href={`/actualites/${article.id}/`}>Lire l'article →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="news rv">
+        <div>
+          <h3 style="font-size:22px">Recevez les nouvelles du centre</h3>
+          <p>Une lettre par mois : avancement du projet de médersa, vie des élèves, comptes publiés.</p>
+        </div>
+        {config.formulaires.newsletterUrl ? (
+          <form action={config.formulaires.newsletterUrl} method="get">
+            <div class="input"><input type="email" name="email" placeholder="votre@email.com" aria-label="Votre e-mail" required></div>
+            <button class="btn btn--vert" type="submit">S'inscrire</button>
+          </form>
+        ) : (
+          <a class="btn btn--vert" href={emailNewsletter}>S'inscrire par e-mail</a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <DonConfig />
+</Base>

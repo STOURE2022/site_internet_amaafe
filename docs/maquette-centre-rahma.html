@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centre Coranique Rahma — Yirimadio, Bamako | Une initiative de l'AMAAFE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#0A1B12;
+  --vert:#0F4A2F;
+  --vert-2:#176B44;
+  --vert-pale:#E5EFE8;
+  --or:#D9A62B;
+  --or-pale:#F8F0D9;
+  --rouge:#B3271E;
+  --rouge-pale:#FBE7E4;
+  --banco:#C9A97F;
+  --papier:#F4F1E8;
+  --papier-2:#FCFAF5;
+  --encre:#13201A;
+  --gris:#5C6C62;
+  --gris-2:#8A978E;
+  --ligne:#E1D9C8;
+  --blanc:#FFFFFF;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --arabe:"Amiri",Georgia,serif;
+  --pad:clamp(20px,5vw,72px);
+  --max:1220px;
+  --r:8px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2.5px solid var(--or);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
+.sec{padding-block:clamp(52px,7.5vw,100px)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:-.015em;line-height:1.13}
+h1{font-size:clamp(36px,5.4vw,62px);line-height:1.05;letter-spacing:-.03em}
+h2{font-size:clamp(27px,3.3vw,40px)}
+h3{font-size:clamp(18px,1.6vw,21px);line-height:1.28}
+p{margin:0}
+.lead{font-size:clamp(16px,1.2vw,18px);line-height:1.66;color:var(--gris)}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--or);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:7px;height:7px;background:var(--or);transform:rotate(45deg);flex:none}
+.eyebrow--d{color:#8A6D12}
+.eyebrow--r{color:var(--rouge)}
+.eyebrow--r::before{background:var(--rouge)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* jeton « donnée manquante » */
+.tbd{display:inline-block;font-family:var(--mono);font-size:.82em;letter-spacing:.02em;
+  padding:1px 7px;border-radius:4px;background:var(--rouge-pale);color:var(--rouge);
+  border:1px dashed rgba(179,39,30,.45);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 26px;border-radius:var(--r);
+  font-weight:600;font-size:15px;border:1.5px solid transparent;text-align:center;
+  transition:transform .18s ease,background .18s ease,color .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn--or{background:var(--or);color:#1B1403}
+.btn--or:hover{background:#E7B845}
+.btn--vert{background:var(--vert);color:#fff}
+.btn--vert:hover{background:var(--vert-2)}
+.btn--ghost{border-color:var(--vert);color:var(--vert)}
+.btn--ghost:hover{background:var(--vert);color:#fff}
+.btn--light{border-color:rgba(255,255,255,.42);color:#fff}
+.btn--light:hover{background:rgba(255,255,255,.13)}
+.btn--full{width:100%}
+.btn--lg{padding:19px 30px;font-size:16.5px}
+
+.photo{position:relative;border-radius:var(--r);overflow:hidden;display:grid;place-items:center;text-align:center;padding:16px;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 1px,transparent 1px 10px),var(--vert);
+  color:rgba(255,255,255,.62);font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase}
+.photo--s{background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 1px,transparent 1px 10px),var(--banco);color:rgba(28,20,8,.65)}
+.photo--p{background:repeating-linear-gradient(135deg,rgba(15,74,47,.07) 0 1px,transparent 1px 10px),var(--vert-pale);color:rgba(15,74,47,.62)}
+
+/* ---- logos ---- */
+.mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;
+  color:var(--or);font-family:var(--arabe);font-size:23px;line-height:1;padding-bottom:3px}
+.heart{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;
+  background:conic-gradient(from -90deg,var(--vert) 0 33%,var(--or) 0 66%,var(--rouge) 0);
+  font-family:var(--mono);font-size:8px;font-weight:600;color:#fff;letter-spacing:.02em}
+
+/* ---- nav ---- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s}
+.nav.is-stuck{border-bottom-color:var(--ligne);box-shadow:0 8px 26px -22px rgba(10,27,18,.6)}
+.nav__bar{display:flex;align-items:center;gap:24px;padding-block:13px}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto}
+.brand__n{font-weight:700;font-size:14.5px;letter-spacing:.05em;color:var(--vert);line-height:1.2}
+.brand__s{font-size:11px;color:var(--gris-2);line-height:1.3}
+.menu{display:flex;gap:22px;align-items:center}
+.menu a{font-size:14px;font-weight:500;color:#33453C;position:relative;padding-block:4px}
+.menu a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--or);transition:right .25s}
+.menu a:hover::after{right:0}
+.nav__cta{display:flex;gap:10px;align-items:center}
+.burger{display:none;width:44px;height:44px;border-radius:10px;background:var(--vert-pale);place-items:center;gap:4.5px}
+.burger span{display:block;width:17px;height:1.8px;background:var(--vert);border-radius:2px}
+.mmenu{display:none;border-top:1px solid var(--ligne);background:var(--papier-2)}
+.mmenu.is-open{display:block}
+.mmenu a{display:block;padding:14px var(--pad);border-bottom:1px solid var(--ligne);font-weight:500}
+.topbar{background:var(--vert);color:rgba(255,255,255,.8);font-size:12px}
+.topbar__i{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:9px}
+.topbar b{color:var(--or);font-weight:600}
+
+/* ---- hero ---- */
+.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,64px);align-items:center}
+.hero h1{margin-block:20px 20px;max-width:15ch;color:var(--vert)}
+.hero h1 em{font-style:italic;color:var(--or);font-weight:400}
+.hero__act{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero__pay{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
+.tablet{border-radius:12px;padding:14px;background:linear-gradient(160deg,#0D3A25,var(--nuit) 72%);box-shadow:0 40px 70px -50px rgba(10,27,18,.9)}
+.tablet__in{border:1px solid rgba(217,166,43,.42);border-radius:6px;padding:clamp(20px,3vw,28px);display:flex;flex-direction:column;gap:18px}
+.tablet__ar{font-family:var(--arabe);font-size:clamp(46px,6.5vw,68px);line-height:1;color:var(--or);text-align:center;margin-top:4px}
+.tablet__tr{text-align:center;color:rgba(255,255,255,.6);font-size:13px;font-style:italic}
+.tablet .photo{aspect-ratio:16/9;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 1px,transparent 1px 10px),rgba(255,255,255,.06);color:rgba(255,255,255,.5)}
+.tablet__ft{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.13);padding-top:15px}
+.tablet__st b{display:block;font-family:var(--serif);font-size:22px;color:#fff;line-height:1}
+.tablet__st span{font-size:11px;color:rgba(255,255,255,.55)}
+
+/* ---- bandeaux ---- */
+.proof{background:var(--blanc);border-block:1px solid var(--ligne)}
+.proof__g{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding-block:34px}
+.proof__i b{display:block;font-family:var(--serif);font-size:clamp(26px,3vw,36px);color:var(--vert);line-height:1.1}
+.proof__i span{font-size:13px;color:var(--gris)}
+
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:34px;flex-wrap:wrap;margin-bottom:36px}
+.head h2{margin-top:13px;max-width:20ch;color:var(--vert)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--blanc);border:1px solid var(--ligne);border-radius:var(--r);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);box-shadow:0 26px 44px -34px rgba(10,27,18,.5)}
+
+/* ---- qui sommes-nous ---- */
+.about{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(30px,5vw,64px);align-items:center}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.gal .photo:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.gal .photo:not(:first-child){aspect-ratio:1/1}
+.rule{border:0;height:4px;max-width:110px;margin:20px 0;background:linear-gradient(var(--or),var(--or)) top/100% 1.5px no-repeat,linear-gradient(var(--or),var(--or)) bottom/100% 1px no-repeat;opacity:.6}
+
+/* ---- engagements ---- */
+.eng{display:grid;gap:2px;background:var(--ligne);border:1px solid var(--ligne);border-radius:var(--r);overflow:hidden;margin-top:26px}
+.eng__i{background:var(--papier-2);padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.eng__c{width:22px;height:22px;border-radius:50%;background:var(--vert);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:2px}
+.eng__i b{font-size:15px}
+.eng__i p{font-size:13.8px;color:var(--gris);margin-top:2px}
+
+/* ---- parcours ---- */
+.path{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:12px}
+.path::before{content:"";position:absolute;left:26px;right:26px;top:26px;height:2px;background:var(--ligne)}
+.step{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:11px}
+.step__d{width:52px;height:52px;border-radius:50%;background:var(--vert);color:var(--or);display:grid;place-items:center;
+  font-family:var(--serif);font-size:19px;border:5px solid var(--papier);position:relative;z-index:1}
+.step--last .step__d{background:var(--or);color:var(--nuit)}
+.step b{font-size:15.5px}
+.step p{font-size:13.6px;color:var(--gris)}
+
+/* ---- défis ---- */
+.chal{background:var(--nuit);color:#fff}
+.chal h2{color:#fff}
+.chal__g{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,64px);align-items:center}
+.chal p{color:rgba(255,255,255,.7)}
+.chal__l{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px}
+.chal__l li{display:grid;grid-template-columns:auto 1fr;gap:13px;font-size:14.8px;color:rgba(255,255,255,.82)}
+.chal__l i{width:6px;height:6px;background:var(--rouge);transform:rotate(45deg);margin-top:8px}
+.chal .photo{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 1px,transparent 1px 10px),rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
+
+/* ---- projet médersa ---- */
+.proj{background:var(--blanc);border:1px solid var(--ligne);border-radius:12px;overflow:hidden;
+  display:grid;grid-template-columns:1fr .85fr}
+.proj__b{padding:clamp(26px,3.2vw,40px)}
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-block:22px}
+.room{display:flex;align-items:center;gap:10px;font-size:14px;padding:11px 14px;background:var(--papier);border-radius:6px}
+.room i{width:7px;height:7px;background:var(--or);transform:rotate(45deg);flex:none}
+.bar{height:9px;border-radius:99px;background:var(--vert-pale);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:var(--or);transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.sums{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:12px}
+.sums b{font-family:var(--mono);font-size:16px;color:var(--vert)}
+.sums span{font-size:12.5px;color:var(--gris-2)}
+.proj__side{background:var(--vert);color:#fff;padding:clamp(26px,3.2vw,36px);display:flex;flex-direction:column;gap:18px;justify-content:center}
+.proj__side .photo{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 10px),rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
+
+/* ---- parrainage ---- */
+.child{padding:26px 22px 22px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.child__a{width:80px;height:80px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:22px;color:var(--vert);background:var(--vert-pale)}
+.child__a--s{background:var(--or-pale);color:#8A6D12}
+.child p{font-size:13.4px;color:var(--gris)}
+.child .btn{width:100%;margin-top:4px;padding-block:13px}
+
+/* ---- don ---- */
+.give{background:var(--vert);color:#fff}
+.give h2{color:#fff}
+.give__g{display:grid;grid-template-columns:1fr 470px;gap:clamp(30px,5vw,64px);align-items:start}
+.give__l{color:rgba(255,255,255,.73);max-width:44ch;margin-top:16px}
+.impact{margin-top:32px;border:1px solid rgba(255,255,255,.18);border-radius:var(--r);padding:26px 28px;background:rgba(255,255,255,.05)}
+.impact__k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--or)}
+.impact__v{font-family:var(--serif);font-size:clamp(24px,2.8vw,32px);line-height:1.24;margin-top:11px}
+.impact__v b{color:var(--or);font-weight:600}
+.impact__n{margin-top:12px;font-size:13.8px;color:rgba(255,255,255,.62)}
+.give__n{margin-top:24px;font-size:13.4px;color:rgba(255,255,255,.56);display:flex;gap:10px;align-items:flex-start}
+.form{background:var(--blanc);color:var(--encre);border-radius:12px;padding:clamp(22px,3vw,30px);box-shadow:0 50px 80px -60px rgba(0,0,0,.9)}
+.form__s{font-size:13px;color:var(--gris-2);margin-top:4px}
+.fl{display:block;font-size:13px;font-weight:600;margin-block:20px 9px}
+.toggle{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--papier);border-radius:10px;padding:4px;margin-top:18px}
+.toggle button{padding:11px;border-radius:7px;font-size:13.6px;font-weight:600;color:var(--gris);transition:.2s}
+.toggle button[aria-pressed="true"]{background:var(--blanc);color:var(--vert);box-shadow:0 2px 8px -4px rgba(0,0,0,.3)}
+.toggle--3{grid-template-columns:repeat(3,1fr)}
+.amts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.amts button{padding:14px 4px;border:1px solid var(--ligne);border-radius:9px;font-weight:600;font-size:14px;font-family:var(--mono);transition:.18s}
+.amts button:hover{border-color:var(--or)}
+.amts button[aria-pressed="true"]{border-color:var(--or);border-width:2px;background:var(--or-pale);color:#7A5F0C}
+.input{display:flex;align-items:center;gap:10px;border:1px solid var(--ligne);border-radius:9px;padding:0 14px;background:var(--papier-2)}
+.input input{border:0;background:none;padding:14px 0;width:100%;font:inherit;outline:none}
+.input span{font-family:var(--mono);font-size:12.5px;color:var(--gris-2);flex:none}
+.pays{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pay{display:flex;align-items:center;gap:10px;border:1px solid var(--ligne);border-radius:9px;padding:12px 13px;font-size:13.2px;font-weight:600;transition:.18s;text-align:left}
+.pay:hover{border-color:var(--vert)}
+.pay[aria-pressed="true"]{border-color:var(--vert);border-width:2px;background:#F1F7F3}
+.pay i{width:18px;height:18px;border-radius:50%;flex:none}
+.cons{display:flex;gap:11px;align-items:flex-start;margin-top:18px;font-size:12.6px;color:var(--gris);line-height:1.5}
+.cons input{margin-top:2px;accent-color:var(--vert);width:17px;height:17px;flex:none}
+.form .btn{margin-top:20px}
+.form__sec{text-align:center;font-size:11.5px;color:var(--gris-2);margin-top:11px}
+.paybox{margin-top:16px;border:1px dashed var(--ligne);border-radius:9px;padding:16px;background:var(--papier-2);font-size:13.5px}
+.paybox b{display:block;font-family:var(--mono);font-size:17px;color:var(--vert);letter-spacing:.02em;margin-block:6px 4px}
+.paybox span{color:var(--gris)}
+
+/* ---- transparence ---- */
+.trust{background:var(--papier-2);border-block:1px solid var(--ligne)}
+.entity{padding:26px 26px 24px}
+.entity__t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+.entity h3{margin-bottom:12px}
+.dl{display:grid;gap:7px;font-size:13.8px}
+.dl div{display:flex;justify-content:space-between;gap:14px;padding-bottom:6px;border-bottom:1px solid var(--ligne)}
+.dl em{font-style:normal;color:var(--gris-2)}
+.dl span{text-align:right;font-family:var(--mono);font-size:12.8px}
+
+/* ---- actions AMAAFE ---- */
+.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.tag{padding:9px 15px;border-radius:99px;background:var(--blanc);border:1px solid var(--ligne);font-size:13.4px}
+
+/* ---- actualités ---- */
+.post{overflow:hidden;display:flex;flex-direction:column}
+.post .photo{aspect-ratio:16/9;border-radius:0}
+.post__b{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.post__m{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.post__m i{padding:5px 9px;border-radius:99px;background:var(--vert-pale);color:var(--vert);font-style:normal}
+.post__m span{color:var(--gris-2)}
+.post p{font-size:14px;color:var(--gris)}
+.post__l{margin-top:auto;padding-top:6px;font-size:13.4px;font-weight:600;color:var(--vert)}
+.news{margin-top:24px;background:var(--or-pale);border-radius:var(--r);padding:clamp(24px,3vw,34px);display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.news p{font-size:14.2px;color:#6B5B2A;margin-top:6px;max-width:46ch}
+.news form{display:flex;gap:10px;flex-wrap:wrap}
+.news .input{background:var(--blanc);min-width:240px;flex:1}
+
+/* ---- contact ---- */
+.contact__g{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,48px)}
+.cbox{display:grid;gap:14px}
+.cline{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px 18px;background:var(--blanc);border:1px solid var(--ligne);border-radius:var(--r)}
+.cline i{width:30px;height:30px;border-radius:8px;background:var(--vert-pale);color:var(--vert);display:grid;place-items:center;font-size:13px;font-style:normal}
+.cline b{font-size:14px;display:block}
+.cline span{font-size:13.6px;color:var(--gris)}
+
+/* ---- footer ---- */
+.foot{background:var(--vert);color:#fff;padding-block:clamp(46px,6vw,72px) 24px}
+.foot__g{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(26px,4vw,50px)}
+.foot .mark{background:var(--or);color:var(--vert)}
+.foot .brand__n{color:#fff}
+.foot .brand__s{color:rgba(255,255,255,.5)}
+.foot__d{font-size:13.8px;color:rgba(255,255,255,.68);margin-top:16px;max-width:36ch}
+.foot__c{margin-top:16px;display:grid;gap:6px;font-size:13.4px;color:rgba(255,255,255,.85)}
+.foot__s{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.foot__s a{padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.1);font-size:12.2px}
+.foot__col b{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:13px}
+.foot__col a{display:block;font-size:13.8px;color:rgba(255,255,255,.75);padding-block:5px}
+.foot__col a:hover{color:#fff}
+.legal{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:12.2px;color:rgba(255,255,255,.55);line-height:1.7}
+.legal__b{margin-top:14px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.legal__b div{display:flex;gap:20px;flex-wrap:wrap}
+
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:10px;padding:11px 14px calc(11px + env(safe-area-inset-bottom));
+  background:rgba(244,241,232,.96);backdrop-filter:blur(12px);border-top:1px solid var(--ligne)}
+.dock .btn{flex:1;padding-block:14px}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.is-in{opacity:1;transform:none}
+
+@media (max-width:1080px){
+  .menu{display:none}.burger{display:grid}
+  .hero__grid,.about,.chal__g,.give__g,.proj,.contact__g{grid-template-columns:1fr}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .foot__g{grid-template-columns:1fr 1fr}
+  .nav__cta .btn--ghost{display:none}
+}
+@media (max-width:760px){
+  .g3,.rooms{grid-template-columns:1fr}
+  .proof__g{grid-template-columns:1fr 1fr;gap:20px}
+  .path{grid-template-columns:1fr}
+  .path::before{display:none}
+  .gal .photo:not(:first-child){aspect-ratio:4/3}
+  .dock{display:flex}
+  body{padding-bottom:72px}
+  .topbar__i{justify-content:center;text-align:center}
+}
+@media (max-width:520px){
+  .g4,.g2{grid-template-columns:1fr}
+  .amts{grid-template-columns:1fr 1fr}
+  .pays{grid-template-columns:1fr}
+  .foot__g{grid-template-columns:1fr}
+  .brand__s{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="wrap topbar__i">
+    <span>Yirimadio, Bamako — Mali &nbsp;·&nbsp; Une initiative de l'<b>AMAAFE</b></span>
+    <span>+223 76 33 79 15 &nbsp;·&nbsp; +33 6 66 31 53 40 &nbsp;·&nbsp; centrerahma.coran@gmail.com</span>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav__bar">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true">ر</span>
+      <span>
+        <span class="brand__n">CENTRE CORANIQUE RAHMA</span>
+        <span class="brand__s">Solidarité — Discipline — Travail</span>
+      </span>
+    </a>
+    <nav class="menu" aria-label="Navigation principale">
+      <a href="#apropos">Qui sommes-nous</a>
+      <a href="#vision">Notre vision</a>
+      <a href="#defis">Nos défis</a>
+      <a href="#medersa">Le projet</a>
+      <a href="#parrainage">Parrainage</a>
+      <a href="#amaafe">L'AMAAFE</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--ghost" href="#parrainage">Parrainer</a>
+      <a class="btn btn--or" href="#don">Faire un don</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#apropos">Qui sommes-nous</a><a href="#vision">Notre vision</a><a href="#defis">Nos défis</a>
+    <a href="#medersa">Le projet de médersa</a><a href="#parrainage">Parrainage</a><a href="#don">Faire un don</a>
+    <a href="#amaafe">L'AMAAFE</a><a href="#transparence">Transparence</a><a href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="sec hero">
+  <div class="wrap hero__grid">
+    <div class="rv">
+      <span class="eyebrow">École coranique gratuite — depuis 2023</span>
+      <h1>Aucun enfant ne devrait être privé d'école <em>faute de moyens.</em></h1>
+      <p class="lead">Le Centre Coranique Rahma accueille gratuitement les enfants des familles les plus démunies de Yirimadio. Scolarité, fournitures et uniformes offerts — jusqu'à l'apprentissage d'un métier.</p>
+      <div class="hero__act">
+        <a class="btn btn--or btn--lg" href="#don">Faire un don</a>
+        <a class="btn btn--ghost btn--lg" href="#parrainage">Parrainer un enfant</a>
+      </div>
+      <div class="hero__pay"><span>Orange Money</span><span>Wave</span><span>Virement France</span><span>Virement Mali</span></div>
+    </div>
+    <div class="tablet rv" role="img" aria-label="Planchette coranique portant le mot Rahma">
+      <div class="tablet__in">
+        <div class="tablet__ar">رحمة</div>
+        <div class="tablet__tr">Rahma — la miséricorde</div>
+        <div class="photo">Photo — les élèves du centre, photo de famille</div>
+        <div class="tablet__ft">
+          <div class="tablet__st"><b class="num">—</b><span>enfants accueillis</span></div>
+          <div class="tablet__st"><b class="num">—</b><span>enseignants</span></div>
+          <div class="tablet__st"><b class="num">2023</b><span>année de création</span></div>
+          <div class="tablet__st"><b class="num">100 %</b><span>gratuit</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHIFFRES ===== -->
+<section class="proof">
+  <div class="wrap proof__g">
+    <div class="proof__i rv"><b><span class="tbd">à confirmer</span></b><span>enfants scolarisés gratuitement</span></div>
+    <div class="proof__i rv"><b><span class="tbd">à confirmer</span></b><span>enseignants et encadrants</span></div>
+    <div class="proof__i rv"><b class="num">16 ans</b><span>âge jusqu'auquel l'enfant est suivi</span></div>
+    <div class="proof__i rv"><b class="num">0 FCFA</b><span>demandés aux familles</span></div>
+  </div>
+</section>
+
+<!-- ===== QUI SOMMES-NOUS ===== -->
+<section class="sec" id="apropos">
+  <div class="wrap about">
+    <div class="gal rv">
+      <div class="photo photo--p">Photo — les élèves en uniforme</div>
+      <div class="photo photo--s">Photo — sortie éducative</div>
+      <div class="photo photo--p">Photo — un cours</div>
+    </div>
+    <div class="rv">
+      <span class="eyebrow eyebrow--d">Qui sommes-nous</span>
+      <h2 style="margin-top:15px;color:var(--vert)">Né d'un constat, pas d'une idée.</h2>
+      <hr class="rule">
+      <p class="lead">En accompagnant les familles les plus vulnérables de Bamako, les équipes de l'AMAAFE ont fait le même constat, encore et encore : des enfants privés d'école faute de moyens, exposés à l'exclusion et à la précarité.</p>
+      <p class="lead" style="margin-top:16px">Plutôt que de le déplorer, l'association a créé en 2023 un centre entièrement dédié à ces enfants. Le Centre Rahma est devenu un lieu où chaque enfant peut apprendre, grandir et construire son avenir dans la dignité.</p>
+      <div class="eng">
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>La scolarité est entièrement gratuite</b><p>Aucune contribution n'est demandée aux familles, quelle que soit leur situation.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Fournitures et uniformes offerts</b><p>Chaque élève reçoit son matériel et sa tenue, sans frais.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Un accompagnement éducatif et moral</b><p>Les élèves sont suivis individuellement, au-delà du seul enseignement.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Accueil sans distinction</b><p>Chaque enfant est accueilli sans distinction de situation sociale.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISION / PARCOURS ===== -->
+<section class="sec" id="vision" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Notre vision</span>
+        <h2>Former des femmes et des hommes utiles à leur communauté</h2>
+      </div>
+      <p class="lead" style="max-width:38ch">Le Centre Rahma ne se limite pas à l'enseignement du Saint Coran. Notre but est de rompre durablement le cycle de la pauvreté par l'éducation et la formation.</p>
+    </div>
+    <div class="path">
+      <div class="step rv"><div class="step__d">1</div><b>Enseignement coranique</b><p>Apprentissage et mémorisation du Saint Coran, encadrés au quotidien.</p></div>
+      <div class="step rv"><div class="step__d">2</div><b>Éducation morale et citoyenne</b><p>Discipline, solidarité et respect, appris et pratiqués chaque jour.</p></div>
+      <div class="step rv"><div class="step__d">3</div><b>Suivi jusqu'à 16 ans</b><p>L'enfant est accompagné sans interruption tout au long de son parcours.</p></div>
+      <div class="step step--last rv"><div class="step__d">4</div><b>Formation professionnelle</b><p>À partir de 16 ans, orientation vers un métier adapté à ses aptitudes.</p></div>
+    </div>
+    <p class="lead rv" style="margin-top:34px;text-align:center;max-width:60ch;margin-inline:auto">
+      Cette dernière étape est décisive : elle donne au jeune une autonomie financière et fait de lui un adulte capable de subvenir à ses besoins et de contribuer au développement de sa communauté.
+    </p>
+  </div>
+</section>
+
+<!-- ===== DÉFIS ===== -->
+<section class="sec chal" id="defis">
+  <div class="wrap chal__g">
+    <div class="rv">
+      <span class="eyebrow eyebrow--r">Nos défis aujourd'hui</span>
+      <h2 style="margin-top:15px">Nos élèves étudient dans un hangar en tôle.</h2>
+      <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.7)">Faute de moyens, les cours se tiennent sous une tôle installée provisoirement sur une parcelle prêtée par la mosquée du quartier. Les enfants y viennent chaque jour, avec courage et motivation.</p>
+      <ul class="chal__l">
+        <li><i></i><span>Aucune véritable salle de classe</span></li>
+        <li><i></i><span>Chaleur difficilement supportable en saison sèche</span></li>
+        <li><i></i><span>Risques réels pendant la saison des pluies</span></li>
+        <li><i></i><span>Bruit permanent et inconfort</span></li>
+        <li><i></i><span>Manque d'espace et de mobilier adapté</span></li>
+      </ul>
+    </div>
+    <div class="photo rv">Photo — les cours sous le hangar en tôle</div>
+  </div>
+</section>
+
+<!-- ===== PROJET MÉDERSA ===== -->
+<section class="sec" id="medersa">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Notre projet prioritaire</span>
+        <h2>Un terrain, puis une médersa</h2>
+      </div>
+      <a class="btn btn--ghost" href="#don">Soutenir le projet</a>
+    </div>
+    <div class="proj rv">
+      <div class="proj__b">
+        <h3 style="font-size:24px">Acquérir un terrain et construire un vrai centre</h3>
+        <p class="lead" style="margin-top:14px">Notre priorité absolue est aujourd'hui l'acquisition d'un terrain, afin d'y bâtir une médersa moderne, adaptée aux besoins des enfants et à la croissance du centre.</p>
+        <div class="rooms">
+          <div class="room"><i></i>Des salles de classe</div>
+          <div class="room"><i></i>Une salle de mémorisation</div>
+          <div class="room"><i></i>Une bibliothèque</div>
+          <div class="room"><i></i>Des bureaux administratifs</div>
+          <div class="room"><i></i>Des sanitaires</div>
+          <div class="room"><i></i>Une cour de récréation</div>
+          <div class="room" style="grid-column:1/-1"><i></i>Des espaces dédiés à la future formation professionnelle</div>
+        </div>
+        <div class="bar"><i data-fill="18"></i></div>
+        <div class="sums">
+          <b><span class="tbd">montant collecté</span></b>
+          <span>sur un objectif de <span class="tbd">budget à chiffrer</span></span>
+        </div>
+        <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Les montants seront affichés dès que le budget du projet aura été arrêté par le bureau.</p>
+      </div>
+      <div class="proj__side">
+        <div class="photo">Plan ou vue d'artiste de la future médersa</div>
+        <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,.85)">« Chaque contribution, quelle qu'en soit l'importance, représente une pierre supplémentaire vers la réalisation de ce projet. »</p>
+        <a class="btn btn--or btn--full" href="#don">Poser une pierre</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARRAINAGE ===== -->
+<section class="sec" id="parrainage" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Parrainage solidaire</span>
+        <h2>Accompagnez un enfant sur la durée</h2>
+      </div>
+      <p class="lead" style="max-width:40ch">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours.</p>
+    </div>
+    <div class="g4">
+      <article class="card child rv"><div class="child__a">?</div><h3>Enfant à parrainer</h3><p>Fiche à compléter : prénom, âge, niveau, année d'entrée au centre.</p><b class="tbd">montant / mois</b><a class="btn btn--ghost" href="#don">Parrainer</a></article>
+      <article class="card child rv"><div class="child__a child__a--s">?</div><h3>Enfant à parrainer</h3><p>Fiche à compléter : prénom, âge, niveau, année d'entrée au centre.</p><b class="tbd">montant / mois</b><a class="btn btn--ghost" href="#don">Parrainer</a></article>
+      <article class="card child rv"><div class="child__a">?</div><h3>Enfant à parrainer</h3><p>Fiche à compléter : prénom, âge, niveau, année d'entrée au centre.</p><b class="tbd">montant / mois</b><a class="btn btn--ghost" href="#don">Parrainer</a></article>
+      <article class="card child rv"><div class="child__a child__a--s">?</div><h3>Enfant à parrainer</h3><p>Fiche à compléter : prénom, âge, niveau, année d'entrée au centre.</p><b class="tbd">montant / mois</b><a class="btn btn--ghost" href="#don">Parrainer</a></article>
+    </div>
+    <p class="rv" style="margin-top:26px;font-size:13.5px;color:var(--gris-2);text-align:center">
+      Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants seront présentés sans photo ni nom complet.
+    </p>
+  </div>
+</section>
+
+<!-- ===== DON ===== -->
+<section class="sec give" id="don">
+  <div class="wrap give__g">
+    <div class="rv">
+      <span class="eyebrow">Faire un don</span>
+      <h2 style="margin-top:15px">Votre don devient un cartable, un uniforme, une salle de classe.</h2>
+      <p class="lead give__l">Le centre ne demande rien aux familles. Tout repose sur la générosité des donateurs, au Mali comme dans la diaspora.</p>
+      <div class="impact">
+        <span class="impact__k">Ce que votre don finance</span>
+        <p class="impact__v" id="impactText">Donnez <b>10 000 FCFA</b> et vous financez <b>une part concrète</b> de la scolarité d'un enfant.</p>
+        <p class="impact__n" id="impactNote">La grille d'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.</p>
+      </div>
+      <p class="give__n"><span aria-hidden="true">✳</span> Les comptes du centre seront publiés régulièrement. Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration.</p>
+    </div>
+
+    <div class="form rv">
+      <h3 style="font-size:22px">Soutenir le Centre Rahma</h3>
+      <p class="form__s">Sécurisé · 2 minutes · sans création de compte</p>
+
+      <div class="toggle" role="group" aria-label="Fréquence du don">
+        <button type="button" data-freq="once" aria-pressed="true">Don ponctuel</button>
+        <button type="button" data-freq="month" aria-pressed="false">Don mensuel</button>
+      </div>
+
+      <label class="fl">Devise</label>
+      <div class="toggle toggle--3" style="margin-top:0" role="group" aria-label="Devise">
+        <button type="button" data-cur="FCFA" aria-pressed="true">FCFA</button>
+        <button type="button" data-cur="EUR" aria-pressed="false">Euro</button>
+        <button type="button" data-cur="USD" aria-pressed="false">Dollar</button>
+      </div>
+
+      <label class="fl">Choisissez un montant</label>
+      <div class="amts" role="group" aria-label="Montant" id="amts"></div>
+
+      <label class="fl" for="custom">Ou saisissez un autre montant</label>
+      <div class="input"><input id="custom" type="number" min="1" placeholder="Montant libre" inputmode="numeric"><span id="curLabel">FCFA</span></div>
+
+      <label class="fl">Moyen de paiement</label>
+      <div class="pays" role="group" aria-label="Moyen de paiement" id="pays">
+        <button type="button" class="pay" data-pay="om" aria-pressed="true"><i style="background:#F26522"></i>Orange Money</button>
+        <button type="button" class="pay" data-pay="wave" aria-pressed="false"><i style="background:#1DC3F0"></i>Wave</button>
+        <button type="button" class="pay" data-pay="vir-ml" aria-pressed="false"><i style="background:#0F4A2F"></i>Virement Mali</button>
+        <button type="button" class="pay" data-pay="vir-fr" aria-pressed="false"><i style="background:#D9A62B"></i>Virement France</button>
+      </div>
+
+      <div class="paybox" id="paybox"></div>
+
+      <label class="fl" for="mail">Votre e-mail</label>
+      <div class="input"><input id="mail" type="email" placeholder="pour recevoir la confirmation"></div>
+
+      <label class="cons"><input type="checkbox" checked> Je souhaite recevoir les nouvelles du centre et l'avancement du projet de médersa.</label>
+
+      <button class="btn btn--or btn--full btn--lg" id="submit" type="button">J'ai envoyé mon don</button>
+      <p class="form__sec">Le centre ne conserve aucune donnée bancaire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== L'AMAAFE ===== -->
+<section class="sec" id="amaafe">
+  <div class="wrap about">
+    <div class="rv">
+      <span class="eyebrow eyebrow--d">L'association porteuse</span>
+      <h2 style="margin-top:15px;color:var(--vert)">Le Centre Rahma est une initiative de l'AMAAFE</h2>
+      <hr class="rule">
+      <p class="lead">L'Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
+      <p class="lead" style="margin-top:16px">Le centre n'est qu'une de ses actions. L'association intervient aussi sur :</p>
+      <div class="tags">
+        <span class="tag">Promotion de la santé des populations</span>
+        <span class="tag">Lutte contre le mariage précoce et forcé</span>
+        <span class="tag">Droits de l'enfant</span>
+        <span class="tag">Scolarisation des filles</span>
+        <span class="tag">Éducation islamique</span>
+        <span class="tag">Sorties éducatives et récréatives</span>
+        <span class="tag">Centres de jeux pour enfants</span>
+        <span class="tag">Assainissement et cadre de vie</span>
+        <span class="tag">Épanouissement des femmes</span>
+        <span class="tag">Entrepreneuriat féminin</span>
+      </div>
+    </div>
+    <div class="gal rv">
+      <div class="photo photo--s">Photo — une action de sensibilisation</div>
+      <div class="photo photo--p">Photo — l'équipe AMAAFE</div>
+      <div class="photo photo--p">Photo — une sortie éducative</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRANSPARENCE ===== -->
+<section class="sec trust" id="transparence">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Transparence</span>
+        <h2>Deux associations déclarées, des comptes ouverts</h2>
+      </div>
+      <p class="lead" style="max-width:38ch">La première question d'un donateur n'est pas « combien ? » mais « où va mon argent ? ». Voici nos références, vérifiables.</p>
+    </div>
+    <div class="g2">
+      <div class="card entity rv">
+        <div class="entity__t">Entité malienne</div>
+        <h3>AMAAFE / Mali</h3>
+        <div class="dl">
+          <div><em>Date de création</em><span>30 septembre 2010</span></div>
+          <div><em>Récépissé</em><span>1811/MATCL-DNI</span></div>
+          <div><em>Siège social</em><span>Yirimadio, Bamako</span></div>
+          <div><em>Porte</em><span>Le Centre Rahma</span></div>
+        </div>
+      </div>
+      <div class="card entity rv">
+        <div class="entity__t">Entité française</div>
+        <h3>AMAAFE / France</h3>
+        <div class="dl">
+          <div><em>Date de création</em><span>25 avril 2012</span></div>
+          <div><em>N° RNA</em><span>W953004202</span></div>
+          <div><em>Siège social</em><span>Osny (95), France</span></div>
+          <div><em>Régime</em><span>Loi 1901</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="g3 rv" style="margin-top:20px">
+      <a class="card entity" href="#"><div class="entity__t">Document</div><h3 style="font-size:18px">Statuts de l'association</h3><p style="font-size:13.5px;color:var(--gris);margin-top:8px">Télécharger le PDF →</p></a>
+      <a class="card entity" href="#"><div class="entity__t">Document</div><h3 style="font-size:18px">Rapport d'activité</h3><p style="font-size:13.5px;color:var(--gris);margin-top:8px">À publier après validation en AG →</p></a>
+      <a class="card entity" href="#"><div class="entity__t">Document</div><h3 style="font-size:18px">Rapport financier</h3><p style="font-size:13.5px;color:var(--gris);margin-top:8px">À publier après validation en AG →</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACTUALITÉS ===== -->
+<section class="sec" id="actualites" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Actualités</span>
+        <h2>La vie du centre</h2>
+      </div>
+      <a class="btn btn--ghost" href="#">Toutes les actualités</a>
+    </div>
+    <div class="g3">
+      <article class="card post rv">
+        <div class="photo photo--p">Photo — sortie éducative</div>
+        <div class="post__b"><div class="post__m"><i>Sortie éducative</i><span>date à préciser</span></div><h3>Visite d'un centre médical avec les élèves</h3><p>Les enfants du centre ont découvert le fonctionnement d'un centre de santé, dans le cadre des sorties éducatives de l'AMAAFE.</p><span class="post__l">Lire l'article →</span></div>
+      </article>
+      <article class="card post rv">
+        <div class="photo photo--s">Photo — remise des fournitures</div>
+        <div class="post__b"><div class="post__m"><i>Vie du centre</i><span>date à préciser</span></div><h3>Remise des uniformes et des fournitures scolaires</h3><p>Chaque élève reçoit sa tenue et son matériel en début d'année, entièrement pris en charge par le centre.</p><span class="post__l">Lire l'article →</span></div>
+      </article>
+      <article class="card post rv">
+        <div class="photo photo--p">Photo — le hangar</div>
+        <div class="post__b"><div class="post__m"><i>Le projet</i><span>date à préciser</span></div><h3>Où en est le projet de médersa ?</h3><p>Point d'étape sur la recherche du terrain et sur les fonds réunis à ce jour.</p><span class="post__l">Lire l'article →</span></div>
+      </article>
+    </div>
+    <div class="news rv">
+      <div>
+        <h3 style="font-size:22px">Recevez les nouvelles du centre</h3>
+        <p>Une lettre par mois : avancement du projet de médersa, vie des élèves, comptes publiés.</p>
+      </div>
+      <form onsubmit="return false">
+        <div class="input"><input type="email" placeholder="votre@email.com" aria-label="Votre e-mail"></div>
+        <button class="btn btn--vert" type="submit">S'inscrire</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="head rv">
+      <div>
+        <span class="eyebrow eyebrow--d">Contact</span>
+        <h2>Parlons de votre soutien</h2>
+      </div>
+      <p class="lead" style="max-width:38ch">Une question, une visite, un partenariat : nous restons à votre disposition pour tout échange.</p>
+    </div>
+    <div class="contact__g">
+      <div class="cbox rv">
+        <div class="cline"><i>◉</i><div><b>Adresse du centre</b><span>Yirimadio — Bamako, Mali</span></div></div>
+        <div class="cline"><i>✆</i><div><b>Téléphone Mali</b><span>+223 76 33 79 15</span></div></div>
+        <div class="cline"><i>✆</i><div><b>Téléphone France</b><span>+33 6 66 31 53 40</span></div></div>
+        <div class="cline"><i>✉</i><div><b>Courriel</b><span>centrerahma.coran@gmail.com</span></div></div>
+        <div class="cline"><i>☰</i><div><b>Horaires de visite</b><span><span class="tbd">à préciser</span></span></div></div>
+      </div>
+      <div class="cbox rv">
+        <div class="input"><input type="text" placeholder="Votre nom" aria-label="Votre nom"></div>
+        <div class="input"><input type="email" placeholder="Votre e-mail" aria-label="Votre e-mail"></div>
+        <div class="input"><input type="text" placeholder="Votre message" aria-label="Votre message" style="padding-block:26px"></div>
+        <button class="btn btn--vert btn--full" type="button">Envoyer le message</button>
+        <a class="btn btn--ghost btn--full" href="#">Écrire directement sur WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__g">
+      <div>
+        <div class="brand">
+          <span class="mark" aria-hidden="true">ر</span>
+          <span><span class="brand__n">CENTRE CORANIQUE RAHMA</span><span class="brand__s">Solidarité — Discipline — Travail</span></span>
+        </div>
+        <p class="foot__d">Un établissement d'éducation et de formation créé en 2023 à Yirimadio, Bamako, à l'initiative de l'AMAAFE.</p>
+        <div class="foot__c">
+          <span>Yirimadio — Bamako, Mali</span>
+          <span>+223 76 33 79 15 · +33 6 66 31 53 40</span>
+          <span>centrerahma.coran@gmail.com</span>
+        </div>
+        <div class="foot__s"><a href="#">Facebook</a><a href="#">WhatsApp</a><a href="#">YouTube</a><a href="#">TikTok</a></div>
+      </div>
+      <div class="foot__col"><b>Le centre</b><a href="#apropos">Qui sommes-nous</a><a href="#vision">Notre vision</a><a href="#defis">Nos défis</a><a href="#medersa">Le projet de médersa</a><a href="#actualites">Actualités</a></div>
+      <div class="foot__col"><b>Soutenir</b><a href="#don">Faire un don</a><a href="#parrainage">Parrainer un enfant</a><a href="#">Devenir bénévole</a><a href="#">Partenariats</a><a href="#">Adhérer à l'AMAAFE</a></div>
+      <div class="foot__col"><b>L'association</b><a href="#amaafe">L'AMAAFE</a><a href="#transparence">Transparence</a><a href="#">Statuts</a><a href="#">Rapports</a><a href="#contact">Nous contacter</a></div>
+    </div>
+    <div class="legal">
+      <strong style="color:rgba(255,255,255,.8)">Mentions légales —</strong>
+      Site édité par l'Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant (AMAAFE).
+      AMAAFE/Mali : association déclarée le 30 septembre 2010, récépissé n° 1811/MATCL-DNI, siège social à Yirimadio, Bamako (Mali).
+      AMAAFE/France : association loi 1901 déclarée le 25 avril 2012, n° RNA W953004202, siège social à Osny (95520), France.
+      Directeur de la publication : <span class="tbd">à désigner</span>. Hébergeur : <span class="tbd">à préciser</span>.
+      <div class="legal__b">
+        <span>© 2026 Centre Coranique Rahma — AMAAFE. Tous droits réservés.</span>
+        <div><a href="#">Politique de confidentialité</a><a href="#">Conditions de don</a><a href="#">Gestion des cookies</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <a class="btn btn--ghost" href="#parrainage">Parrainer</a>
+  <a class="btn btn--or" href="#don">Faire un don</a>
+</div>
+
+<script>
+(function(){
+  var fmt=function(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");};
+
+  var nav=document.getElementById('nav');
+  var onS=function(){nav.classList.toggle('is-stuck',window.scrollY>8);};
+  window.addEventListener('scroll',onS,{passive:true});onS();
+
+  var burger=document.getElementById('burger'),mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',function(){
+    var o=mmenu.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded',o?'true':'false');
+  });
+  mmenu.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){mmenu.classList.remove('is-open');burger.setAttribute('aria-expanded','false');}
+  });
+
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+  var bio=new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if(!e.isIntersecting)return;
+      e.target.style.width=e.target.dataset.fill+'%';bio.unobserve(e.target);
+    });
+  },{threshold:.4});
+  document.querySelectorAll('.bar i').forEach(function(el){bio.observe(el);});
+
+  /* ---- formulaire de don ---- */
+  var PRESETS={
+    FCFA:[2500,5000,10000,25000,50000,100000],
+    EUR:[5,10,20,50,100,200],
+    USD:[5,10,25,50,100,200]
+  };
+  var COORD={
+    om:{t:'Orange Money — Mali',n:'À communiquer par le centre',s:'Le nom affiché à la validation doit être celui de l\'association.'},
+    wave:{t:'Wave — Mali',n:'À communiquer par le centre',s:'Un lien de paiement Wave sera intégré ici.'},
+    'vir-ml':{t:'Virement — compte Mali',n:'Coordonnées à communiquer',s:'Motif à indiquer : DON RAHMA + votre nom.'},
+    'vir-fr':{t:'Virement — compte France (EUR)',n:'IBAN de l\'AMAAFE/France',s:'Motif à indiquer : DON RAHMA + votre nom.'}
+  };
+  var cur='FCFA',amount=PRESETS.FCFA[2],freq='once',pay='om';
+  var amtsEl=document.getElementById('amts'),curLabel=document.getElementById('curLabel'),
+      custom=document.getElementById('custom'),submit=document.getElementById('submit'),
+      impactT=document.getElementById('impactText'),impactN=document.getElementById('impactNote'),
+      paybox=document.getElementById('paybox');
+
+  function group(list,btn){list.forEach(function(b){b.setAttribute('aria-pressed',b===btn?'true':'false');});}
+
+  function drawAmounts(){
+    amtsEl.innerHTML='';
+    PRESETS[cur].forEach(function(v,i){
+      var b=document.createElement('button');
+      b.type='button';b.textContent=fmt(v);
+      b.setAttribute('aria-pressed',v===amount?'true':'false');
+      b.addEventListener('click',function(){
+        amount=v;custom.value='';
+        group(amtsEl.querySelectorAll('button'),b);render();
+      });
+      amtsEl.appendChild(b);
+    });
+  }
+
+  function render(){
+    var m=freq==='month';
+    curLabel.textContent=cur;
+    impactT.innerHTML='Donnez <b>'+fmt(amount)+' '+cur+'</b>'+(m?' par mois':'')+' et vous financez <b>une part concrète</b> de la scolarité d\'un enfant.';
+    impactN.textContent=m
+      ? 'Le don mensuel sera à renouveler manuellement tant que le prélèvement automatique n\'est pas en place.'
+      : 'La grille d\'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.';
+    submit.textContent='J\'ai envoyé '+fmt(amount)+' '+cur;
+    var c=COORD[pay];
+    paybox.innerHTML='<span>'+c.t+'</span><b>'+c.n+'</b><span>'+c.s+'</span>';
+  }
+
+  document.querySelectorAll('[data-freq]').forEach(function(b){
+    b.addEventListener('click',function(){
+      freq=b.dataset.freq;group(document.querySelectorAll('[data-freq]'),b);render();
+    });
+  });
+  document.querySelectorAll('[data-cur]').forEach(function(b){
+    b.addEventListener('click',function(){
+      cur=b.dataset.cur;amount=PRESETS[cur][2];custom.value='';
+      group(document.querySelectorAll('[data-cur]'),b);drawAmounts();render();
+    });
+  });
+  document.querySelectorAll('[data-pay]').forEach(function(b){
+    b.addEventListener('click',function(){
+      pay=b.dataset.pay;group(document.querySelectorAll('[data-pay]'),b);render();
+    });
+  });
+  custom.addEventListener('input',function(){
+    var v=parseInt(custom.value,10);
+    if(v>0){amount=v;group(amtsEl.querySelectorAll('button'),null);render();}
+  });
+  submit.addEventListener('click',function(){
+    submit.textContent='Maquette — la déclaration de don sera enregistrée ici';
+    setTimeout(render,2400);
+  });
+
+  drawAmounts();render();
+})();
+</script>
+</body>
+</html>

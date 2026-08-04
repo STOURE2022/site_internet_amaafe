@@ -1,0 +1,12 @@
+---
+/** Injecte la configuration de paiement pour /public/js/don.js.
+    À inclure une fois sur chaque page qui contient le module de don. */
+import config from '../../content/config.json';
+
+const donCfg = {
+  paiement: config.paiement,
+  whatsapp: config.whatsapp.numero,
+};
+---
+<script type="application/json" id="don-config" set:html={JSON.stringify(donCfg)} />
+<script is:inline defer src="/js/don.js"></script>

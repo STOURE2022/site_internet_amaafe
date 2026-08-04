@@ -1,0 +1,196 @@
+---
+import '../styles/global.css';
+import config from '../../content/config.json';
+
+interface Props {
+  titre: string;
+  description: string;
+  /** Masquer la barre de don fixe en bas de l'écran mobile (page don). */
+  masquerDock?: boolean;
+}
+
+const { titre, description, masquerDock = false } = Astro.props;
+const site = Astro.site ?? new URL('https://centre-rahma.pages.dev');
+const urlCanonique = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/images/logo-amaafe.png', site).href;
+const chemin = Astro.url.pathname;
+
+const menu = [
+  { href: '/le-centre/', label: 'Le centre' },
+  { href: '/notre-projet/', label: 'Notre projet' },
+  { href: '/parrainage/', label: 'Parrainage' },
+  { href: '/l-amaafe/', label: "L'AMAAFE" },
+  { href: '/actualites/', label: 'Actualités' },
+  { href: '/contact/', label: 'Contact' },
+];
+const menuMobile = [
+  ...menu.slice(0, 4),
+  { href: '/transparence/', label: 'Transparence' },
+  { href: '/faire-un-don/', label: 'Faire un don' },
+  ...menu.slice(4),
+];
+const estActif = (href: string) =>
+  chemin === href || (href !== '/' && chemin.startsWith(href));
+
+const reseaux = [
+  ['Facebook', config.reseaux.facebook],
+  ['WhatsApp', config.reseaux.whatsapp],
+  ['YouTube', config.reseaux.youtube],
+  ['TikTok', config.reseaux.tiktok],
+].filter(([, url]) => url) as [string, string][];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: config.site.nom,
+  slogan: config.site.devise,
+  foundingDate: String(config.site.anneeCreation),
+  url: site.href,
+  logo: ogImage,
+  email: config.contact.email,
+  telephone: [config.contact.telMali, config.contact.telFrance],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Yirimadio',
+    addressLocality: 'Bamako',
+    addressCountry: 'ML',
+  },
+  parentOrganization: {
+    '@type': 'NGO',
+    name: config.amaafe.nomComplet,
+    alternateName: config.amaafe.sigle,
+    slogan: config.amaafe.slogan,
+  },
+};
+---
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{titre}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={urlCanonique} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="/fonts/karla-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={config.site.nom} />
+  <meta property="og:title" content={titre} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={urlCanonique} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap topbar__i">
+      <span>{config.site.lieu} &nbsp;·&nbsp; Une initiative de l'<b>{config.amaafe.sigle}</b></span>
+      <span>{config.contact.telMali} &nbsp;·&nbsp; {config.contact.telFrance} &nbsp;·&nbsp; {config.contact.email}</span>
+    </div>
+  </div>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav__bar">
+      <a class="brand" href="/">
+        <span class="mark" aria-hidden="true">ر</span>
+        <span>
+          <span class="brand__n">CENTRE CORANIQUE RAHMA</span>
+          <span class="brand__s">{config.site.devise}</span>
+        </span>
+      </a>
+      <nav class="menu" aria-label="Navigation principale">
+        {menu.map((item) => (
+          <a href={item.href} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="/parrainage/">Parrainer</a>
+        <a class="btn btn--or" href="/faire-un-don/">Faire un don</a>
+        <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <nav class="mmenu" id="mmenu" aria-label="Navigation mobile">
+      {menuMobile.map((item) => (
+        <a href={item.href} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </header>
+
+  <main id="contenu">
+    <slot />
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__g">
+        <div>
+          <div class="brand">
+            <span class="mark" aria-hidden="true">ر</span>
+            <span><span class="brand__n">CENTRE CORANIQUE RAHMA</span><span class="brand__s">{config.site.devise}</span></span>
+          </div>
+          <p class="foot__d">Un établissement d'éducation et de formation créé en {config.site.anneeCreation} à Yirimadio, Bamako, à l'initiative de l'AMAAFE.</p>
+          <div class="foot__c">
+            <span>{config.contact.adresse}</span>
+            <span>{config.contact.telMali} · {config.contact.telFrance}</span>
+            <span>{config.contact.email}</span>
+          </div>
+          {reseaux.length > 0 && (
+            <div class="foot__s">
+              {reseaux.map(([nom, url]) => <a href={url} rel="noopener">{nom}</a>)}
+            </div>
+          )}
+        </div>
+        <div class="foot__col">
+          <b>Le centre</b>
+          <a href="/le-centre/">Qui sommes-nous</a>
+          <a href="/le-centre/#vision">Notre vision</a>
+          <a href="/notre-projet/">Le projet de médersa</a>
+          <a href="/actualites/">Actualités</a>
+        </div>
+        <div class="foot__col">
+          <b>Soutenir</b>
+          <a href="/faire-un-don/">Faire un don</a>
+          <a href="/parrainage/">Parrainer un enfant</a>
+          <a href="/contact/">Devenir bénévole</a>
+          <a href="/contact/">Partenariats</a>
+        </div>
+        <div class="foot__col">
+          <b>L'association</b>
+          <a href="/l-amaafe/">L'AMAAFE</a>
+          <a href="/transparence/">Transparence</a>
+          <a href="/mentions-legales/">Mentions légales</a>
+          <a href="/contact/">Nous contacter</a>
+        </div>
+      </div>
+      <div class="legal">
+        <strong style="color:rgba(255,255,255,.8)">Mentions légales —</strong>
+        Site édité par l'{config.amaafe.nomComplet} ({config.amaafe.sigle}).
+        {config.entites.mali.nom} : association déclarée le {config.entites.mali.dateCreation}, {config.entites.mali.reference.toLowerCase()}, siège social à {config.entites.mali.siege}.
+        {config.entites.france.nom} : association loi 1901 déclarée le {config.entites.france.dateCreation}, {config.entites.france.reference.toLowerCase()}, siège social à {config.entites.france.siege}.
+        Directeur de la publication : <span class="tbd">à désigner</span>. Hébergeur : <span class="tbd">à préciser</span>.
+        <div class="legal__b">
+          <span>© 2026 {config.site.nom} — {config.amaafe.sigle}. Tous droits réservés.</span>
+          <div>
+            <a href="/mentions-legales/">Mentions légales</a>
+            <a href="/confidentialite/">Politique de confidentialité</a>
+            <a href="/conditions-de-don/">Conditions de don</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  {!masquerDock && (
+    <div class="dock">
+      <a class="btn btn--ghost" href="/parrainage/">Parrainer</a>
+      <a class="btn btn--or" href="/faire-un-don/">Faire un don</a>
+    </div>
+  )}
+
+  <script is:inline defer src="/js/site.js"></script>
+</body>
+</html>

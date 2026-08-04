@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Politique de confidentialité | Centre Coranique Rahma"
+  description="Comment le site du Centre Coranique Rahma traite vos données : pas de cookies, pas de traceurs, des données de formulaires utilisées uniquement pour vous répondre."
+>
+  <section class="sec" style="padding-top:clamp(36px,5vw,64px)">
+    <div class="wrap" style="max-width:860px">
+      <span class="eyebrow eyebrow--d">Vos données</span>
+      <h1 style="color:var(--vert);font-size:clamp(30px,4vw,46px);margin-top:14px">Politique de confidentialité</h1>
+      <div class="prose">
+        <p class="lead">Ce site est conçu pour collecter le moins de données possible. L'entité française de l'association (AMAAFE / France) est soumise au Règlement général sur la protection des données (RGPD).</p>
+
+        <h2>Pas de cookies, pas de traceurs</h2>
+        <p>Ce site n'utilise <strong>aucun cookie</strong>, aucun outil de mesure d'audience tiers (pas de Google Analytics) et aucun traceur publicitaire. Aucune bannière de consentement n'est donc nécessaire.</p>
+
+        <h2>Les données que vous nous transmettez</h2>
+        <p>Vous pouvez être amené à nous transmettre des données uniquement lorsque vous nous écrivez volontairement :</p>
+        <ul>
+          <li><strong>Formulaire ou e-mail de contact</strong> : nom, adresse e-mail et message — utilisés uniquement pour vous répondre.</li>
+          <li><strong>Déclaration de don</strong> (par WhatsApp ou formulaire externe) : nom, numéro de téléphone émetteur, montant, canal et date du don — utilisés uniquement pour rapprocher votre don du relevé de l'opérateur et vous remercier.</li>
+          <li><strong>Demande de parrainage</strong> : coordonnées utilisées uniquement pour la mise en relation.</li>
+          <li><strong>Lettre d'information</strong> : adresse e-mail, utilisée uniquement pour l'envoi des nouvelles du centre. Vous pouvez vous désinscrire à tout moment en nous écrivant.</li>
+        </ul>
+        <p>Ces données ne sont ni vendues, ni cédées, ni utilisées à d'autres fins. Le site ne conserve <strong>aucune donnée bancaire</strong>.</p>
+
+        <h2>Services tiers</h2>
+        <p>Lorsque vous utilisez WhatsApp ou un formulaire hébergé par un service externe (par exemple Tally ou Google Forms), les conditions de ces services s'appliquent également. Les services utilisés sont indiqués sur les pages concernées.</p>
+
+        <h2>Durée de conservation</h2>
+        <p>Les messages et déclarations sont conservés le temps nécessaire au traitement de votre demande et aux obligations comptables de l'association, puis supprimés.</p>
+
+        <h2>Vos droits</h2>
+        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression de vos données. Pour l'exercer, écrivez à <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a>. Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir la CNIL (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).</p>
+      </div>
+    </div>
+  </section>
+</Base>

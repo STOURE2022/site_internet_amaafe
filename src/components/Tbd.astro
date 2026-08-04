@@ -1,0 +1,23 @@
+---
+/**
+ * Jeton « donnée manquante ». Affiche la valeur si elle est connue,
+ * sinon le jeton rouge en pointillés de la maquette.
+ *
+ * <Tbd valeur={config.chiffres.enfants} label="à confirmer" suffixe=" enfants" />
+ */
+import { fmtNombre } from '../lib/format.js';
+
+interface Props {
+  valeur?: string | number | null;
+  label?: string;
+  prefixe?: string;
+  suffixe?: string;
+}
+const { valeur = null, label = 'à confirmer', prefixe = '', suffixe = '' } = Astro.props;
+const affichage = typeof valeur === 'number' ? fmtNombre(valeur) : valeur;
+---
+{valeur != null ? (
+  <>{prefixe}{affichage}{suffixe}</>
+) : (
+  <span class="tbd">{label}</span>
+)}

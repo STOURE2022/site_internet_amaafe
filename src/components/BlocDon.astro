@@ -1,0 +1,56 @@
+---
+/** Bloc don de la page d'accueil : choix du montant, de la devise et du
+    canal, aperçu des instructions, puis renvoi vers /faire-un-don pour
+    la déclaration. Le JS associé est /public/js/don.js (via DonConfig). */
+---
+<section class="sec give" id="don">
+  <div class="wrap give__g">
+    <div class="rv">
+      <span class="eyebrow">Faire un don</span>
+      <h2 style="margin-top:15px">Votre don devient un cartable, un uniforme, une salle de classe.</h2>
+      <p class="lead give__l">Le centre ne demande rien aux familles. Tout repose sur la générosité des donateurs, au Mali comme dans la diaspora.</p>
+      <div class="impact">
+        <span class="impact__k">Ce que votre don finance</span>
+        <p class="impact__v" id="impactText">Donnez <b>10 000 FCFA</b> et vous financez <b>une part concrète</b> de la scolarité d'un enfant.</p>
+        <p class="impact__n" id="impactNote">La grille d'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.</p>
+      </div>
+      <p class="give__n"><span aria-hidden="true">✳</span> Les comptes du centre seront publiés régulièrement. Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration.</p>
+    </div>
+
+    <div class="form rv">
+      <h3 style="font-size:22px">Soutenir le Centre Rahma</h3>
+      <p class="form__s">Sécurisé · 2 minutes · sans création de compte</p>
+
+      <div class="toggle" role="group" aria-label="Fréquence du don">
+        <button type="button" data-freq="once" aria-pressed="true">Don ponctuel</button>
+        <button type="button" data-freq="month" aria-pressed="false">Don mensuel</button>
+      </div>
+
+      <span class="fl" id="lbl-devise">Devise</span>
+      <div class="toggle toggle--3" style="margin-top:0" role="group" aria-labelledby="lbl-devise">
+        <button type="button" data-cur="FCFA" aria-pressed="true">FCFA</button>
+        <button type="button" data-cur="EUR" aria-pressed="false">Euro</button>
+        <button type="button" data-cur="USD" aria-pressed="false">Dollar</button>
+      </div>
+
+      <span class="fl" id="lbl-montant">Choisissez un montant</span>
+      <div class="amts" role="group" aria-labelledby="lbl-montant" id="amts"></div>
+
+      <label class="fl" for="custom">Ou saisissez un autre montant</label>
+      <div class="input"><input id="custom" type="number" min="1" placeholder="Montant libre" inputmode="numeric"><span id="curLabel">FCFA</span></div>
+
+      <span class="fl" id="lbl-canal">Moyen de paiement</span>
+      <div class="pays" role="group" aria-labelledby="lbl-canal" id="pays">
+        <button type="button" class="pay" data-pay="om" aria-pressed="true"><i style="background:#F26522"></i>Orange Money</button>
+        <button type="button" class="pay" data-pay="wave" aria-pressed="false"><i style="background:#1DC3F0"></i>Wave</button>
+        <button type="button" class="pay" data-pay="vir-ml" aria-pressed="false"><i style="background:#0F4A2F"></i>Virement Mali</button>
+        <button type="button" class="pay" data-pay="vir-fr" aria-pressed="false"><i style="background:#D9A62B"></i>Virement France</button>
+      </div>
+
+      <div class="paybox" id="paybox"></div>
+
+      <a class="btn btn--or btn--full btn--lg" id="versDeclaration" href="/faire-un-don/#declarer">J'ai envoyé mon don — je le déclare</a>
+      <p class="form__sec">Le centre ne conserve aucune donnée bancaire.</p>
+    </div>
+  </div>
+</section>

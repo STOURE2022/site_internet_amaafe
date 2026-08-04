@@ -1,0 +1,130 @@
+---
+import Base from '../layouts/Base.astro';
+import DonConfig from '../components/DonConfig.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Faire un don — Orange Money, Wave ou virement | Centre Coranique Rahma"
+  description="Soutenez le Centre Coranique Rahma en 4 étapes : choisissez un montant, un canal (Orange Money, Wave, virement), suivez les instructions puis déclarez votre don par WhatsApp."
+  masquerDock={true}
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Faire un don</span>
+    <h1>Votre don devient un cartable, un uniforme, une salle de classe.</h1>
+    <p class="lead">Le site n'encaisse pas votre argent : il vous guide vers le canal de votre choix (Orange Money, Wave ou virement), puis vous permet de déclarer votre don pour que le centre puisse le retrouver et vous remercier.</p>
+  </section>
+
+  <div class="wrap" style="max-width:860px">
+
+    <!-- ===== ÉTAPE 1 : MONTANT ===== -->
+    <section class="dstep rv" aria-labelledby="etape1">
+      <div class="dstep__h">
+        <span class="dstep__n" aria-hidden="true">1</span>
+        <div>
+          <h2 id="etape1">Choisissez votre montant</h2>
+          <p class="dstep__s">Don ponctuel ou mensuel, en FCFA, en euros ou en dollars.</p>
+        </div>
+      </div>
+
+      <div class="toggle" role="group" aria-label="Fréquence du don">
+        <button type="button" data-freq="once" aria-pressed="true">Don ponctuel</button>
+        <button type="button" data-freq="month" aria-pressed="false">Don mensuel</button>
+      </div>
+
+      <span class="fl" id="lbl-devise">Devise</span>
+      <div class="toggle toggle--3" style="margin-top:0" role="group" aria-labelledby="lbl-devise">
+        <button type="button" data-cur="FCFA" aria-pressed="true">FCFA</button>
+        <button type="button" data-cur="EUR" aria-pressed="false">Euro</button>
+        <button type="button" data-cur="USD" aria-pressed="false">Dollar</button>
+      </div>
+
+      <span class="fl" id="lbl-montant">Montant</span>
+      <div class="amts" role="group" aria-labelledby="lbl-montant" id="amts"></div>
+
+      <label class="fl" for="custom">Ou saisissez un autre montant</label>
+      <div class="input"><input id="custom" type="number" min="1" placeholder="Montant libre" inputmode="numeric"><span id="curLabel">FCFA</span></div>
+
+      <div class="impact" style="margin-top:22px;border-color:var(--ligne);background:var(--papier-2)">
+        <span class="impact__k" style="color:#8A6D12">Ce que votre don finance</span>
+        <p class="impact__v" id="impactText" style="color:var(--encre)">Donnez <b style="color:#8A6D12">10 000 FCFA</b> et vous financez <b style="color:#8A6D12">une part concrète</b> de la scolarité d'un enfant.</p>
+        <p class="impact__n" id="impactNote" style="color:var(--gris)">La grille d'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.</p>
+      </div>
+    </section>
+
+    <!-- ===== ÉTAPE 2 : CANAL ===== -->
+    <section class="dstep rv" aria-labelledby="etape2">
+      <div class="dstep__h">
+        <span class="dstep__n" aria-hidden="true">2</span>
+        <div>
+          <h2 id="etape2">Choisissez votre canal</h2>
+          <p class="dstep__s">Mobile money depuis le Mali, virement depuis le Mali ou l'Europe.</p>
+        </div>
+      </div>
+      <div class="pays" role="group" aria-label="Moyen de paiement" id="pays" style="margin-top:16px">
+        <button type="button" class="pay" data-pay="om" aria-pressed="true"><i style="background:#F26522"></i>Orange Money — Mali</button>
+        <button type="button" class="pay" data-pay="wave" aria-pressed="false"><i style="background:#1DC3F0"></i>Wave — Mali</button>
+        <button type="button" class="pay" data-pay="vir-ml" aria-pressed="false"><i style="background:#0F4A2F"></i>Virement bancaire — Mali</button>
+        <button type="button" class="pay" data-pay="vir-fr" aria-pressed="false"><i style="background:#D9A62B"></i>Virement bancaire — France (EUR)</button>
+      </div>
+    </section>
+
+    <!-- ===== ÉTAPE 3 : INSTRUCTIONS ===== -->
+    <section class="dstep rv" aria-labelledby="etape3">
+      <div class="dstep__h">
+        <span class="dstep__n" aria-hidden="true">3</span>
+        <div>
+          <h2 id="etape3">Envoyez votre don</h2>
+          <p class="dstep__s">Suivez les instructions du canal choisi, puis revenez déclarer votre envoi.</p>
+        </div>
+      </div>
+      <div class="paybox" id="paybox" aria-live="polite"></div>
+      <div class="note">
+        <strong>Pour les virements :</strong> indiquez impérativement le motif <strong>« {config.paiement.motif} »</strong> pour que le centre puisse rattacher votre virement à votre déclaration.
+      </div>
+    </section>
+
+    <!-- ===== ÉTAPE 4 : DÉCLARATION ===== -->
+    <section class="dstep rv" id="declarer" aria-labelledby="etape4">
+      <div class="dstep__h">
+        <span class="dstep__n" aria-hidden="true">4</span>
+        <div>
+          <h2 id="etape4">Déclarez votre don</h2>
+          <p class="dstep__s">C'est ce qui permet au centre de retrouver votre envoi dans le relevé de l'opérateur — et de vous remercier.</p>
+        </div>
+      </div>
+
+      <label class="fl" for="d-nom">Votre nom</label>
+      <div class="input"><input id="d-nom" type="text" autocomplete="name" placeholder="Nom et prénom"></div>
+
+      <label class="fl" for="d-num">Numéro émetteur (le numéro qui a envoyé l'argent)</label>
+      <div class="input"><input id="d-num" type="tel" inputmode="tel" placeholder="+223 …"></div>
+      <p style="font-size:12.8px;color:var(--gris);margin-top:8px">C'est l'information la plus importante : le mobile money ne transmet aucune référence exploitable, seul votre numéro permet de rapprocher votre don du relevé de l'opérateur.</p>
+
+      <label class="fl" for="d-date">Date d'envoi</label>
+      <div class="input"><input id="d-date" type="date"></div>
+
+      <a class="btn btn--full btn--lg wa" id="waLink" href="#declarer" style="margin-top:24px" rel="noopener">Déclarer mon don sur WhatsApp</a>
+      <p style="font-size:12.8px;color:var(--gris-2);text-align:center;margin-top:10px">Le message est pré-rempli avec votre montant et votre canal — vous n'avez plus qu'à l'envoyer.</p>
+
+      {config.formulaires.declarationDonUrl ? (
+        <>
+          <p style="text-align:center;font-size:13px;color:var(--gris);margin-top:18px">Vous préférez ne pas utiliser WhatsApp ?</p>
+          <a class="btn btn--ghost btn--full" href={config.formulaires.declarationDonUrl} rel="noopener">Déclarer via le formulaire en ligne</a>
+        </>
+      ) : (
+        <div class="note" style="margin-top:22px">
+          Le formulaire de déclaration en ligne (pour ceux qui n'utilisent pas WhatsApp) sera activé prochainement : <span class="tbd">URL à configurer</span>. En attendant, vous pouvez aussi écrire à <a href={`mailto:${config.contact.email}`} style="text-decoration:underline">{config.contact.email}</a>.
+        </div>
+      )}
+    </section>
+
+    <p class="rv" style="font-size:13.4px;color:var(--gris);margin-block:30px;display:flex;gap:10px;align-items:flex-start">
+      <span aria-hidden="true">✳</span>
+      <span>Le centre ne conserve aucune donnée bancaire. Les comptes seront publiés régulièrement. Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration. Voir les <a href="/conditions-de-don/" style="color:var(--vert);text-decoration:underline">conditions de don</a>.</span>
+    </p>
+
+  </div>
+
+  <DonConfig />
+</Base>

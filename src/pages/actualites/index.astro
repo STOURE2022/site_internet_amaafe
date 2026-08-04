@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import config from '../../../content/config.json';
+import { getCollection } from 'astro:content';
+import { fmtDate } from '../../lib/format.js';
+
+const articles = (await getCollection('actualites', ({ data }) => data.publie))
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURIComponent('Inscription à la lettre d’information')}`;
+---
+<Base
+  titre="Actualités — La vie du centre | Centre Coranique Rahma"
+  description="Les actualités du Centre Coranique Rahma : vie des élèves, sorties éducatives, remises de fournitures et avancement du projet de médersa."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Actualités</span>
+    <h1>La vie du centre.</h1>
+    <p class="lead">Sorties éducatives, remises de fournitures, avancement du projet de médersa : suivez ce qui se passe à Yirimadio.</p>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="g3">
+        {articles.map((article, i) => (
+          <article class="card post rv">
+            <div class={`photo ${i % 2 === 0 ? 'photo--p' : 'photo--s'}`}>Photo — {article.data.titre}</div>
+            <div class="post__b">
+              <div class="post__m">
+                <i>{article.data.categorie}</i>
+                {article.data.date
+                  ? <span>{fmtDate(article.data.date)}</span>
+                  : <span class="tbd">date à préciser</span>}
+              </div>
+              <h3>{article.data.titre}</h3>
+              <p>{article.data.extrait}</p>
+              <a class="post__l" href={`/actualites/${article.id}/`}>Lire l'article →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="news rv">
+        <div>
+          <h3 style="font-size:22px">Recevez les nouvelles du centre</h3>
+          <p>Une lettre par mois : avancement du projet de médersa, vie des élèves, comptes publiés.</p>
+        </div>
+        {config.formulaires.newsletterUrl ? (
+          <form action={config.formulaires.newsletterUrl} method="get">
+            <div class="input"><input type="email" name="email" placeholder="votre@email.com" aria-label="Votre e-mail" required></div>
+            <button class="btn btn--vert" type="submit">S'inscrire</button>
+          </form>
+        ) : (
+          <a class="btn btn--vert" href={emailNewsletter}>S'inscrire par e-mail</a>
+        )}
+      </div>
+    </div>
+  </section>
+
+</Base>

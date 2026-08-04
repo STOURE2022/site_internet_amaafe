@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Tbd from '../components/Tbd.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Notre projet — Un terrain, puis une médersa | Centre Coranique Rahma"
+  description="Le projet prioritaire du Centre Coranique Rahma : acquérir un terrain à Bamako et y construire une médersa avec salles de classe, bibliothèque, sanitaires et espaces de formation professionnelle."
+>
+
+  <section class="wrap phero">
+    <span class="eyebrow eyebrow--d">Notre projet prioritaire</span>
+    <h1>Sortir du hangar. Construire la médersa.</h1>
+    <p class="lead">Aujourd'hui, les cours se tiennent sous un hangar en tôle, sur une parcelle prêtée par la mosquée du quartier. Notre priorité absolue : acquérir un terrain et y bâtir un vrai centre.</p>
+  </section>
+
+  <!-- ===== LA SITUATION ACTUELLE ===== -->
+  <section class="sec chal" style="padding-block:clamp(44px,6vw,80px)">
+    <div class="wrap chal__g">
+      <div class="rv">
+        <span class="eyebrow eyebrow--r">La situation actuelle</span>
+        <h2 style="margin-top:15px">Un hangar en tôle, prêté, provisoire.</h2>
+        <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.7)">Les enfants viennent chaque jour, avec courage et motivation. Mais les conditions d'étude restent très difficiles :</p>
+        <ul class="chal__l">
+          <li><i></i><span>Aucune véritable salle de classe</span></li>
+          <li><i></i><span>Chaleur difficilement supportable en saison sèche</span></li>
+          <li><i></i><span>Risques réels pendant la saison des pluies</span></li>
+          <li><i></i><span>Bruit permanent et inconfort</span></li>
+          <li><i></i><span>Manque d'espace et de mobilier adapté</span></li>
+        </ul>
+      </div>
+      <div class="photo rv">Photo — les cours sous le hangar en tôle</div>
+    </div>
+  </section>
+
+  <!-- ===== LE PROJET EN DÉTAIL ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Le projet</span>
+          <h2>Une médersa pensée pour les enfants et pour l'avenir</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">Le projet se déroule en deux temps : d'abord l'acquisition du terrain, ensuite la construction du bâtiment.</p>
+      </div>
+      <div class="proj rv">
+        <div class="proj__b">
+          <h3 style="font-size:24px">Les espaces prévus</h3>
+          <p class="lead" style="margin-top:14px">La future médersa comprendra tout ce qui manque aujourd'hui aux élèves :</p>
+          <div class="rooms">
+            <div class="room"><i></i>Des salles de classe</div>
+            <div class="room"><i></i>Une salle de mémorisation</div>
+            <div class="room"><i></i>Une bibliothèque</div>
+            <div class="room"><i></i>Des bureaux administratifs</div>
+            <div class="room"><i></i>Des sanitaires</div>
+            <div class="room"><i></i>Une cour de récréation</div>
+            <div class="room" style="grid-column:1/-1"><i></i>Des espaces dédiés à la future formation professionnelle</div>
+          </div>
+          <p class="lead" style="font-size:15px">Ces espaces de formation prépareront la dernière étape du parcours des élèves : l'apprentissage d'un métier à partir de {config.chiffres.suiviJusquaAge} ans.</p>
+        </div>
+        <div class="proj__side">
+          <div class="photo">Plan ou vue d'artiste de la future médersa</div>
+          <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,.85)">« Chaque contribution, quelle qu'en soit l'importance, représente une pierre supplémentaire vers la réalisation de ce projet. »</p>
+          <a class="btn btn--or btn--full" href="/faire-un-don/">Poser une pierre</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AVANCEMENT ===== -->
+  <section class="sec trust">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Avancement</span>
+          <h2>Où en sommes-nous ?</h2>
+        </div>
+      </div>
+      <div class="card entity rv" style="max-width:720px">
+        <div class="entity__t">Collecte pour le terrain et la médersa</div>
+        <div class="bar"><i data-fill={config.medersa.pourcentageAvancement ?? 0}></i></div>
+        <div class="sums">
+          <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
+          <span>sur un objectif de <Tbd valeur={config.medersa.budgetTotalFCFA} label="budget à chiffrer" suffixe=" FCFA" /></span>
+        </div>
+        <p style="font-size:13.5px;color:var(--gris);margin-top:16px">Le budget du projet sera arrêté par le bureau de l'association, puis publié ici avec le montant déjà collecté. L'avancement (terrain identifié, achat, début des travaux) sera relaté dans les <a href="/actualites/" style="color:var(--vert);text-decoration:underline">actualités du centre</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPEL AU DON ===== -->
+  <section class="sec">
+    <div class="wrap" style="text-align:center">
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Participer</span>
+        <h2 style="margin-top:14px;color:var(--vert)">Ce projet se construira pierre par pierre</h2>
+        <p class="lead" style="max-width:56ch;margin:18px auto 0">Chaque don, du plus modeste au plus important, rapproche les enfants d'une vraie salle de classe. Les comptes de la collecte seront publiés régulièrement.</p>
+        <div class="hero__act" style="justify-content:center">
+          <a class="btn btn--or btn--lg" href="/faire-un-don/">Faire un don pour la médersa</a>
+          <a class="btn btn--ghost btn--lg" href="/contact/">Proposer un partenariat</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

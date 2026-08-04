@@ -1,0 +1,8 @@
+# Dépendances et fichiers générés
+node_modules/
+dist/
+.astro/
+
+# Fichiers systèmes et éditeurs
+.DS_Store
+Thumbs.db

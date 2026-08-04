@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+---
+<Base
+  titre="Conditions de don | Centre Coranique Rahma"
+  description="Les conditions applicables aux dons faits au Centre Coranique Rahma : canaux de paiement, affectation des fonds, transparence et absence d'avantage fiscal annoncé."
+>
+  <section class="sec" style="padding-top:clamp(36px,5vw,64px)">
+    <div class="wrap" style="max-width:860px">
+      <span class="eyebrow eyebrow--d">Donner en confiance</span>
+      <h1 style="color:var(--vert);font-size:clamp(30px,4vw,46px);margin-top:14px">Conditions de don</h1>
+      <div class="prose">
+        <h2>Comment les dons sont reçus</h2>
+        <p>Ce site <strong>n'encaisse aucun paiement</strong>. Il présente les canaux officiels de l'association (Orange Money, Wave, virement bancaire au Mali ou en France) et vous guide pour effectuer votre don directement auprès de votre opérateur ou de votre banque.</p>
+        <p>Pour les virements, le motif <strong>« {config.paiement.motif} »</strong> doit être indiqué afin que votre don puisse être identifié.</p>
+
+        <h2>La déclaration de don</h2>
+        <p>Après votre envoi, nous vous demandons de déclarer votre don (par WhatsApp ou par formulaire), en indiquant notamment le <strong>numéro de téléphone émetteur</strong>. Le mobile money ne transmettant aucune référence exploitable, cette déclaration est le seul moyen pour le centre de rapprocher votre don du relevé de l'opérateur et de vous en accuser réception.</p>
+
+        <h2>Affectation des dons</h2>
+        <p>Les dons servent au fonctionnement du Centre Coranique Rahma (scolarité, fournitures et uniformes offerts aux élèves) et au projet prioritaire d'acquisition d'un terrain et de construction d'une médersa. L'utilisation des fonds sera présentée dans les comptes publiés sur la page <a href="/transparence/">Transparence</a>.</p>
+
+        <h2>Avantage fiscal</h2>
+        <p>Aucun avantage fiscal (réduction d'impôt, reçu fiscal) n'est annoncé pour l'instant : l'éligibilité de l'association n'a pas encore été confirmée par l'administration compétente. Cette page sera mise à jour si la situation évolue.</p>
+
+        <h2>Erreur ou question sur un don</h2>
+        <p>En cas d'erreur (montant, canal, double envoi) ou pour toute question sur votre don, contactez-nous au plus vite à <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a> ou au {config.contact.telMali} / {config.contact.telFrance}. Chaque situation sera examinée avec le donateur de bonne foi.</p>
+      </div>
+    </div>
+  </section>
+</Base>

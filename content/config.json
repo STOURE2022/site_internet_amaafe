@@ -1,0 +1,100 @@
+{
+  "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
+
+  "site": {
+    "nom": "Centre Coranique Rahma",
+    "devise": "Solidarité — Discipline — Travail",
+    "lieu": "Yirimadio — Bamako, Mali",
+    "anneeCreation": 2023
+  },
+
+  "amaafe": {
+    "nomComplet": "Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant",
+    "sigle": "AMAAFE",
+    "slogan": "Femmes et Enfants au cœur de l'AMAAFE",
+    "domainesAction": [
+      "Promotion de la santé des populations",
+      "Lutte contre le mariage précoce et forcé",
+      "Droits de l'enfant",
+      "Scolarisation des filles",
+      "Éducation islamique",
+      "Sorties éducatives et récréatives",
+      "Centres de jeux pour enfants",
+      "Assainissement et cadre de vie",
+      "Épanouissement des femmes",
+      "Entrepreneuriat féminin"
+    ]
+  },
+
+  "entites": {
+    "mali": {
+      "nom": "AMAAFE / Mali",
+      "dateCreation": "30 septembre 2010",
+      "reference": "Récépissé n° 1811/MATCL-DNI",
+      "siege": "Yirimadio, Bamako (Mali)",
+      "regime": "Association malienne"
+    },
+    "france": {
+      "nom": "AMAAFE / France",
+      "dateCreation": "25 avril 2012",
+      "reference": "N° RNA W953004202",
+      "siege": "Osny (95520), France",
+      "regime": "Association loi 1901"
+    }
+  },
+
+  "contact": {
+    "email": "centrerahma.coran@gmail.com",
+    "telMali": "+223 76 33 79 15",
+    "telFrance": "+33 6 66 31 53 40",
+    "adresse": "Yirimadio — Bamako, Mali",
+    "horairesVisite": null
+  },
+
+  "whatsapp": {
+    "_aide": "Numéro qui reçoit les déclarations de don sur WhatsApp, au format international SANS le +, sans espaces. Vérifier que ce numéro est bien relié à un compte WhatsApp actif.",
+    "numero": "22376337915"
+  },
+
+  "chiffres": {
+    "enfants": null,
+    "enseignants": null,
+    "coutAnnuelParEnfantFCFA": null,
+    "suiviJusquaAge": 16
+  },
+
+  "parrainage": {
+    "montantMensuelFCFA": null,
+    "montantMensuelEUR": null
+  },
+
+  "medersa": {
+    "budgetTotalFCFA": null,
+    "montantCollecteFCFA": null,
+    "pourcentageAvancement": null
+  },
+
+  "paiement": {
+    "orangeMoney": { "numero": null, "titulaire": null },
+    "wave": { "numero": null, "lienPaiement": null },
+    "virementMali": { "banque": null, "rib": null, "titulaire": null },
+    "virementFrance": { "iban": null, "bic": null, "titulaire": null },
+    "motif": "DON RAHMA - VOTRE NOM"
+  },
+
+  "formulaires": {
+    "_aide": "URLs des formulaires externes (Tally, Google Forms…). Tant qu'une URL est à null, le site propose uniquement le canal WhatsApp ou e-mail correspondant.",
+    "declarationDonUrl": null,
+    "parrainageUrl": null,
+    "contactUrl": null,
+    "newsletterUrl": null
+  },
+
+  "reseaux": {
+    "_aide": "Liens des réseaux sociaux. Les liens à null ne sont pas affichés.",
+    "facebook": null,
+    "whatsapp": null,
+    "youtube": null,
+    "tiktok": null
+  }
+}

@@ -1,0 +1,5 @@
+# Configuration Cloudflare Pages (déploiement avec `wrangler pages deploy`
+# ou via le tableau de bord — voir README, section « Déployer »).
+name = "site-centre-rahma"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "dist"

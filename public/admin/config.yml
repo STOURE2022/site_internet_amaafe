@@ -1,0 +1,186 @@
+# =====================================================================
+# Decap CMS — configuration de l'interface d'administration
+# Permet au trésorier / à l'équipe d'éditer les contenus sans toucher
+# au code. Voir le README, section « Administration des contenus ».
+#
+# ⚠️ AVANT LA MISE EN LIGNE : renseigner le dépôt GitHub ci-dessous
+# (repo) et mettre en place l'authentification OAuth (voir README).
+# =====================================================================
+backend:
+  name: github
+  repo: A-COMPLETER/site-centre-rahma   # ex. amaafe/site-centre-rahma
+  branch: main
+  # base_url: https://VOTRE-PROXY-OAUTH  # nécessaire sur Cloudflare Pages (voir README)
+
+locale: fr
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  # ---- Le fichier central des données variables ----
+  - name: configuration
+    label: "Configuration du site"
+    files:
+      - name: config
+        label: "Données du site (chiffres, contacts, paiement)"
+        file: "content/config.json"
+        format: json
+        fields:
+          - { name: _aide, label: "Aide (ne pas modifier)", widget: string, required: false }
+          - name: site
+            label: "Site"
+            widget: object
+            fields:
+              - { name: nom, label: "Nom du centre", widget: string }
+              - { name: devise, label: "Devise", widget: string }
+              - { name: lieu, label: "Lieu", widget: string }
+              - { name: anneeCreation, label: "Année de création", widget: number }
+          - name: amaafe
+            label: "AMAAFE"
+            widget: object
+            fields:
+              - { name: nomComplet, label: "Nom complet", widget: string }
+              - { name: sigle, label: "Sigle", widget: string }
+              - { name: slogan, label: "Slogan", widget: string }
+              - { name: domainesAction, label: "Domaines d'action", widget: list }
+          - name: entites
+            label: "Entités déclarées"
+            widget: object
+            fields:
+              - name: mali
+                label: "AMAAFE / Mali"
+                widget: object
+                fields:
+                  - { name: nom, label: "Nom", widget: string }
+                  - { name: dateCreation, label: "Date de création", widget: string }
+                  - { name: reference, label: "Référence légale", widget: string }
+                  - { name: siege, label: "Siège social", widget: string }
+                  - { name: regime, label: "Régime", widget: string }
+              - name: france
+                label: "AMAAFE / France"
+                widget: object
+                fields:
+                  - { name: nom, label: "Nom", widget: string }
+                  - { name: dateCreation, label: "Date de création", widget: string }
+                  - { name: reference, label: "Référence légale", widget: string }
+                  - { name: siege, label: "Siège social", widget: string }
+                  - { name: regime, label: "Régime", widget: string }
+          - name: contact
+            label: "Contact"
+            widget: object
+            fields:
+              - { name: email, label: "E-mail", widget: string }
+              - { name: telMali, label: "Téléphone Mali", widget: string }
+              - { name: telFrance, label: "Téléphone France", widget: string }
+              - { name: adresse, label: "Adresse", widget: string }
+              - { name: horairesVisite, label: "Horaires de visite", widget: string, required: false }
+          - name: whatsapp
+            label: "WhatsApp"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: numero, label: "Numéro WhatsApp (sans +, sans espaces)", widget: string }
+          - name: chiffres
+            label: "Chiffres clés"
+            widget: object
+            fields:
+              - { name: enfants, label: "Nombre d'enfants", widget: number, required: false }
+              - { name: enseignants, label: "Nombre d'enseignants", widget: number, required: false }
+              - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, required: false }
+              - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number }
+          - name: parrainage
+            label: "Parrainage"
+            widget: object
+            fields:
+              - { name: montantMensuelFCFA, label: "Montant mensuel (FCFA)", widget: number, required: false }
+              - { name: montantMensuelEUR, label: "Montant mensuel (EUR)", widget: number, required: false }
+          - name: medersa
+            label: "Projet de médersa"
+            widget: object
+            fields:
+              - { name: budgetTotalFCFA, label: "Budget total (FCFA)", widget: number, required: false }
+              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false }
+              - { name: pourcentageAvancement, label: "Avancement (%)", widget: number, required: false }
+          - name: paiement
+            label: "Coordonnées de paiement"
+            widget: object
+            fields:
+              - name: orangeMoney
+                label: "Orange Money"
+                widget: object
+                fields:
+                  - { name: numero, label: "Numéro", widget: string, required: false }
+                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+              - name: wave
+                label: "Wave"
+                widget: object
+                fields:
+                  - { name: numero, label: "Numéro", widget: string, required: false }
+                  - { name: lienPaiement, label: "Lien de paiement", widget: string, required: false }
+              - name: virementMali
+                label: "Virement Mali"
+                widget: object
+                fields:
+                  - { name: banque, label: "Banque", widget: string, required: false }
+                  - { name: rib, label: "RIB", widget: string, required: false }
+                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+              - name: virementFrance
+                label: "Virement France"
+                widget: object
+                fields:
+                  - { name: iban, label: "IBAN", widget: string, required: false }
+                  - { name: bic, label: "BIC", widget: string, required: false }
+                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+              - { name: motif, label: "Motif imposé des virements", widget: string }
+          - name: formulaires
+            label: "Formulaires externes (URLs)"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: declarationDonUrl, label: "URL formulaire de déclaration de don", widget: string, required: false }
+              - { name: parrainageUrl, label: "URL formulaire de parrainage", widget: string, required: false }
+              - { name: contactUrl, label: "URL formulaire de contact", widget: string, required: false }
+              - { name: newsletterUrl, label: "URL inscription newsletter", widget: string, required: false }
+          - name: reseaux
+            label: "Réseaux sociaux"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: facebook, label: "Facebook", widget: string, required: false }
+              - { name: whatsapp, label: "WhatsApp (lien)", widget: string, required: false }
+              - { name: youtube, label: "YouTube", widget: string, required: false }
+              - { name: tiktok, label: "TikTok", widget: string, required: false }
+
+  # ---- Les actualités ----
+  - name: actualites
+    label: "Actualités"
+    label_singular: "Actualité"
+    folder: "content/actualites"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: titre, label: "Titre", widget: string }
+      - { name: categorie, label: "Catégorie", widget: select,
+          options: ["Vie du centre", "Sortie éducative", "Le projet", "AMAAFE"] }
+      - { name: extrait, label: "Extrait (1 ou 2 phrases)", widget: text }
+      - { name: date, label: "Date (laisser vide si inconnue)", widget: string, required: false,
+          hint: "Format AAAA-MM-JJ, ex. 2026-03-12" }
+      - { name: image, label: "Image (avec autorisation uniquement)", widget: image, required: false }
+      - { name: publie, label: "Publié", widget: boolean, default: true }
+      - { name: body, label: "Texte de l'article", widget: markdown }
+
+  # ---- Les fiches de parrainage ----
+  - name: enfants
+    label: "Enfants à parrainer"
+    label_singular: "Fiche enfant"
+    folder: "content/enfants"
+    create: true
+    slug: "enfant-{{slug}}"
+    fields:
+      - { name: prenom, label: "Prénom (avec autorisation écrite uniquement)", widget: string, required: false }
+      - { name: age, label: "Âge", widget: number, required: false }
+      - { name: niveau, label: "Niveau", widget: string, required: false }
+      - { name: anneeEntree, label: "Année d'entrée au centre", widget: number, required: false }
+      - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false }
+      - { name: publie, label: "Publié", widget: boolean, default: true }
+      - { name: body, label: "Description", widget: markdown }
