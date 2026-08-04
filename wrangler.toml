@@ -1,9 +1,15 @@
 # Configuration Cloudflare (projet Workers avec ressources statiques).
 # Le nom doit correspondre au service créé dans le tableau de bord Cloudflare.
 # Dans les réglages du projet, la commande de build doit être : npm run build
+#
+# Le script worker.js protège la zone /admin/ par mot de passe : définir
+# le secret ADMIN_PASSWORD dans les réglages du service (voir README).
 name = "site-internet-amaafe"
+main = "worker.js"
 compatibility_date = "2026-08-01"
 
 [assets]
 directory = "./dist"
 not_found_handling = "404-page"
+binding = "ASSETS"
+run_worker_first = true

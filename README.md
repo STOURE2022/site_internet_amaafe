@@ -105,6 +105,8 @@ L'interface d'édition sans code est préparée dans `public/admin/` (accessible
 2. Decap a besoin d'une authentification GitHub OAuth. Sur Cloudflare Pages, le plus simple est de déployer un petit proxy OAuth (par exemple [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth), un Worker Cloudflare gratuit), puis de renseigner `base_url:` dans `config.yml`.
 3. Le trésorier se connecte sur `/admin/` avec son compte GitHub (invité comme collaborateur du dépôt) et peut modifier chiffres, coordonnées de paiement, actualités et fiches — chaque sauvegarde crée un commit et redéploie le site.
 
+**Mot de passe de la zone admin.** Toute la zone `/admin/` (tableau de bord et éditeur) est protégée par un mot de passe vérifié côté serveur (`worker.js`). Le mot de passe n'est pas dans le code : il faut définir le **secret `ADMIN_PASSWORD`** dans Cloudflare → Workers & Pages → `site-internet-amaafe` → Settings → Variables and Secrets → Add (type « Secret »). Tant qu'il n'est pas défini, la zone admin reste fermée. Au premier accès, le navigateur demande un identifiant (peu importe le nom saisi) et ce mot de passe.
+
 Un **tableau de bord** de pilotage est disponible sur `/admin/tableau-de-bord/` : indicateurs clés, avancement de la collecte, état des canaux de paiement et liste des données restant à compléter — le tout calculé à chaque publication à partir de `content/config.json`, des collections de contenu et de `public/documents/`. Chaque lien renvoie vers l'écran d'édition Decap correspondant. La page est hors sitemap et `/admin/` est interdit aux robots.
 
 En attendant l'activation, tout reste éditable à la main dans `content/` (c'est le même contenu).
