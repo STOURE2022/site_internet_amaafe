@@ -7,7 +7,7 @@
 import { readdirSync } from 'node:fs';
 import { getCollection } from 'astro:content';
 import config from '../../../content/config.json';
-import { fmtNombre } from '../../lib/format.js';
+import { fmtNombre, pourcentageCollecte } from '../../lib/format.js';
 
 const actus = await getCollection('actualites', ({ data }) => data.publie);
 const temoignages = await getCollection('temoignages', ({ data }) => data.publie);
@@ -50,6 +50,8 @@ const canaux = [
 ];
 
 const genereLe = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const pctCollecte = pourcentageCollecte(config.medersa);
+const pctCollecteFr = String(pctCollecte).replace('.', ',');
 const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
   : null;
@@ -297,10 +299,10 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
               : <span class="tbd">montant collecté à renseigner</span>}
             <span>sur l'objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>{objectifFCFAMillions && ` (≈ ${objectifFCFAMillions} millions de FCFA)`}</span>
           </div>
-          <div class="bar" role="img" aria-label={`Avancement de la collecte : ${config.medersa.pourcentageAvancement ?? 0} pour cent`}>
-            <i style={`width:${config.medersa.pourcentageAvancement ?? 0}%`}></i>
+          <div class="bar" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}>
+            <i style={`width:${pctCollecte}%`}></i>
           </div>
-          <div class="obj__f"><span>champ : medersa (Données du site)</span><span>{config.medersa.pourcentageAvancement ?? 0} %</span></div>
+          <div class="obj__f"><span>jauge calculée depuis le montant collecté</span><span>{pctCollecteFr} %</span></div>
         </section>
 
         <section class="card" aria-labelledby="t-dons">

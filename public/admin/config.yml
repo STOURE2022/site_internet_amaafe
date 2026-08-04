@@ -175,8 +175,9 @@ collections:
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, required: false }
-              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false }
-              - { name: pourcentageAvancement, label: "Avancement (%)", widget: number, required: false }
+              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false,
+                  hint: "La jauge d'avancement se calcule automatiquement à partir de ce montant." }
+              - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, required: false }
           - name: paiement
             label: "Coordonnées de paiement"
             widget: object

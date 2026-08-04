@@ -2,12 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Tbd from '../components/Tbd.astro';
 import config from '../../content/config.json';
-import { fmtNombre } from '../lib/format.js';
+import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
 
 /* Parité fixe FCFA/euro : 1 € = 655,957 FCFA */
 const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
   : null;
+const pctCollecte = pourcentageCollecte(config.medersa);
 ---
 <Base
   titre="Notre projet — Un terrain, puis une médersa | Centre Coranique Rahma"
@@ -85,7 +86,7 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
       </div>
       <div class="card entity rv" style="max-width:720px">
         <div class="entity__t">Collecte pour le terrain et la médersa</div>
-        <div class="bar"><i data-fill={config.medersa.pourcentageAvancement ?? 0}></i></div>
+        <div class="bar"><i data-fill={pctCollecte}></i></div>
         <div class="sums">
           <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
           <span>sur un objectif de {config.medersa.budgetTotalEUR != null
