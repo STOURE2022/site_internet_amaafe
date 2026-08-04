@@ -92,6 +92,9 @@ p{margin:0}
 /* ---- logos ---- */
 .mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;
   color:var(--or);font-family:var(--arabe);font-size:23px;line-height:1;padding-bottom:3px}
+/* logo AMAAFE dans la barre de marque (en-tête et pied de page) */
+.mark-img{width:46px;height:46px;flex:none;border-radius:10px;background:#fff;padding:3px;object-fit:contain;
+  border:1px solid var(--ligne)}
 .logo-amaafe{display:block;width:120px;height:auto}
 /* bandeau « initiative de l'AMAAFE » (accueil) */
 .bande-amaafe{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(24px,4vw,48px);align-items:center;
