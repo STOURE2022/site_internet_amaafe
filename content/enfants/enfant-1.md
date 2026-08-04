@@ -1,10 +1,10 @@
 ---
-titre: "Fiche 1"
-prenom: null
-age: null
-niveau: null
-anneeEntree: null
-photo: null
+titre: Fiche 1
+prenom: Moussa Guindo
+age: 7
+niveau: "2"
+anneeEntree: 2022
+photo: /images/uploads/homme_01.jpg
 publie: true
 ---
 
