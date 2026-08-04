@@ -19,6 +19,7 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 - [ ] Numéro **Wave** officiel + lien de paiement éventuel (`paiement.wave`)
 - [ ] RIB du compte bancaire **Mali** + nom de la banque (`paiement.virementMali`)
 - [ ] IBAN + BIC du compte **France** (`paiement.virementFrance`)
+- [ ] Numéro de téléphone **Wero** relié au compte bancaire de l'association + nom du titulaire (`paiement.wero`) — vérifier que Wero est activé sur ce compte dans l'application de la banque
 - [ ] Vérifier que le **nom affiché à la validation** d'un envoi Orange Money / Wave est bien celui de l'association (un donateur doit pouvoir le reconnaître)
 - [ ] Confirmer que le numéro WhatsApp configuré (`whatsapp.numero`, actuellement le +223 76 33 79 15) est bien **relié à un compte WhatsApp actif et consulté** — c'est lui qui reçoit les déclarations de don et les demandes de parrainage
 

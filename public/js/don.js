@@ -22,7 +22,8 @@
     om: 'Orange Money',
     wave: 'Wave',
     'vir-ml': 'Virement bancaire (Mali)',
-    'vir-fr': 'Virement bancaire (France)'
+    'vir-fr': 'Virement bancaire (France)',
+    wero: 'Wero (Europe)'
   };
 
   /* ---- état, initialisé depuis l'URL si on arrive de l'accueil ---- */
@@ -65,6 +66,13 @@
         return { t: 'Virement — compte France (EUR)', v: p.virementFrance.iban,
                  s: (p.virementFrance.bic ? 'BIC : ' + p.virementFrance.bic + '. ' : '') +
                     'Motif à indiquer : ' + motif + '.', tbdSeul: !p.virementFrance.iban };
+      case 'wero':
+        return { t: 'Wero — Europe (EUR)', v: p.wero.numero,
+                 s: p.wero.numero
+                   ? 'Envoyez avec Wero depuis l’application de votre banque, à ce numéro.' +
+                     (p.wero.titulaire ? ' Le destinataire affiché doit être « ' + p.wero.titulaire + ' ».' : '') +
+                     ' Message à indiquer : ' + motif + '.'
+                   : NOTE_TBD };
     }
   }
 

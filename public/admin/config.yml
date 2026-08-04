@@ -176,6 +176,12 @@ collections:
                 fields:
                   - { name: numero, label: "Numéro", widget: string, required: false }
                   - { name: lienPaiement, label: "Lien de paiement", widget: string, required: false }
+              - name: wero
+                label: "Wero (Europe)"
+                widget: object
+                fields:
+                  - { name: numero, label: "Numéro de téléphone lié au compte", widget: string, required: false }
+                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
               - name: virementMali
                 label: "Virement Mali"
                 widget: object

@@ -148,6 +148,7 @@
   "paiement": {
     "orangeMoney": { "numero": null, "titulaire": null },
     "wave": { "numero": null, "lienPaiement": null },
+    "wero": { "numero": null, "titulaire": null },
     "virementMali": { "banque": null, "rib": null, "titulaire": null },
     "virementFrance": { "iban": null, "bic": null, "titulaire": null },
     "motif": "DON RAHMA - VOTRE NOM"
