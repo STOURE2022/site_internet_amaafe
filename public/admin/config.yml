@@ -10,7 +10,7 @@ backend:
   name: github
   repo: STOURE2022/site_internet_amaafe
   branch: main
-  # base_url: https://VOTRE-PROXY-OAUTH  # nécessaire sur Cloudflare Pages (voir README)
+  base_url: https://sveltia-cms-auth.touresoumailou19.workers.dev
 
 locale: fr
 media_folder: "public/images/uploads"
