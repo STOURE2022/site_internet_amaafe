@@ -1,0 +1,395 @@
+---
+/** Tableau de bord d'administration — page privée (hors sitemap, /admin/
+    est interdit aux robots). Toutes les données affichées sont réelles :
+    elles viennent de content/config.json, des collections de contenu et
+    du dossier public/documents, recalculées à chaque publication du site.
+    L'édition se fait dans Decap CMS, vers lequel chaque lien renvoie. */
+import { readdirSync } from 'node:fs';
+import { getCollection } from 'astro:content';
+import config from '../../../content/config.json';
+import { fmtNombre } from '../../lib/format.js';
+
+const actus = await getCollection('actualites', ({ data }) => data.publie);
+const temoignages = await getCollection('temoignages', ({ data }) => data.publie);
+const enfants = await getCollection('enfants', ({ data }) => data.publie);
+
+const derniereActu = [...actus].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''))[0];
+
+const documents = readdirSync(new URL('../../../public/documents/', import.meta.url)).filter((f) => f.endsWith('.pdf'));
+const statutsPresents = documents.some((f) => f.toLowerCase().includes('statut'));
+
+const p = config.paiement;
+/* Chemins d'édition dans Decap : la quasi-totalité des données vit dans
+   l'entrée « config » de la collection « configuration ». */
+const CMS = '/admin/#';
+const versConfig = `${CMS}/collections/configuration/entries/config`;
+const versMedias = `${CMS}/media`;
+
+const aCompleter = [
+  !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfig },
+  !p.paypal.lien && { titre: 'Lien PayPal', detail: 'Lien paypal.me ou e-mail du compte de l’association.', sev: 'r', href: versConfig },
+  !p.virementMali.rib && { titre: 'RIB du compte Mali', detail: 'Coordonnées du virement bancaire au Mali.', sev: 'r', href: versConfig },
+  !p.virementFrance.iban && { titre: 'IBAN du compte France', detail: 'Coordonnées du virement bancaire en France.', sev: 'r', href: versConfig },
+  !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfig },
+  !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfig },
+  config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la barre d’avancement de la collecte.', sev: 'o', href: versConfig },
+  !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Annoncés sur la page Transparence.', sev: 'o', href: versMedias },
+  enfants.length === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },
+  !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfig },
+].filter(Boolean);
+
+const manquesPaiement = aCompleter.filter((t) => t.sev === 'r').length;
+
+const canaux = [
+  { nom: 'Orange Money', c: '#F26522', ok: !!p.orangeMoney.numero },
+  { nom: 'Wero (Europe)', c: '#7A5CF0', ok: !!p.wero.numero },
+  { nom: 'Wave', c: '#1DC3F0', ok: !!p.wave.numero },
+  { nom: 'PayPal', c: '#0055B8', ok: !!p.paypal.lien },
+  { nom: 'Virement Mali', c: '#D9A62B', ok: !!p.virementMali.rib },
+  { nom: 'Virement France', c: '#0F4A2F', ok: !!p.virementFrance.iban },
+];
+
+const genereLe = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
+  ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
+  : null;
+const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
+---
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Tableau de bord — Administration AMAAFE</title>
+  <link rel="icon" href="/images/logo-amaafe.png" type="image/png" />
+  <style is:global>
+    @font-face{font-family:"Fraunces";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/fraunces-600.woff2) format("woff2")}
+    @font-face{font-family:"Karla";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/karla-400.woff2) format("woff2")}
+    @font-face{font-family:"Karla";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/karla-600.woff2) format("woff2")}
+    @font-face{font-family:"Karla";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/karla-700.woff2) format("woff2")}
+    @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ibm-plex-mono-400.woff2) format("woff2")}
+    :root{
+      --nuit:#0A1B12; --vert:#0F4A2F; --vert-2:#176B44; --vert-pale:#E5EFE8;
+      --or:#D9A62B; --or-pale:#F8F0D9; --rouge:#B3271E; --rouge-pale:#FBE7E4;
+      --papier:#F4F1E8; --papier-2:#FCFAF5; --encre:#13201A;
+      --gris:#5C6C62; --gris-2:#8A978E; --ligne:#E1D9C8; --blanc:#FFF;
+      --serif:"Fraunces",Georgia,serif;
+      --sans:"Karla",-apple-system,"Segoe UI",Roboto,sans-serif;
+      --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+      --r:8px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--papier);color:var(--encre);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    :focus-visible{outline:2.5px solid var(--or);outline-offset:2px;border-radius:3px}
+    @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+    .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+
+    .side{background:var(--nuit);color:#E9EFE9;display:flex;flex-direction:column;padding:22px 14px;position:sticky;top:0;height:100vh}
+    .brand{display:flex;align-items:center;gap:11px;padding:4px 10px 20px;border-bottom:1px solid rgba(233,239,233,.12)}
+    .brand img{width:38px;height:38px;border-radius:50%;background:#fff;object-fit:contain;flex:none}
+    .brand b{font-family:var(--serif);font-weight:600;font-size:16px}
+    .brand span{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8FA396;margin-top:1px}
+    .nav{display:flex;flex-direction:column;gap:2px;margin-top:18px}
+    .nav__t{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#71857A;padding:14px 10px 6px}
+    .nav a{display:flex;align-items:center;gap:10px;padding:8.5px 10px;border-radius:7px;font-size:14px;color:#C9D4CB;transition:background .15s,color .15s}
+    .nav a:hover{background:rgba(233,239,233,.07);color:#fff}
+    .nav a[aria-current]{background:var(--vert);color:#fff;font-weight:600}
+    .nav .ic{width:17px;height:17px;flex:none;opacity:.85}
+    .nav .n{margin-left:auto;font-family:var(--mono);font-size:11px;background:rgba(233,239,233,.12);border-radius:99px;padding:1px 7px}
+    .nav .n--r{background:var(--rouge);color:#fff}
+    .side__foot{margin-top:auto;padding:14px 10px 2px;border-top:1px solid rgba(233,239,233,.12);font-size:12.5px;color:#8FA396}
+    .side__foot a{color:#C9D4CB;text-decoration:underline;text-underline-offset:3px}
+
+    .main{padding:26px clamp(20px,3.4vw,44px) 56px;max-width:1180px}
+    .demo{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gris);background:var(--vert-pale);border:1px solid #CBDCCF;border-radius:99px;padding:3px 11px;margin-bottom:16px}
+    .demo i{width:7px;height:7px;border-radius:50%;background:var(--vert-2);font-style:normal}
+    .top{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .top h1{font-family:var(--serif);font-weight:600;font-size:clamp(24px,2.6vw,31px);letter-spacing:-.02em;margin:0}
+    .top p{margin:3px 0 0;color:var(--gris);font-size:14px}
+    .top__act{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;padding:9.5px 16px;font-weight:600;font-size:14px;transition:background .15s,border-color .15s}
+    .btn--or{background:var(--or);color:var(--nuit);box-shadow:0 1px 0 rgba(19,32,26,.18)}
+    .btn--or:hover{background:#C79624}
+    .btn--ghost{border:1.5px solid var(--ligne);background:var(--papier-2)}
+    .btn--ghost:hover{border-color:var(--vert)}
+
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+    .kpi{background:var(--papier-2);border:1px solid var(--ligne);border-radius:var(--r);padding:16px 18px 14px}
+    .kpi__l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gris);font-weight:600}
+    .kpi__v{font-family:var(--serif);font-size:31px;line-height:1.1;margin-top:8px;font-variant-numeric:tabular-nums;color:var(--vert)}
+    .kpi__v small{font-size:15px;color:var(--gris)}
+    .kpi__s{font-size:12.5px;color:var(--gris);margin-top:5px}
+    .kpi__s b{color:var(--vert-2);font-weight:600}
+    .kpi--attention .kpi__v{color:var(--rouge)}
+    .kpi--attention .kpi__s b{color:var(--rouge)}
+
+    .grid{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-top:16px;align-items:start}
+    .col{display:flex;flex-direction:column;gap:16px;min-width:0}
+    .card{background:var(--papier-2);border:1px solid var(--ligne);border-radius:var(--r);padding:20px 22px}
+    .card__h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+    .card__h h2{font-family:var(--serif);font-weight:600;font-size:18.5px;margin:0}
+    .card__h a{margin-left:auto;font-size:13px;color:var(--vert-2);font-weight:600;white-space:nowrap}
+    .card__h a:hover{text-decoration:underline;text-underline-offset:3px}
+
+    .tbd{display:inline-block;background:var(--rouge-pale);color:var(--rouge);border-radius:6px;padding:1px 8px;font-size:.82em;font-weight:700}
+    .obj{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .obj b{font-family:var(--serif);font-size:29px;color:var(--vert);font-variant-numeric:tabular-nums}
+    .obj span{color:var(--gris);font-size:13.5px}
+    .bar{height:12px;border-radius:99px;background:var(--vert-pale);border:1px solid var(--ligne);overflow:hidden;margin-top:12px}
+    .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--vert-2),var(--vert))}
+    .obj__f{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--gris);margin-top:8px}
+
+    .todo{display:flex;flex-direction:column}
+    .todo__i{display:flex;gap:12px;align-items:flex-start;padding:11px 2px;border-bottom:1px solid var(--ligne)}
+    .todo__i:last-child{border-bottom:0}
+    .todo__d{width:9px;height:9px;border-radius:50%;flex:none;margin-top:6px}
+    .todo__d--r{background:var(--rouge)}
+    .todo__d--o{background:var(--or)}
+    .todo__i b{font-size:13.5px;display:block}
+    .todo__i p{margin:1px 0 0;font-size:12.5px;color:var(--gris)}
+    .todo__i .go{margin-left:auto;flex:none;font-size:12.5px;font-weight:700;color:var(--vert-2);padding:4px 2px;white-space:nowrap}
+    .todo__i .go:hover{text-decoration:underline;text-underline-offset:3px}
+
+    .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .quick a{display:flex;flex-direction:column;gap:6px;border:1.5px solid var(--ligne);border-radius:var(--r);padding:13px 14px;background:var(--blanc);transition:border-color .15s,transform .15s}
+    .quick a:hover{border-color:var(--vert-2);transform:translateY(-1px)}
+    .quick b{font-size:13.5px}
+    .quick span{font-size:12px;color:var(--gris)}
+
+    .cnt{display:flex;flex-direction:column}
+    .cnt__i{display:flex;align-items:center;gap:11px;padding:9.5px 2px;border-bottom:1px solid var(--ligne);font-size:13.5px}
+    .cnt__i:last-child{border-bottom:0}
+    .cnt__i b{font-weight:600}
+    .cnt__i .st{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--gris);white-space:nowrap;text-align:right}
+    .canal{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;white-space:nowrap}
+    .canal i{width:9px;height:9px;border-radius:50%;flex:none}
+
+    .wa{display:flex;gap:14px;align-items:flex-start;background:var(--blanc);border:1.5px solid var(--ligne);border-radius:var(--r);padding:14px 16px;margin-top:4px}
+    .wa p{margin:0;font-size:13.5px;color:var(--gris)}
+    .wa b{color:var(--encre)}
+
+    @media (max-width:1080px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+    @media (max-width:840px){
+      .app{grid-template-columns:1fr}
+      .side{position:static;height:auto;flex-direction:row;align-items:center;overflow-x:auto;padding:10px 14px;gap:6px}
+      .brand{border:0;padding:0 10px 0 0}.brand div span{display:none}
+      .nav{flex-direction:row;margin:0}.nav__t,.side__foot{display:none}
+      .nav a{white-space:nowrap;padding:7px 11px}
+    }
+    @media (max-width:560px){.kpis{grid-template-columns:1fr}.quick{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="side">
+    <a class="brand" href="/admin/tableau-de-bord/">
+      <img src="/images/logo-amaafe.png" alt="" width="38" height="38" />
+      <div><b>AMAAFE</b><span>Administration</span></div>
+    </a>
+
+    <nav class="nav" aria-label="Navigation d'administration">
+      <span class="nav__t">Piloter</span>
+      <a href="/admin/tableau-de-bord/" aria-current="page">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Tableau de bord
+      </a>
+      <a href={lienWhatsApp} rel="noopener">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4.4-3.2-8-6.2-8-10a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 3.8-3.6 6.8-8 10Z"/></svg>
+        Déclarations de don ↗
+      </a>
+      <a href={versConfig}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M4 3h16v6a8 8 0 0 1-16 0V3Z"/><path d="M4 5H2v2a4 4 0 0 0 4 4M20 5h2v2a4 4 0 0 1-4 4"/></svg>
+        Collecte médersa
+      </a>
+
+      <span class="nav__t">Contenus</span>
+      <a href={`${CMS}/collections/actualites`}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg>
+        Actualités <span class="n">{actus.length}</span>
+      </a>
+      <a href={`${CMS}/collections/temoignages`}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h10M7 12h6M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12Z"/></svg>
+        Témoignages <span class="n">{temoignages.length}</span>
+      </a>
+      <a href={`${CMS}/collections/enfants`}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4.5-6.2"/></svg>
+        Enfants à parrainer <span class={`n${enfants.length === 0 ? ' n--r' : ''}`}>{enfants.length}</span>
+      </a>
+      <a href={versMedias}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>
+        Photos &amp; médias
+      </a>
+
+      <span class="nav__t">Données</span>
+      <a href={versConfig}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+        Données du site
+      </a>
+      <a href={versConfig}>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M2.5 10h19"/><path d="M6 15h4"/></svg>
+        Paiements {manquesPaiement > 0 && <span class="n n--r">{manquesPaiement}</span>}
+      </a>
+      <a href="/transparence/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h6M9 14l2 2 4-4"/></svg>
+        Documents <span class="n">{documents.length}</span>
+      </a>
+    </nav>
+
+    <div class="side__foot">
+      <a href="/admin/">Ouvrir l'éditeur (Decap) ↗</a><br>
+      <a href="/">Voir le site public ↗</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <span class="demo"><i></i>Données réelles — mises à jour à chaque publication</span>
+
+    <header class="top">
+      <div>
+        <h1>Tableau de bord</h1>
+        <p>La situation du Centre Rahma et de l'AMAAFE, générée le {genereLe}.</p>
+      </div>
+      <div class="top__act">
+        <a class="btn btn--ghost" href="/">Voir le site ↗</a>
+        <a class="btn btn--or" href={`${CMS}/collections/actualites/new`}>+ Nouvelle actualité</a>
+      </div>
+    </header>
+
+    <section class="kpis" aria-label="Indicateurs clés">
+      <div class="kpi">
+        <span class="kpi__l">Élèves au centre</span>
+        <div class="kpi__v">{config.chiffres.enfants}</div>
+        <p class="kpi__s"><b>{config.chiffres.enseignants} enseignants</b> · suivi jusqu'à {config.chiffres.suiviJusquaAge} ans</p>
+      </div>
+      <div class="kpi">
+        <span class="kpi__l">Parrainages actifs</span>
+        <div class="kpi__v">{config.chiffres.parrainsActifs}</div>
+        <p class="kpi__s"><b>{enfants.length} fiche{enfants.length > 1 ? 's' : ''} enfant publiée{enfants.length > 1 ? 's' : ''}</b> sur le site</p>
+      </div>
+      <div class="kpi">
+        <span class="kpi__l">Objectif médersa</span>
+        <div class="kpi__v">{config.medersa.budgetTotalEUR != null ? fmtNombre(config.medersa.budgetTotalEUR) : '—'} <small>€</small></div>
+        <p class="kpi__s">{config.medersa.montantCollecteFCFA != null
+          ? <Fragment><b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA</b> collectés</Fragment>
+          : <Fragment>montant collecté <b>à renseigner</b></Fragment>}</p>
+      </div>
+      <div class={`kpi${aCompleter.length > 0 ? ' kpi--attention' : ''}`}>
+        <span class="kpi__l">Données à compléter</span>
+        <div class="kpi__v">{aCompleter.length}</div>
+        <p class="kpi__s">{aCompleter.length > 0 ? <Fragment><b>{manquesPaiement} canal{manquesPaiement > 1 ? 'aux' : ''} de don bloqué{manquesPaiement > 1 ? 's' : ''}</b> — voir ci-contre</Fragment> : <b>Tout est à jour ✓</b>}</p>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="col">
+
+        <section class="card" aria-labelledby="t-collecte">
+          <div class="card__h">
+            <h2 id="t-collecte">Collecte pour le terrain de la médersa</h2>
+            <a href={versConfig}>Mettre à jour →</a>
+          </div>
+          <div class="obj">
+            {config.medersa.montantCollecteFCFA != null
+              ? <b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA</b>
+              : <span class="tbd">montant collecté à renseigner</span>}
+            <span>sur l'objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>{objectifFCFAMillions && ` (≈ ${objectifFCFAMillions} millions de FCFA)`}</span>
+          </div>
+          <div class="bar" role="img" aria-label={`Avancement de la collecte : ${config.medersa.pourcentageAvancement ?? 0} pour cent`}>
+            <i style={`width:${config.medersa.pourcentageAvancement ?? 0}%`}></i>
+          </div>
+          <div class="obj__f"><span>champ : medersa (Données du site)</span><span>{config.medersa.pourcentageAvancement ?? 0} %</span></div>
+        </section>
+
+        <section class="card" aria-labelledby="t-dons">
+          <div class="card__h">
+            <h2 id="t-dons">Déclarations de don</h2>
+            <a href={lienWhatsApp} rel="noopener">Ouvrir WhatsApp ↗</a>
+          </div>
+          <div class="wa">
+            <p>Les donateurs déclarent leurs dons sur le WhatsApp du centre (<b>{config.contact.telMali}</b>), avec un message pré-rempli : montant, canal, numéro émetteur, nom et date. <b>Pointez chaque déclaration avec le relevé de l'opérateur</b> (Orange Money, Wave, banque), puis remerciez le donateur — c'est la promesse faite sur le site.</p>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="t-cnt">
+          <div class="card__h">
+            <h2 id="t-cnt">Contenus du site</h2>
+            <a href="/admin/">Ouvrir l'éditeur →</a>
+          </div>
+          <div class="cnt">
+            <div class="cnt__i">
+              <span><b>Dernière actualité</b> · {derniereActu ? derniereActu.data.titre : 'aucune actualité publiée'}</span>
+              <span class="st">{derniereActu?.data.date ?? 'date à préciser'}</span>
+            </div>
+            <div class="cnt__i">
+              <span><b>Témoignages</b> · parrains, parents, donateurs et partenaires</span>
+              <span class="st">{temoignages.length} publiés</span>
+            </div>
+            <div class="cnt__i">
+              <span><b>Fiches enfants</b> · {enfants.length === 0 ? 'aucune publiée — autorisations parentales signées' : 'visibles sur la page Parrainage'}</span>
+              <span class="st" style={enfants.length === 0 ? 'color:var(--rouge)' : ''}>{enfants.length === 0 ? 'à compléter' : `${enfants.length} publiée${enfants.length > 1 ? 's' : ''}`}</span>
+            </div>
+            <div class="cnt__i">
+              <span><b>Documents</b> · téléchargeables sur la page Transparence</span>
+              <span class="st" style={statutsPresents ? '' : 'color:var(--rouge)'}>{documents.length} PDF{statutsPresents ? '' : ' · statuts manquants'}</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+
+        <section class="card" aria-labelledby="t-todo">
+          <div class="card__h"><h2 id="t-todo">À compléter</h2></div>
+          <div class="todo">
+            {aCompleter.length === 0 && <p style="margin:0;color:var(--vert-2);font-weight:600">Tout est à jour ✓</p>}
+            {aCompleter.map((t) => (
+              <div class="todo__i">
+                <span class={`todo__d todo__d--${t.sev}`} aria-hidden="true"></span>
+                <div><b>{t.titre}</b><p>{t.detail}</p></div>
+                <a class="go" href={t.href}>Renseigner →</a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="t-quick">
+          <div class="card__h"><h2 id="t-quick">Raccourcis</h2></div>
+          <div class="quick">
+            <a href={`${CMS}/collections/actualites/new`}>
+              <b>Nouvelle actualité</b><span>Photo + 3 phrases suffisent</span>
+            </a>
+            <a href={versConfig}>
+              <b>Mettre à jour la collecte</b><span>Montant + avancement</span>
+            </a>
+            <a href={`${CMS}/collections/enfants/new`}>
+              <b>Ajouter une fiche enfant</b><span>Avec autorisation signée</span>
+            </a>
+            <a href={versMedias}>
+              <b>Téléverser un média</b><span>Photos, logos, documents</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="t-pay" style="background:var(--nuit);border-color:var(--nuit);color:#E9EFE9">
+          <div class="card__h">
+            <h2 id="t-pay" style="color:#fff">Canaux de paiement</h2>
+            <a href={versConfig} style="color:#9FD4AE">Modifier →</a>
+          </div>
+          <div class="cnt">
+            {canaux.map((c) => (
+              <div class="cnt__i" style="border-color:rgba(233,239,233,.14)">
+                <span class="canal"><i style={`background:${c.c}`}></i>{c.nom}</span>
+                <span class="st" style={c.ok ? 'color:#9FD4AE' : 'color:#E9B8B3'}>{c.ok ? 'actif ✓' : 'à communiquer'}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
