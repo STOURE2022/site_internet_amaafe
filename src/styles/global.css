@@ -89,7 +89,8 @@ p{margin:0}
 .photo--s{background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 1px,transparent 1px 10px),var(--banco);color:rgba(28,20,8,.65)}
 .photo--p{background:repeating-linear-gradient(135deg,rgba(15,74,47,.07) 0 1px,transparent 1px 10px),var(--vert-pale);color:rgba(15,74,47,.62)}
 .photo--img{padding:0;margin:0}
-.photo--img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo--img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.photo--img .photo__fond{object-fit:cover;filter:blur(20px) saturate(1.05);transform:scale(1.12);opacity:.85}
 
 /* ---- logos ---- */
 .mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;

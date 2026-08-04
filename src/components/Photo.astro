@@ -9,6 +9,9 @@ const src = (config.photos ?? {})[cle] ?? null;
 ---
 {src ? (
   <figure class:list={['photo', 'photo--img', classe]} style={style}>
+    {/* Fond flouté : remplit l'emplacement quand le format de l'image
+        ne correspond pas, sans jamais rogner la photo elle-même. */}
+    <img class="photo__fond" src={src} alt="" aria-hidden="true" loading="lazy" />
     <img src={src} alt={texte} loading="lazy" />
   </figure>
 ) : (
