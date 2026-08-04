@@ -138,6 +138,9 @@ const jsonLd = {
             <span>{config.contact.telMali} · {config.contact.telFrance}</span>
             <span>{config.contact.email}</span>
           </div>
+          <a class="foot__logo" href="/l-amaafe/" title="Découvrir l'AMAAFE">
+            <img src="/images/logo-amaafe.png" alt={`Logo de l'AMAAFE — ${config.amaafe.slogan}`} width="220" height="220" loading="lazy" />
+          </a>
           {reseaux.length > 0 && (
             <div class="foot__s">
               {reseaux.map(([nom, url]) => <a href={url} rel="noopener">{nom}</a>)}

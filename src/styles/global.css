@@ -93,6 +93,15 @@ p{margin:0}
 .mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;
   color:var(--or);font-family:var(--arabe);font-size:23px;line-height:1;padding-bottom:3px}
 .logo-amaafe{display:block;width:120px;height:auto}
+/* bandeau « initiative de l'AMAAFE » (accueil) */
+.bande-amaafe{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(24px,4vw,48px);align-items:center;
+  background:var(--blanc);border:1px solid var(--ligne);border-radius:12px;padding:clamp(24px,3.5vw,40px)}
+.bande-amaafe img{width:120px;height:auto}
+.bande-amaafe h2{font-size:clamp(21px,2.2vw,27px);color:var(--vert);margin-top:10px}
+.bande-amaafe p{font-size:14.5px;color:var(--gris);margin-top:8px;max-width:60ch}
+/* logo AMAAFE sur fond sombre (pied de page) : pastille blanche */
+.foot__logo{display:inline-block;background:#fff;border-radius:12px;padding:10px 12px;margin-top:18px}
+.foot__logo img{display:block;width:82px;height:auto}
 
 /* ---- nav ---- */
 .nav{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.93);backdrop-filter:blur(12px);
@@ -355,6 +364,7 @@ p{margin:0}
 }
 @media (max-width:760px){
   .brand__n,.brand__s{white-space:normal}
+  .bande-amaafe{grid-template-columns:1fr;text-align:center;justify-items:center}
   .g3,.rooms{grid-template-columns:1fr}
   .proof__g{grid-template-columns:1fr 1fr;gap:20px}
   .path{grid-template-columns:1fr}
