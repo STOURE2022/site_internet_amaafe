@@ -2,7 +2,7 @@
 titre: Fiche 1
 prenom: Moussa Guindo
 age: 7
-niveau: "2"
+niveau: 5 sourates mémorisées
 anneeEntree: 2022
 photo: /images/uploads/homme_01.jpg
 publie: true
