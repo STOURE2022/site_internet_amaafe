@@ -7,6 +7,10 @@
 name = "site-internet-amaafe"
 main = "worker.js"
 compatibility_date = "2026-08-01"
+# Conserver les variables définies dans le tableau de bord Cloudflare :
+# sans cette ligne, chaque déploiement git efface les variables « texte »
+# (dont ADMIN_PASSWORD si elle a été créée en type Texte).
+keep_vars = true
 
 [assets]
 directory = "./dist"
