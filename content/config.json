@@ -38,9 +38,16 @@
       "nom": "AMAAFE / France",
       "dateCreation": "25 avril 2012",
       "reference": "N° RNA W953004202",
-      "siege": "Osny (95520), France",
-      "regime": "Association loi 1901"
+      "siege": "1, rue de la Fraternité, 95520 Osny (France)",
+      "regime": "Association loi 1901",
+      "email": "amaafe.association@yahoo.com"
     }
+  },
+
+  "dirigeants": {
+    "_aide": "Source : bilan financier 2024/2025 présenté en assemblée générale.",
+    "presidente": "Ramatou Koné",
+    "tresorier": "Mamby Diallo"
   },
 
   "contact": {
@@ -57,10 +64,40 @@
   },
 
   "chiffres": {
-    "enfants": null,
-    "enseignants": null,
+    "_aide": "Source : rapport d'impact 2010-2025.",
+    "enfants": 33,
+    "enseignants": 2,
+    "parrainsActifs": 13,
+    "benevoles": 3,
     "coutAnnuelParEnfantFCFA": null,
     "suiviJusquaAge": 16
+  },
+
+  "impact": {
+    "_aide": "Réalisations de l'AMAAFE depuis 2010 (source : rapport d'impact 2010-2025).",
+    "realisations": [
+      { "valeur": "30", "libelle": "campagnes de sensibilisation menées (santé, hygiène, droits), plus de 1 500 personnes touchées" },
+      { "valeur": "832", "libelle": "enfants accompagnés vers la scolarisation, dans 4 écoles" },
+      { "valeur": "1 198", "libelle": "kits alimentaires (iftar) distribués pendant le Ramadan" },
+      { "valeur": "1 100", "libelle": "bénéficiaires directs de l'aide alimentaire trimestrielle, dans 6 communes (9 539 bénéficiaires indirects)" },
+      { "valeur": "2", "libelle": "forages réalisés pour l'accès à l'eau potable, plus de 200 personnes desservies" },
+      { "valeur": "52", "libelle": "femmes et 76 jeunes accompagnés vers l'autonomie, 2 projets financés" }
+    ]
+  },
+
+  "partenaires": [
+    { "nom": "Zakat Foundation of America", "logo": "/images/partenaires/zakat-foundation.jpg" },
+    { "nom": "CESUF", "logo": "/images/partenaires/cesuf.jpg" },
+    { "nom": "Diaspora Africana Ciociaria ODV", "logo": "/images/partenaires/diaspora-africana-ciociaria.png" },
+    { "nom": "AJAP-MALI", "logo": "/images/partenaires/ajap-mali.jpg" }
+  ],
+
+  "finances": {
+    "_aide": "Bilan financier 2024/2025 (source : état financier certifié, AG ordinaire).",
+    "exercice": "2024/2025",
+    "recettesEUR": "9 490,00",
+    "depensesEUR": "7 990,65",
+    "excedentEUR": "1 499,35"
   },
 
   "parrainage": {

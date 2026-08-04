@@ -31,4 +31,16 @@ const enfants = defineCollection({
   }),
 });
 
-export const collections = { actualites, enfants };
+const temoignages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './content/temoignages' }),
+  schema: z.object({
+    nom: z.string(),
+    role: z.string(),
+    // Page d'affichage : « parrainage » ou « amaafe ».
+    contexte: z.enum(['parrainage', 'amaafe']),
+    ordre: z.number().default(99),
+    publie: z.boolean().default(true),
+  }),
+});
+
+export const collections = { actualites, enfants, temoignages };

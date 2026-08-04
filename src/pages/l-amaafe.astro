@@ -1,8 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
+import { getCollection, render } from 'astro:content';
 
 const { mali, france } = config.entites;
+const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'amaafe'))
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+const temoignagesRendus = await Promise.all(
+  temoignages.map(async (t) => ({ ...t, Contenu: (await render(t)).Content }))
+);
 ---
 <Base
   titre="L'AMAAFE — L'association qui porte le Centre Rahma"
@@ -35,6 +41,69 @@ const { mali, france } = config.entites;
     </div>
   </section>
 
+  <!-- ===== RÉALISATIONS DEPUIS 2010 ===== -->
+  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Nos réalisations</span>
+          <h2>Quinze ans d'action, des résultats concrets</h2>
+        </div>
+        <p class="lead" style="max-width:40ch">Chiffres issus du <a href="/documents/rapport-impact-2010-2025.pdf" style="color:var(--vert);text-decoration:underline">rapport d'impact 2010-2025</a> de l'association.</p>
+      </div>
+      <div class="g3">
+        {config.impact.realisations.map((r) => (
+          <div class="card rv" style="padding:24px 24px 22px">
+            <b class="num" style="font-family:var(--serif);font-size:clamp(30px,3vw,40px);color:var(--vert);line-height:1">{r.valeur}</b>
+            <p style="font-size:14px;color:var(--gris);margin-top:10px;line-height:1.6">{r.libelle}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTENAIRES ===== -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="head rv" style="margin-bottom:10px">
+        <div>
+          <span class="eyebrow eyebrow--d">Ils nous accompagnent</span>
+          <h2>Nos partenaires</h2>
+        </div>
+      </div>
+      <div class="partners rv">
+        {config.partenaires.map((p) => (
+          <div class="partner">
+            <img src={p.logo} alt={`Logo ${p.nom}`} loading="lazy" width="130" height="76" />
+            <span>{p.nom}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TÉMOIGNAGES ===== -->
+  {temoignagesRendus.length > 0 && (
+    <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+      <div class="wrap">
+        <div class="head rv">
+          <div>
+            <span class="eyebrow eyebrow--d">Ils en parlent</span>
+            <h2>Bénévoles, donateurs et partenaires témoignent</h2>
+          </div>
+        </div>
+        <div class="g3">
+          {temoignagesRendus.map((t) => (
+            <article class="card quote rv">
+              <blockquote><t.Contenu /></blockquote>
+              <footer><b>{t.data.nom}</b><span>{t.data.role}</span></footer>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- ===== LES DEUX ENTITÉS ===== -->
   <section class="sec trust">
     <div class="wrap">
@@ -65,6 +134,7 @@ const { mali, france } = config.entites;
             <div><em>Référence</em><span>{france.reference}</span></div>
             <div><em>Siège social</em><span>{france.siege}</span></div>
             <div><em>Régime</em><span>{france.regime}</span></div>
+            <div><em>Courriel</em><span>{france.email}</span></div>
           </div>
         </div>
       </div>

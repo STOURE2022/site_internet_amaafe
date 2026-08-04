@@ -65,6 +65,14 @@ collections:
                   - { name: reference, label: "Référence légale", widget: string }
                   - { name: siege, label: "Siège social", widget: string }
                   - { name: regime, label: "Régime", widget: string }
+                  - { name: email, label: "Courriel", widget: string }
+          - name: dirigeants
+            label: "Bureau de l'association"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: presidente, label: "Présidente", widget: string }
+              - { name: tresorier, label: "Trésorier", widget: string }
           - name: contact
             label: "Contact"
             widget: object
@@ -84,10 +92,39 @@ collections:
             label: "Chiffres clés"
             widget: object
             fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: enfants, label: "Nombre d'enfants", widget: number, required: false }
               - { name: enseignants, label: "Nombre d'enseignants", widget: number, required: false }
+              - { name: parrainsActifs, label: "Parrains actifs", widget: number, required: false }
+              - { name: benevoles, label: "Bénévoles", widget: number, required: false }
               - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, required: false }
               - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number }
+          - name: impact
+            label: "Réalisations AMAAFE (depuis 2010)"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - name: realisations
+                label: "Réalisations"
+                widget: list
+                fields:
+                  - { name: valeur, label: "Chiffre", widget: string }
+                  - { name: libelle, label: "Libellé", widget: string }
+          - name: partenaires
+            label: "Partenaires"
+            widget: list
+            fields:
+              - { name: nom, label: "Nom", widget: string }
+              - { name: logo, label: "Logo", widget: image }
+          - name: finances
+            label: "Bilan financier affiché"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: exercice, label: "Exercice", widget: string }
+              - { name: recettesEUR, label: "Recettes (€)", widget: string }
+              - { name: depensesEUR, label: "Dépenses (€)", widget: string }
+              - { name: excedentEUR, label: "Excédent (€)", widget: string }
           - name: parrainage
             label: "Parrainage"
             widget: object
@@ -169,6 +206,24 @@ collections:
           hint: "Compresser l'image avant l'envoi (squoosh.app, format WebP ou JPEG, moins de 200 Ko) — le site doit rester léger pour les connexions lentes." }
       - { name: publie, label: "Publié", widget: boolean, default: true }
       - { name: body, label: "Texte de l'article", widget: markdown }
+
+  # ---- Les témoignages ----
+  - name: temoignages
+    label: "Témoignages"
+    label_singular: "Témoignage"
+    folder: "content/temoignages"
+    create: true
+    identifier_field: nom
+    slug: "{{slug}}"
+    summary: "{{nom}} — {{role}}"
+    fields:
+      - { name: nom, label: "Nom", widget: string }
+      - { name: role, label: "Rôle (ex. Parrain, Parent d'élève, Partenaire…)", widget: string }
+      - { name: contexte, label: "Page d'affichage", widget: select,
+          options: [{ label: "Page Parrainage", value: "parrainage" }, { label: "Page L'AMAAFE", value: "amaafe" }] }
+      - { name: ordre, label: "Ordre d'affichage", widget: number, default: 99 }
+      - { name: publie, label: "Publié", widget: boolean, default: true }
+      - { name: body, label: "Texte du témoignage (sans guillemets)", widget: markdown }
 
   # ---- Les fiches de parrainage ----
   - name: enfants

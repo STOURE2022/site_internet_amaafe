@@ -288,6 +288,21 @@ p{margin:0}
 .dl em{font-style:normal;color:var(--gris-2)}
 .dl span{text-align:right;font-family:var(--mono);font-size:12.8px}
 
+/* ---- témoignages ---- */
+.quote{position:relative;padding:24px 24px 20px;display:flex;flex-direction:column}
+.quote::before{content:"«";font-family:var(--serif);font-size:42px;color:var(--or);line-height:.9;display:block;margin-bottom:10px}
+.quote blockquote{margin:0;font-size:14.6px;color:var(--gris);line-height:1.7;flex:1}
+.quote blockquote p{margin:0}
+.quote footer{margin-top:16px;padding-top:12px;border-top:1px solid var(--ligne)}
+.quote footer b{font-size:14px;color:var(--vert);display:block}
+.quote footer span{font-size:12.4px;color:var(--gris-2)}
+
+/* ---- partenaires ---- */
+.partners{display:flex;flex-wrap:wrap;gap:clamp(20px,3.5vw,44px);align-items:flex-start;justify-content:center;margin-top:30px}
+.partner{display:flex;flex-direction:column;align-items:center;gap:11px;width:150px;text-align:center}
+.partner img{height:76px;width:auto;max-width:130px;object-fit:contain;background:#fff;border-radius:8px;padding:6px}
+.partner span{font-size:12.4px;color:var(--gris);line-height:1.4}
+
 /* ---- domaines d'action AMAAFE ---- */
 .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
 .tag{padding:9px 15px;border-radius:99px;background:var(--blanc);border:1px solid var(--ligne);font-size:13.4px}

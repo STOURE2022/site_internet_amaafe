@@ -38,44 +38,78 @@ const { mali, france } = config.entites;
             <div><em>Référence</em><span>{france.reference}</span></div>
             <div><em>Siège social</em><span>{france.siege}</span></div>
             <div><em>Régime</em><span>{france.regime}</span></div>
+            <div><em>Courriel</em><span>{france.email}</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== DOCUMENTS ===== -->
+  <!-- ===== BILAN FINANCIER ===== -->
   <section class="sec">
     <div class="wrap">
       <div class="head rv">
         <div>
-          <span class="eyebrow eyebrow--d">Documents</span>
-          <h2>Ce que nous publierons</h2>
+          <span class="eyebrow eyebrow--d">Les comptes</span>
+          <h2>Bilan financier {config.finances.exercice}</h2>
         </div>
-        <p class="lead" style="max-width:42ch">Les documents seront mis en ligne au fur et à mesure de leur validation par les instances de l'association.</p>
+        <p class="lead" style="max-width:42ch">Bilan établi par le bureau de l'association et présenté aux membres lors de l'assemblée générale ordinaire.</p>
       </div>
       <div class="g3 rv">
+        <div class="card entity">
+          <div class="entity__t">Recettes</div>
+          <b class="num" style="font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--vert)">{config.finances.recettesEUR} €</b>
+          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Cotisations, dons, parrainages et événements</p>
+        </div>
+        <div class="card entity">
+          <div class="entity__t">Dépenses</div>
+          <b class="num" style="font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--vert)">{config.finances.depensesEUR} €</b>
+          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Dont actions humanitaires et fonctionnement du Centre Rahma</p>
+        </div>
+        <div class="card entity">
+          <div class="entity__t">Excédent</div>
+          <b class="num" style="font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--vert)">{config.finances.excedentEUR} €</b>
+          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Reporté sur l'exercice suivant, au service des projets</p>
+        </div>
+      </div>
+      <p class="rv" style="font-size:13.5px;color:var(--gris);margin-top:18px">
+        Bureau de l'association — Présidente : <strong>{config.dirigeants.presidente}</strong> · Trésorier : <strong>{config.dirigeants.tresorier}</strong>. Le détail complet figure dans le document ci-dessous.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== DOCUMENTS ===== -->
+  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+    <div class="wrap">
+      <div class="head rv">
+        <div>
+          <span class="eyebrow eyebrow--d">Documents</span>
+          <h2>Documents à télécharger</h2>
+        </div>
+        <p class="lead" style="max-width:42ch">Les autres documents seront mis en ligne au fur et à mesure de leur validation par les instances de l'association.</p>
+      </div>
+      <div class="g3 rv">
+        <a class="card entity" href="/documents/etat-financier-2024-2025.pdf">
+          <div class="entity__t">PDF — 140 Ko</div>
+          <h3 style="font-size:18px">État financier 2024/2025</h3>
+          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Recettes, dépenses et réalisations de l'exercice — Télécharger →</p>
+        </a>
+        <a class="card entity" href="/documents/rapport-impact-2010-2025.pdf">
+          <div class="entity__t">PDF — 290 Ko</div>
+          <h3 style="font-size:18px">Rapport d'impact 2010-2025</h3>
+          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Quinze ans d'actions et de résultats — Télécharger →</p>
+        </a>
         <div class="card entity">
           <div class="entity__t">Document</div>
           <h3 style="font-size:18px">Statuts de l'association</h3>
           <p style="font-size:13.5px;color:var(--gris);margin-top:8px">PDF à publier — <span class="tbd">à téléverser</span></p>
-        </div>
-        <div class="card entity">
-          <div class="entity__t">Document</div>
-          <h3 style="font-size:18px">Rapport d'activité</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">À publier après validation en assemblée générale</p>
-        </div>
-        <div class="card entity">
-          <div class="entity__t">Document</div>
-          <h3 style="font-size:18px">Rapport financier</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">À publier après validation en assemblée générale</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===== ENGAGEMENTS ===== -->
-  <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
+  <section class="sec">
     <div class="wrap">
       <div class="head rv">
         <div>

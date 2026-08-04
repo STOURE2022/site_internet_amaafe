@@ -1,10 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { fmtNombre } from '../lib/format.js';
 
 const enfants = await getCollection('enfants', ({ data }) => data.publie);
+const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'parrainage'))
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+const temoignagesRendus = await Promise.all(
+  temoignages.map(async (t) => ({ ...t, Contenu: (await render(t)).Content }))
+);
 
 const sujetMail = encodeURIComponent('Demande de parrainage — Centre Rahma');
 const corpsMail = encodeURIComponent(
@@ -22,7 +27,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
   <section class="wrap phero">
     <span class="eyebrow eyebrow--d">Parrainage solidaire</span>
     <h1>Accompagnez un enfant sur la durée.</h1>
-    <p class="lead">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours, de l'école jusqu'au métier.</p>
+    <p class="lead">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours, de l'école jusqu'au métier. Ils sont déjà <strong>{config.chiffres.parrainsActifs} parrains et marraines actifs</strong> aux côtés des {config.chiffres.enfants} élèves du centre.</p>
   </section>
 
   <!-- ===== FONCTIONNEMENT ===== -->
@@ -94,6 +99,28 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
       </div>
     </div>
   </section>
+
+  <!-- ===== TÉMOIGNAGES ===== -->
+  {temoignagesRendus.length > 0 && (
+    <section class="sec">
+      <div class="wrap">
+        <div class="head rv">
+          <div>
+            <span class="eyebrow eyebrow--d">Ils témoignent</span>
+            <h2>La parole aux parrains et aux parents</h2>
+          </div>
+        </div>
+        <div class="g2">
+          {temoignagesRendus.map((t) => (
+            <article class="card quote rv">
+              <blockquote><t.Contenu /></blockquote>
+              <footer><b>{t.data.nom}</b><span>{t.data.role}</span></footer>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ===== MISE EN RELATION ===== -->
   <section class="sec" id="devenir-parrain">
