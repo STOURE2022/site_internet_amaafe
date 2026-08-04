@@ -23,7 +23,12 @@ const p = config.paiement;
    l'entrée « config » de la collection « configuration ». */
 const CMS = '/admin/#';
 const versConfig = `${CMS}/collections/configuration/entries/config`;
-const versMedias = `${CMS}/media`;
+/* La médiathèque Decap est une fenêtre modale (bouton « Médias » de
+   l'éditeur), sans URL directe ; et elle téléverse dans images/uploads.
+   Les PDF de public/documents/ se déposent donc via GitHub. */
+const versEditeur = '/admin/';
+const REPO = 'https://github.com/STOURE2022/site_internet_amaafe';
+const versDocumentsGitHub = `${REPO}/upload/main/public/documents`;
 
 const aCompleter = [
   !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfig },
@@ -33,7 +38,7 @@ const aCompleter = [
   !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfig },
   !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfig },
   config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la barre d’avancement de la collecte.', sev: 'o', href: versConfig },
-  !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Annoncés sur la page Transparence.', sev: 'o', href: versMedias },
+  !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Déposer le PDF dans public/documents sur GitHub.', sev: 'o', href: versDocumentsGitHub },
   enfants.length === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },
   !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfig },
 ].filter(Boolean);
@@ -220,7 +225,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4.5-6.2"/></svg>
         Enfants à parrainer <span class={`n${enfants.length === 0 ? ' n--r' : ''}`}>{enfants.length}</span>
       </a>
-      <a href={versMedias}>
+      <a href={versEditeur} title="Dans l'éditeur, bouton « Médias » de la barre du haut">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>
         Photos &amp; médias
       </a>
@@ -234,9 +239,9 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M2.5 10h19"/><path d="M6 15h4"/></svg>
         Paiements {manquesPaiement > 0 && <span class="n n--r">{manquesPaiement}</span>}
       </a>
-      <a href="/transparence/">
+      <a href={`${REPO}/tree/main/public/documents`} rel="noopener">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h6M9 14l2 2 4-4"/></svg>
-        Documents <span class="n">{documents.length}</span>
+        Documents ↗ <span class="n">{documents.length}</span>
       </a>
     </nav>
 
@@ -281,7 +286,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
       <div class={`kpi${aCompleter.length > 0 ? ' kpi--attention' : ''}`}>
         <span class="kpi__l">Données à compléter</span>
         <div class="kpi__v">{aCompleter.length}</div>
-        <p class="kpi__s">{aCompleter.length > 0 ? <Fragment><b>{manquesPaiement} canal{manquesPaiement > 1 ? 'aux' : ''} de don bloqué{manquesPaiement > 1 ? 's' : ''}</b> — voir ci-contre</Fragment> : <b>Tout est à jour ✓</b>}</p>
+        <p class="kpi__s">{aCompleter.length > 0 ? <Fragment><b>{manquesPaiement} {manquesPaiement > 1 ? 'canaux de don bloqués' : 'canal de don bloqué'}</b> — voir ci-contre</Fragment> : <b>Tout est à jour ✓</b>}</p>
       </div>
     </section>
 
@@ -369,8 +374,8 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
             <a href={`${CMS}/collections/enfants/new`}>
               <b>Ajouter une fiche enfant</b><span>Avec autorisation signée</span>
             </a>
-            <a href={versMedias}>
-              <b>Téléverser un média</b><span>Photos, logos, documents</span>
+            <a href={versEditeur}>
+              <b>Téléverser une photo</b><span>Bouton « Médias » de l'éditeur</span>
             </a>
           </div>
         </section>
