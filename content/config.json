@@ -1,19 +1,134 @@
 {
-  "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
-
+  "contact": {
+    "email": "centrerahma.coran@gmail.com",
+    "telMali": "+223 76 33 79 15",
+    "telFrance": "+33 6 66 31 53 40",
+    "adresse": "Yirimadio — Bamako, Mali",
+    "horairesVisite": "du lundi au jeudi de 8 h à 17 h, le vendredi de 8 h à 12 h"
+  },
+  "entites": {
+    "mali": {
+      "nom": "AMAAFE / Mali",
+      "dateCreation": "30 septembre 2010",
+      "reference": "Récépissé n° 1811/MATCL-DNI",
+      "siege": "Yirimadio, Bamako (Mali)",
+      "regime": "Association malienne"
+    },
+    "france": {
+      "nom": "AMAAFE / France",
+      "dateCreation": "25 avril 2012",
+      "reference": "N° RNA W953004202",
+      "siege": "1, rue de la Fraternité, 95520 Osny (France)",
+      "regime": "Association loi 1901",
+      "email": "amaafe.association@yahoo.com"
+    }
+  },
+  "impact": {
+    "_aide": "Réalisations de l'AMAAFE depuis 2010 (source : rapport d'impact 2010-2025).",
+    "realisations": [
+      {
+        "valeur": "30",
+        "libelle": "campagnes de sensibilisation menées (santé, hygiène, droits), plus de 1 500 personnes touchées"
+      },
+      {
+        "valeur": "832",
+        "libelle": "enfants accompagnés vers la scolarisation, dans 4 écoles"
+      },
+      {
+        "valeur": "1 198",
+        "libelle": "kits alimentaires (iftar) distribués pendant le Ramadan — opération Babou Râyyan, depuis 2025"
+      },
+      {
+        "valeur": "1 100",
+        "libelle": "bénéficiaires directs de l'aide alimentaire trimestrielle dans 6 communes, en partenariat avec Zakat Foundation of America (9 539 bénéficiaires indirects)"
+      },
+      {
+        "valeur": "2",
+        "libelle": "forages réalisés pour l'accès à l'eau potable, plus de 200 personnes desservies"
+      },
+      {
+        "valeur": "52",
+        "libelle": "femmes et 76 jeunes accompagnés vers l'autonomie, 2 projets financés"
+      }
+    ]
+  },
+  "dirigeants": {
+    "_aide": "Source : bilan financier 2024/2025 et document métier 2026.",
+    "fondatrice": "Ramatou Koné",
+    "presidente": "Ramatou Koné",
+    "vicePresidente": "Habiatou Koné",
+    "secretaireGeneral": "Mohamed Coulibaly",
+    "tresorier": "Mamby Diallo",
+    "responsablesCommunication": [
+      "Kadidia Coulibaly",
+      "Djénébou Coulibaly"
+    ]
+  },
   "site": {
     "nom": "Centre Coranique Rahma",
     "devise": "Solidarité — Discipline — Travail",
     "lieu": "Yirimadio — Bamako, Mali",
     "anneeCreation": 2023
   },
-
+  "medersa": {
+    "_aide": "Objectif de collecte pour le terrain et la médersa, en euros (source : document métier 2026).",
+    "budgetTotalEUR": 30000,
+    "montantCollecteFCFA": 300,
+    "pourcentageAvancement": null
+  },
+  "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
+  "parrainage": {
+    "_aide": "Montants mensuels du parrainage : FCFA pour l'Afrique, EUR pour l'Europe (source : document métier 2026).",
+    "montantMensuelFCFA": 20000,
+    "montantMensuelEUR": 30
+  },
+  "financesMali": {
+    "_aide": "Budget annuel de la maison mère AMAAFE / Mali (source : document métier 2026). Bilan détaillé à publier dès validation.",
+    "cotisationsAnnuellesFCFA": 360000,
+    "partFonctionnementCouturePct": 30,
+    "partActionsPct": 70
+  },
+  "paiement": {
+    "orangeMoney": {
+      "numero": "+223 76 33 79 15",
+      "titulaire": null
+    },
+    "wave": {
+      "numero": null,
+      "lienPaiement": null
+    },
+    "wero": {
+      "numero": "+33 6 66 31 53 40",
+      "titulaire": null
+    },
+    "paypal": {
+      "lien": null
+    },
+    "virementMali": {
+      "banque": null,
+      "rib": null,
+      "titulaire": null
+    },
+    "virementFrance": {
+      "iban": null,
+      "bic": null,
+      "titulaire": null
+    },
+    "motif": "DON RAHMA - VOTRE NOM"
+  },
   "amaafe": {
     "nomComplet": "Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant",
     "sigle": "AMAAFE",
     "slogan": "Femmes et Enfants au cœur de l'AMAAFE",
     "zoneIntervention": "Bamako et le cercle de Kolokani (région de Koulikoro)",
-    "valeurs": ["Solidarité", "Dignité", "Éducation", "Compassion", "Transparence", "Responsabilité"],
+    "valeurs": [
+      "Solidarité",
+      "Dignité",
+      "Éducation",
+      "Compassion",
+      "Transparence",
+      "Responsabilité"
+    ],
     "perspectives2030": [
       "Construire des salles de classe pour la médersa",
       "Développer le programme de parrainage",
@@ -38,140 +153,114 @@
       "Accompagnement social"
     ]
   },
-
-  "entites": {
-    "mali": {
-      "nom": "AMAAFE / Mali",
-      "dateCreation": "30 septembre 2010",
-      "reference": "Récépissé n° 1811/MATCL-DNI",
-      "siege": "Yirimadio, Bamako (Mali)",
-      "regime": "Association malienne"
-    },
-    "france": {
-      "nom": "AMAAFE / France",
-      "dateCreation": "25 avril 2012",
-      "reference": "N° RNA W953004202",
-      "siege": "1, rue de la Fraternité, 95520 Osny (France)",
-      "regime": "Association loi 1901",
-      "email": "amaafe.association@yahoo.com"
-    }
-  },
-
-  "dirigeants": {
-    "_aide": "Source : bilan financier 2024/2025 et document métier 2026.",
-    "fondatrice": "Ramatou Koné",
-    "presidente": "Ramatou Koné",
-    "vicePresidente": "Habiatou Koné",
-    "secretaireGeneral": "Mohamed Coulibaly",
-    "tresorier": "Mamby Diallo",
-    "responsablesCommunication": ["Kadidia Coulibaly", "Djénébou Coulibaly"]
-  },
-
-  "contact": {
-    "email": "centrerahma.coran@gmail.com",
-    "telMali": "+223 76 33 79 15",
-    "telFrance": "+33 6 66 31 53 40",
-    "adresse": "Yirimadio — Bamako, Mali",
-    "horairesVisite": "du lundi au jeudi de 8 h à 17 h, le vendredi de 8 h à 12 h"
-  },
-
   "whatsapp": {
     "_aide": "Numéro qui reçoit les déclarations de don sur WhatsApp, au format international SANS le +, sans espaces. Vérifier que ce numéro est bien relié à un compte WhatsApp actif.",
     "numero": "22376337915"
   },
-
-  "chiffres": {
-    "_aide": "Sources : rapport d'impact 2010-2025 et document métier 2026.",
-    "enfants": 33,
-    "enseignants": 2,
-    "parrainsActifs": 13,
-    "benevoles": 7,
-    "membresAdherents": 30,
-    "coutMensuelParEnfantFCFA": 15000,
-    "coutAnnuelParEnfantFCFA": 180000,
-    "suiviJusquaAge": 16
-  },
-
-  "impact": {
-    "_aide": "Réalisations de l'AMAAFE depuis 2010 (source : rapport d'impact 2010-2025).",
-    "realisations": [
-      { "valeur": "30", "libelle": "campagnes de sensibilisation menées (santé, hygiène, droits), plus de 1 500 personnes touchées" },
-      { "valeur": "832", "libelle": "enfants accompagnés vers la scolarisation, dans 4 écoles" },
-      { "valeur": "1 198", "libelle": "kits alimentaires (iftar) distribués pendant le Ramadan — opération Babou Râyyan, depuis 2025" },
-      { "valeur": "1 100", "libelle": "bénéficiaires directs de l'aide alimentaire trimestrielle dans 6 communes, en partenariat avec Zakat Foundation of America (9 539 bénéficiaires indirects)" },
-      { "valeur": "2", "libelle": "forages réalisés pour l'accès à l'eau potable, plus de 200 personnes desservies" },
-      { "valeur": "52", "libelle": "femmes et 76 jeunes accompagnés vers l'autonomie, 2 projets financés" }
-    ]
-  },
-
-  "partenaires": [
-    { "nom": "Zakat Foundation of America", "logo": "/images/partenaires/zakat-foundation.jpg" },
-    { "nom": "CESUF", "logo": "/images/partenaires/cesuf.jpg" },
-    { "nom": "Diaspora Africana Ciociaria ODV", "logo": "/images/partenaires/diaspora-africana-ciociaria.png" },
-    { "nom": "AJAP-MALI", "logo": "/images/partenaires/ajap-mali.jpg" }
-  ],
-
   "finances": {
-    "_aide": "Bilan financier 2024/2025 (source : état financier certifié, AG ordinaire).",
-    "exercice": "2024/2025",
-    "recettesEUR": "9 490,00",
-    "depensesEUR": "7 990,65",
-    "excedentEUR": "1 499,35",
-    "detailRecettes": [
-      { "libelle": "Cotisations des membres", "montantEUR": "600,00" },
-      { "libelle": "Dons des particuliers", "montantEUR": "3 960,00" },
-      { "libelle": "Parrainages", "montantEUR": "4 680,00" },
-      { "libelle": "Produits des événements", "montantEUR": "250,00" }
+    "detailDepensesFonctionnement": [
+      {
+        "libelle": "Personnel du Centre Coranique Rahma",
+        "montantEUR": "1 097,63"
+      },
+      {
+        "libelle": "Fournitures administratives",
+        "montantEUR": "150,00"
+      },
+      {
+        "libelle": "Déplacements",
+        "montantEUR": "150,00"
+      },
+      {
+        "libelle": "Téléphone / Internet",
+        "montantEUR": "100,00"
+      },
+      {
+        "libelle": "Frais bancaires",
+        "montantEUR": "94,32"
+      },
+      {
+        "libelle": "Communication",
+        "montantEUR": "50,00"
+      }
     ],
     "detailDepensesActions": [
-      { "libelle": "Soutien aux familles démunies", "montantEUR": "2 000,00" },
-      { "libelle": "Aide aux orphelinats", "montantEUR": "1 680,00" },
-      { "libelle": "Fournitures et uniformes scolaires", "montantEUR": "910,00" },
-      { "libelle": "Aide alimentaire du Ramadan", "montantEUR": "808,70" },
-      { "libelle": "Autres actions sociales", "montantEUR": "950,00" }
+      {
+        "libelle": "Soutien aux familles démunies",
+        "montantEUR": "2 000,00"
+      },
+      {
+        "libelle": "Aide aux orphelinats",
+        "montantEUR": "1 680,00"
+      },
+      {
+        "libelle": "Fournitures et uniformes scolaires",
+        "montantEUR": "910,00"
+      },
+      {
+        "libelle": "Aide alimentaire du Ramadan",
+        "montantEUR": "808,70"
+      },
+      {
+        "libelle": "Autres actions sociales",
+        "montantEUR": "950,00"
+      }
     ],
+    "excedentEUR": "1 499,35",
+    "_aide": "Bilan financier 2024/2025 (source : état financier certifié, AG ordinaire).",
+    "exercice": "2024/2025",
     "sousTotalActionsEUR": "6 348,70",
-    "detailDepensesFonctionnement": [
-      { "libelle": "Personnel du Centre Coranique Rahma", "montantEUR": "1 097,63" },
-      { "libelle": "Fournitures administratives", "montantEUR": "150,00" },
-      { "libelle": "Déplacements", "montantEUR": "150,00" },
-      { "libelle": "Téléphone / Internet", "montantEUR": "100,00" },
-      { "libelle": "Frais bancaires", "montantEUR": "94,32" },
-      { "libelle": "Communication", "montantEUR": "50,00" }
+    "sousTotalFonctionnementEUR": "1 641,95",
+    "detailRecettes": [
+      {
+        "libelle": "Cotisations des membres",
+        "montantEUR": "600,00"
+      },
+      {
+        "libelle": "Dons des particuliers",
+        "montantEUR": "3 960,00"
+      },
+      {
+        "libelle": "Parrainages",
+        "montantEUR": "4 680,00"
+      },
+      {
+        "libelle": "Produits des événements",
+        "montantEUR": "250,00"
+      }
     ],
-    "sousTotalFonctionnementEUR": "1 641,95"
+    "depensesEUR": "7 990,65",
+    "recettesEUR": "9 490,00"
   },
-
-  "financesMali": {
-    "_aide": "Budget annuel de la maison mère AMAAFE / Mali (source : document métier 2026). Bilan détaillé à publier dès validation.",
-    "cotisationsAnnuellesFCFA": 360000,
-    "partFonctionnementCouturePct": 30,
-    "partActionsPct": 70
+  "partenaires": [
+    {
+      "nom": "Zakat Foundation of America",
+      "logo": "/images/partenaires/zakat-foundation.jpg"
+    },
+    {
+      "nom": "CESUF",
+      "logo": "/images/partenaires/cesuf.jpg"
+    },
+    {
+      "nom": "Diaspora Africana Ciociaria ODV",
+      "logo": "/images/partenaires/diaspora-africana-ciociaria.png"
+    },
+    {
+      "nom": "AJAP-MALI",
+      "logo": "/images/partenaires/ajap-mali.jpg"
+    }
+  ],
+  "chiffres": {
+    "enseignants": 2,
+    "parrainsActifs": 13,
+    "membresAdherents": 30,
+    "benevoles": 7,
+    "_aide": "Sources : rapport d'impact 2010-2025 et document métier 2026.",
+    "enfants": 33,
+    "coutMensuelParEnfantFCFA": 15000,
+    "suiviJusquaAge": 16,
+    "coutAnnuelParEnfantFCFA": 180000
   },
-
-  "parrainage": {
-    "_aide": "Montants mensuels du parrainage : FCFA pour l'Afrique, EUR pour l'Europe (source : document métier 2026).",
-    "montantMensuelFCFA": 20000,
-    "montantMensuelEUR": 30
-  },
-
-  "medersa": {
-    "_aide": "Objectif de collecte pour le terrain et la médersa, en euros (source : document métier 2026).",
-    "budgetTotalEUR": 30000,
-    "montantCollecteFCFA": null,
-    "pourcentageAvancement": null
-  },
-
-  "paiement": {
-    "orangeMoney": { "numero": "+223 76 33 79 15", "titulaire": null },
-    "wave": { "numero": null, "lienPaiement": null },
-    "wero": { "numero": "+33 6 66 31 53 40", "titulaire": null },
-    "paypal": { "lien": null },
-    "virementMali": { "banque": null, "rib": null, "titulaire": null },
-    "virementFrance": { "iban": null, "bic": null, "titulaire": null },
-    "motif": "DON RAHMA - VOTRE NOM"
-  },
-
   "formulaires": {
     "_aide": "URLs des formulaires externes (Tally, Google Forms…). Tant qu'une URL est à null, le site propose uniquement le canal WhatsApp ou e-mail correspondant.",
     "declarationDonUrl": null,
@@ -179,7 +268,6 @@
     "contactUrl": null,
     "newsletterUrl": null
   },
-
   "reseaux": {
     "_aide": "Liens des réseaux sociaux. Les liens à null ne sont pas affichés.",
     "facebook": "https://www.facebook.com/profile.php?id=100092539929291",
