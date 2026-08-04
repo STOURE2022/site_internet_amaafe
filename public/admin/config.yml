@@ -175,9 +175,12 @@ collections:
     label_singular: "Fiche enfant"
     folder: "content/enfants"
     create: true
-    slug: "enfant-{{slug}}"
-    summary: "{{filename}} — {{prenom}}"
+    identifier_field: titre
+    slug: "{{slug}}"
+    summary: "{{titre}} — {{prenom}}"
     fields:
+      - { name: titre, label: "Référence de la fiche (ex. Fiche 5)", widget: string,
+          hint: "Sert à nommer le fichier et à retrouver la fiche dans cette liste — jamais affiché sur le site." }
       - { name: prenom, label: "Prénom (avec autorisation écrite uniquement)", widget: string, required: false }
       - { name: age, label: "Âge", widget: number, required: false }
       - { name: niveau, label: "Niveau", widget: string, required: false }
