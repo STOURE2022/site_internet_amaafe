@@ -16,7 +16,7 @@ import { fmtNombre } from '../lib/format.js';
         <p class="impact__v" id="impactText">Donnez <b>10 000 FCFA</b> et vous financez <b>une part concrète</b> de la scolarité d'un enfant.</p>
         <p class="impact__n" id="impactNote">Base : {fmtNombre(config.chiffres.coutMensuelParEnfantFCFA)} FCFA par mois et par enfant, soit {fmtNombre(config.chiffres.coutAnnuelParEnfantFCFA)} FCFA par an — scolarité, fournitures et accompagnement.</p>
       </div>
-      <p class="give__n"><span aria-hidden="true">✳</span> Les comptes du centre seront publiés régulièrement. Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration.</p>
+      <p class="give__n"><span aria-hidden="true">✳</span> Les comptes du centre seront publiés régulièrement. L'association française dispose d'un rescrit fiscal : les dons versés en France ouvrent droit à une réduction d'impôt.</p>
     </div>
 
     <div class="form rv">
@@ -48,6 +48,7 @@ import { fmtNombre } from '../lib/format.js';
         <button type="button" class="pay" data-pay="vir-ml" aria-pressed="false"><i style="background:#0F4A2F"></i>Virement Mali</button>
         <button type="button" class="pay" data-pay="vir-fr" aria-pressed="false"><i style="background:#D9A62B"></i>Virement France</button>
         <button type="button" class="pay" data-pay="wero" aria-pressed="false"><i style="background:#7A5CF0"></i>Wero (Europe)</button>
+        <button type="button" class="pay" data-pay="paypal" aria-pressed="false"><i style="background:#003087"></i>PayPal</button>
       </div>
 
       <div class="paybox" id="paybox"></div>

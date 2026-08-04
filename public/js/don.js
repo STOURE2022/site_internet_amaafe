@@ -23,7 +23,8 @@
     wave: 'Wave',
     'vir-ml': 'Virement bancaire (Mali)',
     'vir-fr': 'Virement bancaire (France)',
-    wero: 'Wero (Europe)'
+    wero: 'Wero (Europe)',
+    paypal: 'PayPal'
   };
 
   /* ---- état, initialisé depuis l'URL si on arrive de l'accueil ---- */
@@ -66,6 +67,11 @@
         return { t: 'Virement — compte France (EUR)', v: p.virementFrance.iban,
                  s: (p.virementFrance.bic ? 'BIC : ' + p.virementFrance.bic + '. ' : '') +
                     'Motif à indiquer : ' + motif + '.', tbdSeul: !p.virementFrance.iban };
+      case 'paypal':
+        return { t: 'PayPal', v: p.paypal.lien,
+                 s: p.paypal.lien
+                   ? 'Ouvrez ce lien (ou copiez-le) pour envoyer votre don via PayPal. Indiquez en note : ' + motif + '.'
+                   : NOTE_TBD };
       case 'wero':
         return { t: 'Wero — Europe (EUR)', v: p.wero.numero,
                  s: p.wero.numero

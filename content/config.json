@@ -141,6 +141,13 @@
     "sousTotalFonctionnementEUR": "1 641,95"
   },
 
+  "financesMali": {
+    "_aide": "Budget annuel de la maison mère AMAAFE / Mali (source : document métier 2026). Bilan détaillé à publier dès validation.",
+    "cotisationsAnnuellesFCFA": 360000,
+    "partFonctionnementCouturePct": 30,
+    "partActionsPct": 70
+  },
+
   "parrainage": {
     "_aide": "Montants mensuels du parrainage : FCFA pour l'Afrique, EUR pour l'Europe (source : document métier 2026).",
     "montantMensuelFCFA": 20000,
@@ -148,7 +155,8 @@
   },
 
   "medersa": {
-    "budgetTotalFCFA": null,
+    "_aide": "Objectif de collecte pour le terrain et la médersa, en euros (source : document métier 2026).",
+    "budgetTotalEUR": 30000,
     "montantCollecteFCFA": null,
     "pourcentageAvancement": null
   },
@@ -157,6 +165,7 @@
     "orangeMoney": { "numero": "+223 76 33 79 15", "titulaire": null },
     "wave": { "numero": null, "lienPaiement": null },
     "wero": { "numero": "+33 6 66 31 53 40", "titulaire": null },
+    "paypal": { "lien": null },
     "virementMali": { "banque": null, "rib": null, "titulaire": null },
     "virementFrance": { "iban": null, "bic": null, "titulaire": null },
     "motif": "DON RAHMA - VOTRE NOM"

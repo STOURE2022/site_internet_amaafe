@@ -120,7 +120,7 @@ Le site est en français. La structure prévue pour ajouter l'anglais ou l'arabe
 - **Le site n'encaisse aucun paiement.** Il guide vers Orange Money / Wave / virement, puis recueille une **déclaration de don** — par WhatsApp pré-rempli (canal principal au Mali) ou formulaire externe. Le **numéro émetteur** est la clé de rapprochement avec le relevé de l'opérateur.
 - **Aucune donnée inventée** : toute valeur inconnue affiche un jeton rouge « à confirmer », alimenté par `content/config.json`.
 - **Aucune photo d'enfant ni prénom réel** tant que les autorisations parentales ne sont pas recueillies : le site affiche des emplacements hachurés prévus à cet effet.
-- **Aucun avantage fiscal annoncé** tant que l'éligibilité n'est pas confirmée.
+- **Avantage fiscal (France)** : AMAAFE / France dispose d'un rescrit fiscal — la réduction d'impôt est annoncée sur le site pour les dons versés en France.
 - **Pas de traceur, pas de cookie** : rien à déclarer, pas de bannière nécessaire. Si une mesure d'audience devient utile, choisir un outil sans cookie (par ex. Cloudflare Web Analytics) et mettre à jour la politique de confidentialité.
 
 Avant publication : suivre **`CHECKLIST-AVANT-MISE-EN-LIGNE.md`**.

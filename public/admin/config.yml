@@ -154,6 +154,14 @@ collections:
                   - { name: libelle, label: "Libellé", widget: string }
                   - { name: montantEUR, label: "Montant (€)", widget: string }
               - { name: sousTotalFonctionnementEUR, label: "Sous-total fonctionnement (€)", widget: string }
+          - name: financesMali
+            label: "Budget AMAAFE / Mali"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: cotisationsAnnuellesFCFA, label: "Cotisations annuelles (FCFA)", widget: number, required: false }
+              - { name: partFonctionnementCouturePct, label: "Part fonctionnement centre de couture (%)", widget: number, required: false }
+              - { name: partActionsPct, label: "Part activités humanitaires (%)", widget: number, required: false }
           - name: parrainage
             label: "Parrainage"
             widget: object
@@ -165,7 +173,8 @@ collections:
             label: "Projet de médersa"
             widget: object
             fields:
-              - { name: budgetTotalFCFA, label: "Budget total (FCFA)", widget: number, required: false }
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, required: false }
               - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false }
               - { name: pourcentageAvancement, label: "Avancement (%)", widget: number, required: false }
           - name: paiement
@@ -190,6 +199,11 @@ collections:
                 fields:
                   - { name: numero, label: "Numéro de téléphone lié au compte", widget: string, required: false }
                   - { name: titulaire, label: "Titulaire", widget: string, required: false }
+              - name: paypal
+                label: "PayPal"
+                widget: object
+                fields:
+                  - { name: lien, label: "Lien de paiement (paypal.me) ou adresse e-mail PayPal", widget: string, required: false }
               - name: virementMali
                 label: "Virement Mali"
                 widget: object

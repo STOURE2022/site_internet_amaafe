@@ -150,9 +150,11 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
           <div class="bar"><i data-fill={config.medersa.pourcentageAvancement ?? 0}></i></div>
           <div class="sums">
             <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
-            <span>sur un objectif de <Tbd valeur={config.medersa.budgetTotalFCFA} label="budget à chiffrer" suffixe=" FCFA" /></span>
+            <span>sur un objectif de {config.medersa.budgetTotalEUR != null
+              ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>
+              : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
           </div>
-          <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Les montants seront affichés dès que le budget du projet aura été arrêté par le bureau.</p>
+          <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Le montant déjà collecté sera publié ici et actualisé régulièrement.</p>
         </div>
         <div class="proj__side">
           <div class="photo">Plan ou vue d'artiste de la future médersa</div>

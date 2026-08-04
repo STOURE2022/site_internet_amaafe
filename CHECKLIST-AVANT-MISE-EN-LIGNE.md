@@ -20,6 +20,7 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 - [ ] RIB du compte bancaire **Mali** + nom de la banque (`paiement.virementMali`)
 - [ ] IBAN + BIC du compte **France** (`paiement.virementFrance`)
 - [ ] Numéro de téléphone **Wero** relié au compte bancaire de l'association + nom du titulaire (`paiement.wero`) — vérifier que Wero est activé sur ce compte dans l'application de la banque
+- [ ] Lien **PayPal** (paypal.me) ou adresse e-mail PayPal de l'association (`paiement.paypal.lien`) — à renseigner par l'admin ; d'ici là le canal affiche « à communiquer »
 - [ ] Vérifier que le **nom affiché à la validation** d'un envoi Orange Money / Wave est bien celui de l'association (un donateur doit pouvoir le reconnaître)
 - [ ] Confirmer que le numéro WhatsApp configuré (`whatsapp.numero`, actuellement le +223 76 33 79 15) est bien **relié à un compte WhatsApp actif et consulté** — c'est lui qui reçoit les déclarations de don et les demandes de parrainage
 
@@ -43,7 +44,7 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 
 - [ ] Désigner le **directeur de la publication** (à remplacer dans `src/layouts/Base.astro` et `src/pages/mentions-legales.astro`)
 - [ ] Confirmer l'**hébergeur** définitif et compléter la mention (Cloudflare Pages prévu)
-- [ ] Ne **jamais** annoncer d'avantage fiscal (66 %, reçu fiscal) tant que l'éligibilité n'est pas confirmée par l'administration ; si elle l'est un jour, mettre à jour `/conditions-de-don/` et `/faire-un-don/`
+- [x] ~~Ne jamais annoncer d'avantage fiscal tant que l'éligibilité n'est pas confirmée~~ — **rescrit fiscal obtenu** par AMAAFE / France : l'avantage fiscal est annoncé sur `/conditions-de-don/`, `/faire-un-don/` et l'accueil. Conserver le rescrit dans les archives de l'association (et le publier sur `/transparence/` si souhaité)
 - [ ] Relire la politique de confidentialité si un service externe (formulaire, newsletter) est ajouté — le nommer dans la page
 - [ ] Vérifier les statuts et références légales affichées sur `/transparence/` avec les documents officiels
 

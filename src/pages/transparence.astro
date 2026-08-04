@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
+import { fmtNombre } from '../lib/format.js';
 
 const { mali, france } = config.entites;
 ---
@@ -51,9 +52,9 @@ const { mali, france } = config.entites;
       <div class="head rv">
         <div>
           <span class="eyebrow eyebrow--d">Les comptes</span>
-          <h2>Bilan financier {config.finances.exercice}</h2>
+          <h2>Bilan financier {config.finances.exercice} — AMAAFE / France</h2>
         </div>
-        <p class="lead" style="max-width:42ch">Bilan établi par le bureau de l'association et présenté aux membres lors de l'assemblée générale ordinaire.</p>
+        <p class="lead" style="max-width:42ch">Bilan de l'entité française, établi par le bureau de l'association et présenté aux membres lors de l'assemblée générale ordinaire.</p>
       </div>
       <div class="g3 rv">
         <div class="card entity">
@@ -104,6 +105,12 @@ const { mali, france } = config.entites;
       <p class="rv" style="font-size:13.5px;color:var(--gris);margin-top:10px">
         Bureau de l'association — Présidente : <strong>{config.dirigeants.presidente}</strong> · Trésorier : <strong>{config.dirigeants.tresorier}</strong>. Le détail complet figure dans le document ci-dessous.
       </p>
+      <div class="card entity rv" style="margin-top:26px">
+        <div class="entity__t">Et la maison mère, AMAAFE / Mali ?</div>
+        <p style="font-size:14.5px;color:var(--gris);margin-top:12px;line-height:1.7">
+          L'entité malienne fonctionne avec un budget annuel d'environ <strong>{fmtNombre(config.financesMali.cotisationsAnnuellesFCFA)} FCFA</strong> de cotisations des membres, complété par des dons ponctuels. <strong>{config.financesMali.partFonctionnementCouturePct} %</strong> de ce budget finance le fonctionnement du <strong>centre de couture</strong>, où les enfants apprennent le métier de la couture, et <strong>{config.financesMali.partActionsPct} %</strong> les activités humanitaires. Son bilan détaillé sera publié ici dès sa validation par le bureau.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -148,7 +155,7 @@ const { mali, france } = config.entites;
       </div>
       <div class="eng rv" style="margin-top:0;max-width:820px">
         <div class="eng__i"><span class="eng__c">✓</span><div><b>Publier les comptes régulièrement</b><p>Les recettes et l'utilisation des dons seront rendues publiques sur ce site.</p></div></div>
-        <div class="eng__i"><span class="eng__c">✓</span><div><b>Ne rien promettre qui ne soit confirmé</b><p>Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration.</p></div></div>
+        <div class="eng__i"><span class="eng__c">✓</span><div><b>Ne rien promettre qui ne soit confirmé</b><p>L'avantage fiscal en France n'est annoncé que depuis l'obtention du rescrit fiscal par AMAAFE / France ; chaque affirmation du site s'appuie sur un document vérifiable.</p></div></div>
         <div class="eng__i"><span class="eng__c">✓</span><div><b>Protéger les enfants</b><p>Aucune photo identifiable ni prénom réel publié sans autorisation écrite des parents.</p></div></div>
         <div class="eng__i"><span class="eng__c">✓</span><div><b>Répondre à toute question</b><p>Tout donateur peut demander des précisions sur l'utilisation des fonds via la <a href="/contact/" style="color:var(--vert);text-decoration:underline">page contact</a>.</p></div></div>
       </div>
