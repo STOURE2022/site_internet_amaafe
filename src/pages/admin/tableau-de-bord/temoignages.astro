@@ -1,0 +1,50 @@
+---
+/** Vue interne des témoignages : tous les témoignages avec leur page
+    d'affichage et leur ordre, consultables sans quitter le tableau de bord. */
+import { getCollection, render } from 'astro:content';
+import Admin from '../../../layouts/Admin.astro';
+import { CMS } from '../../../lib/admin.js';
+
+const temoignages = (await getCollection('temoignages'))
+  .sort((a, b) => a.data.contexte.localeCompare(b.data.contexte) || a.data.ordre - b.data.ordre);
+const rendus = await Promise.all(
+  temoignages.map(async (t) => ({ ...t, Contenu: (await render(t)).Content }))
+);
+const nbPublies = temoignages.filter((t) => t.data.publie).length;
+const PAGES = { amaafe: "L'AMAAFE", parrainage: 'Parrainage' };
+---
+<Admin titre="Témoignages" sousTitre={`${temoignages.length} témoignage${temoignages.length > 1 ? 's' : ''}, dont ${nbPublies} publié${nbPublies > 1 ? 's' : ''} sur le site.`} actif="temoignages">
+  <Fragment slot="actions">
+    <a class="btn btn--ghost" href="/l-amaafe/">Voir la page publique ↗</a>
+    <a class="btn btn--or" href={`${CMS}/collections/temoignages/new`}>+ Nouveau témoignage</a>
+  </Fragment>
+
+  <section class="card" style="margin-top:24px">
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Nom &amp; rôle</th><th>Extrait</th><th>Page d'affichage</th><th>Ordre</th><th>Statut</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {rendus.map((t) => (
+            <tr>
+              <td><b>{t.data.nom}</b><br /><span class="muted">{t.data.role}</span></td>
+              <td style="max-width:380px"><div class="muted" style="max-height:64px;overflow:hidden"><t.Contenu /></div></td>
+              <td>{PAGES[t.data.contexte]}</td>
+              <td class="dt">{t.data.ordre}</td>
+              <td>{t.data.publie ? <span class="chip chip--ok">Publié</span> : <span class="chip chip--off">Masqué</span>}</td>
+              <td class="act">
+                <a href={`${CMS}/collections/temoignages/entries/${t.id}`}>Modifier →</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p style="font-size:13px;color:var(--gris);margin-top:14px">
+    L'« ordre » détermine la position du témoignage sur sa page d'affichage (1 = premier).
+    Pour retirer un témoignage du site sans le supprimer, décochez « Publié » dans l'éditeur.
+  </p>
+</Admin>

@@ -1,0 +1,49 @@
+---
+/** Vue interne des fiches enfants à parrainer : état de remplissage de
+    chaque fiche, consultable sans quitter le tableau de bord. */
+import { getCollection } from 'astro:content';
+import Admin from '../../../layouts/Admin.astro';
+import { CMS } from '../../../lib/admin.js';
+
+const enfants = (await getCollection('enfants')).sort((a, b) => a.id.localeCompare(b.id));
+const nbPubliees = enfants.filter((e) => e.data.publie).length;
+const nbCompletes = enfants.filter((e) => e.data.prenom && e.data.age != null && e.data.niveau).length;
+---
+<Admin titre="Enfants à parrainer" sousTitre={`${enfants.length} fiche${enfants.length > 1 ? 's' : ''}, dont ${nbPubliees} publiée${nbPubliees > 1 ? 's' : ''} — ${nbCompletes} complète${nbCompletes > 1 ? 's' : ''} (prénom, âge, niveau).`} actif="enfants">
+  <Fragment slot="actions">
+    <a class="btn btn--ghost" href="/parrainage/">Voir la page publique ↗</a>
+    <a class="btn btn--or" href={`${CMS}/collections/enfants/new`}>+ Nouvelle fiche</a>
+  </Fragment>
+
+  <section class="card" style="margin-top:24px">
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Fiche</th><th>Prénom</th><th>Âge</th><th>Niveau</th><th>Au centre depuis</th><th>Photo</th><th>Statut</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {enfants.map((e) => (
+            <tr>
+              <td class="dt">{e.id}</td>
+              <td>{e.data.prenom ? <b>{e.data.prenom}</b> : <span class="chip chip--n">à compléter</span>}</td>
+              <td class="dt">{e.data.age ?? '—'}</td>
+              <td>{e.data.niveau ?? <span class="muted">—</span>}</td>
+              <td class="dt">{e.data.anneeEntree ?? '—'}</td>
+              <td>{e.data.photo ? <span class="chip chip--ok">oui</span> : <span class="chip chip--n">aucune</span>}</td>
+              <td>{e.data.publie ? <span class="chip chip--ok">Publiée</span> : <span class="chip chip--off">Masquée</span>}</td>
+              <td class="act">
+                <a href={`${CMS}/collections/enfants/entries/${e.id}`}>Modifier →</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p style="font-size:13px;color:var(--gris);margin-top:14px">
+    <strong>Protection des enfants :</strong> ne renseignez le prénom et la photo qu'avec l'autorisation
+    écrite des parents. Une fiche incomplète s'affiche sur le site sans photo ni nom, avec la mention
+    « fiche à compléter ».
+  </p>
+</Admin>

@@ -1,0 +1,48 @@
+---
+/** Vue interne des actualités : toutes les entrées (publiées et brouillons),
+    consultables sans quitter le tableau de bord. Le bouton « Modifier »
+    ouvre l'entrée dans l'éditeur Decap. */
+import { getCollection } from 'astro:content';
+import Admin from '../../../layouts/Admin.astro';
+import { CMS } from '../../../lib/admin.js';
+
+const actus = (await getCollection('actualites'))
+  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const nbPubliees = actus.filter((a) => a.data.publie).length;
+---
+<Admin titre="Actualités" sousTitre={`${actus.length} article${actus.length > 1 ? 's' : ''}, dont ${nbPubliees} publié${nbPubliees > 1 ? 's' : ''} sur le site.`} actif="actualites">
+  <Fragment slot="actions">
+    <a class="btn btn--ghost" href="/actualites/">Voir la page publique ↗</a>
+    <a class="btn btn--or" href={`${CMS}/collections/actualites/new`}>+ Nouvelle actualité</a>
+  </Fragment>
+
+  <section class="card" style="margin-top:24px">
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Titre</th><th>Catégorie</th><th>Date</th><th>Photo</th><th>Statut</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {actus.map((a) => (
+            <tr>
+              <td><b>{a.data.titre}</b><br /><span class="muted">{a.data.extrait}</span></td>
+              <td>{a.data.categorie}</td>
+              <td class="dt">{a.data.date ?? 'à préciser'}</td>
+              <td>{a.data.image ? <span class="chip chip--ok">oui</span> : <span class="chip chip--n">aucune</span>}</td>
+              <td>{a.data.publie ? <span class="chip chip--ok">Publiée</span> : <span class="chip chip--off">Brouillon</span>}</td>
+              <td class="act">
+                {a.data.publie && <a href={`/actualites/${a.id}/`}>Voir ↗</a>}
+                <a href={`${CMS}/collections/actualites/entries/${a.id}`}>Modifier →</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p style="font-size:13px;color:var(--gris);margin-top:14px">
+    Une actualité efficace : un titre concret, deux ou trois phrases, une date et une photo autorisée.
+    Chaque enregistrement dans l'éditeur republie le site en quelques minutes.
+  </p>
+</Admin>
