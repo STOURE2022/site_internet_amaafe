@@ -1,0 +1,48 @@
+---
+/** Carte « enfant à parrainer » (variante Portrait validée sur maquette) :
+    photo ou silhouette en tête, étiquettes d'informations, prix mensuel
+    dans un pied de carte et bouton d'action — doré quand la fiche est
+    complète, pour guider l'œil. */
+import config from '../../content/config.json';
+import { fmtNombre } from '../lib/format.js';
+
+const { enfant, lien = '/parrainage/#devenir-parrain' } = Astro.props;
+const d = enfant.data;
+const complete = Boolean(d.prenom);
+const meta = [
+  d.age != null ? `${d.age} ans` : null,
+  d.niveau,
+  d.anneeEntree != null ? `depuis ${d.anneeEntree}` : null,
+].filter(Boolean);
+const prixFCFA = config.parrainage.montantMensuelFCFA;
+const prixEUR = config.parrainage.montantMensuelEUR;
+---
+<article class="cenf rv">
+  <div class:list={['cenf__ph', { 'cenf__ph--vide': !d.photo }]}>
+    <span class="cenf__chip">{complete ? 'Cherche un parrain' : 'Fiche en préparation'}</span>
+    {d.photo
+      ? <img src={d.photo} alt={d.prenom ? `Photo de ${d.prenom}` : "Photo de l'enfant"} loading="lazy" width="400" height="340" />
+      : <span class="cenf__sil" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="16" r="8"/><path d="M8 38c2.5-8 8-11.5 14-11.5S33.5 30 36 38"/></svg></span>}
+  </div>
+  <div class="cenf__b">
+    <div class="cenf__n">
+      {complete ? d.prenom : 'Un enfant vous attend'}
+      {!complete && <small>Prénom, âge et niveau publiés après l'autorisation écrite des parents.</small>}
+    </div>
+    <div class="cenf__meta">
+      {meta.length > 0
+        ? meta.map((m) => <span>{m}</span>)
+        : <span class="cenf__attente">autorisation en cours</span>}
+    </div>
+  </div>
+  <div class="cenf__f">
+    <div class="cenf__prix">
+      {prixFCFA != null
+        ? <Fragment><b>{fmtNombre(prixFCFA)} FCFA</b><i>/ mois{prixEUR != null && ` — ou ${prixEUR} € depuis l'Europe`}</i></Fragment>
+        : <span class="tbd">montant / mois</span>}
+    </div>
+    <a class:list={['cenf__btn', { 'cenf__btn--plein': complete }]} href={lien}>
+      <span>{complete ? `Parrainer ${d.prenom.split(' ')[0]}` : 'Parrainer'}</span><i aria-hidden="true">→</i>
+    </a>
+  </div>
+</article>

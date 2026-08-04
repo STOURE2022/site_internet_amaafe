@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
 import { getCollection, render } from 'astro:content';
 import { fmtNombre } from '../lib/format.js';
+import CarteEnfant from '../components/CarteEnfant.astro';
 
 const enfants = await getCollection('enfants', ({ data }) => data.publie);
 const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'parrainage'))
@@ -70,29 +71,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
         </div>
       </div>
       <div class="g4">
-        {enfants.map((enfant, i) => (
-          <article class="card child rv">
-            {enfant.data.photo
-              ? <img class="child__p" src={enfant.data.photo} alt={enfant.data.prenom ? `Photo de ${enfant.data.prenom}` : "Photo de l'enfant"} loading="lazy" width="160" height="160" />
-              : <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>}
-            <h3>{enfant.data.prenom ?? 'Enfant à parrainer'}</h3>
-            <p>
-              {enfant.data.age != null || enfant.data.niveau || enfant.data.anneeEntree != null
-                ? [
-                    enfant.data.age != null ? `${enfant.data.age} ans` : null,
-                    enfant.data.niveau,
-                    enfant.data.anneeEntree != null ? `au centre depuis ${enfant.data.anneeEntree}` : null,
-                  ].filter(Boolean).join(' · ')
-                : "Fiche à compléter : prénom, âge, niveau, année d'entrée au centre."}
-            </p>
-            <b>
-              {config.parrainage.montantMensuelFCFA != null
-                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois${config.parrainage.montantMensuelEUR != null ? ` (${config.parrainage.montantMensuelEUR} € depuis l'Europe)` : ''}`
-                : <span class="tbd">montant / mois</span>}
-            </b>
-            <a class="btn btn--ghost" href="#devenir-parrain">Parrainer</a>
-          </article>
-        ))}
+        {enfants.map((enfant) => <CarteEnfant enfant={enfant} lien="#devenir-parrain" />)}
       </div>
       <div class="note rv" style="max-width:760px;margin-inline:auto">
         <strong>Protection des enfants.</strong> Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants sont présentés sans photo ni nom complet — comme c'est le cas actuellement.

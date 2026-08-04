@@ -7,6 +7,7 @@ import config from '../../content/config.json';
 import { getCollection } from 'astro:content';
 import { fmtDate, fmtNombre, pourcentageCollecte } from '../lib/format.js';
 import Photo from '../components/Photo.astro';
+import CarteEnfant from '../components/CarteEnfant.astro';
 
 const actualites = (await getCollection('actualites', ({ data }) => data.publie)).slice(0, 3);
 const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slice(0, 4);
@@ -177,25 +178,7 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
         <p class="lead" style="max-width:40ch">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours.</p>
       </div>
       <div class="g4">
-        {enfants.map((enfant, i) => (
-          <article class="card child rv">
-            {enfant.data.photo
-              ? <img class="child__p" src={enfant.data.photo} alt={enfant.data.prenom ? `Photo de ${enfant.data.prenom}` : "Photo de l'enfant"} loading="lazy" width="160" height="160" />
-              : <div class={`child__a${i % 2 === 1 ? ' child__a--s' : ''}`}>{enfant.data.prenom ? enfant.data.prenom[0] : '?'}</div>}
-            <h3>{enfant.data.prenom ?? 'Enfant à parrainer'}</h3>
-            <p>
-              {enfant.data.age != null || enfant.data.niveau
-                ? [enfant.data.age != null ? `${enfant.data.age} ans` : null, enfant.data.niveau].filter(Boolean).join(' · ')
-                : "Fiche à compléter : prénom, âge, niveau, année d'entrée au centre."}
-            </p>
-            <b>
-              {config.parrainage.montantMensuelFCFA != null
-                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois${config.parrainage.montantMensuelEUR != null ? ` (${config.parrainage.montantMensuelEUR} € depuis l'Europe)` : ''}`
-                : <span class="tbd">montant / mois</span>}
-            </b>
-            <a class="btn btn--ghost" href="/parrainage/">Parrainer</a>
-          </article>
-        ))}
+        {enfants.map((enfant) => <CarteEnfant enfant={enfant} lien="/parrainage/" />)}
       </div>
       <p class="rv" style="margin-top:26px;font-size:13.5px;color:var(--gris-2);text-align:center">
         Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants seront présentés sans photo ni nom complet.
