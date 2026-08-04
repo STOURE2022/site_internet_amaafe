@@ -4,7 +4,7 @@
     défaut et leurs boutons d'en-tête via le slot « actions ». */
 import { getCollection } from 'astro:content';
 import config from '../../content/config.json';
-import { CMS, versConfig, versEditeur, REPO, lireDocuments, listeACompleter } from '../lib/admin.js';
+import { CMS, versConfig, lireDocuments, lireMedias, listeACompleter } from '../lib/admin.js';
 
 const { titre, sousTitre, actif = 'accueil' } = Astro.props;
 
@@ -12,6 +12,7 @@ const actusPub = await getCollection('actualites', ({ data }) => data.publie);
 const temoignagesPub = await getCollection('temoignages', ({ data }) => data.publie);
 const enfantsPub = await getCollection('enfants', ({ data }) => data.publie);
 const documents = lireDocuments();
+const medias = lireMedias();
 const manquesPaiement = listeACompleter(config, enfantsPub.length).filter((t) => t.sev === 'r').length;
 const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
 ---
@@ -147,6 +148,14 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
     .chip--off{background:var(--rouge-pale);color:var(--rouge)}
     .chip--n{background:var(--or-pale);color:#8A6D12}
 
+    /* galerie de la médiathèque */
+    .medias{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+    .media{display:flex;flex-direction:column;gap:4px;background:var(--papier-2);border:1px solid var(--ligne);border-radius:var(--r);padding:10px;transition:border-color .15s}
+    .media:hover{border-color:var(--vert-2)}
+    .media img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:var(--vert-pale)}
+    .media b{font-size:12px;overflow-wrap:anywhere}
+    .media span{font-family:var(--mono);font-size:11px;color:var(--gris)}
+
     @media (max-width:1080px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
     @media (max-width:840px){
       .app{grid-template-columns:1fr}
@@ -177,7 +186,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4.4-3.2-8-6.2-8-10a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 3.8-3.6 6.8-8 10Z"/></svg>
         Déclarations de don ↗
       </a>
-      <a href={versConfig}>
+      <a href="/admin/tableau-de-bord/#t-collecte">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M4 3h16v6a8 8 0 0 1-16 0V3Z"/><path d="M4 5H2v2a4 4 0 0 0 4 4M20 5h2v2a4 4 0 0 1-4 4"/></svg>
         Collecte médersa
       </a>
@@ -195,23 +204,23 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4.5-6.2"/></svg>
         Enfants à parrainer <span class={`n${enfantsPub.length === 0 ? ' n--r' : ''}`}>{enfantsPub.length}</span>
       </a>
-      <a href={versEditeur} title="Dans l'éditeur, bouton « Médias » de la barre du haut">
+      <a href="/admin/tableau-de-bord/medias/" aria-current={actif === 'medias' ? 'page' : undefined}>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>
-        Photos &amp; médias
+        Photos &amp; médias <span class="n">{medias.length}</span>
       </a>
 
       <span class="nav__t">Données</span>
-      <a href={versConfig}>
+      <a href="/admin/tableau-de-bord/donnees/" aria-current={actif === 'donnees' ? 'page' : undefined}>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
         Données du site
       </a>
-      <a href={versConfig}>
+      <a href="/admin/tableau-de-bord/paiements/" aria-current={actif === 'paiements' ? 'page' : undefined}>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M2.5 10h19"/><path d="M6 15h4"/></svg>
         Paiements {manquesPaiement > 0 && <span class="n n--r">{manquesPaiement}</span>}
       </a>
-      <a href={`${REPO}/tree/main/public/documents`} rel="noopener">
+      <a href="/admin/tableau-de-bord/documents/" aria-current={actif === 'documents' ? 'page' : undefined}>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h9l5 5v13H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v6h6M9 14l2 2 4-4"/></svg>
-        Documents ↗ <span class="n">{documents.length}</span>
+        Documents <span class="n">{documents.length}</span>
       </a>
     </nav>
 

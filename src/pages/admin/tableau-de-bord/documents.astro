@@ -1,0 +1,56 @@
+---
+/** Vue interne des documents téléchargeables (public/documents/),
+    avec leur taille et l'accès au dépôt GitHub pour en ajouter. */
+import Admin from '../../../layouts/Admin.astro';
+import { lireDocumentsDetail, fmtTaille, versDocumentsGitHub, REPO } from '../../../lib/admin.js';
+
+const NOMS = {
+  'etat-financier-2024-2025.pdf': 'État financier 2024/2025',
+  'rapport-impact-2010-2025.pdf': "Rapport d'impact 2010-2025",
+  'presentation-centre-rahma.pdf': 'Présentation du Centre Rahma (diapos)',
+};
+const documents = lireDocumentsDetail();
+const statutsPresents = documents.some((d) => d.nom.toLowerCase().includes('statut'));
+---
+<Admin titre="Documents" sousTitre={`${documents.length} PDF téléchargeable${documents.length > 1 ? 's' : ''} sur la page Transparence.`} actif="documents">
+  <Fragment slot="actions">
+    <a class="btn btn--ghost" href="/transparence/">Voir la page publique ↗</a>
+    <a class="btn btn--or" href={versDocumentsGitHub} rel="noopener">Déposer un PDF (GitHub) ↗</a>
+  </Fragment>
+
+  <section class="card" style="margin-top:24px">
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Document</th><th>Fichier</th><th>Taille</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {documents.map((d) => (
+            <tr>
+              <td><b>{NOMS[d.nom] ?? d.nom}</b></td>
+              <td class="dt">{d.nom}</td>
+              <td class="dt">{fmtTaille(d.taille)}</td>
+              <td class="act">
+                <a href={d.href} rel="noopener">Voir ↗</a>
+                <a href={`${REPO}/blob/main/public/documents/${d.nom}`} rel="noopener">GitHub ↗</a>
+              </td>
+            </tr>
+          ))}
+          {!statutsPresents && (
+            <tr>
+              <td><b>Statuts de l'association</b></td>
+              <td><span class="chip chip--off">manquant</span></td>
+              <td class="dt">—</td>
+              <td class="act"><a href={versDocumentsGitHub} rel="noopener">Déposer ↗</a></td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <p style="font-size:13px;color:var(--gris);margin-top:14px">
+    Les PDF déposés dans <span class="dt" style="font-size:12px">public/documents/</span> sur GitHub apparaissent ici et sur la page
+    Transparence après le redéploiement. Compressez les fichiers volumineux avant l'envoi : le site vise les connexions lentes.
+  </p>
+</Admin>

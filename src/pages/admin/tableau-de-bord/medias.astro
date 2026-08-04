@@ -1,0 +1,34 @@
+---
+/** Vue interne de la médiathèque (public/images/uploads/) : aperçu des
+    images disponibles pour les actualités et les fiches enfants. */
+import Admin from '../../../layouts/Admin.astro';
+import { lireMedias, fmtTaille, versEditeur } from '../../../lib/admin.js';
+
+const medias = lireMedias();
+---
+<Admin titre="Photos & médias" sousTitre={`${medias.length} image${medias.length > 1 ? 's' : ''} dans la médiathèque, utilisable${medias.length > 1 ? 's' : ''} dans les actualités et les fiches enfants.`} actif="medias">
+  <Fragment slot="actions">
+    <a class="btn btn--or" href={versEditeur}>Téléverser (éditeur, bouton « Médias »)</a>
+  </Fragment>
+
+  {medias.length === 0 ? (
+    <section class="card" style="margin-top:24px">
+      <p style="margin:0;font-size:13.5px;color:var(--gris)">Aucune image téléversée pour l'instant. Ouvrez l'éditeur puis le bouton « Médias » de la barre du haut pour en ajouter.</p>
+    </section>
+  ) : (
+    <section class="medias" style="margin-top:24px">
+      {medias.map((m) => (
+        <a class="media" href={m.href} rel="noopener">
+          <img src={m.href} alt={m.nom} loading="lazy" />
+          <b>{m.nom}</b>
+          <span>{fmtTaille(m.taille)}</span>
+        </a>
+      ))}
+    </section>
+  )}
+
+  <p style="font-size:13px;color:var(--gris);margin-top:18px">
+    <strong>Avant de téléverser :</strong> compressez l'image (squoosh.app, WebP ou JPEG, moins de 200 Ko) — le site doit rester
+    léger pour les connexions lentes. <strong>Aucune photo d'enfant identifiable</strong> sans autorisation écrite des parents.
+  </p>
+</Admin>

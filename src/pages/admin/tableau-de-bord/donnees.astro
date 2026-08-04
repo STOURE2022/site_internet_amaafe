@@ -1,0 +1,98 @@
+---
+/** Vue interne des données du site : miroir en lecture de
+    content/config.json, groupé par thème. L'édition se fait dans Decap. */
+import Admin from '../../../layouts/Admin.astro';
+import config from '../../../../content/config.json';
+import { fmtNombre } from '../../../lib/format.js';
+import { versConfig } from '../../../lib/admin.js';
+
+const c = config;
+/* Chaque groupe : un titre et des lignes [libellé, valeur] ; une valeur
+   null s'affiche en jeton « à renseigner ». */
+const groupes = [
+  { titre: 'Le centre', lignes: [
+    ['Nom', c.site.nom], ['Devise', c.site.devise], ['Lieu', c.site.lieu], ['Année de création', String(c.site.anneeCreation)],
+  ]},
+  { titre: 'Chiffres clés', lignes: [
+    ['Élèves', String(c.chiffres.enfants)], ['Enseignants', String(c.chiffres.enseignants)],
+    ['Parrains actifs', String(c.chiffres.parrainsActifs)], ['Bénévoles', String(c.chiffres.benevoles)],
+    ['Membres adhérents', String(c.chiffres.membresAdherents)],
+    ['Coût mensuel / enfant', `${fmtNombre(c.chiffres.coutMensuelParEnfantFCFA)} FCFA`],
+    ['Coût annuel / enfant', `${fmtNombre(c.chiffres.coutAnnuelParEnfantFCFA)} FCFA`],
+    ['Suivi jusqu’à', `${c.chiffres.suiviJusquaAge} ans`],
+  ]},
+  { titre: 'Contact', lignes: [
+    ['E-mail', c.contact.email], ['Téléphone Mali', c.contact.telMali], ['Téléphone France', c.contact.telFrance],
+    ['Adresse', c.contact.adresse], ['Horaires de visite', c.contact.horairesVisite],
+    ['WhatsApp (déclarations)', c.whatsapp.numero],
+  ]},
+  { titre: 'Parrainage', lignes: [
+    ['Montant mensuel (Afrique)', c.parrainage.montantMensuelFCFA != null ? `${fmtNombre(c.parrainage.montantMensuelFCFA)} FCFA` : null],
+    ['Montant mensuel (Europe)', c.parrainage.montantMensuelEUR != null ? `${c.parrainage.montantMensuelEUR} €` : null],
+  ]},
+  { titre: 'Projet de médersa', lignes: [
+    ['Objectif de collecte', c.medersa.budgetTotalEUR != null ? `${fmtNombre(c.medersa.budgetTotalEUR)} €` : null],
+    ['Montant collecté', c.medersa.montantCollecteFCFA != null ? `${fmtNombre(c.medersa.montantCollecteFCFA)} FCFA` : null],
+    ['Avancement forcé', c.medersa.pourcentageAvancement != null ? `${c.medersa.pourcentageAvancement} %` : 'calculé automatiquement'],
+  ]},
+  { titre: "L'AMAAFE", lignes: [
+    ['Slogan', c.amaafe.slogan], ['Zone d’intervention', c.amaafe.zoneIntervention],
+    ['Valeurs', c.amaafe.valeurs.join(' · ')],
+    ['Domaines d’action', `${c.amaafe.domainesAction.length} domaines`],
+    ['Perspectives 2030', `${c.amaafe.perspectives2030.length} priorités`],
+  ]},
+  { titre: 'Bureau', lignes: [
+    ['Fondatrice & présidente', c.dirigeants.presidente], ['Vice-présidente', c.dirigeants.vicePresidente],
+    ['Secrétaire général', c.dirigeants.secretaireGeneral], ['Trésorier', c.dirigeants.tresorier],
+    ['Communication', c.dirigeants.responsablesCommunication.join(' · ')],
+  ]},
+  { titre: 'Entités déclarées', lignes: [
+    ['AMAAFE / Mali', `${c.entites.mali.dateCreation} — ${c.entites.mali.reference}`],
+    ['AMAAFE / France', `${c.entites.france.dateCreation} — ${c.entites.france.reference}`],
+  ]},
+  { titre: 'Finances affichées', lignes: [
+    ['Bilan France ' + c.finances.exercice, `${c.finances.recettesEUR} € de recettes · ${c.finances.depensesEUR} € de dépenses`],
+    ['Excédent', `${c.finances.excedentEUR} €`],
+    ['Budget Mali (cotisations)', `${fmtNombre(c.financesMali.cotisationsAnnuellesFCFA)} FCFA / an`],
+    ['Répartition Mali', `${c.financesMali.partFonctionnementCouturePct} % centre de couture · ${c.financesMali.partActionsPct} % actions`],
+  ]},
+  { titre: 'Réseaux sociaux', lignes: [
+    ['Facebook', c.reseaux.facebook], ['Instagram', c.reseaux.instagram], ['TikTok', c.reseaux.tiktok],
+    ['WhatsApp (lien public)', c.reseaux.whatsapp], ['YouTube', c.reseaux.youtube],
+  ]},
+  { titre: 'Formulaires externes', lignes: [
+    ['Déclaration de don', c.formulaires.declarationDonUrl], ['Parrainage', c.formulaires.parrainageUrl],
+    ['Contact', c.formulaires.contactUrl], ['Newsletter', c.formulaires.newsletterUrl],
+  ]},
+];
+const moitie = Math.ceil(groupes.length / 2);
+const colonnes = [groupes.slice(0, moitie), groupes.slice(moitie)];
+---
+<Admin titre="Données du site" sousTitre="Tout ce que le site affiche vient de ces données. Une valeur « à renseigner » apparaît en rouge sur les pages publiques." actif="donnees">
+  <Fragment slot="actions">
+    <a class="btn btn--or" href={versConfig}>Modifier dans l'éditeur</a>
+  </Fragment>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:24px">
+    {colonnes.map((col) => (
+      <div class="col">
+        {col.map((g) => (
+          <section class="card">
+            <div class="card__h">
+              <h2>{g.titre}</h2>
+              <a href={versConfig}>Modifier →</a>
+            </div>
+            <div class="cnt">
+              {g.lignes.map(([libelle, valeur]) => (
+                <div class="cnt__i">
+                  <span>{libelle}</span>
+                  <span class="st" style="max-width:60%;white-space:normal;overflow-wrap:anywhere">{valeur ?? <span class="tbd">à renseigner</span>}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    ))}
+  </div>
+</Admin>

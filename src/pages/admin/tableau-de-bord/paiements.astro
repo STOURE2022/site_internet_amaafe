@@ -1,0 +1,60 @@
+---
+/** Vue interne des canaux de paiement : coordonnées réelles, titulaires
+    et statut de chaque canal, sans quitter le tableau de bord. */
+import Admin from '../../../layouts/Admin.astro';
+import config from '../../../../content/config.json';
+import { versConfig } from '../../../lib/admin.js';
+
+const p = config.paiement;
+const canaux = [
+  { nom: 'Orange Money — Mali', c: '#F26522', coord: p.orangeMoney.numero, type: 'Numéro', titulaire: p.orangeMoney.titulaire },
+  { nom: 'Wave — Mali', c: '#1DC3F0', coord: p.wave.numero, type: 'Numéro', titulaire: null, extra: p.wave.lienPaiement && `Lien : ${p.wave.lienPaiement}` },
+  { nom: 'Wero — Europe', c: '#7A5CF0', coord: p.wero.numero, type: 'Numéro lié au compte', titulaire: p.wero.titulaire },
+  { nom: 'PayPal — International', c: '#0055B8', coord: p.paypal.lien, type: 'Lien ou e-mail', titulaire: null },
+  { nom: 'Virement — Mali', c: '#D9A62B', coord: p.virementMali.rib, type: 'RIB', titulaire: p.virementMali.titulaire, extra: p.virementMali.banque && `Banque : ${p.virementMali.banque}` },
+  { nom: 'Virement — France', c: '#0F4A2F', coord: p.virementFrance.iban, type: 'IBAN', titulaire: p.virementFrance.titulaire, extra: p.virementFrance.bic && `BIC : ${p.virementFrance.bic}` },
+];
+const nbActifs = canaux.filter((c) => c.coord).length;
+---
+<Admin titre="Canaux de paiement" sousTitre={`${nbActifs} canal${nbActifs > 1 ? 'aux' : ''} actif${nbActifs > 1 ? 's' : ''} sur ${canaux.length}. Les coordonnées renseignées ici s'affichent sur la page Faire un don.`} actif="paiements">
+  <Fragment slot="actions">
+    <a class="btn btn--ghost" href="/faire-un-don/">Voir la page don ↗</a>
+    <a class="btn btn--or" href={versConfig}>Modifier les coordonnées</a>
+  </Fragment>
+
+  <section class="card" style="margin-top:24px">
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Canal</th><th>Coordonnée</th><th>Titulaire</th><th>Statut</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {canaux.map((c) => (
+            <tr>
+              <td><span class="canal"><i style={`background:${c.c}`}></i>{c.nom}</span></td>
+              <td>
+                {c.coord
+                  ? <Fragment><span class="dt">{c.coord}</span>{c.extra && <Fragment><br /><span class="muted">{c.extra}</span></Fragment>}</Fragment>
+                  : <span class="chip chip--off">{c.type} à communiquer</span>}
+              </td>
+              <td>{c.titulaire ?? <span class="chip chip--n">à préciser</span>}</td>
+              <td>{c.coord ? <span class="chip chip--ok">Actif ✓</span> : <span class="chip chip--off">Bloqué</span>}</td>
+              <td class="act"><a href={versConfig}>Modifier →</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="grid" style="margin-top:16px">
+    <section class="card">
+      <div class="card__h"><h2>Motif des virements</h2></div>
+      <p style="margin:0;font-size:13.5px;color:var(--gris)">Chaque virement doit porter le motif <strong style="color:var(--encre)">« {p.motif} »</strong> pour être rapproché de la déclaration du donateur.</p>
+    </section>
+    <section class="card">
+      <div class="card__h"><h2>Déclarations</h2></div>
+      <p style="margin:0;font-size:13.5px;color:var(--gris)">Les déclarations de don arrivent sur le WhatsApp <strong style="color:var(--encre)">{config.contact.telMali}</strong> — vérifiez que ce numéro reste relié à un compte WhatsApp actif et consulté.</p>
+    </section>
+  </div>
+</Admin>

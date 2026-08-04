@@ -1,7 +1,7 @@
 /** Calculs partagés du tableau de bord d'administration.
     Tout est évalué au build, à partir de content/config.json,
     des collections de contenu et de public/documents/. */
-import { readdirSync } from 'node:fs';
+import { readdirSync, statSync } from 'node:fs';
 
 /* La médiathèque Decap est une fenêtre modale (bouton « Médias » de
    l'éditeur), sans URL directe ; et elle téléverse dans images/uploads.
@@ -15,6 +15,29 @@ export const versDocumentsGitHub = `${REPO}/upload/main/public/documents`;
 /** Liste des PDF publiés dans public/documents/. */
 export function lireDocuments() {
   return readdirSync(new URL('../../public/documents/', import.meta.url)).filter((f) => f.endsWith('.pdf'));
+}
+
+/** PDF de public/documents/ avec leur taille et leur URL publique. */
+export function lireDocumentsDetail() {
+  const dossier = new URL('../../public/documents/', import.meta.url);
+  return readdirSync(dossier)
+    .filter((f) => f.endsWith('.pdf'))
+    .map((f) => ({ nom: f, taille: statSync(new URL(f, dossier)).size, href: `/documents/${f}` }));
+}
+
+/** Images de la médiathèque (public/images/uploads/), avec taille et URL. */
+export function lireMedias() {
+  const dossier = new URL('../../public/images/uploads/', import.meta.url);
+  return readdirSync(dossier)
+    .filter((f) => /\.(jpe?g|png|webp|gif|svg)$/i.test(f))
+    .map((f) => ({ nom: f, taille: statSync(new URL(f, dossier)).size, href: `/images/uploads/${f}` }));
+}
+
+/** Taille de fichier lisible : « 148 Ko », « 3,7 Mo ». */
+export function fmtTaille(octets) {
+  return octets >= 1e6
+    ? (octets / 1e6).toFixed(1).replace('.', ',') + ' Mo'
+    : Math.max(1, Math.round(octets / 1024)) + ' Ko';
 }
 
 /** Données manquantes sur le site, avec sévérité (r = canal de don bloqué). */
