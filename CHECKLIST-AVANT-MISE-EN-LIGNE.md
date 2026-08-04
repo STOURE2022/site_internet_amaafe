@@ -43,7 +43,7 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 ## 5. Mentions légales et conformité
 
 - [ ] Désigner le **directeur de la publication** (à remplacer dans `src/layouts/Base.astro` et `src/pages/mentions-legales.astro`)
-- [ ] Confirmer l'**hébergeur** définitif et compléter la mention (Cloudflare Pages prévu)
+- [x] ~~Confirmer l'hébergeur définitif et compléter la mention~~ — hébergeur confirmé : **Cloudflare, Inc.** (Workers), mention complétée dans le pied de page et sur `/mentions-legales/`
 - [ ] Définir le **secret `ADMIN_PASSWORD`** dans Cloudflare (Workers & Pages → site-internet-amaafe → Settings → Variables and Secrets) — sans lui, la zone `/admin/` reste fermée à tous, y compris l'équipe ; choisir un mot de passe long et le partager uniquement avec le bureau
 - [x] ~~Ne jamais annoncer d'avantage fiscal tant que l'éligibilité n'est pas confirmée~~ — **rescrit fiscal obtenu** par AMAAFE / France : l'avantage fiscal est annoncé sur `/conditions-de-don/`, `/faire-un-don/` et l'accueil. Conserver le rescrit dans les archives de l'association (et le publier sur `/transparence/` si souhaité)
 - [ ] Relire la politique de confidentialité si un service externe (formulaire, newsletter) est ajouté — le nommer dans la page
