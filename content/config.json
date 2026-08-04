@@ -12,6 +12,7 @@
     "nomComplet": "Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant",
     "sigle": "AMAAFE",
     "slogan": "Femmes et Enfants au cœur de l'AMAAFE",
+    "zoneIntervention": "Bamako et le cercle de Kolokani (région de Koulikoro)",
     "valeurs": ["Solidarité", "Dignité", "Éducation", "Compassion", "Transparence", "Responsabilité"],
     "perspectives2030": [
       "Construire des salles de classe pour la médersa",
@@ -56,9 +57,13 @@
   },
 
   "dirigeants": {
-    "_aide": "Source : bilan financier 2024/2025 présenté en assemblée générale.",
+    "_aide": "Source : bilan financier 2024/2025 et document métier 2026.",
+    "fondatrice": "Ramatou Koné",
     "presidente": "Ramatou Koné",
-    "tresorier": "Mamby Diallo"
+    "vicePresidente": "Habiatou Koné",
+    "secretaireGeneral": "Mohamed Coulibaly",
+    "tresorier": "Mamby Diallo",
+    "responsablesCommunication": ["Kadidia Coulibaly", "Djénébou Coulibaly"]
   },
 
   "contact": {
@@ -66,7 +71,7 @@
     "telMali": "+223 76 33 79 15",
     "telFrance": "+33 6 66 31 53 40",
     "adresse": "Yirimadio — Bamako, Mali",
-    "horairesVisite": null
+    "horairesVisite": "du lundi au jeudi de 8 h à 17 h, le vendredi de 8 h à 12 h"
   },
 
   "whatsapp": {
@@ -75,12 +80,14 @@
   },
 
   "chiffres": {
-    "_aide": "Source : rapport d'impact 2010-2025.",
+    "_aide": "Sources : rapport d'impact 2010-2025 et document métier 2026.",
     "enfants": 33,
     "enseignants": 2,
     "parrainsActifs": 13,
-    "benevoles": 3,
-    "coutAnnuelParEnfantFCFA": null,
+    "benevoles": 7,
+    "membresAdherents": 30,
+    "coutMensuelParEnfantFCFA": 15000,
+    "coutAnnuelParEnfantFCFA": 180000,
     "suiviJusquaAge": 16
   },
 
@@ -135,8 +142,9 @@
   },
 
   "parrainage": {
-    "montantMensuelFCFA": null,
-    "montantMensuelEUR": null
+    "_aide": "Montants mensuels du parrainage : FCFA pour l'Afrique, EUR pour l'Europe (source : document métier 2026).",
+    "montantMensuelFCFA": 20000,
+    "montantMensuelEUR": 30
   },
 
   "medersa": {
@@ -146,9 +154,9 @@
   },
 
   "paiement": {
-    "orangeMoney": { "numero": null, "titulaire": null },
+    "orangeMoney": { "numero": "+223 76 33 79 15", "titulaire": null },
     "wave": { "numero": null, "lienPaiement": null },
-    "wero": { "numero": null, "titulaire": null },
+    "wero": { "numero": "+33 6 66 31 53 40", "titulaire": null },
     "virementMali": { "banque": null, "rib": null, "titulaire": null },
     "virementFrance": { "iban": null, "bic": null, "titulaire": null },
     "motif": "DON RAHMA - VOTRE NOM"
@@ -164,9 +172,10 @@
 
   "reseaux": {
     "_aide": "Liens des réseaux sociaux. Les liens à null ne sont pas affichés.",
-    "facebook": null,
+    "facebook": "https://www.facebook.com/profile.php?id=100092539929291",
+    "instagram": "https://www.instagram.com/centrerahma223",
     "whatsapp": null,
     "youtube": null,
-    "tiktok": null
+    "tiktok": "https://www.tiktok.com/@centrerahma"
   }
 }

@@ -44,6 +44,33 @@ const temoignagesRendus = await Promise.all(
     </div>
   </section>
 
+  <!-- ===== NOTRE HISTOIRE + BUREAU ===== -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap about">
+      <div class="rv">
+        <span class="eyebrow eyebrow--d">Notre histoire</span>
+        <h2 style="margin-top:14px">Une histoire de solidarité</h2>
+        <hr class="rule">
+        <p class="lead">L'histoire de l'AMAAFE est avant tout celle d'hommes et de femmes qui ont refusé de rester indifférents face aux difficultés des populations les plus fragiles.</p>
+        <p style="font-size:15px;color:var(--gris);line-height:1.7;margin-top:14px">Au début des années 2010, les membres fondateurs, autour de {config.dirigeants.fondatrice}, constatent que de nombreuses familles font face à des difficultés majeures : accès limité aux soins, précarité économique, faible accès à l'éducation, manque d'eau potable, insuffisance de soutien aux femmes et aux enfants. Ils décident de créer une organisation capable d'apporter des réponses concrètes, durables et adaptées : l'AMAAFE est née.</p>
+        <p style="font-size:15px;color:var(--gris);line-height:1.7;margin-top:12px">L'année 2023 marque une étape importante avec la création du Centre Rahma, un projet éducatif destiné à offrir gratuitement une éducation à des enfants issus de familles défavorisées — en joignant l'aspect spirituel à l'action humanitaire, ce qui fait la singularité de l'association.</p>
+        <p style="font-size:15px;color:var(--gris);line-height:1.7;margin-top:12px">L'association intervient aujourd'hui à {config.amaafe.zoneIntervention}, et s'appuie sur {config.chiffres.membresAdherents} membres adhérents et {config.chiffres.benevoles} bénévoles actifs.</p>
+      </div>
+      <div class="rv">
+        <div class="card entity">
+          <div class="entity__t">Le bureau de l'association</div>
+          <div class="dl" style="margin-top:14px">
+            <div><em>Fondatrice &amp; présidente</em><span>{config.dirigeants.presidente}</span></div>
+            <div><em>Vice-présidente</em><span>{config.dirigeants.vicePresidente}</span></div>
+            <div><em>Secrétaire général</em><span>{config.dirigeants.secretaireGeneral}</span></div>
+            <div><em>Trésorier</em><span>{config.dirigeants.tresorier}</span></div>
+            <div><em>Communication</em><span>{config.dirigeants.responsablesCommunication.join(' · ')}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== RÉALISATIONS DEPUIS 2010 ===== -->
   <section class="sec" style="background:var(--blanc);border-block:1px solid var(--ligne)">
     <div class="wrap">

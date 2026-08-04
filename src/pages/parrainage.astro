@@ -38,7 +38,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
           <span class="eyebrow eyebrow--d">Comment ça marche</span>
           <h2>Un parrainage simple et suivi</h2>
         </div>
-        <p class="lead" style="max-width:40ch">Le montant mensuel du parrainage sera fixé par le bureau à partir du coût réel par enfant, puis publié ici : <span class="tbd">montant / mois</span>.</p>
+        <p class="lead" style="max-width:40ch">Le montant mensuel du parrainage est de <strong>{fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA depuis l'Afrique</strong> ou <strong>{config.parrainage.montantMensuelEUR} € depuis l'Europe</strong>.</p>
       </div>
       <div class="g3">
         <div class="card rv" style="padding:26px">
@@ -54,7 +54,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
         <div class="card rv" style="padding:26px">
           <div class="step__d" style="border-color:var(--blanc)">3</div>
           <h3 style="margin-top:14px">Vous suivez son parcours</h3>
-          <p style="font-size:14.5px;color:var(--gris);margin-top:8px">Le centre vous donne régulièrement des nouvelles de l'enfant, jusqu'à son orientation vers une formation professionnelle à {config.chiffres.suiviJusquaAge} ans.</p>
+          <p style="font-size:14.5px;color:var(--gris);margin-top:8px">Chaque trimestre, vous recevez un point sur l'évolution scolaire de votre filleul, avec ses messages ou ses dessins — jusqu'à son orientation vers une formation professionnelle à {config.chiffres.suiviJusquaAge} ans.</p>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
             </p>
             <b>
               {config.parrainage.montantMensuelFCFA != null
-                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois`
+                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois${config.parrainage.montantMensuelEUR != null ? ` (${config.parrainage.montantMensuelEUR} € depuis l'Europe)` : ''}`
                 : <span class="tbd">montant / mois</span>}
             </b>
             <a class="btn btn--ghost" href="#devenir-parrain">Parrainer</a>

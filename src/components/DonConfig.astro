@@ -6,6 +6,7 @@ import config from '../../content/config.json';
 const donCfg = {
   paiement: config.paiement,
   whatsapp: config.whatsapp.numero,
+  coutMensuelEnfantFCFA: config.chiffres.coutMensuelParEnfantFCFA,
 };
 ---
 <script type="application/json" id="don-config" set:html={JSON.stringify(donCfg)} />

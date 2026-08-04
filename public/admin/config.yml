@@ -42,6 +42,7 @@ collections:
               - { name: nomComplet, label: "Nom complet", widget: string }
               - { name: sigle, label: "Sigle", widget: string }
               - { name: slogan, label: "Slogan", widget: string }
+              - { name: zoneIntervention, label: "Zone d'intervention", widget: string }
               - { name: valeurs, label: "Valeurs", widget: list }
               - { name: perspectives2030, label: "Perspectives 2030", widget: list }
               - { name: domainesAction, label: "Domaines d'action", widget: list }
@@ -73,8 +74,12 @@ collections:
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: fondatrice, label: "Fondatrice", widget: string }
               - { name: presidente, label: "Présidente", widget: string }
+              - { name: vicePresidente, label: "Vice-présidente", widget: string }
+              - { name: secretaireGeneral, label: "Secrétaire général", widget: string }
               - { name: tresorier, label: "Trésorier", widget: string }
+              - { name: responsablesCommunication, label: "Responsables communication", widget: list }
           - name: contact
             label: "Contact"
             widget: object
@@ -99,6 +104,8 @@ collections:
               - { name: enseignants, label: "Nombre d'enseignants", widget: number, required: false }
               - { name: parrainsActifs, label: "Parrains actifs", widget: number, required: false }
               - { name: benevoles, label: "Bénévoles", widget: number, required: false }
+              - { name: membresAdherents, label: "Membres adhérents", widget: number, required: false }
+              - { name: coutMensuelParEnfantFCFA, label: "Coût mensuel par enfant (FCFA)", widget: number, required: false }
               - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, required: false }
               - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number }
           - name: impact
@@ -151,6 +158,7 @@ collections:
             label: "Parrainage"
             widget: object
             fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: montantMensuelFCFA, label: "Montant mensuel (FCFA)", widget: number, required: false }
               - { name: montantMensuelEUR, label: "Montant mensuel (EUR)", widget: number, required: false }
           - name: medersa
@@ -212,6 +220,7 @@ collections:
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: facebook, label: "Facebook", widget: string, required: false }
+              - { name: instagram, label: "Instagram", widget: string, required: false }
               - { name: whatsapp, label: "WhatsApp (lien)", widget: string, required: false }
               - { name: youtube, label: "YouTube", widget: string, required: false }
               - { name: tiktok, label: "TikTok", widget: string, required: false }

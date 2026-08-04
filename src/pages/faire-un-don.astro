@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import DonConfig from '../components/DonConfig.astro';
 import config from '../../content/config.json';
+import { fmtNombre } from '../lib/format.js';
 ---
 <Base
   titre="Faire un don — Orange Money, Wave ou virement | Centre Coranique Rahma"
@@ -13,7 +14,7 @@ import config from '../../content/config.json';
     <span class="eyebrow eyebrow--d">Faire un don</span>
     <h1>Votre don devient un cartable, un uniforme, une salle de classe.</h1>
     <p class="lead">Le site n'encaisse pas votre argent : il vous guide vers le canal de votre choix (Orange Money, Wave, Wero ou virement), puis vous permet de déclarer votre don pour que le centre puisse le retrouver et vous remercier.</p>
-    <p class="lead" style="margin-top:14px">Chaque contribution constitue une <strong>Sadaqa Jâriya</strong> — une aumône continue dont les bénéfices perdureront, par la permission d'Allah.</p>
+    <p class="lead" style="margin-top:14px">Chaque contribution constitue une <strong>Sadaqa Jâriya</strong> — une aumône continue dont les bénéfices perdureront, par la permission d'Allah. L'association accepte aussi la <strong>Zakat</strong> : précisez-le lors de votre déclaration, elle sera comptabilisée et utilisée séparément.</p>
   </section>
 
   <div class="wrap" style="max-width:860px">
@@ -49,7 +50,7 @@ import config from '../../content/config.json';
       <div class="impact" style="margin-top:22px;border-color:var(--ligne);background:var(--papier-2)">
         <span class="impact__k" style="color:#8A6D12">Ce que votre don finance</span>
         <p class="impact__v" id="impactText" style="color:var(--encre)">Donnez <b style="color:#8A6D12">10 000 FCFA</b> et vous financez <b style="color:#8A6D12">une part concrète</b> de la scolarité d'un enfant.</p>
-        <p class="impact__n" id="impactNote" style="color:var(--gris)">La grille d'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.</p>
+        <p class="impact__n" id="impactNote" style="color:var(--gris)">Base : {fmtNombre(config.chiffres.coutMensuelParEnfantFCFA)} FCFA par mois et par enfant, soit {fmtNombre(config.chiffres.coutAnnuelParEnfantFCFA)} FCFA par an — scolarité, fournitures et accompagnement.</p>
       </div>
     </section>
 

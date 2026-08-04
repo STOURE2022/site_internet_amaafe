@@ -2,6 +2,8 @@
 /** Bloc don de la page d'accueil : choix du montant, de la devise et du
     canal, aperçu des instructions, puis renvoi vers /faire-un-don pour
     la déclaration. Le JS associé est /public/js/don.js (via DonConfig). */
+import config from '../../content/config.json';
+import { fmtNombre } from '../lib/format.js';
 ---
 <section class="sec give" id="don">
   <div class="wrap give__g">
@@ -12,7 +14,7 @@
       <div class="impact">
         <span class="impact__k">Ce que votre don finance</span>
         <p class="impact__v" id="impactText">Donnez <b>10 000 FCFA</b> et vous financez <b>une part concrète</b> de la scolarité d'un enfant.</p>
-        <p class="impact__n" id="impactNote">La grille d'impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.</p>
+        <p class="impact__n" id="impactNote">Base : {fmtNombre(config.chiffres.coutMensuelParEnfantFCFA)} FCFA par mois et par enfant, soit {fmtNombre(config.chiffres.coutAnnuelParEnfantFCFA)} FCFA par an — scolarité, fournitures et accompagnement.</p>
       </div>
       <p class="give__n"><span aria-hidden="true">✳</span> Les comptes du centre seront publiés régulièrement. Aucun avantage fiscal n'est annoncé tant que l'éligibilité n'a pas été confirmée par l'administration.</p>
     </div>

@@ -103,17 +103,43 @@
       'Date d’envoi : ' + date;
   }
 
+  /* ---- grille d'impact : équivalence en mois de prise en charge d'un enfant.
+     Calculée pour le FCFA et l'euro (parité fixe 1 € = 655,957 FCFA) ;
+     texte générique pour le dollar, dont le cours varie. ---- */
+  var COUT_MOIS = CFG.coutMensuelEnfantFCFA || null;
+  var EUR_FCFA = 655.957;
+
+  function descImpact(mensuel) {
+    var generique = 'une part concrète de la scolarité d’un enfant';
+    var enFCFA = cur === 'FCFA' ? amount : cur === 'EUR' ? amount * EUR_FCFA : null;
+    if (!COUT_MOIS || !enFCFA) return generique;
+    var mois = Math.floor(enFCFA / COUT_MOIS);
+    if (mensuel) {
+      return mois >= 1
+        ? 'chaque mois la prise en charge complète ' + (mois > 1 ? 'de ' + mois + ' enfants' : 'd’un enfant')
+        : generique;
+    }
+    if (mois >= 12) {
+      var ans = Math.floor(mois / 12);
+      return 'la prise en charge complète d’un enfant pendant ' + (ans > 1 ? ans + ' ans' : 'un an');
+    }
+    if (mois >= 1) return (mois > 1 ? mois + ' mois' : 'un mois') + ' de prise en charge complète d’un enfant';
+    return generique;
+  }
+
   function render() {
     var mensuel = freq === 'month';
     if (curLabel) curLabel.textContent = cur;
     if (impactT) {
       impactT.innerHTML = 'Donnez <b>' + fmt(amount) + ' ' + cur + '</b>' + (mensuel ? ' par mois' : '') +
-        ' et vous financez <b>une part concrète</b> de la scolarité d’un enfant.';
+        ' et vous financez <b>' + descImpact(mensuel) + '</b>.';
     }
     if (impactN) {
       impactN.textContent = mensuel
         ? 'Le don mensuel sera à renouveler manuellement tant que le prélèvement automatique n’est pas en place.'
-        : 'La grille d’impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.';
+        : COUT_MOIS
+          ? 'Base : ' + fmt(COUT_MOIS) + ' FCFA par mois et par enfant, soit ' + fmt(COUT_MOIS * 12) + ' FCFA par an — scolarité, fournitures et accompagnement.'
+          : 'La grille d’impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.';
     }
     renderPaybox();
     if (versDecl) {

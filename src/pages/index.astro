@@ -187,7 +187,7 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
             </p>
             <b>
               {config.parrainage.montantMensuelFCFA != null
-                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois`
+                ? `${fmtNombre(config.parrainage.montantMensuelFCFA)} FCFA / mois${config.parrainage.montantMensuelEUR != null ? ` (${config.parrainage.montantMensuelEUR} € depuis l'Europe)` : ''}`
                 : <span class="tbd">montant / mois</span>}
             </b>
             <a class="btn btn--ghost" href="/parrainage/">Parrainer</a>
