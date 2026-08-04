@@ -1,31 +1,69 @@
 ---
-/** Vue interne de la médiathèque (public/images/uploads/) : aperçu des
-    images disponibles pour les actualités et les fiches enfants. */
+/** Vue interne des photos : les emplacements demandés par le site
+    (chargeables via l'éditeur) et la médiathèque (public/images/uploads/). */
 import Admin from '../../../layouts/Admin.astro';
-import { lireMedias, fmtTaille, versEditeur } from '../../../lib/admin.js';
+import config from '../../../../content/config.json';
+import { lireMedias, fmtTaille, versEditeur, versConfig, PHOTOS_SITE } from '../../../lib/admin.js';
 
 const medias = lireMedias();
+const emplacements = PHOTOS_SITE.map((ph) => ({ ...ph, src: (config.photos ?? {})[ph.cle] ?? null }));
+const nbChargees = emplacements.filter((e) => e.src).length;
 ---
-<Admin titre="Photos & médias" sousTitre={`${medias.length} image${medias.length > 1 ? 's' : ''} dans la médiathèque, utilisable${medias.length > 1 ? 's' : ''} dans les actualités et les fiches enfants.`} actif="medias">
+<Admin titre="Photos & médias" sousTitre={`${nbChargees} emplacement${nbChargees > 1 ? 's' : ''} du site sur ${emplacements.length} a${nbChargees > 1 ? 'vec' : ' reçu'} sa photo · ${medias.length} image${medias.length > 1 ? 's' : ''} dans la médiathèque.`} actif="medias">
   <Fragment slot="actions">
-    <a class="btn btn--or" href={versEditeur}>Téléverser (éditeur, bouton « Médias »)</a>
+    <a class="btn btn--or" href={versConfig}>Charger les photos du site</a>
   </Fragment>
 
-  {medias.length === 0 ? (
-    <section class="card" style="margin-top:24px">
+  <section class="card" style="margin-top:24px">
+    <div class="card__h">
+      <h2>Photos demandées par le site</h2>
+      <a href={versConfig}>Charger →</a>
+    </div>
+    <div class="scroll">
+      <table class="tbl">
+        <thead>
+          <tr><th>Aperçu</th><th>Emplacement</th><th>Visible sur</th><th>Statut</th><th class="act">Actions</th></tr>
+        </thead>
+        <tbody>
+          {emplacements.map((e) => (
+            <tr>
+              <td>{e.src
+                ? <img src={e.src} alt={e.label} loading="lazy" style="width:72px;height:54px;object-fit:cover;border-radius:6px;display:block" />
+                : <span style="display:grid;place-items:center;width:72px;height:54px;border-radius:6px;background:repeating-linear-gradient(135deg,rgba(15,74,47,.07) 0 1px,transparent 1px 10px),var(--vert-pale);color:rgba(15,74,47,.5);font-size:10px">hachuré</span>}</td>
+              <td><b>{e.label}</b></td>
+              <td class="muted">{e.pages}</td>
+              <td>{e.src ? <span class="chip chip--ok">Chargée ✓</span> : <span class="chip chip--n">En attente</span>}</td>
+              <td class="act"><a href={versConfig}>{e.src ? 'Remplacer →' : 'Charger →'}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px;color:var(--gris);margin-top:12px">
+      « Charger » ouvre l'éditeur à la section <strong>Photos du site</strong> : choisissez l'emplacement, téléversez l'image,
+      enregistrez — elle remplace le bloc hachuré sur les pages concernées après le redéploiement (2-3 minutes).
+    </p>
+  </section>
+
+  <section class="card" style="margin-top:16px">
+    <div class="card__h">
+      <h2>Médiathèque</h2>
+      <a href={versEditeur}>Téléverser (bouton « Médias » de l'éditeur) →</a>
+    </div>
+    {medias.length === 0 ? (
       <p style="margin:0;font-size:13.5px;color:var(--gris)">Aucune image téléversée pour l'instant. Ouvrez l'éditeur puis le bouton « Médias » de la barre du haut pour en ajouter.</p>
-    </section>
-  ) : (
-    <section class="medias" style="margin-top:24px">
-      {medias.map((m) => (
-        <a class="media" href={m.href} rel="noopener">
-          <img src={m.href} alt={m.nom} loading="lazy" />
-          <b>{m.nom}</b>
-          <span>{fmtTaille(m.taille)}</span>
-        </a>
-      ))}
-    </section>
-  )}
+    ) : (
+      <div class="medias">
+        {medias.map((m) => (
+          <a class="media" href={m.href} rel="noopener">
+            <img src={m.href} alt={m.nom} loading="lazy" />
+            <b>{m.nom}</b>
+            <span>{fmtTaille(m.taille)}</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
 
   <p style="font-size:13px;color:var(--gris);margin-top:18px">
     <strong>Avant de téléverser :</strong> compressez l'image (squoosh.app, WebP ou JPEG, moins de 200 Ko) — le site doit rester

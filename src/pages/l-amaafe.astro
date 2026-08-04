@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
 import config from '../../content/config.json';
 import { getCollection, render } from 'astro:content';
 
@@ -37,9 +38,9 @@ const temoignagesRendus = await Promise.all(
         </div>
       </div>
       <div class="gal rv">
-        <div class="photo photo--s">Photo — une action de sensibilisation</div>
-        <div class="photo photo--p">Photo — l'équipe AMAAFE</div>
-        <div class="photo photo--p">Photo — une sortie éducative</div>
+        <Photo cle="sensibilisation" texte="une action de sensibilisation" classe="photo--s" />
+        <Photo cle="equipeAmaafe" texte="l'équipe AMAAFE" classe="photo--p" />
+        <Photo cle="sortieEducative" texte="une sortie éducative" classe="photo--p" />
       </div>
     </div>
   </section>

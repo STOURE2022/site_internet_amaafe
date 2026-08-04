@@ -12,6 +12,24 @@ export const versEditeur = '/admin/';
 export const REPO = 'https://github.com/STOURE2022/site_internet_amaafe';
 export const versDocumentsGitHub = `${REPO}/upload/main/public/documents`;
 
+/** Les emplacements photo du site (config.photos), avec les pages où
+    chacun apparaît — même ordre que le formulaire de l'éditeur. */
+export const PHOTOS_SITE = [
+  { cle: 'familleCentre', label: 'Les élèves du centre (photo de famille)', pages: 'Accueil' },
+  { cle: 'elevesUniforme', label: 'Les élèves en uniforme', pages: 'Accueil · Le Centre' },
+  { cle: 'unCours', label: 'Un cours au centre', pages: 'Accueil · Le Centre' },
+  { cle: 'sortieEducative', label: 'Une sortie éducative', pages: "Accueil · Le Centre · L'AMAAFE" },
+  { cle: 'courCentre', label: 'La cour du centre', pages: 'Le Centre' },
+  { cle: 'hangar', label: 'Les cours sous le hangar en tôle', pages: 'Accueil · Le Centre · Notre projet' },
+  { cle: 'remiseFournitures', label: 'Remise des fournitures', pages: 'Le Centre' },
+  { cle: 'recitation', label: 'La récitation', pages: 'Le Centre' },
+  { cle: 'uniformes', label: 'Les uniformes', pages: 'Le Centre' },
+  { cle: 'detente', label: 'Moment de détente', pages: 'Le Centre' },
+  { cle: 'sensibilisation', label: 'Une action de sensibilisation', pages: "L'AMAAFE" },
+  { cle: 'equipeAmaafe', label: "L'équipe AMAAFE", pages: "L'AMAAFE" },
+  { cle: 'planMedersa', label: "Plan ou vue d'artiste de la future médersa", pages: 'Accueil · Notre projet' },
+];
+
 /** Liste des PDF publiés dans public/documents/. */
 export function lireDocuments() {
   return readdirSync(new URL('../../public/documents/', import.meta.url)).filter((f) => f.endsWith('.pdf'));
@@ -44,6 +62,7 @@ export function fmtTaille(octets) {
 export function listeACompleter(config, nbFichesEnfants) {
   const p = config.paiement;
   const statutsPresents = lireDocuments().some((f) => f.toLowerCase().includes('statut'));
+  const photosManquantes = PHOTOS_SITE.filter((ph) => !(config.photos ?? {})[ph.cle]).length;
   return [
     !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfig },
     !p.paypal.lien && { titre: 'Lien PayPal', detail: 'Lien paypal.me ou e-mail du compte de l’association.', sev: 'r', href: versConfig },
@@ -53,6 +72,7 @@ export function listeACompleter(config, nbFichesEnfants) {
     !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfig },
     config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la jauge d’avancement de la collecte.', sev: 'o', href: versConfig },
     !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Déposer le PDF dans public/documents sur GitHub.', sev: 'o', href: versDocumentsGitHub },
+    photosManquantes > 0 && { titre: 'Photos du site', detail: `${photosManquantes} emplacement${photosManquantes > 1 ? 's' : ''} hachuré${photosManquantes > 1 ? 's' : ''} en attente d’une photo.`, sev: 'o', href: '/admin/tableau-de-bord/medias/' },
     nbFichesEnfants === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },
     !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfig },
   ].filter(Boolean);

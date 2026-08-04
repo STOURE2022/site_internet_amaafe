@@ -1,0 +1,16 @@
+---
+/** Emplacement photo du site. Si l'admin a chargé une image pour cet
+    emplacement (config.photos, via l'éditeur ou le tableau de bord),
+    elle s'affiche ; sinon le bloc hachuré « Photo — … » reste en place. */
+import config from '../../content/config.json';
+
+const { cle, texte, classe = '', style } = Astro.props;
+const src = (config.photos ?? {})[cle] ?? null;
+---
+{src ? (
+  <figure class:list={['photo', 'photo--img', classe]} style={style}>
+    <img src={src} alt={texte} loading="lazy" />
+  </figure>
+) : (
+  <div class:list={['photo', classe]} style={style}>Photo — {texte}</div>
+)}

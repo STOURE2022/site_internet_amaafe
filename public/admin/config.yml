@@ -178,6 +178,24 @@ collections:
               - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false,
                   hint: "La jauge d'avancement se calcule automatiquement à partir de ce montant." }
               - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, required: false }
+          - name: photos
+            label: "Photos du site"
+            widget: object
+            fields:
+              - { name: _aide, label: "Aide", widget: string, required: false }
+              - { name: familleCentre, label: "Accueil — les élèves du centre (photo de famille)", widget: image, required: false }
+              - { name: elevesUniforme, label: "Accueil & Le Centre — les élèves en uniforme", widget: image, required: false }
+              - { name: unCours, label: "Accueil & Le Centre — un cours au centre", widget: image, required: false }
+              - { name: sortieEducative, label: "Accueil, Le Centre & L'AMAAFE — une sortie éducative", widget: image, required: false }
+              - { name: courCentre, label: "Le Centre — la cour du centre", widget: image, required: false }
+              - { name: hangar, label: "Accueil, Le Centre & Notre projet — les cours sous le hangar en tôle", widget: image, required: false }
+              - { name: remiseFournitures, label: "Le Centre — remise des fournitures", widget: image, required: false }
+              - { name: recitation, label: "Le Centre — la récitation", widget: image, required: false }
+              - { name: uniformes, label: "Le Centre — les uniformes", widget: image, required: false }
+              - { name: detente, label: "Le Centre — moment de détente", widget: image, required: false }
+              - { name: sensibilisation, label: "L'AMAAFE — une action de sensibilisation", widget: image, required: false }
+              - { name: equipeAmaafe, label: "L'AMAAFE — l'équipe", widget: image, required: false }
+              - { name: planMedersa, label: "Accueil & Notre projet — plan ou vue d'artiste de la médersa", widget: image, required: false }
           - name: paiement
             label: "Coordonnées de paiement"
             widget: object

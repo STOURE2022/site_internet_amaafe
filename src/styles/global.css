@@ -88,6 +88,8 @@ p{margin:0}
   color:rgba(255,255,255,.62);font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase}
 .photo--s{background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 1px,transparent 1px 10px),var(--banco);color:rgba(28,20,8,.65)}
 .photo--p{background:repeating-linear-gradient(135deg,rgba(15,74,47,.07) 0 1px,transparent 1px 10px),var(--vert-pale);color:rgba(15,74,47,.62)}
+.photo--img{padding:0;margin:0}
+.photo--img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 
 /* ---- logos ---- */
 .mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;

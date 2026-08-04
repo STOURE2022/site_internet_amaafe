@@ -88,6 +88,22 @@
     "partFonctionnementCouturePct": 30,
     "partActionsPct": 70
   },
+  "photos": {
+    "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
+    "familleCentre": null,
+    "elevesUniforme": null,
+    "unCours": null,
+    "sortieEducative": null,
+    "courCentre": null,
+    "hangar": null,
+    "remiseFournitures": null,
+    "recitation": null,
+    "uniformes": null,
+    "detente": null,
+    "sensibilisation": null,
+    "equipeAmaafe": null,
+    "planMedersa": null
+  },
   "paiement": {
     "orangeMoney": {
       "numero": "+223 76 33 79 15",

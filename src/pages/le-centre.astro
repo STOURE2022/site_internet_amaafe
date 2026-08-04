@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Tbd from '../components/Tbd.astro';
+import Photo from '../components/Photo.astro';
 import config from '../../content/config.json';
 ---
 <Base
@@ -18,9 +19,9 @@ import config from '../../content/config.json';
   <section class="sec" style="padding-top:0">
     <div class="wrap about">
       <div class="gal rv">
-        <div class="photo photo--p">Photo — les élèves en uniforme</div>
-        <div class="photo photo--s">Photo — un cours au centre</div>
-        <div class="photo photo--p">Photo — la cour du centre</div>
+        <Photo cle="elevesUniforme" texte="les élèves en uniforme" classe="photo--p" />
+        <Photo cle="unCours" texte="un cours au centre" classe="photo--s" />
+        <Photo cle="courCentre" texte="la cour du centre" classe="photo--p" />
       </div>
       <div class="rv">
         <span class="eyebrow eyebrow--d">Notre histoire</span>
@@ -84,12 +85,12 @@ import config from '../../content/config.json';
         <p class="lead" style="max-width:40ch">Les photos seront publiées après recueil des autorisations parentales, sans jamais permettre d'identifier un enfant sans accord écrit.</p>
       </div>
       <div class="g3 rv">
-        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — un cours sous le hangar</div>
-        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — remise des fournitures</div>
-        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — sortie éducative</div>
-        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — la récitation</div>
-        <div class="photo photo--p" style="aspect-ratio:4/3">Photo — les uniformes</div>
-        <div class="photo photo--s" style="aspect-ratio:4/3">Photo — moment de détente</div>
+        <Photo cle="hangar" texte="un cours sous le hangar" classe="photo--p" style="aspect-ratio:4/3" />
+        <Photo cle="remiseFournitures" texte="remise des fournitures" classe="photo--s" style="aspect-ratio:4/3" />
+        <Photo cle="sortieEducative" texte="sortie éducative" classe="photo--p" style="aspect-ratio:4/3" />
+        <Photo cle="recitation" texte="la récitation" classe="photo--s" style="aspect-ratio:4/3" />
+        <Photo cle="uniformes" texte="les uniformes" classe="photo--p" style="aspect-ratio:4/3" />
+        <Photo cle="detente" texte="moment de détente" classe="photo--s" style="aspect-ratio:4/3" />
       </div>
     </div>
   </section>

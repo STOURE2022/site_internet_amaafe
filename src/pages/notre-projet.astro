@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Tbd from '../components/Tbd.astro';
+import Photo from '../components/Photo.astro';
 import config from '../../content/config.json';
 import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
 
@@ -36,7 +37,7 @@ const pctCollecte = pourcentageCollecte(config.medersa);
           <li><i></i><span>Manque d'espace et de mobilier adapté</span></li>
         </ul>
       </div>
-      <div class="photo rv">Photo — les cours sous le hangar en tôle</div>
+      <Photo cle="hangar" texte="les cours sous le hangar en tôle" classe="rv" />
     </div>
   </section>
 
@@ -67,7 +68,7 @@ const pctCollecte = pourcentageCollecte(config.medersa);
           <p class="lead" style="font-size:15px">Ces espaces de formation prépareront la dernière étape du parcours des élèves : l'apprentissage d'un métier à partir de {config.chiffres.suiviJusquaAge} ans.</p>
         </div>
         <div class="proj__side">
-          <div class="photo">Plan ou vue d'artiste de la future médersa</div>
+          <Photo cle="planMedersa" texte="plan ou vue d'artiste de la future médersa" />
           <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,.85)">« Chaque contribution, quelle qu'en soit l'importance, représente une pierre supplémentaire vers la réalisation de ce projet. »</p>
           <a class="btn btn--or btn--full" href="/faire-un-don/">Poser une pierre</a>
         </div>
