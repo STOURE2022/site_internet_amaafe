@@ -22,7 +22,7 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 - [ ] Numéro de téléphone **Wero** relié au compte bancaire de l'association + nom du titulaire (`paiement.wero`) — vérifier que Wero est activé sur ce compte dans l'application de la banque
 - [ ] Lien **PayPal** (paypal.me) ou adresse e-mail PayPal de l'association (`paiement.paypal.lien`) — à renseigner par l'admin ; d'ici là le canal affiche « à communiquer »
 - [ ] Vérifier que le **nom affiché à la validation** d'un envoi Orange Money / Wave est bien celui de l'association (un donateur doit pouvoir le reconnaître)
-- [ ] Confirmer que le numéro WhatsApp configuré (`whatsapp.numero`, actuellement le +223 76 33 79 15) est bien **relié à un compte WhatsApp actif et consulté** — c'est lui qui reçoit les déclarations de don et les demandes de parrainage
+- [ ] Confirmer que les **deux numéros WhatsApp** configurés sont reliés à des comptes **actifs et consultés** : `whatsapp.numeroMali` (+223 76 33 79 15 — déclarations Orange Money, Wave, virement Mali, et demandes de parrainage) et `whatsapp.numeroFrance` (+33 6 66 31 53 40 — déclarations Wero, PayPal, virement France)
 
 ## 3. Formulaires et canaux
 

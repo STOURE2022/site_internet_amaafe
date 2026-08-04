@@ -170,8 +170,9 @@
     ]
   },
   "whatsapp": {
-    "_aide": "Numéro qui reçoit les déclarations de don sur WhatsApp, au format international SANS le +, sans espaces. Vérifier que ce numéro est bien relié à un compte WhatsApp actif.",
-    "numero": "22376337915"
+    "_aide": "Numéros qui reçoivent les déclarations de don sur WhatsApp, au format international SANS le +, sans espaces. Mali : Orange Money, Wave, virement Mali. France : Wero, PayPal, virement France. Si l'un est vide, tout part vers l'autre. Vérifier que chaque numéro est relié à un compte WhatsApp actif et consulté.",
+    "numeroMali": "22376337915",
+    "numeroFrance": "33666315340"
   },
   "finances": {
     "detailDepensesFonctionnement": [

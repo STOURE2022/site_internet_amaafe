@@ -109,6 +109,9 @@ import { fmtNombre } from '../lib/format.js';
       <div class="input"><input id="d-date" type="date"></div>
 
       <a class="btn btn--full btn--lg wa" id="waLink" href="#declarer" style="margin-top:24px" rel="noopener">Déclarer mon don sur WhatsApp</a>
+      <div class="wadest wadest--ml" id="waDest" aria-live="polite">
+        <span aria-hidden="true">🇲🇱</span><p>Votre déclaration sera envoyée à <b>l'équipe du Mali</b>{config.whatsapp.numeroMali && <Fragment> (<span class="num">{config.contact.telMali}</span>)</Fragment>}, qui pointe les relevés Orange Money et Wave.</p>
+      </div>
       <p style="font-size:12.8px;color:var(--gris-2);text-align:center;margin-top:10px">Le message est pré-rempli avec votre montant et votre canal — vous n'avez plus qu'à l'envoyer.</p>
 
       {config.formulaires.declarationDonUrl ? (

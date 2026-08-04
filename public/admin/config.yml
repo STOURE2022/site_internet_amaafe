@@ -90,11 +90,12 @@ collections:
               - { name: adresse, label: "Adresse", widget: string }
               - { name: horairesVisite, label: "Horaires de visite", widget: string, required: false }
           - name: whatsapp
-            label: "WhatsApp"
+            label: "WhatsApp (déclarations de don)"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: numero, label: "Numéro WhatsApp (sans +, sans espaces)", widget: string }
+              - { name: numeroMali, label: "Numéro équipe Mali (sans +, sans espaces) — Orange Money, Wave, virement Mali", widget: string, required: false }
+              - { name: numeroFrance, label: "Numéro équipe France (sans +, sans espaces) — Wero, PayPal, virement France", widget: string, required: false }
           - name: chiffres
             label: "Chiffres clés"
             widget: object

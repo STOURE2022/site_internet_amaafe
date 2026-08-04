@@ -218,6 +218,15 @@ p{margin:0}
 .proj__side .photo{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 10px),rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
 
 /* ---- parrainage ---- */
+/* ---- destination de la déclaration WhatsApp (équipe Mali ou France) ---- */
+.wadest{display:flex;gap:12px;align-items:flex-start;border-radius:10px;padding:13px 16px;border:1.5px solid;margin-top:14px;transition:background .25s,border-color .25s}
+.wadest--ml{background:var(--vert-pale);border-color:#BFD6C6}
+.wadest--fr{background:var(--or-pale);border-color:#EAD9A8}
+.wadest span{font-size:20px;line-height:1.2}
+.wadest p{margin:0;font-size:13.5px;color:var(--gris)}
+.wadest b{color:var(--encre)}
+.wadest .num{font-family:var(--mono);font-size:13px}
+
 /* ---- carte « collecte médersa » (variante Planchette) ---- */
 .collecte{background:linear-gradient(155deg,#0D3A25,var(--nuit) 74%);border-radius:16px;padding:14px;box-shadow:0 44px 80px -48px rgba(10,27,18,.75)}
 .collecte__in{border:1px solid rgba(217,166,43,.42);border-radius:9px;padding:clamp(22px,3.4vw,34px);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,48px);align-items:center;color:#fff;position:relative;overflow:hidden}

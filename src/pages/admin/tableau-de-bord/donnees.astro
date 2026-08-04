@@ -24,7 +24,8 @@ const groupes = [
   { titre: 'Contact', lignes: [
     ['E-mail', c.contact.email], ['Téléphone Mali', c.contact.telMali], ['Téléphone France', c.contact.telFrance],
     ['Adresse', c.contact.adresse], ['Horaires de visite', c.contact.horairesVisite],
-    ['WhatsApp (déclarations)', c.whatsapp.numero],
+    ['WhatsApp déclarations (Mali)', c.whatsapp.numeroMali],
+    ['WhatsApp déclarations (France)', c.whatsapp.numeroFrance],
   ]},
   { titre: 'Parrainage', lignes: [
     ['Montant mensuel (Afrique)', c.parrainage.montantMensuelFCFA != null ? `${fmtNombre(c.parrainage.montantMensuelFCFA)} FCFA` : null],

@@ -4,7 +4,7 @@ import Tbd from '../components/Tbd.astro';
 import config from '../../content/config.json';
 
 const messageWa = encodeURIComponent('Bonjour, je vous contacte depuis le site du Centre Coranique Rahma.');
-const lienWa = `https://wa.me/${config.whatsapp.numero}?text=${messageWa}`;
+const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}?text=${messageWa}`;
 ---
 <Base
   titre="Contact — Centre Coranique Rahma, Yirimadio (Bamako)"

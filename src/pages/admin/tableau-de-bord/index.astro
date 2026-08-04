@@ -24,7 +24,7 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   : null;
 const pctCollecte = pourcentageCollecte(config.medersa);
 const pctCollecteFr = String(pctCollecte).replace('.', ',');
-const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
+const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}`;
 ---
 <Admin titre="Tableau de bord" sousTitre={`La situation du Centre Rahma et de l'AMAAFE, générée le ${genereLe}.`} actif="accueil">
   <Fragment slot="actions">
@@ -83,7 +83,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
           <a href={lienWhatsApp} rel="noopener">Ouvrir WhatsApp ↗</a>
         </div>
         <div class="wa">
-          <p>Les donateurs déclarent leurs dons sur le WhatsApp du centre (<b>{config.contact.telMali}</b>), avec un message pré-rempli : montant, canal, numéro émetteur, nom et date. <b>Pointez chaque déclaration avec le relevé de l'opérateur</b> (Orange Money, Wave, banque), puis remerciez le donateur — c'est la promesse faite sur le site.</p>
+          <p>Chaque déclaration part vers l'équipe qui détient les relevés du canal : <b>Mali</b> ({config.contact.telMali}) pour Orange Money, Wave et le virement Mali ; <b>France</b> ({config.contact.telFrance}) pour Wero, PayPal et le virement France. Message pré-rempli : montant, canal, numéro émetteur, nom, date. <b>Pointez chaque déclaration avec le relevé correspondant</b>, puis remerciez le donateur — c'est la promesse faite sur le site.</p>
         </div>
       </section>
 

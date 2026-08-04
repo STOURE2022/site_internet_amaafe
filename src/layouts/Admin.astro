@@ -14,7 +14,7 @@ const enfantsPub = await getCollection('enfants', ({ data }) => data.publie);
 const documents = lireDocuments();
 const medias = lireMedias();
 const manquesPaiement = listeACompleter(config, enfantsPub.length).filter((t) => t.sev === 'r').length;
-const lienWhatsApp = `https://wa.me/${config.whatsapp.numero}`;
+const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}`;
 ---
 <html lang="fr">
 <head>

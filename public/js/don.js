@@ -26,6 +26,18 @@
     wero: 'Wero (Europe)',
     paypal: 'PayPal'
   };
+  /* Équipe qui reçoit la déclaration WhatsApp : celle qui détient les
+     relevés du canal. Si son numéro manque, repli vers l'autre équipe. */
+  var EQUIPE_CANAL = { om: 'ml', wave: 'ml', 'vir-ml': 'ml', 'vir-fr': 'fr', wero: 'fr', paypal: 'fr' };
+
+  function destWhatsApp() {
+    var w = CFG.whatsapp || {};
+    var demandeFr = EQUIPE_CANAL[pay] === 'fr';
+    var equipe = demandeFr ? (w.fr ? 'fr' : 'ml') : (w.ml ? 'ml' : 'fr');
+    var numero = equipe === 'fr' ? w.fr : w.ml;
+    if (!numero) return null;
+    return { numero: numero, equipe: equipe, affiche: equipe === 'fr' ? w.frAffiche : w.mlAffiche };
+  }
 
   /* ---- état, initialisé depuis l'URL si on arrive de l'accueil ---- */
   var params = new URLSearchParams(location.search);
@@ -151,10 +163,27 @@
     if (versDecl) {
       versDecl.href = '/faire-un-don/?freq=' + freq + '&devise=' + cur + '&montant=' + amount + '&canal=' + pay + '#declarer';
     }
+    var dest = destWhatsApp();
     if (waLink) {
-      waLink.href = CFG.whatsapp
-        ? 'https://wa.me/' + CFG.whatsapp + '?text=' + encodeURIComponent(messageWhatsApp())
+      waLink.href = dest
+        ? 'https://wa.me/' + dest.numero + '?text=' + encodeURIComponent(messageWhatsApp())
         : '#declarer';
+    }
+    var waDest = $('waDest');
+    if (waDest) {
+      if (dest) {
+        waDest.hidden = false;
+        waDest.className = 'wadest wadest--' + dest.equipe;
+        waDest.innerHTML = dest.equipe === 'fr'
+          ? '<span aria-hidden="true">🇫🇷</span><p>Votre déclaration sera envoyée à <b>l’équipe de France</b>' +
+            (dest.affiche ? ' (<span class="num">' + esc(dest.affiche) + '</span>)' : '') +
+            ', qui pointe les relevés bancaires, Wero et PayPal.</p>'
+          : '<span aria-hidden="true">🇲🇱</span><p>Votre déclaration sera envoyée à <b>l’équipe du Mali</b>' +
+            (dest.affiche ? ' (<span class="num">' + esc(dest.affiche) + '</span>)' : '') +
+            ', qui pointe les relevés Orange Money et Wave.</p>';
+      } else {
+        waDest.hidden = true;
+      }
     }
   }
 

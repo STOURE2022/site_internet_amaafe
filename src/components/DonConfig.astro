@@ -3,9 +3,21 @@
     À inclure une fois sur chaque page qui contient le module de don. */
 import config from '../../content/config.json';
 
+/* Affichage lisible des numéros WhatsApp : on réutilise le format des
+   numéros de contact quand ils correspondent, sinon « + » + chiffres. */
+const affiche = (numero, telContact) => {
+  if (!numero) return null;
+  return telContact && telContact.replace(/[^0-9]/g, '').endsWith(numero) ? telContact : `+${numero}`;
+};
+
 const donCfg = {
   paiement: config.paiement,
-  whatsapp: config.whatsapp.numero,
+  whatsapp: {
+    ml: config.whatsapp.numeroMali,
+    fr: config.whatsapp.numeroFrance,
+    mlAffiche: affiche(config.whatsapp.numeroMali, config.contact.telMali),
+    frAffiche: affiche(config.whatsapp.numeroFrance, config.contact.telFrance),
+  },
   coutMensuelEnfantFCFA: config.chiffres.coutMensuelParEnfantFCFA,
 };
 ---
