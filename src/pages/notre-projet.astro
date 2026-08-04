@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Tbd from '../components/Tbd.astro';
 import Photo from '../components/Photo.astro';
 import config from '../../content/config.json';
 import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
@@ -10,6 +9,15 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
   : null;
 const pctCollecte = pourcentageCollecte(config.medersa);
+const pctCollecteFr = String(pctCollecte).replace('.', ',');
+const collecteFCFA = config.medersa.montantCollecteFCFA;
+const objectifFCFA = config.medersa.budgetTotalEUR != null ? Math.round(config.medersa.budgetTotalEUR * 655.957) : null;
+const resteFCFA = collecteFCFA != null && objectifFCFA != null ? Math.max(0, objectifFCFA - collecteFCFA) : null;
+const resteAffiche = resteFCFA == null
+  ? null
+  : resteFCFA >= 1e6
+    ? `${(resteFCFA / 1e6).toFixed(1).replace('.', ',')} millions FCFA`
+    : `${fmtNombre(resteFCFA)} FCFA`;
 ---
 <Base
   titre="Notre projet — Un terrain, puis une médersa | Centre Coranique Rahma"
@@ -20,6 +28,40 @@ const pctCollecte = pourcentageCollecte(config.medersa);
     <span class="eyebrow eyebrow--d">Notre projet prioritaire</span>
     <h1>Sortir du hangar. Construire la médersa.</h1>
     <p class="lead">Aujourd'hui, les cours se tiennent sous un hangar en tôle, sur une parcelle prêtée par la mosquée du quartier. Notre priorité absolue : acquérir un terrain et y bâtir un vrai centre.</p>
+  </section>
+
+  <!-- ===== AVANCEMENT DE LA COLLECTE ===== -->
+  <section class="sec" style="padding-top:8px;padding-bottom:clamp(36px,5vw,56px)">
+    <div class="wrap">
+      <div class="collecte rv">
+        <div class="collecte__in">
+          <div>
+            <span class="collecte__eb">Collecte — terrain de la médersa</span>
+            {collecteFCFA != null ? (
+              <Fragment>
+                <div class="collecte__m"><b>{fmtNombre(collecteFCFA)} FCFA</b> collectés</div>
+                <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA)</p>
+                <div class="collecte__jt" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}><i data-fill={pctCollecte}></i></div>
+                <div class="collecte__jf"><span>jauge actualisée par le bureau</span><b>{pctCollecteFr} %</b></div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div class="collecte__m">Collecte en <b>préparation</b></div>
+                <p class="collecte__obj">Objectif : <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA). Le montant déjà collecté sera publié ici dès les premiers dons.</p>
+              </Fragment>
+            )}
+          </div>
+          <div class="collecte__cta">
+            {resteAffiche && resteFCFA > 0 && (
+              <div class="collecte__reste"><b>{resteAffiche}</b><span>restent à réunir pour atteindre l'objectif</span></div>
+            )}
+            <a class="btn btn--or btn--lg" style="justify-content:center" href="/faire-un-don/">Poser une pierre&nbsp;→</a>
+            <p class="collecte__sq">Chaque contribution est une <strong>Sadaqa Jâriya</strong> — une aumône continue.</p>
+          </div>
+        </div>
+      </div>
+      <p class="rv" style="font-size:13.5px;color:var(--gris-2);margin-top:14px">L'avancement concret (terrain identifié, achat, début des travaux) sera relaté dans les <a href="/actualites/" style="color:var(--vert);text-decoration:underline">actualités du centre</a>.</p>
+    </div>
   </section>
 
   <!-- ===== LA SITUATION ACTUELLE ===== -->
@@ -72,29 +114,6 @@ const pctCollecte = pourcentageCollecte(config.medersa);
           <p style="font-size:15px;line-height:1.65;color:rgba(255,255,255,.85)">« Chaque contribution, quelle qu'en soit l'importance, représente une pierre supplémentaire vers la réalisation de ce projet. »</p>
           <a class="btn btn--or btn--full" href="/faire-un-don/">Poser une pierre</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== AVANCEMENT ===== -->
-  <section class="sec trust">
-    <div class="wrap">
-      <div class="head rv">
-        <div>
-          <span class="eyebrow eyebrow--d">Avancement</span>
-          <h2>Où en sommes-nous ?</h2>
-        </div>
-      </div>
-      <div class="card entity rv" style="max-width:720px">
-        <div class="entity__t">Collecte pour le terrain et la médersa</div>
-        <div class="bar"><i data-fill={pctCollecte}></i></div>
-        <div class="sums">
-          <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
-          <span>sur un objectif de {config.medersa.budgetTotalEUR != null
-            ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} € (≈ {objectifFCFAMillions} millions de FCFA)</strong>
-            : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
-        </div>
-        <p style="font-size:13.5px;color:var(--gris);margin-top:16px">Le montant déjà collecté sera publié ici et actualisé régulièrement. L'avancement (terrain identifié, achat, début des travaux) sera relaté dans les <a href="/actualites/" style="color:var(--vert);text-decoration:underline">actualités du centre</a>.</p>
       </div>
     </div>
   </section>

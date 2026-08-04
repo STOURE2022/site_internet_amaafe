@@ -218,6 +218,28 @@ p{margin:0}
 .proj__side .photo{aspect-ratio:4/3;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 10px),rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
 
 /* ---- parrainage ---- */
+/* ---- carte « collecte médersa » (variante Planchette) ---- */
+.collecte{background:linear-gradient(155deg,#0D3A25,var(--nuit) 74%);border-radius:16px;padding:14px;box-shadow:0 44px 80px -48px rgba(10,27,18,.75)}
+.collecte__in{border:1px solid rgba(217,166,43,.42);border-radius:9px;padding:clamp(22px,3.4vw,34px);display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,48px);align-items:center;color:#fff;position:relative;overflow:hidden}
+.collecte__in::before{content:"رحمة";position:absolute;right:-14px;bottom:-42px;font-family:var(--arabe);font-size:150px;color:rgba(217,166,43,.07);line-height:1;pointer-events:none}
+.collecte__eb{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#F3C75C}
+.collecte__m{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4vw,48px);line-height:1.04;color:#fff;margin-top:12px;letter-spacing:-.02em}
+.collecte__m b{color:#F3C75C;font-weight:600}
+.collecte__obj{font-size:14.5px;color:rgba(255,255,255,.72);margin-top:9px}
+.collecte__obj strong{color:#fff}
+.collecte__jt{position:relative;height:14px;border-radius:99px;background:rgba(233,239,233,.14);overflow:hidden;margin-top:22px}
+.collecte__jt i{position:absolute;inset:0 auto 0 0;border-radius:99px;background:linear-gradient(90deg,#B98C1E,var(--or) 55%,#F3C75C);box-shadow:0 0 18px rgba(217,166,43,.5);transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.collecte__jt i::after{content:"";position:absolute;top:0;right:0;bottom:0;width:38px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35));border-radius:99px}
+.collecte__jf{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:rgba(255,255,255,.62);margin-top:10px}
+.collecte__jf b{color:#F3C75C;font-size:14px}
+.collecte__cta{display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
+.collecte__reste{background:rgba(233,239,233,.08);border:1px solid rgba(233,239,233,.16);border-radius:10px;padding:14px 18px}
+.collecte__reste b{display:block;font-family:var(--serif);font-size:24px;color:#fff;letter-spacing:-.01em}
+.collecte__reste span{font-size:13px;color:rgba(255,255,255,.65)}
+.collecte__sq{font-size:12.5px;color:rgba(255,255,255,.6);text-align:center;line-height:1.55}
+.collecte__sq strong{color:#F3C75C;font-weight:700}
+@media(max-width:840px){.collecte__in{grid-template-columns:1fr}}
+
 /* ---- cartes « enfants à parrainer » (variante Portrait) ----
    L'élévation au survol utilise `translate` (et non `transform`) pour ne
    pas entrer en conflit avec l'animation d'apparition .rv. */

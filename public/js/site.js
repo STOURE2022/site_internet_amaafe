@@ -42,9 +42,9 @@
         bio.unobserve(e.target);
       });
     }, { threshold: 0.4 });
-    document.querySelectorAll('.bar i').forEach(function (el) { bio.observe(el); });
+    document.querySelectorAll('.bar i, .collecte__jt i').forEach(function (el) { bio.observe(el); });
   } else {
     document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('is-in'); });
-    document.querySelectorAll('.bar i').forEach(function (el) { el.style.width = (el.dataset.fill || 0) + '%'; });
+    document.querySelectorAll('.bar i, .collecte__jt i').forEach(function (el) { el.style.width = (el.dataset.fill || 0) + '%'; });
   }
 })();
