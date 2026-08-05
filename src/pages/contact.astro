@@ -64,10 +64,15 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.nu
                 <div class="bmail__msg"><b>Votre message</b><pre id="c-apercu"></pre></div>
                 <div class="bmail__act">
                   <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
-                  <a class="btn btn--or" id="c-mailto" href="#">Ouvrir mon application e-mail</a>
+                  <a class="btn btn--or" id="c-gmail" href="#" target="_blank" rel="noopener">Ouvrir dans Gmail</a>
+                </div>
+                <div class="bmail__autres">Ou ouvrir dans :
+                  <a id="c-outlook" href="#" target="_blank" rel="noopener">Outlook</a> ·
+                  <a id="c-yahoo" href="#" target="_blank" rel="noopener">Yahoo</a> ·
+                  <a id="c-mailto" href="#">l'application de l'appareil</a>
                 </div>
               </div>
-              <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur (Gmail, Yahoo…).</p>
+              <p class="bmail__aide">Gmail, Outlook et Yahoo s'ouvrent dans le navigateur, avec le message déjà écrit — connectez-vous à votre boîte si nécessaire.</p>
               <p style="margin-top:10px"><a href="#" id="c-retour" style="font-size:13px;font-weight:700;color:var(--vert-2)">← Modifier mon message</a></p>
             </div>
           </Fragment>
@@ -93,8 +98,10 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.nu
           var sujet = 'Message depuis le site — ' + nom;
           var corps = msg + '\n\n— ' + nom + ' (' + mail + ')';
           document.getElementById('c-apercu').textContent = 'Objet : ' + sujet + '\n\n' + corps;
-          document.getElementById('c-mailto').href =
-            'mailto:' + email + '?subject=' + encodeURIComponent(sujet) + '&body=' + encodeURIComponent(corps);
+          document.getElementById('c-gmail').href = window.lienEmailRahma('gmail', email, sujet, corps);
+          document.getElementById('c-outlook').href = window.lienEmailRahma('outlook', email, sujet, corps);
+          document.getElementById('c-yahoo').href = window.lienEmailRahma('yahoo', email, sujet, corps);
+          document.getElementById('c-mailto').href = window.lienEmailRahma('appareil', email, sujet, corps);
           form.hidden = true;
           suite.hidden = false;
         });

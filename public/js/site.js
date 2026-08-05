@@ -1,6 +1,19 @@
 /* Comportements communs à toutes les pages : navigation collante,
    menu mobile, révélation au défilement, barres de progression,
    boutons « Copier » des blocs e-mail. */
+
+/* Lien de composition d'un e-mail selon la messagerie : les webmails
+   (Gmail, Outlook, Yahoo) s'ouvrent dans le navigateur ; « appareil »
+   utilise l'application configurée localement (mailto). Utilisé par les
+   blocs e-mail dynamiques (contact, déclaration de don, parrainage). */
+window.lienEmailRahma = function (service, dest, sujet, corps) {
+  var s = encodeURIComponent(sujet), c = encodeURIComponent(corps), d = encodeURIComponent(dest);
+  if (service === 'gmail') return 'https://mail.google.com/mail/?view=cm&fs=1&to=' + d + '&su=' + s + '&body=' + c;
+  if (service === 'outlook') return 'https://outlook.live.com/mail/0/deeplink/compose?to=' + d + '&subject=' + s + '&body=' + c;
+  if (service === 'yahoo') return 'https://compose.mail.yahoo.com/?to=' + d + '&subject=' + s + '&body=' + c;
+  return 'mailto:' + dest + '?subject=' + s + '&body=' + c;
+};
+
 (function () {
   document.documentElement.classList.remove('no-js');
 

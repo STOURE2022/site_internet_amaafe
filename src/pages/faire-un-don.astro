@@ -132,10 +132,15 @@ import { fmtNombre } from '../lib/format.js';
 Bonjour, je déclare un don au Centre Coranique Rahma.</pre></div>
             <div class="bmail__act">
               <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
-              <a class="btn btn--or" id="emailDeclLien" href={`mailto:${config.contact.email}?subject=${encodeURIComponent('Déclaration de don')}`}>Ouvrir mon application e-mail</a>
+              <a class="btn btn--or" id="emailDeclGmail" href="#" target="_blank" rel="noopener">Ouvrir dans Gmail</a>
+            </div>
+            <div class="bmail__autres">Ou ouvrir dans :
+              <a id="emailDeclOutlook" href="#" target="_blank" rel="noopener">Outlook</a> ·
+              <a id="emailDeclYahoo" href="#" target="_blank" rel="noopener">Yahoo</a> ·
+              <a id="emailDeclLien" href={`mailto:${config.contact.email}?subject=${encodeURIComponent('Déclaration de don')}`}>l'application de l'appareil</a>
             </div>
           </div>
-          <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur.</p>
+          <p class="bmail__aide">Gmail, Outlook et Yahoo s'ouvrent dans le navigateur, avec la déclaration déjà écrite — connectez-vous à votre boîte si nécessaire.</p>
         </div>
       )}
     </section>

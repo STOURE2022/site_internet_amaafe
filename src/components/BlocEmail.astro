@@ -8,7 +8,13 @@ import config from '../../content/config.json';
 
 const { objet, message, libelle = 'Message à envoyer', aide = true } = Astro.props;
 const email = config.contact.email;
-const mailto = `mailto:${email}?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(message)}`;
+const s = encodeURIComponent(objet);
+const c = encodeURIComponent(message);
+const d = encodeURIComponent(email);
+const lienGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${d}&su=${s}&body=${c}`;
+const lienOutlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${d}&subject=${s}&body=${c}`;
+const lienYahoo = `https://compose.mail.yahoo.com/?to=${d}&subject=${s}&body=${c}`;
+const mailto = `mailto:${email}?subject=${s}&body=${c}`;
 ---
 <div class="bmail">
   <div class="bmail__adr">
@@ -23,9 +29,14 @@ const mailto = `mailto:${email}?subject=${encodeURIComponent(objet)}&body=${enco
   </div>
   <div class="bmail__act">
     <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
-    <a class="btn btn--or" href={mailto}>Ouvrir mon application e-mail</a>
+    <a class="btn btn--or" href={lienGmail} target="_blank" rel="noopener">Ouvrir dans Gmail</a>
+  </div>
+  <div class="bmail__autres">Ou ouvrir dans :
+    <a href={lienOutlook} target="_blank" rel="noopener">Outlook</a> ·
+    <a href={lienYahoo} target="_blank" rel="noopener">Yahoo</a> ·
+    <a href={mailto}>l'application de l'appareil</a>
   </div>
 </div>
 {aide && (
-  <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur (Gmail, Yahoo…).</p>
+  <p class="bmail__aide">Gmail, Outlook et Yahoo s'ouvrent dans le navigateur, avec le message déjà écrit — connectez-vous à votre boîte si nécessaire.</p>
 )}

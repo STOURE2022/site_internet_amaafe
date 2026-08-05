@@ -173,12 +173,14 @@
        message WhatsApp, mis à jour à chaque changement du parcours. */
     var emailDecl = $('emailDecl');
     if (emailDecl) {
-      emailDecl.textContent = 'Objet : Déclaration de don\n\n' + messageWhatsApp();
-      var emailDeclLien = $('emailDeclLien');
-      if (emailDeclLien && CFG.email) {
-        emailDeclLien.href = 'mailto:' + CFG.email +
-          '?subject=' + encodeURIComponent('Déclaration de don') +
-          '&body=' + encodeURIComponent(messageWhatsApp());
+      var msgDecl = messageWhatsApp();
+      emailDecl.textContent = 'Objet : Déclaration de don\n\n' + msgDecl;
+      if (CFG.email && window.lienEmailRahma) {
+        [['emailDeclGmail', 'gmail'], ['emailDeclOutlook', 'outlook'], ['emailDeclYahoo', 'yahoo'], ['emailDeclLien', 'appareil']]
+          .forEach(function (paire) {
+            var lien = $(paire[0]);
+            if (lien) lien.href = window.lienEmailRahma(paire[1], CFG.email, 'Déclaration de don', msgDecl);
+          });
       }
     }
     var waDest = $('waDest');

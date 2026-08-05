@@ -60,8 +60,12 @@ const telAffiche = chiffres(config.contact.telMali) === numeroWa ? config.contac
           <span><strong>Objet :</strong> <span id="pv-objet"></span></span>
           <span><strong>Message :</strong> <span id="pv-msg-mail"></span></span>
         </div>
-        <a class="pv__btn pv__btn--mail" id="pv-lien-mail" href="#">Écrire l'e-mail (pré-rempli) <span aria-hidden="true">→</span></a>
-        <p class="pv__note">Le bouton ouvre votre application e-mail avec tout déjà écrit — ou copiez l'adresse ci-dessus.</p>
+        <a class="pv__btn pv__btn--mail" id="pv-lien-mail" href="#" target="_blank" rel="noopener">Ouvrir dans Gmail <span aria-hidden="true">→</span></a>
+        <p class="pv__note">Ou ouvrir dans :
+          <a id="pv-lien-outlook" href="#" target="_blank" rel="noopener" style="color:var(--vert-2);font-weight:700">Outlook</a> ·
+          <a id="pv-lien-yahoo" href="#" target="_blank" rel="noopener" style="color:var(--vert-2);font-weight:700">Yahoo</a> ·
+          <a id="pv-lien-appareil" href="#" style="color:var(--vert-2);font-weight:700">l'application de l'appareil</a>
+        </p>
       </div>
     </div>
   </div>
@@ -92,7 +96,10 @@ const telAffiche = chiffres(config.contact.telMali) === numeroWa ? config.contac
     var objet = nom ? 'Parrainage de ' + nom : 'Parrainage d’un enfant';
     document.getElementById('pv-objet').textContent = objet;
     document.getElementById('pv-lien-wa').href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(msg);
-    document.getElementById('pv-lien-mail').href = 'mailto:' + email + '?subject=' + encodeURIComponent(objet) + '&body=' + encodeURIComponent(msg);
+    document.getElementById('pv-lien-mail').href = window.lienEmailRahma('gmail', email, objet, msg);
+    document.getElementById('pv-lien-outlook').href = window.lienEmailRahma('outlook', email, objet, msg);
+    document.getElementById('pv-lien-yahoo').href = window.lienEmailRahma('yahoo', email, objet, msg);
+    document.getElementById('pv-lien-appareil').href = window.lienEmailRahma('appareil', email, objet, msg);
     montre(e1);
     pv.hidden = false;
     document.getElementById('pv-x').focus();
