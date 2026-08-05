@@ -1,0 +1,116 @@
+---
+/** Fenêtre « Parrainer » : au clic sur un bouton portant [data-parrainer],
+    propose WhatsApp ou e-mail avec un message pré-rédigé, personnalisé
+    avec le nom et les informations de l'enfant (data-nom / data-infos).
+    À inclure une fois sur chaque page qui contient de tels boutons.
+    Sans JavaScript, les boutons restent des liens vers la page Parrainage. */
+import config from '../../content/config.json';
+
+const numeroWa = config.whatsapp.numeroMali || config.whatsapp.numeroFrance;
+const telAffiche = config.contact.telMali;
+---
+<div class="pv" id="pv" role="dialog" aria-modal="true" aria-labelledby="pv-titre" hidden
+     data-wa={numeroWa} data-email={config.contact.email}>
+  <div class="pv__dial">
+    <div class="pv__h">
+      <div>
+        <h2 id="pv-titre">Parrainer un enfant</h2>
+        <p>Choisissez comment contacter l'équipe — elle fait la mise en relation et répond à vos questions.</p>
+      </div>
+      <button type="button" class="pv__x" id="pv-x" aria-label="Fermer">✕</button>
+    </div>
+    <div class="pv__b">
+
+      <div class="pv__choix" id="pv-e1">
+        <button type="button" class="pv__cx" id="pv-vers-wa">
+          <span class="pv__i pv__i--wa" aria-hidden="true">💬</span>
+          <span><b>Par WhatsApp</b><span>Réponse rapide — message déjà rédigé, vous n'avez qu'à l'envoyer.</span></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button type="button" class="pv__cx" id="pv-vers-mail">
+          <span class="pv__i pv__i--mail" aria-hidden="true">✉️</span>
+          <span><b>Par e-mail</b><span>Nous vous montrons l'adresse et préparons le message pour vous.</span></span>
+          <i aria-hidden="true">→</i>
+        </button>
+      </div>
+
+      <div class="pv__etape" id="pv-ewa" hidden>
+        <button type="button" class="pv__retour" data-pv-retour>← Changer de moyen</button>
+        <div class="pv__apercu">
+          <b>Votre message, déjà rédigé</b>
+          <span id="pv-msg-wa"></span>
+        </div>
+        <a class="pv__btn pv__btn--wa" id="pv-lien-wa" href="#" rel="noopener">Ouvrir WhatsApp <span aria-hidden="true">→</span></a>
+        <p class="pv__note">Votre message part vers l'équipe du centre ({telAffiche}).</p>
+      </div>
+
+      <div class="pv__etape" id="pv-email" hidden>
+        <button type="button" class="pv__retour" data-pv-retour>← Changer de moyen</button>
+        <div class="pv__courriel">
+          <span>{config.contact.email}</span>
+          <button type="button" class="pv__copier" id="pv-copie">Copier</button>
+        </div>
+        <div class="pv__apercu pv__apercu--mail">
+          <b>Objet et message préparés</b>
+          <span><strong>Objet :</strong> <span id="pv-objet"></span></span>
+          <span><strong>Message :</strong> <span id="pv-msg-mail"></span></span>
+        </div>
+        <a class="pv__btn pv__btn--mail" id="pv-lien-mail" href="#">Écrire l'e-mail (pré-rempli) <span aria-hidden="true">→</span></a>
+        <p class="pv__note">Le bouton ouvre votre application e-mail avec tout déjà écrit — ou copiez l'adresse ci-dessus.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var pv = document.getElementById('pv');
+  if (!pv) return;
+  var wa = pv.dataset.wa, email = pv.dataset.email;
+  var titre = document.getElementById('pv-titre');
+  var e1 = document.getElementById('pv-e1'), ewa = document.getElementById('pv-ewa'), em = document.getElementById('pv-email');
+  var nom = '', infos = '';
+
+  function message() {
+    return 'Bonjour, je souhaite parrainer ' +
+      (nom ? nom + (infos ? ' (' + infos + ')' : '') : 'un enfant') +
+      ' du Centre Coranique Rahma. Pouvez-vous me recontacter pour la mise en relation ?';
+  }
+  function montre(el) {
+    e1.hidden = el !== e1; ewa.hidden = el !== ewa; em.hidden = el !== em;
+  }
+  function ouvre(btn) {
+    nom = btn.dataset.nom || '';
+    infos = btn.dataset.infos || '';
+    titre.textContent = nom ? 'Parrainer ' + nom.split(' ')[0] : 'Parrainer un enfant';
+    var msg = message();
+    document.getElementById('pv-msg-wa').textContent = msg;
+    document.getElementById('pv-msg-mail').textContent = msg;
+    var objet = nom ? 'Parrainage de ' + nom : 'Parrainage d’un enfant';
+    document.getElementById('pv-objet').textContent = objet;
+    document.getElementById('pv-lien-wa').href = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(msg);
+    document.getElementById('pv-lien-mail').href = 'mailto:' + email + '?subject=' + encodeURIComponent(objet) + '&body=' + encodeURIComponent(msg);
+    montre(e1);
+    pv.hidden = false;
+    document.getElementById('pv-x').focus();
+  }
+  function ferme() { pv.hidden = true; }
+
+  document.querySelectorAll('[data-parrainer]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) { e.preventDefault(); ouvre(btn); });
+  });
+  document.getElementById('pv-x').addEventListener('click', ferme);
+  pv.addEventListener('click', function (e) { if (e.target === pv) ferme(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') ferme(); });
+  document.getElementById('pv-vers-wa').addEventListener('click', function () { montre(ewa); });
+  document.getElementById('pv-vers-mail').addEventListener('click', function () { montre(em); });
+  document.querySelectorAll('[data-pv-retour]').forEach(function (b) {
+    b.addEventListener('click', function () { montre(e1); });
+  });
+  document.getElementById('pv-copie').addEventListener('click', function () {
+    if (navigator.clipboard) navigator.clipboard.writeText(email);
+    var b = this; b.textContent = 'Copié ✓';
+    setTimeout(function () { b.textContent = 'Copier'; }, 2000);
+  });
+})();
+</script>

@@ -4,6 +4,7 @@ import config from '../../content/config.json';
 import { getCollection, render } from 'astro:content';
 import { fmtNombre } from '../lib/format.js';
 import CarteEnfant from '../components/CarteEnfant.astro';
+import ParrainerDialog from '../components/ParrainerDialog.astro';
 
 const enfants = await getCollection('enfants', ({ data }) => data.publie);
 const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'parrainage'))
@@ -122,4 +123,5 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.nu
     </div>
   </section>
 
+  <ParrainerDialog />
 </Base>

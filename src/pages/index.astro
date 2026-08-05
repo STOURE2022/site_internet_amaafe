@@ -8,6 +8,7 @@ import { getCollection } from 'astro:content';
 import { fmtDate, fmtNombre, pourcentageCollecte } from '../lib/format.js';
 import Photo from '../components/Photo.astro';
 import CarteEnfant from '../components/CarteEnfant.astro';
+import ParrainerDialog from '../components/ParrainerDialog.astro';
 
 const actualites = (await getCollection('actualites', ({ data }) => data.publie)).slice(0, 3);
 const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slice(0, 4);
@@ -252,4 +253,5 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
   </section>
 
   <DonConfig />
+  <ParrainerDialog />
 </Base>
