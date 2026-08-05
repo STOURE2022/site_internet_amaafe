@@ -255,7 +255,10 @@ p{margin:0}
 @media(max-width:560px){.gale{grid-template-columns:1fr}}
 
 /* ---- bulles réseaux sociaux ---- */
-.rs{display:flex;gap:10px;flex-wrap:wrap}
+.rs{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.rs__etiq{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#8A6D12;background:var(--or-pale);border:1px solid #EAD9A8;border-radius:99px;padding:6px 14px;margin-right:4px}
+.rs__flamme{width:16px;height:16px;fill:url(#feu-rs);animation:flamme-rs 1.6s ease-in-out infinite alternate;transform-origin:50% 90%}
+@keyframes flamme-rs{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.12) rotate(2.5deg)}}
 .rs a{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--ligne);background:var(--papier-2);display:grid;place-items:center;color:var(--vert);transition:background .18s,color .18s,border-color .18s,translate .18s}
 .rs a:hover{background:var(--vert);color:#fff;border-color:var(--vert);translate:0 -2px}
 .rs svg{width:20px;height:20px;fill:currentColor}
