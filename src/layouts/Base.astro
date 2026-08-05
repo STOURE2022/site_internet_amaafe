@@ -9,7 +9,7 @@ interface Props {
   masquerDock?: boolean;
 }
 
-const { titre, description, masquerDock = false } = Astro.props;
+const { titre, description, masquerDock = false, noindex = false } = Astro.props;
 const site = Astro.site ?? new URL('https://centre-rahma.pages.dev');
 const urlCanonique = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/images/logo-amaafe.png', site).href;
@@ -71,6 +71,7 @@ const jsonLd = {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{titre}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex" />}
   <link rel="canonical" href={urlCanonique} />
   <link rel="icon" href="/images/logo-amaafe.png" type="image/png" />
   <link rel="preload" href="/fonts/karla-400.woff2" as="font" type="font/woff2" crossorigin />

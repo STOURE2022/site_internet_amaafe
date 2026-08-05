@@ -315,4 +315,5 @@ collections:
       - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false,
           hint: "Compresser la photo avant l'envoi (squoosh.app, moins de 200 Ko). Elle s'affiche en rond sur les fiches." }
       - { name: publie, label: "Publié", widget: boolean, default: true }
-      - { name: body, label: "Description", widget: markdown }
+      - { name: body, label: "Son histoire (affichée sur la fiche publique de l'enfant)", widget: markdown,
+          hint: "Deux ou trois paragraphes : son parcours, ses progrès, ce que le parrain recevra. Sans nom de famille des parents ni information sensible." }

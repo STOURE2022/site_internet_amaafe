@@ -1,0 +1,79 @@
+---
+/** Fiche individuelle d'un enfant à parrainer. Une page n'est générée que
+    pour les fiches publiées ET complètes (prénom renseigné, donc avec
+    l'autorisation écrite des parents). Hors moteurs de recherche (noindex),
+    accessible uniquement en naviguant depuis le site. */
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import config from '../../../content/config.json';
+import { fmtNombre } from '../../lib/format.js';
+
+export async function getStaticPaths() {
+  const enfants = await getCollection('enfants', ({ data }) => data.publie && data.prenom);
+  return enfants.map((enfant) => ({ params: { id: enfant.id }, props: { enfant } }));
+}
+
+const { enfant } = Astro.props;
+const d = enfant.data;
+const prenom = d.prenom.split(' ')[0];
+
+/* Le corps de la fiche sert d'« histoire » ; le texte gabarit d'origine
+   (« Fiche à compléter par l'équipe… ») est traité comme une absence. */
+const histoirePresente = Boolean(enfant.body?.trim()) && !enfant.body.trim().startsWith('Fiche à compléter');
+const { Content } = await render(enfant);
+
+const prixFCFA = config.parrainage.montantMensuelFCFA;
+const prixEUR = config.parrainage.montantMensuelEUR;
+---
+<Base
+  titre={`${d.prenom} — Enfant à parrainer | Centre Coranique Rahma`}
+  description={`Découvrez le parcours de ${prenom} au Centre Coranique Rahma et accompagnez-le par un parrainage mensuel.`}
+  noindex={true}
+>
+  <section class="sec" style="padding-top:clamp(28px,4vw,48px)">
+    <div class="wrap">
+      <article class="fiche rv">
+        <div class="fiche__hero">
+          <div class="fiche__ph">
+            {d.photo
+              ? <img src={d.photo} alt={`Photo de ${d.prenom}`} />
+              : <span class="cenf__sil" style="position:absolute;inset:0;margin:auto" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="16" r="8"/><path d="M8 38c2.5-8 8-11.5 14-11.5S33.5 30 36 38"/></svg></span>}
+          </div>
+          <div class="fiche__c">
+            <a class="fiche__retour" href="/parrainage/">← Tous les enfants à parrainer</a>
+            <span class="cenf__chip cenf__chip--brille">Cherche un parrain</span>
+            <h1>{d.prenom}</h1>
+            <div class="cenf__meta">
+              {d.age != null && <span>{d.age} ans</span>}
+              {d.niveau && <span>{d.niveau}</span>}
+              {d.anneeEntree != null && <span>au centre depuis {d.anneeEntree}</span>}
+            </div>
+            <div class="fiche__prix">
+              {prixFCFA != null
+                ? <Fragment><b>{fmtNombre(prixFCFA)} FCFA</b><i>/ mois{prixEUR != null && ` — ou ${prixEUR} € depuis l'Europe`}</i></Fragment>
+                : <span class="tbd">montant / mois</span>}
+            </div>
+            <div class="fiche__act">
+              <a class="cenf__btn cenf__btn--plein" href="/parrainage/#devenir-parrain"><span>Parrainer {prenom}</span><i aria-hidden="true">→</i></a>
+              <a class="cenf__btn" href="/contact/">Poser une question</a>
+            </div>
+          </div>
+        </div>
+        <div class="fiche__hist">
+          <h2>Son histoire</h2>
+          {histoirePresente ? (
+            <Content />
+          ) : (
+            <p>{prenom} fait partie des élèves du Centre Coranique Rahma : scolarité, fournitures et uniforme entièrement offerts, avec un accompagnement éducatif et moral au quotidien. Son histoire détaillée sera bientôt rédigée par l'équipe du centre. Votre parrainage lui garantit déjà la continuité de son parcours — et vous recevrez chaque trimestre de ses nouvelles.</p>
+          )}
+          <div class="fiche__stats">
+            <div class="fiche__stat"><b>{d.anneeEntree ?? '—'}</b><span>arrivée au centre</span></div>
+            <div class="fiche__stat"><b>{d.age != null ? `${d.age} ans` : '—'}</b><span>aujourd'hui</span></div>
+            <div class="fiche__stat"><b>{config.chiffres.suiviJusquaAge} ans</b><span>suivi jusqu'à la formation professionnelle</span></div>
+          </div>
+        </div>
+        <p class="fiche__note"><strong>Protection :</strong> cette fiche n'est publiée qu'avec l'autorisation écrite des parents. Elle ne mentionne ni nom de famille des parents, ni adresse, ni information sensible, et n'apparaît pas dans les moteurs de recherche.</p>
+      </article>
+    </div>
+  </section>
+</Base>

@@ -8,6 +8,9 @@ import { CMS } from '../../../lib/admin.js';
 const enfants = (await getCollection('enfants')).sort((a, b) => a.id.localeCompare(b.id));
 const nbPubliees = enfants.filter((e) => e.data.publie).length;
 const nbCompletes = enfants.filter((e) => e.data.prenom && e.data.age != null && e.data.niveau).length;
+/* Le corps de la fiche sert d'« histoire » sur la page publique de
+   l'enfant ; le texte gabarit d'origine compte comme une absence. */
+const aHistoire = (e) => Boolean(e.body?.trim()) && !e.body.trim().startsWith('Fiche à compléter');
 ---
 <Admin titre="Enfants à parrainer" sousTitre={`${enfants.length} fiche${enfants.length > 1 ? 's' : ''}, dont ${nbPubliees} publiée${nbPubliees > 1 ? 's' : ''} — ${nbCompletes} complète${nbCompletes > 1 ? 's' : ''} (prénom, âge, niveau).`} actif="enfants">
   <Fragment slot="actions">
@@ -19,7 +22,7 @@ const nbCompletes = enfants.filter((e) => e.data.prenom && e.data.age != null &&
     <div class="scroll">
       <table class="tbl">
         <thead>
-          <tr><th>Fiche</th><th>Prénom</th><th>Âge</th><th>Niveau</th><th>Au centre depuis</th><th>Photo</th><th>Statut</th><th class="act">Actions</th></tr>
+          <tr><th>Fiche</th><th>Prénom</th><th>Âge</th><th>Niveau</th><th>Au centre depuis</th><th>Photo</th><th>Histoire</th><th>Statut</th><th class="act">Actions</th></tr>
         </thead>
         <tbody>
           {enfants.map((e) => (
@@ -30,8 +33,10 @@ const nbCompletes = enfants.filter((e) => e.data.prenom && e.data.age != null &&
               <td>{e.data.niveau ?? <span class="muted">—</span>}</td>
               <td class="dt">{e.data.anneeEntree ?? '—'}</td>
               <td>{e.data.photo ? <span class="chip chip--ok">oui</span> : <span class="chip chip--n">aucune</span>}</td>
+              <td>{aHistoire(e) ? <span class="chip chip--ok">rédigée</span> : <span class="chip chip--n">à rédiger</span>}</td>
               <td>{e.data.publie ? <span class="chip chip--ok">Publiée</span> : <span class="chip chip--off">Masquée</span>}</td>
               <td class="act">
+                {e.data.publie && e.data.prenom && <a href={`/parrainage/${e.id}/`}>Voir ↗</a>}
                 <a href={`${CMS}/collections/enfants/entries/${e.id}`}>Modifier →</a>
               </td>
             </tr>
