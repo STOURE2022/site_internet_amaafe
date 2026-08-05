@@ -34,7 +34,7 @@ collections:
               - { name: nom, label: "Nom du centre", widget: string }
               - { name: devise, label: "Devise", widget: string }
               - { name: lieu, label: "Lieu", widget: string }
-              - { name: anneeCreation, label: "Année de création", widget: number }
+              - { name: anneeCreation, label: "Année de création", widget: number, value_type: int }
           - name: amaafe
             label: "AMAAFE"
             widget: object
@@ -103,14 +103,14 @@ collections:
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: enfants, label: "Nombre d'enfants", widget: number, required: false }
-              - { name: enseignants, label: "Nombre d'enseignants", widget: number, required: false }
-              - { name: parrainsActifs, label: "Parrains actifs", widget: number, required: false }
-              - { name: benevoles, label: "Bénévoles", widget: number, required: false }
-              - { name: membresAdherents, label: "Membres adhérents", widget: number, required: false }
-              - { name: coutMensuelParEnfantFCFA, label: "Coût mensuel par enfant (FCFA)", widget: number, required: false }
-              - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, required: false }
-              - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number }
+              - { name: enfants, label: "Nombre d'enfants", widget: number, value_type: int, required: false }
+              - { name: enseignants, label: "Nombre d'enseignants", widget: number, value_type: int, required: false }
+              - { name: parrainsActifs, label: "Parrains actifs", widget: number, value_type: int, required: false }
+              - { name: benevoles, label: "Bénévoles", widget: number, value_type: int, required: false }
+              - { name: membresAdherents, label: "Membres adhérents", widget: number, value_type: int, required: false }
+              - { name: coutMensuelParEnfantFCFA, label: "Coût mensuel par enfant (FCFA)", widget: number, value_type: int, required: false }
+              - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, value_type: int, required: false }
+              - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number, value_type: int }
           - name: impact
             label: "Réalisations AMAAFE (depuis 2010)"
             widget: object
@@ -162,25 +162,25 @@ collections:
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: cotisationsAnnuellesFCFA, label: "Cotisations annuelles (FCFA)", widget: number, required: false }
-              - { name: partFonctionnementCouturePct, label: "Part fonctionnement centre de couture (%)", widget: number, required: false }
-              - { name: partActionsPct, label: "Part activités humanitaires (%)", widget: number, required: false }
+              - { name: cotisationsAnnuellesFCFA, label: "Cotisations annuelles (FCFA)", widget: number, value_type: int, required: false }
+              - { name: partFonctionnementCouturePct, label: "Part fonctionnement centre de couture (%)", widget: number, value_type: int, required: false }
+              - { name: partActionsPct, label: "Part activités humanitaires (%)", widget: number, value_type: int, required: false }
           - name: parrainage
             label: "Parrainage"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: montantMensuelFCFA, label: "Montant mensuel (FCFA)", widget: number, required: false }
-              - { name: montantMensuelEUR, label: "Montant mensuel (EUR)", widget: number, required: false }
+              - { name: montantMensuelFCFA, label: "Montant mensuel (FCFA)", widget: number, value_type: int, required: false }
+              - { name: montantMensuelEUR, label: "Montant mensuel (EUR)", widget: number, value_type: int, required: false }
           - name: medersa
             label: "Projet de médersa"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, required: false }
-              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, required: false,
+              - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, value_type: int, required: false }
+              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, value_type: int, required: false,
                   hint: "La jauge d'avancement se calcule automatiquement à partir de ce montant." }
-              - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, required: false }
+              - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, value_type: float, required: false }
           - name: photos
             label: "Photos du site"
             widget: object
@@ -311,9 +311,9 @@ collections:
       - { name: titre, label: "Référence de la fiche (ex. Fiche 5)", widget: string,
           hint: "Sert à nommer le fichier et à retrouver la fiche dans cette liste — jamais affiché sur le site." }
       - { name: prenom, label: "Prénom (avec autorisation écrite uniquement)", widget: string, required: false }
-      - { name: age, label: "Âge", widget: number, required: false }
+      - { name: age, label: "Âge", widget: number, value_type: int, required: false }
       - { name: niveau, label: "Niveau", widget: string, required: false }
-      - { name: anneeEntree, label: "Année d'entrée au centre", widget: number, required: false }
+      - { name: anneeEntree, label: "Année d'entrée au centre", widget: number, value_type: int, required: false }
       - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false,
           hint: "Compresser la photo avant l'envoi (squoosh.app, moins de 200 Ko). Elle s'affiche en rond sur les fiches." }
       - { name: publie, label: "Publié", widget: boolean, default: true }
