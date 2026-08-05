@@ -6,8 +6,13 @@
     Sans JavaScript, les boutons restent des liens vers la page Parrainage. */
 import config from '../../content/config.json';
 
-const numeroWa = config.whatsapp.numeroMali || config.whatsapp.numeroFrance;
-const telAffiche = config.contact.telMali;
+/* Numéro dédié au parrainage s'il est configuré, sinon celui de
+   l'équipe Mali, sinon celui de la France. */
+const numeroWa = config.whatsapp.numeroParrainage || config.whatsapp.numeroMali || config.whatsapp.numeroFrance;
+const chiffres = (tel) => (tel ?? '').replace(/[^0-9]/g, '');
+const telAffiche = chiffres(config.contact.telMali) === numeroWa ? config.contact.telMali
+  : chiffres(config.contact.telFrance) === numeroWa ? config.contact.telFrance
+  : `+${numeroWa}`;
 ---
 <div class="pv" id="pv" role="dialog" aria-modal="true" aria-labelledby="pv-titre" hidden
      data-wa={numeroWa} data-email={config.contact.email}>

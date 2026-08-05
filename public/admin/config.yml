@@ -96,6 +96,8 @@ collections:
               - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: numeroMali, label: "Numéro équipe Mali (sans +, sans espaces) — Orange Money, Wave, virement Mali", widget: string, required: false }
               - { name: numeroFrance, label: "Numéro équipe France (sans +, sans espaces) — Wero, PayPal, virement France", widget: string, required: false }
+              - { name: numeroParrainage, label: "Numéro parrainage (sans +, sans espaces) — messages « Parrainer un enfant »", widget: string, required: false,
+                  hint: "Laisser vide pour utiliser le numéro de l'équipe Mali." }
           - name: chiffres
             label: "Chiffres clés"
             widget: object

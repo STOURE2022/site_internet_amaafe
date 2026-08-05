@@ -19,7 +19,7 @@ const corpsMail = encodeURIComponent(
 );
 const lienMail = `mailto:${config.contact.email}?subject=${sujetMail}&body=${corpsMail}`;
 const messageWa = encodeURIComponent('Bonjour, je souhaite parrainer un enfant du Centre Coranique Rahma. Pouvez-vous me recontacter pour la mise en relation ?');
-const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}?text=${messageWa}`;
+const lienWa = `https://wa.me/${config.whatsapp.numeroParrainage || config.whatsapp.numeroMali || config.whatsapp.numeroFrance}?text=${messageWa}`;
 ---
 <Base
   titre="Parrainage — Accompagnez un enfant sur la durée | Centre Coranique Rahma"

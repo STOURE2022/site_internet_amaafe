@@ -26,6 +26,7 @@ const groupes = [
     ['Adresse', c.contact.adresse], ['Horaires de visite', c.contact.horairesVisite],
     ['WhatsApp déclarations (Mali)', c.whatsapp.numeroMali],
     ['WhatsApp déclarations (France)', c.whatsapp.numeroFrance],
+    ['WhatsApp parrainage', c.whatsapp.numeroParrainage ?? 'numéro Mali (par défaut)'],
   ]},
   { titre: 'Parrainage', lignes: [
     ['Montant mensuel (Afrique)', c.parrainage.montantMensuelFCFA != null ? `${fmtNombre(c.parrainage.montantMensuelFCFA)} FCFA` : null],
