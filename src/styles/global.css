@@ -242,6 +242,21 @@ p{margin:0}
 .fiche__note{margin:0;padding:14px 18px;background:var(--or-pale);border-top:1px solid var(--ligne);font-size:13px;color:#6B5410}
 @media(max-width:760px){.fiche__hero{grid-template-columns:1fr}.fiche__stats{grid-template-columns:1fr}}
 
+/* ---- bloc e-mail sans système d'envoi (adresse + message à copier) ---- */
+.bmail{border:1.5px solid var(--ligne);border-radius:12px;background:var(--blanc);overflow:hidden}
+.bmail__adr{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px dashed var(--ligne)}
+.bmail__adr b{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2);font-family:var(--mono);font-weight:400}
+.bmail__adr span{font-family:var(--mono);font-size:14.5px;color:var(--vert);overflow-wrap:anywhere}
+.bmail__copier{margin-left:auto;flex:none;font-size:12.5px;font-weight:700;color:var(--vert-2);border:1.5px solid var(--ligne);border-radius:7px;padding:6px 12px;transition:border-color .15s;background:var(--papier-2)}
+.bmail__copier:hover{border-color:var(--vert)}
+.bmail__msg{padding:14px 16px;background:var(--or-pale);font-size:13.5px;color:#5A4710}
+.bmail__msg b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8A6D12;margin-bottom:6px;font-family:var(--mono);font-weight:400}
+.bmail__msg pre{margin:0;font:inherit;white-space:pre-wrap}
+.bmail__act{display:flex;gap:10px;padding:14px 16px;flex-wrap:wrap}
+.bmail__act .btn{flex:1;min-width:190px;justify-content:center}
+.bmail__aide{font-size:12px;color:var(--gris-2);margin-top:10px}
+.bmail-ok{display:flex;gap:10px;align-items:center;background:var(--vert-pale);border:1px solid #BFD6C6;border-radius:10px;padding:12px 16px;font-size:13.5px;color:var(--vert);font-weight:700;margin-bottom:14px}
+
 /* ---- fenêtre « Parrainer » : choix WhatsApp ou e-mail ---- */
 .pv{position:fixed;inset:0;background:rgba(10,27,18,.55);backdrop-filter:blur(3px);display:grid;place-items:center;padding:18px;z-index:80}
 .pv[hidden]{display:none}

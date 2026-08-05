@@ -169,6 +169,18 @@
         ? 'https://wa.me/' + dest.numero + '?text=' + encodeURIComponent(messageWhatsApp())
         : '#declarer';
     }
+    /* Déclaration par e-mail (repli sans WhatsApp) : même contenu que le
+       message WhatsApp, mis à jour à chaque changement du parcours. */
+    var emailDecl = $('emailDecl');
+    if (emailDecl) {
+      emailDecl.textContent = 'Objet : Déclaration de don\n\n' + messageWhatsApp();
+      var emailDeclLien = $('emailDeclLien');
+      if (emailDeclLien && CFG.email) {
+        emailDeclLien.href = 'mailto:' + CFG.email +
+          '?subject=' + encodeURIComponent('Déclaration de don') +
+          '&body=' + encodeURIComponent(messageWhatsApp());
+      }
+    }
     var waDest = $('waDest');
     if (waDest) {
       if (dest) {

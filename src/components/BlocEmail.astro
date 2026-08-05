@@ -1,0 +1,31 @@
+---
+/** Bloc e-mail sans système d'envoi : l'adresse est visible et copiable,
+    le message est prêt à copier, et « ouvrir l'application e-mail » n'est
+    qu'une option — jamais le seul chemin (elle échoue en silence quand
+    aucune application n'est configurée). Les boutons Copier sont gérés
+    par délégation dans public/js/site.js. */
+import config from '../../content/config.json';
+
+const { objet, message, libelle = 'Message à envoyer', aide = true } = Astro.props;
+const email = config.contact.email;
+const mailto = `mailto:${email}?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(message)}`;
+---
+<div class="bmail">
+  <div class="bmail__adr">
+    <b>À&nbsp;:</b><span>{email}</span>
+    <button type="button" class="bmail__copier" data-copie={email}>Copier</button>
+  </div>
+  <div class="bmail__msg">
+    <b>{libelle}</b>
+    <pre>Objet : {objet}
+
+{message}</pre>
+  </div>
+  <div class="bmail__act">
+    <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
+    <a class="btn btn--or" href={mailto}>Ouvrir mon application e-mail</a>
+  </div>
+</div>
+{aide && (
+  <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur (Gmail, Yahoo…).</p>
+)}

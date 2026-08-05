@@ -1,7 +1,34 @@
 /* Comportements communs à toutes les pages : navigation collante,
-   menu mobile, révélation au défilement, barres de progression. */
+   menu mobile, révélation au défilement, barres de progression,
+   boutons « Copier » des blocs e-mail. */
 (function () {
   document.documentElement.classList.remove('no-js');
+
+  /* Blocs e-mail : copie de l'adresse ou du message (délégation, les
+     blocs peuvent être générés ou remplis dynamiquement). */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-copie], [data-copie-bloc]');
+    if (!btn) return;
+    var bloc = btn.closest('.bmail');
+    var texte = btn.dataset.copie || (bloc && bloc.querySelector('pre') ? bloc.querySelector('pre').textContent : '');
+    if (!texte) return;
+    var ok = function () {
+      var t = btn.textContent;
+      btn.textContent = 'Copié ✓';
+      setTimeout(function () { btn.textContent = t; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texte).then(ok);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = texte;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok();
+    }
+  });
 
   var nav = document.getElementById('nav');
   if (nav) {

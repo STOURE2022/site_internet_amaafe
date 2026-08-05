@@ -1,12 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
+import BlocEmail from '../../components/BlocEmail.astro';
 import config from '../../../content/config.json';
 import { getCollection } from 'astro:content';
 import { fmtDate } from '../../lib/format.js';
 
 const articles = (await getCollection('actualites', ({ data }) => data.publie))
   .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
-const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURIComponent('Inscription à la lettre d’information')}`;
 ---
 <Base
   titre="Actualités — La vie du centre | Centre Coranique Rahma"
@@ -53,7 +53,7 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
             <button class="btn btn--vert" type="submit">S'inscrire</button>
           </form>
         ) : (
-          <a class="btn btn--vert" href={emailNewsletter}>S'inscrire par e-mail</a>
+          <BlocEmail objet="Inscription à la lettre d'information" message="Bonjour, je souhaite recevoir les nouvelles du Centre Coranique Rahma." libelle="Message à envoyer pour s'inscrire" />
         )}
       </div>
     </div>

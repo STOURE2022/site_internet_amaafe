@@ -42,17 +42,35 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.nu
             </div>
           </form>
         ) : (
-          <form id="form-contact">
-            <div class="cbox">
-              <label class="fl" for="c-nom" style="margin-top:0">Votre nom</label>
-              <div class="input"><input id="c-nom" type="text" autocomplete="name" required></div>
-              <label class="fl" for="c-mail" style="margin-top:0">Votre e-mail</label>
-              <div class="input"><input id="c-mail" type="email" autocomplete="email" required></div>
-              <label class="fl" for="c-msg" style="margin-top:0">Votre message</label>
-              <div class="input"><textarea id="c-msg" required></textarea></div>
-              <button class="btn btn--vert btn--full" type="submit">Envoyer le message</button>
+          <Fragment>
+            <form id="form-contact">
+              <div class="cbox">
+                <label class="fl" for="c-nom" style="margin-top:0">Votre nom</label>
+                <div class="input"><input id="c-nom" type="text" autocomplete="name" required></div>
+                <label class="fl" for="c-mail" style="margin-top:0">Votre e-mail</label>
+                <div class="input"><input id="c-mail" type="email" autocomplete="email" required></div>
+                <label class="fl" for="c-msg" style="margin-top:0">Votre message</label>
+                <div class="input"><textarea id="c-msg" required></textarea></div>
+                <button class="btn btn--vert btn--full" type="submit">Préparer mon message →</button>
+              </div>
+            </form>
+            <div id="c-suite" hidden>
+              <div class="bmail-ok">✓ Votre message est prêt — envoyez-le comme vous préférez :</div>
+              <div class="bmail">
+                <div class="bmail__adr">
+                  <b>À&nbsp;:</b><span>{config.contact.email}</span>
+                  <button type="button" class="bmail__copier" data-copie={config.contact.email}>Copier</button>
+                </div>
+                <div class="bmail__msg"><b>Votre message</b><pre id="c-apercu"></pre></div>
+                <div class="bmail__act">
+                  <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
+                  <a class="btn btn--or" id="c-mailto" href="#">Ouvrir mon application e-mail</a>
+                </div>
+              </div>
+              <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur (Gmail, Yahoo…).</p>
+              <p style="margin-top:10px"><a href="#" id="c-retour" style="font-size:13px;font-weight:700;color:var(--vert-2)">← Modifier mon message</a></p>
             </div>
-          </form>
+          </Fragment>
         )}
         <p style="font-size:12.6px;color:var(--gris);line-height:1.5">Les informations transmises ne sont utilisées que pour répondre à votre message. Elles ne sont ni cédées, ni utilisées à d'autres fins. Voir la <a href="/confidentialite/" style="color:var(--vert);text-decoration:underline">politique de confidentialité</a>.</p>
       </div>
@@ -61,17 +79,31 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.nu
 
   {!config.formulaires.contactUrl && (
     <script is:inline define:vars={{ email: config.contact.email }}>
-      // Sans service de formulaire configuré, l'envoi ouvre le client
-      // e-mail du visiteur avec le message pré-rempli.
-      document.getElementById('form-contact').addEventListener('submit', function (e) {
-        e.preventDefault();
-        var nom = document.getElementById('c-nom').value.trim();
-        var mail = document.getElementById('c-mail').value.trim();
-        var msg = document.getElementById('c-msg').value.trim();
-        var sujet = encodeURIComponent('Message depuis le site — ' + nom);
-        var corps = encodeURIComponent(msg + '\n\n— ' + nom + ' (' + mail + ')');
-        location.href = 'mailto:' + email + '?subject=' + sujet + '&body=' + corps;
-      });
+      // Sans service de formulaire configuré, on ne prétend pas envoyer :
+      // le message est assemblé et remis au visiteur (adresse + texte à
+      // copier, application e-mail en option).
+      (function () {
+        var form = document.getElementById('form-contact');
+        var suite = document.getElementById('c-suite');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var nom = document.getElementById('c-nom').value.trim();
+          var mail = document.getElementById('c-mail').value.trim();
+          var msg = document.getElementById('c-msg').value.trim();
+          var sujet = 'Message depuis le site — ' + nom;
+          var corps = msg + '\n\n— ' + nom + ' (' + mail + ')';
+          document.getElementById('c-apercu').textContent = 'Objet : ' + sujet + '\n\n' + corps;
+          document.getElementById('c-mailto').href =
+            'mailto:' + email + '?subject=' + encodeURIComponent(sujet) + '&body=' + encodeURIComponent(corps);
+          form.hidden = true;
+          suite.hidden = false;
+        });
+        document.getElementById('c-retour').addEventListener('click', function (e) {
+          e.preventDefault();
+          suite.hidden = true;
+          form.hidden = false;
+        });
+      })();
     </script>
   )}
 

@@ -9,10 +9,10 @@ import { fmtDate, fmtNombre, pourcentageCollecte } from '../lib/format.js';
 import Photo from '../components/Photo.astro';
 import CarteEnfant from '../components/CarteEnfant.astro';
 import ParrainerDialog from '../components/ParrainerDialog.astro';
+import BlocEmail from '../components/BlocEmail.astro';
 
 const actualites = (await getCollection('actualites', ({ data }) => data.publie)).slice(0, 3);
 const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slice(0, 4);
-const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURIComponent('Inscription à la lettre d’information')}`;
 ---
 <Base
   titre="Centre Coranique Rahma — École coranique gratuite à Yirimadio, Bamako | AMAAFE"
@@ -231,7 +231,7 @@ const emailNewsletter = `mailto:${config.contact.email}?subject=${encodeURICompo
             <button class="btn btn--vert" type="submit">S'inscrire</button>
           </form>
         ) : (
-          <a class="btn btn--vert" href={emailNewsletter}>S'inscrire par e-mail</a>
+          <BlocEmail objet="Inscription à la lettre d'information" message="Bonjour, je souhaite recevoir les nouvelles du Centre Coranique Rahma." libelle="Message à envoyer pour s'inscrire" />
         )}
       </div>
     </div>

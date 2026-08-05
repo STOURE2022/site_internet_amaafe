@@ -120,8 +120,22 @@ import { fmtNombre } from '../lib/format.js';
           <a class="btn btn--ghost btn--full" href={config.formulaires.declarationDonUrl} rel="noopener">Déclarer via le formulaire en ligne</a>
         </>
       ) : (
-        <div class="note" style="margin-top:22px">
-          Le formulaire de déclaration en ligne (pour ceux qui n'utilisent pas WhatsApp) sera activé prochainement : <span class="tbd">URL à configurer</span>. En attendant, vous pouvez aussi écrire à <a href={`mailto:${config.contact.email}`} style="text-decoration:underline">{config.contact.email}</a>.
+        <div style="margin-top:26px">
+          <p style="font-size:13.5px;font-weight:700;color:var(--gris);margin-bottom:10px">Vous préférez ne pas utiliser WhatsApp ? Déclarez par e-mail :</p>
+          <div class="bmail">
+            <div class="bmail__adr">
+              <b>À&nbsp;:</b><span>{config.contact.email}</span>
+              <button type="button" class="bmail__copier" data-copie={config.contact.email}>Copier</button>
+            </div>
+            <div class="bmail__msg"><b>Modèle de déclaration — rempli avec votre montant et votre canal</b><pre id="emailDecl">Objet : Déclaration de don
+
+Bonjour, je déclare un don au Centre Coranique Rahma.</pre></div>
+            <div class="bmail__act">
+              <button type="button" class="btn btn--ghost" data-copie-bloc>Copier le message</button>
+              <a class="btn btn--or" id="emailDeclLien" href={`mailto:${config.contact.email}?subject=${encodeURIComponent('Déclaration de don')}`}>Ouvrir mon application e-mail</a>
+            </div>
+          </div>
+          <p class="bmail__aide">« Ouvrir mon application e-mail » ne fonctionne que si une application est configurée sur votre appareil. Sinon, copiez l'adresse et le message, et envoyez-les depuis votre messagerie dans le navigateur.</p>
         </div>
       )}
     </section>
