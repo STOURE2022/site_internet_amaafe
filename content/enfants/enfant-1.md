@@ -1,8 +1,8 @@
 ---
 titre: Fiche 1
 prenom: Moussa Guindo
-age: ""
-niveau: ""
+age: 0
+niveau: "0"
 anneeEntree: 2025
 photo: /images/uploads/homme_01.jpg
 publie: true
