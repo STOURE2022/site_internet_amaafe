@@ -1,0 +1,50 @@
+---
+/** Assistant Rahma : chatbot guidé, sans serveur ni IA — bulle flottante
+    et fenêtre de discussion présentes sur toutes les pages publiques
+    (inclus par le layout Base). Les réponses sont construites par
+    /public/js/assistant.js à partir des données injectées ci-dessous,
+    donc toujours alignées sur la configuration admin. */
+import config from '../../content/config.json';
+import { pourcentageCollecte } from '../lib/format.js';
+
+const cfg = {
+  waMali: config.whatsapp.numeroMali,
+  waFrance: config.whatsapp.numeroFrance,
+  waParrainage: config.whatsapp.numeroParrainage || config.whatsapp.numeroMali || config.whatsapp.numeroFrance,
+  telMali: config.contact.telMali,
+  telFrance: config.contact.telFrance,
+  email: config.contact.email,
+  horaires: config.contact.horairesVisite,
+  adresse: config.contact.adresse,
+  eleves: config.chiffres.enfants,
+  enseignants: config.chiffres.enseignants,
+  anneeCreation: config.site.anneeCreation,
+  parrainageFCFA: config.parrainage.montantMensuelFCFA,
+  parrainageEUR: config.parrainage.montantMensuelEUR,
+  suiviJusquaAge: config.chiffres.suiviJusquaAge,
+  objectifEUR: config.medersa.budgetTotalEUR,
+  collecteFCFA: config.medersa.montantCollecteFCFA,
+  pctCollecte: pourcentageCollecte(config.medersa),
+};
+---
+<div class="cb-coucou" id="cb-coucou" hidden>
+  <b>Assalamu alaykum 👋</b><br />Une question sur le centre, les dons ou le parrainage ? Je peux vous aider.
+</div>
+
+<button type="button" class="cb-bulle" id="cb-ouvre" aria-expanded="false" aria-controls="cb" aria-label="Ouvrir l'assistant du Centre Rahma">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C7 3 3 6.6 3 11c0 2.2 1 4.2 2.7 5.6-.1 1-.5 2.1-1.4 3.1-.2.2 0 .6.3.5 1.7-.2 3.1-.8 4.1-1.5 1 .3 2.1.4 3.3.4 5 0 9-3.6 9-8S17 3 12 3Zm-4.2 9.3a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4.2 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Zm4.2 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6Z" /></svg>
+  <i aria-hidden="true"></i>
+</button>
+
+<div class="cb" id="cb" role="dialog" aria-modal="false" aria-label="Assistant du Centre Rahma" hidden>
+  <div class="cb__h">
+    <span class="cb__av"><span aria-hidden="true">ر</span><i aria-hidden="true"></i></span>
+    <div><b>Assistant Rahma</b><span>Répond tout de suite · français</span></div>
+    <button type="button" class="cb__x" id="cb-ferme" aria-label="Fermer l'assistant">✕</button>
+  </div>
+  <div class="cb__flux" id="cb-flux"></div>
+  <div class="cb__pied">Assistant automatique — pour une vraie personne : WhatsApp {cfg.telMali}</div>
+</div>
+
+<script type="application/json" id="assistant-config" set:html={JSON.stringify(cfg)} />
+<script is:inline defer src="/js/assistant.js"></script>

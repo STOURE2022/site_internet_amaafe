@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Assistant from '../components/Assistant.astro';
 import config from '../../content/config.json';
 
 interface Props {
@@ -193,6 +194,8 @@ const jsonLd = {
       <a class="btn btn--or" href="/faire-un-don/">Faire un don</a>
     </div>
   )}
+
+  <Assistant />
 
   <script is:inline defer src="/js/site.js"></script>
 </body>
