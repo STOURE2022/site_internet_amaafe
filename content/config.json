@@ -8,7 +8,7 @@
   },
   "photos": {
     "equipeAmaafe": null,
-    "uniformes": null,
+    "uniformes": "/images/uploads/sortie_educative_02.jpeg",
     "hangar": null,
     "courCentre": null,
     "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
@@ -20,7 +20,7 @@
     "recitation": null,
     "remiseFournitures": null,
     "planMedersa": null,
-    "sortieEducative": null
+    "sortieEducative": "/images/uploads/sortie_educative_01.jpeg"
   },
   "galerieActions": [
     {
@@ -40,7 +40,7 @@
       "dateCreation": "30 septembre 2010",
       "reference": "Récépissé n° 1811/MATCL-DNI",
       "siege": "Yirimadio, Bamako (Mali)",
-      "regime": "Association déclarée"
+      "regime": "Association malienne"
     },
     "france": {
       "nom": "AMAAFE / France",
