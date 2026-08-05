@@ -74,7 +74,7 @@ const colonnes = [groupes.slice(0, moitie), groupes.slice(moitie)];
     <a class="btn btn--or" href={versConfig}>Modifier dans l'éditeur</a>
   </Fragment>
 
-  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:24px">
+  <div class="grid grid--2" style="margin-top:24px">
     {colonnes.map((col) => (
       <div class="col">
         {col.map((g) => (

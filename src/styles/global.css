@@ -318,7 +318,7 @@ p{margin:0}
 .form .btn{margin-top:20px}
 .form__sec{text-align:center;font-size:11.5px;color:var(--gris-2);margin-top:11px}
 .paybox{margin-top:16px;border:1px dashed var(--ligne);border-radius:9px;padding:16px;background:var(--papier-2);font-size:13.5px}
-.paybox b{display:block;font-family:var(--mono);font-size:17px;color:var(--vert);letter-spacing:.02em;margin-block:6px 4px}
+.paybox b{display:block;font-family:var(--mono);font-size:17px;color:var(--vert);letter-spacing:.02em;margin-block:6px 4px;overflow-wrap:anywhere}
 .paybox span{color:var(--gris)}
 .copy{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:8px 14px;border:1.5px solid var(--vert);border-radius:7px;
   font-size:12.5px;font-weight:600;color:var(--vert);transition:.18s}
@@ -443,7 +443,7 @@ p{margin:0}
 @media (max-width:760px){
   .brand__n,.brand__s{white-space:normal}
   .bande-amaafe{grid-template-columns:1fr;text-align:center;justify-items:center}
-  .g3,.rooms{grid-template-columns:1fr}
+  .g3,.g2,.rooms{grid-template-columns:1fr}
   .proof__g{grid-template-columns:1fr 1fr;gap:20px}
   .path{grid-template-columns:1fr}
   .path::before{display:none}
