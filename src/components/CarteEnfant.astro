@@ -44,7 +44,7 @@ const prixEUR = config.parrainage.montantMensuelEUR;
         : <span class="tbd">montant / mois</span>}
     </div>
     <a class:list={['cenf__btn', { 'cenf__btn--plein': complete }]} href={lien}
-       data-parrainer data-nom={d.prenom ?? ''} data-infos={meta.join(' · ')}>
+       data-parrainer data-nom={d.prenom ?? ''}>
       <span>{complete ? `Parrainer ${d.prenom.split(' ')[0]}` : 'Parrainer'}</span><i aria-hidden="true">→</i>
     </a>
   </div>

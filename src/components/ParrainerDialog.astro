@@ -74,11 +74,10 @@ const telAffiche = chiffres(config.contact.telMali) === numeroWa ? config.contac
   var wa = pv.dataset.wa, email = pv.dataset.email;
   var titre = document.getElementById('pv-titre');
   var e1 = document.getElementById('pv-e1'), ewa = document.getElementById('pv-ewa'), em = document.getElementById('pv-email');
-  var nom = '', infos = '';
+  var nom = '';
 
   function message() {
-    return 'Bonjour, je souhaite parrainer ' +
-      (nom ? nom + (infos ? ' (' + infos + ')' : '') : 'un enfant') +
+    return 'Bonjour, je souhaite parrainer ' + (nom || 'un enfant') +
       ' du Centre Coranique Rahma. Pouvez-vous me recontacter pour la mise en relation ?';
   }
   function montre(el) {
@@ -86,7 +85,6 @@ const telAffiche = chiffres(config.contact.telMali) === numeroWa ? config.contac
   }
   function ouvre(btn) {
     nom = btn.dataset.nom || '';
-    infos = btn.dataset.infos || '';
     titre.textContent = nom ? 'Parrainer ' + nom.split(' ')[0] : 'Parrainer un enfant';
     var msg = message();
     document.getElementById('pv-msg-wa').textContent = msg;

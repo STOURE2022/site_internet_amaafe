@@ -56,8 +56,7 @@ const prixEUR = config.parrainage.montantMensuelEUR;
             </div>
             <div class="fiche__act">
               <a class="cenf__btn cenf__btn--plein" href="/parrainage/#devenir-parrain"
-                 data-parrainer data-nom={d.prenom}
-                 data-infos={[d.age != null ? `${d.age} ans` : null, d.niveau, d.anneeEntree != null ? `au centre depuis ${d.anneeEntree}` : null].filter(Boolean).join(' · ')}>
+                 data-parrainer data-nom={d.prenom}>
                 <span>Parrainer {prenom}</span><i aria-hidden="true">→</i>
               </a>
               <a class="cenf__btn" href="/contact/">Poser une question</a>
