@@ -22,7 +22,18 @@
     "planMedersa": null,
     "sortieEducative": null
   },
-  "galerieActions": [],
+  "galerieActions": [
+    {
+      "image": "/images/uploads/distribution_kits_alimentaire_2.jpeg",
+      "titre": "Distributions de Kits alimentaires",
+      "legende": "Yirimadjo, Opération ramadan"
+    },
+    {
+      "image": "/images/uploads/distrivution_kit_alimentaire.jpeg",
+      "titre": "Préparation des Kits alimentaires",
+      "legende": "Yirimadjo, Opération ramadan"
+    }
+  ],
   "entites": {
     "mali": {
       "nom": "AMAAFE / Mali",
