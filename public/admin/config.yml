@@ -122,6 +122,15 @@ collections:
                 fields:
                   - { name: valeur, label: "Chiffre", widget: string }
                   - { name: libelle, label: "Libellé", widget: string }
+          - name: galerieActions
+            label: "Galerie des actions (page L'AMAAFE)"
+            widget: list
+            required: false
+            hint: "Photo + titre + légende ; les 6 premières entrées s'affichent sur la page L'AMAAFE. Compresser les photos (moins de 200 Ko) ; aucun enfant identifiable sans autorisation écrite."
+            fields:
+              - { name: image, label: "Photo", widget: image }
+              - { name: titre, label: "Titre", widget: string }
+              - { name: legende, label: "Légende (lieu, opération, partenaire…)", widget: string, required: false }
           - name: partenaires
             label: "Partenaires"
             widget: list

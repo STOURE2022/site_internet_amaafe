@@ -5,6 +5,20 @@ import config from '../../content/config.json';
 import { getCollection, render } from 'astro:content';
 
 const { mali, france } = config.entites;
+const galerie = (config.galerieActions ?? []).slice(0, 6);
+
+/* Bulles des réseaux sociaux : seuls les liens renseignés s'affichent. */
+const ICONES_RS = {
+  facebook: 'M13.5 21.5v-7.2h2.4l.4-2.8h-2.8V9.7c0-.8.3-1.4 1.5-1.4h1.4V5.8c-.3 0-1.2-.1-2.1-.1-2.1 0-3.5 1.3-3.5 3.6v2.2H8.4v2.8h2.4v7.2h2.7Z',
+  instagram: 'M12 4.5c2.4 0 2.7 0 3.7.1 1 0 1.5.2 1.9.3.5.2.8.4 1.1.7.3.3.6.7.7 1.1.1.4.3.9.3 1.9.1 1 .1 1.3.1 3.7s0 2.7-.1 3.7c0 1-.2 1.5-.3 1.9-.2.5-.4.8-.7 1.1-.3.3-.7.6-1.1.7-.4.1-.9.3-1.9.3-1 .1-1.3.1-3.7.1s-2.7 0-3.7-.1c-1 0-1.5-.2-1.9-.3-.5-.2-.8-.4-1.1-.7-.3-.3-.6-.7-.7-1.1-.1-.4-.3-.9-.3-1.9-.1-1-.1-1.3-.1-3.7s0-2.7.1-3.7c0-1 .2-1.5.3-1.9.2-.5.4-.8.7-1.1.3-.3.7-.6 1.1-.7.4-.1.9-.3 1.9-.3 1-.1 1.3-.1 3.7-.1Zm0-1.7c-2.4 0-2.7 0-3.8.1-1 0-1.7.2-2.3.5-.6.2-1.2.6-1.7 1.1-.5.5-.9 1.1-1.1 1.7-.3.6-.4 1.3-.5 2.3-.1 1-.1 1.4-.1 3.8s0 2.7.1 3.8c0 1 .2 1.7.5 2.3.2.6.6 1.2 1.1 1.7.5.5 1.1.9 1.7 1.1.6.3 1.3.4 2.3.5 1 .1 1.4.1 3.8.1s2.7 0 3.8-.1c1 0 1.7-.2 2.3-.5.6-.2 1.2-.6 1.7-1.1.5-.5.9-1.1 1.1-1.7.3-.6.4-1.3.5-2.3.1-1 .1-1.4.1-3.8s0-2.7-.1-3.8c0-1-.2-1.7-.5-2.3-.2-.6-.6-1.2-1.1-1.7-.5-.5-1.1-.9-1.7-1.1-.6-.3-1.3-.4-2.3-.5-1-.1-1.4-.1-3.8-.1Zm0 4.5a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm4.9-6.9a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2Z',
+  tiktok: 'M17 5.9c-.9-.6-1.6-1.6-1.7-2.9h-3v11.9a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.3a5.6 5.6 0 1 0 4.8 5.5V9.4c1 .7 2.3 1.2 3.7 1.2v-3c-.7 0-1.5-.3-2-.7Z',
+  whatsapp: 'M12 3.5a8.4 8.4 0 0 0-7.3 12.7L3.5 20l3.9-1.2A8.4 8.4 0 1 0 12 3.5Zm0 15.3c-1.3 0-2.6-.4-3.7-1l-.3-.2-2.3.7.7-2.2-.2-.3a6.9 6.9 0 1 1 5.8 3Zm3.8-5.1c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.5.1-.1.2-.5.7-.6.8-.1.1-.2.1-.4 0a5.6 5.6 0 0 1-2.8-2.4c-.2-.4.2-.3.6-1.1.1-.1 0-.3 0-.4l-.6-1.5c-.2-.4-.3-.3-.5-.3h-.4c-.1 0-.4.1-.6.3-.2.2-.7.7-.7 1.8s.8 2.1.9 2.2c.1.1 1.5 2.3 3.7 3.3 1.4.6 1.9.6 2.6.5.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1 0-.1-.2-.2-.4-.3Z',
+  youtube: 'M20.6 7.7a2.3 2.3 0 0 0-1.6-1.6C17.6 5.7 12 5.7 12 5.7s-5.6 0-7 .4A2.3 2.3 0 0 0 3.4 7.7C3 9.1 3 12 3 12s0 2.9.4 4.3c.2.8.8 1.4 1.6 1.6 1.4.4 7 .4 7 .4s5.6 0 7-.4a2.3 2.3 0 0 0 1.6-1.6c.4-1.4.4-4.3.4-4.3s0-2.9-.4-4.3ZM10.2 14.6V9.4l4.7 2.6-4.7 2.6Z',
+};
+const reseauxBulles = [
+  ['facebook', 'Facebook'], ['instagram', 'Instagram'], ['tiktok', 'TikTok'],
+  ['whatsapp', 'WhatsApp'], ['youtube', 'YouTube'],
+].filter(([cle]) => config.reseaux[cle]);
 const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'amaafe'))
   .sort((a, b) => a.data.ordre - b.data.ordre);
 const temoignagesRendus = await Promise.all(
@@ -17,6 +31,15 @@ const temoignagesRendus = await Promise.all(
 >
 
   <section class="wrap phero">
+    {reseauxBulles.length > 0 && (
+      <div class="rs" style="margin-bottom:20px">
+        {reseauxBulles.map(([cle, nom]) => (
+          <a href={config.reseaux[cle]} rel="noopener" target="_blank" aria-label={`L'AMAAFE sur ${nom}`} title={nom}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={ICONES_RS[cle]} /></svg>
+          </a>
+        ))}
+      </div>
+    )}
     <span class="eyebrow eyebrow--d">L'association porteuse</span>
     <h1>{config.amaafe.slogan}</h1>
     <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
@@ -106,6 +129,31 @@ const temoignagesRendus = await Promise.all(
       </div>
     </div>
   </section>
+
+  <!-- ===== LES ACTIONS EN IMAGES ===== -->
+  {galerie.length > 0 && (
+    <section class="sec">
+      <div class="wrap">
+        <div class="head rv">
+          <div>
+            <span class="eyebrow eyebrow--d">En images</span>
+            <h2>Les actions de l'AMAAFE sur le terrain</h2>
+          </div>
+        </div>
+        <div class="gale rv">
+          {galerie.map((photo) => (
+            <figure class="ga">
+              <img src={photo.image} alt={photo.titre} loading="lazy" width="600" height="450" />
+              <figcaption class="ga__leg">
+                <b>{photo.titre}</b>
+                {photo.legende && <span>{photo.legende}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ===== PARTENAIRES ===== -->
   <section class="sec">
