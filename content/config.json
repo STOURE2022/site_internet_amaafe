@@ -9,7 +9,7 @@
   "photos": {
     "equipeAmaafe": null,
     "uniformes": "/images/uploads/les_filles.jpeg",
-    "hangar": null,
+    "hangar": "/images/uploads/remise_fourniture_scolaire.jpeg",
     "courCentre": null,
     "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
     "familleCentre": "/images/uploads/photo_de_famille_enfants.jpeg",
@@ -18,7 +18,7 @@
     "elevesUniforme": "/images/uploads/les_eleves_en_classe.jpeg",
     "sensibilisation": "/images/uploads/visite_don_orphelinat.jpeg",
     "recitation": "/images/uploads/les_garçons.jpeg",
-    "remiseFournitures": null,
+    "remiseFournitures": "/images/uploads/remise_fourniture_scolaire_00.jpeg",
     "planMedersa": null,
     "sortieEducative": "/images/uploads/sortie_educative_01.jpeg"
   },
