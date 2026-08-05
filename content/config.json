@@ -13,7 +13,7 @@
     "courCentre": null,
     "_aide": "Emplacements photo du site. Chargez une image pour remplacer le bloc hachuré correspondant. Compresser avant l'envoi (moins de 200 Ko) ; aucune photo d'enfant identifiable sans autorisation écrite des parents.",
     "familleCentre": "/images/uploads/photo_de_famille_enfants.jpeg",
-    "detente": null,
+    "detente": "/images/uploads/moment_de_detente.jpg",
     "unCours": null,
     "elevesUniforme": "/images/uploads/les_eleves_en_classe.jpeg",
     "sensibilisation": null,
