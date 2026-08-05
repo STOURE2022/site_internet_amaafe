@@ -3,7 +3,7 @@
     (chargeables via l'éditeur) et la médiathèque (public/images/uploads/). */
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
-import { lireMedias, fmtTaille, versEditeur, versConfig, PHOTOS_SITE } from '../../../lib/admin.js';
+import { lireMedias, fmtTaille, versEditeur, versConfigSection, PHOTOS_SITE } from '../../../lib/admin.js';
 
 const medias = lireMedias();
 const emplacements = PHOTOS_SITE.map((ph) => ({ ...ph, src: (config.photos ?? {})[ph.cle] ?? null }));
@@ -11,13 +11,13 @@ const nbChargees = emplacements.filter((e) => e.src).length;
 ---
 <Admin titre="Photos & médias" sousTitre={`${nbChargees} emplacement${nbChargees > 1 ? 's' : ''} du site sur ${emplacements.length} a${nbChargees > 1 ? 'vec' : ' reçu'} sa photo · ${medias.length} image${medias.length > 1 ? 's' : ''} dans la médiathèque.`} actif="medias">
   <Fragment slot="actions">
-    <a class="btn btn--or" href={versConfig}>Charger les photos du site</a>
+    <a class="btn btn--or" href={versConfigSection('Photos du site')}>Charger les photos du site</a>
   </Fragment>
 
   <section class="card" style="margin-top:24px">
     <div class="card__h">
       <h2>Photos demandées par le site</h2>
-      <a href={versConfig}>Charger →</a>
+      <a href={versConfigSection('Photos du site')}>Charger →</a>
     </div>
     <div class="scroll">
       <table class="tbl">
@@ -33,7 +33,7 @@ const nbChargees = emplacements.filter((e) => e.src).length;
               <td><b>{e.label}</b></td>
               <td class="muted">{e.pages}</td>
               <td>{e.src ? <span class="chip chip--ok">Chargée ✓</span> : <span class="chip chip--n">En attente</span>}</td>
-              <td class="act"><a href={versConfig}>{e.src ? 'Remplacer →' : 'Charger →'}</a></td>
+              <td class="act"><a href={versConfigSection('Photos du site')}>{e.src ? 'Remplacer →' : 'Charger →'}</a></td>
             </tr>
           ))}
         </tbody>

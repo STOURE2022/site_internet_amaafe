@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
 import { fmtNombre, pourcentageCollecte } from '../../../lib/format.js';
-import { CMS, versConfig, listeACompleter, etatCanaux, lireDocuments } from '../../../lib/admin.js';
+import { CMS, versConfigSection, listeACompleter, etatCanaux, lireDocuments } from '../../../lib/admin.js';
 
 const actus = await getCollection('actualites', ({ data }) => data.publie);
 const temoignages = await getCollection('temoignages', ({ data }) => data.publie);
@@ -63,7 +63,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
       <section class="card" aria-labelledby="t-collecte">
         <div class="card__h">
           <h2 id="t-collecte">Collecte pour le terrain de la médersa</h2>
-          <a href={versConfig}>Mettre à jour →</a>
+          <a href={versConfigSection('Projet de médersa')}>Mettre à jour →</a>
         </div>
         <div class="obj">
           {config.medersa.montantCollecteFCFA != null
@@ -135,7 +135,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
           <a href={`${CMS}/collections/actualites/new`}>
             <b>Nouvelle actualité</b><span>Photo + 3 phrases suffisent</span>
           </a>
-          <a href={versConfig}>
+          <a href={versConfigSection('Projet de médersa')}>
             <b>Mettre à jour la collecte</b><span>Montant + avancement</span>
           </a>
           <a href={`${CMS}/collections/enfants/new`}>
@@ -150,7 +150,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
       <section class="card" aria-labelledby="t-pay" style="background:var(--nuit);border-color:var(--nuit);color:#E9EFE9">
         <div class="card__h">
           <h2 id="t-pay" style="color:#fff">Canaux de paiement</h2>
-          <a href={versConfig} style="color:#9FD4AE">Modifier →</a>
+          <a href={versConfigSection('Coordonnées de paiement')} style="color:#9FD4AE">Modifier →</a>
         </div>
         <div class="cnt">
           {canaux.map((c) => (

@@ -8,6 +8,13 @@ import { readdirSync, statSync } from 'node:fs';
    Les PDF de public/documents/ se déposent donc via GitHub. */
 export const CMS = '/admin/#';
 export const versConfig = `${CMS}/collections/configuration/entries/config`;
+
+/** Lien vers l'éditeur, ouvert directement sur une section de la
+    configuration : « ?cible=… » est lu par public/admin/index.html qui
+    défile jusqu'à la section et la surligne. Le libellé doit être
+    exactement celui du formulaire Decap (public/admin/config.yml). */
+export const versConfigSection = (section) =>
+  `/admin/?cible=${encodeURIComponent(section)}#/collections/configuration/entries/config`;
 export const versEditeur = '/admin/';
 export const REPO = 'https://github.com/STOURE2022/site_internet_amaafe';
 export const versDocumentsGitHub = `${REPO}/upload/main/public/documents`;
@@ -64,17 +71,17 @@ export function listeACompleter(config, nbFichesEnfants) {
   const statutsPresents = lireDocuments().some((f) => f.toLowerCase().includes('statut'));
   const photosManquantes = PHOTOS_SITE.filter((ph) => !(config.photos ?? {})[ph.cle]).length;
   return [
-    !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfig },
-    !p.paypal.lien && { titre: 'Lien PayPal', detail: 'Lien paypal.me ou e-mail du compte de l’association.', sev: 'r', href: versConfig },
-    !p.virementMali.rib && { titre: 'RIB du compte Mali', detail: 'Coordonnées du virement bancaire au Mali.', sev: 'r', href: versConfig },
-    !p.virementFrance.iban && { titre: 'IBAN du compte France', detail: 'Coordonnées du virement bancaire en France.', sev: 'r', href: versConfig },
-    !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfig },
-    !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfig },
-    config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la jauge d’avancement de la collecte.', sev: 'o', href: versConfig },
+    !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
+    !p.paypal.lien && { titre: 'Lien PayPal', detail: 'Lien paypal.me ou e-mail du compte de l’association.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
+    !p.virementMali.rib && { titre: 'RIB du compte Mali', detail: 'Coordonnées du virement bancaire au Mali.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
+    !p.virementFrance.iban && { titre: 'IBAN du compte France', detail: 'Coordonnées du virement bancaire en France.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
+    !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
+    !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
+    config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la jauge d’avancement de la collecte.', sev: 'o', href: versConfigSection('Projet de médersa') },
     !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Déposer le PDF dans public/documents sur GitHub.', sev: 'o', href: versDocumentsGitHub },
     photosManquantes > 0 && { titre: 'Photos du site', detail: `${photosManquantes} emplacement${photosManquantes > 1 ? 's' : ''} hachuré${photosManquantes > 1 ? 's' : ''} en attente d’une photo.`, sev: 'o', href: '/admin/tableau-de-bord/medias/' },
     nbFichesEnfants === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },
-    !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfig },
+    !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfigSection('Formulaires externes (URLs)') },
   ].filter(Boolean);
 }
 

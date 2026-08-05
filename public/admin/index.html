@@ -11,6 +11,34 @@
        Le script est chargé depuis un CDN uniquement sur cette page privée ;
        aucune page publique du site ne dépend d'un CDN externe. -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Le tableau de bord ajoute « ?cible=Nom de la section » aux liens vers
+    // l'éditeur : une fois le formulaire affiché (après connexion), on
+    // défile jusqu'à la section demandée et on la surligne quelques
+    // secondes. Decap ne propose pas de lien direct vers un champ.
+    (function () {
+      var cible = new URLSearchParams(location.search).get('cible');
+      if (!cible) return;
+      var essais = 0;
+      var minuteur = setInterval(function () {
+        essais++;
+        var candidats = document.querySelectorAll('label, button, h2, h3, span');
+        for (var i = 0; i < candidats.length; i++) {
+          if (candidats[i].textContent.trim() === cible) {
+            var el = candidats[i];
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            el.style.outline = '3px solid #D9A62B';
+            el.style.outlineOffset = '6px';
+            el.style.borderRadius = '4px';
+            setTimeout(function () { el.style.outline = ''; }, 5000);
+            clearInterval(minuteur);
+            return;
+          }
+        }
+        if (essais > 240) clearInterval(minuteur); // ~2 min, le temps de se connecter
+      }, 500);
+    })();
+  </script>
   <!-- Accès rapide au tableau de bord, sans gêner l'interface Decap. -->
   <a href="/admin/tableau-de-bord/"
      style="position:fixed;bottom:16px;right:16px;z-index:2147483647;background:#0A1B12;color:#E9EFE9;font:600 13px/1 'Karla',-apple-system,'Segoe UI',sans-serif;padding:10px 16px;border-radius:99px;text-decoration:none;box-shadow:0 2px 10px rgba(10,27,18,.35)">

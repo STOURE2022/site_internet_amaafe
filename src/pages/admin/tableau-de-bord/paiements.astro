@@ -3,7 +3,7 @@
     et statut de chaque canal, sans quitter le tableau de bord. */
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
-import { versConfig } from '../../../lib/admin.js';
+import { versConfigSection } from '../../../lib/admin.js';
 
 const p = config.paiement;
 const canaux = [
@@ -19,7 +19,7 @@ const nbActifs = canaux.filter((c) => c.coord).length;
 <Admin titre="Canaux de paiement" sousTitre={`${nbActifs} canal${nbActifs > 1 ? 'aux' : ''} actif${nbActifs > 1 ? 's' : ''} sur ${canaux.length}. Les coordonnées renseignées ici s'affichent sur la page Faire un don.`} actif="paiements">
   <Fragment slot="actions">
     <a class="btn btn--ghost" href="/faire-un-don/">Voir la page don ↗</a>
-    <a class="btn btn--or" href={versConfig}>Modifier les coordonnées</a>
+    <a class="btn btn--or" href={versConfigSection('Coordonnées de paiement')}>Modifier les coordonnées</a>
   </Fragment>
 
   <section class="card" style="margin-top:24px">
@@ -39,7 +39,7 @@ const nbActifs = canaux.filter((c) => c.coord).length;
               </td>
               <td>{c.titulaire ?? <span class="chip chip--n">à préciser</span>}</td>
               <td>{c.coord ? <span class="chip chip--ok">Actif ✓</span> : <span class="chip chip--off">Bloqué</span>}</td>
-              <td class="act"><a href={versConfig}>Modifier →</a></td>
+              <td class="act"><a href={versConfigSection('Coordonnées de paiement')}>Modifier →</a></td>
             </tr>
           ))}
         </tbody>
