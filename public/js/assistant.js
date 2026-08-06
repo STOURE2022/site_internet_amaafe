@@ -42,6 +42,7 @@
         ['🕌', 'Le projet de médersa', 'medersa'],
         ['📖', 'Le centre et ses horaires', 'centre'],
         ['🧕', "L'association AMAAFE", 'amaafe'],
+        ['📱', 'Nos réseaux sociaux', 'reseaux'],
         ['📞', 'Parler à une vraie personne', 'humain'],
       ],
     },
@@ -117,6 +118,18 @@
         ['🔍', 'Voir la transparence financière', 'lien:/transparence/'],
         ['🏠', 'Autres questions', 'accueil'],
       ],
+    },
+    reseaux: {
+      moi: 'Nos réseaux sociaux',
+      reponses: ["Suivez les actions de l'AMAAFE et la vie du centre en images : distributions, sorties éducatives, avancement du projet de médersa… 🔥 Rejoignez-nous :"],
+      liens: [
+        (C.reseaux || {}).facebook && ['wa', '👍 Facebook', C.reseaux.facebook],
+        (C.reseaux || {}).instagram && ['or', '📷 Instagram', C.reseaux.instagram],
+        (C.reseaux || {}).tiktok && ['wa', '🎵 TikTok', C.reseaux.tiktok],
+        (C.reseaux || {}).youtube && ['or', '▶️ YouTube', C.reseaux.youtube],
+        (C.reseaux || {}).whatsapp && ['wa', '💬 Canal WhatsApp', C.reseaux.whatsapp],
+      ].filter(Boolean),
+      choix: [['🏠', 'Autres questions', 'accueil']],
     },
     humain: {
       moi: 'Parler à une vraie personne',
