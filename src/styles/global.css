@@ -274,7 +274,7 @@ p{margin:0}
 .cb-coucou::after{content:"";position:absolute;right:-6px;bottom:8px;width:10px;height:10px;background:var(--papier-2);border-right:1.5px solid var(--or);border-bottom:1.5px solid var(--or);transform:rotate(-45deg)}
 .cb-coucou span{display:block;transition:opacity .3s}
 .cb-coucou .fondu{opacity:0}
-.cb{position:fixed;right:18px;bottom:90px;z-index:70;width:min(390px,calc(100vw - 36px));height:min(590px,calc(100vh - 118px));background:var(--papier);border:1px solid var(--ligne);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -24px rgba(10,27,18,.55)}
+.cb{position:fixed;right:18px;bottom:90px;z-index:70;width:min(390px,calc(100vw - 36px));height:min(590px,calc(100vh - 118px));height:min(590px,calc(100dvh - 118px));background:var(--papier);border:1px solid var(--ligne);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -24px rgba(10,27,18,.55)}
 .cb[hidden]{display:none}
 .cb.ouvert{animation:cb-monte .3s cubic-bezier(.22,1,.36,1)}
 @keyframes cb-monte{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
@@ -312,7 +312,10 @@ p{margin:0}
 @media(max-width:760px){
   .cb-bulle{bottom:86px}
   .cb-coucou{bottom:98px}
-  .cb{bottom:156px;height:min(540px,calc(100vh - 180px))}
+  /* fenêtre plein écran sur mobile ; la bulle et la barre du bas
+     s'effacent tant que l'assistant est ouvert */
+  .cb{inset:0;width:100%;height:100%;height:100dvh;border-radius:0;border:0;z-index:90}
+  .cb-bulle.cb-cache{display:none}
 }
 
 /* ---- bloc e-mail sans système d'envoi (adresse + message à copier) ---- */

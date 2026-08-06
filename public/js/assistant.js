@@ -295,10 +295,12 @@
     if (ouvert) {
       cb.removeAttribute('hidden');
       cb.classList.add('ouvert');
+      bulle.classList.add('cb-cache');
       if (!flux.hasChildNodes()) va('accueil');
     } else {
       cb.setAttribute('hidden', '');
       cb.classList.remove('ouvert');
+      bulle.classList.remove('cb-cache');
     }
     bulle.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
     coucou.hidden = true;
