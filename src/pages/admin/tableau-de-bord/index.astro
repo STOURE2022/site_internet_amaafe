@@ -25,6 +25,21 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
 const pctCollecte = pourcentageCollecte(config.medersa);
 const manuelFCFA = collecteManuelleFCFA(config.medersa);
 const pctCollecteFr = String(pctCollecte).replace('.', ',');
+const lignesCollecte = config.medersa.collecteHorsLigne ?? [];
+const objectifFCFA = config.medersa.budgetTotalEUR != null ? Math.round(config.medersa.budgetTotalEUR * 655.957) : 0;
+
+/* Couleur de la pastille d'une source de collecte, par reconnaissance
+   du libellé saisi par l'équipe. */
+const couleurSource = (source) => {
+  const s = (source ?? '').toLowerCase();
+  if (s.includes('orange')) return '#F26522';
+  if (s.includes('wave')) return '#1DC3F0';
+  if (s.includes('wero')) return '#7A5CF0';
+  if (s.includes('paypal')) return '#0055B8';
+  if (s.includes('virement') || s.includes('banc')) return '#0F4A2F';
+  if (s.includes('espèce') || s.includes('espece') || s.includes('cash')) return '#C9A97F';
+  return '#8A978E';
+};
 const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}`;
 ---
 <Admin titre="Tableau de bord" sousTitre={`La situation du Centre Rahma et de l'AMAAFE, générée le ${genereLe}.`} actif="accueil">
@@ -68,14 +83,48 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
         </div>
         <div class="obj">
           {manuelFCFA != null
-            ? <b>{fmtNombre(manuelFCFA)} FCFA</b>
+            ? <b id="c-total">{fmtNombre(manuelFCFA)} FCFA</b>
             : <span class="tbd">saisies hors ligne à renseigner</span>}
           <span>sur l'objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>{objectifFCFAMillions && ` (≈ ${objectifFCFAMillions} millions de FCFA)`}</span>
         </div>
         <div class="bar" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}>
-          <i style={`width:${pctCollecte}%`}></i>
+          <i id="c-bar" style={`width:${pctCollecte}%`}></i>
         </div>
-        <div class="obj__f"><span>saisies de l'équipe — la part HelloAsso s'ajoute automatiquement sur le site public</span><span>{pctCollecteFr} %</span></div>
+        <div class="obj__f"><span>saisies de l'équipe + part HelloAsso</span><span id="c-pct">{pctCollecteFr} %</span></div>
+
+        <div class="cnt" style="margin-top:16px">
+          {lignesCollecte.map((l) => (
+            <div class="cnt__i">
+              <span class="canal"><i style={`background:${couleurSource(l.source)}`}></i>{l.source}</span>
+              <span class="st">{fmtNombre(Number(l.montantFCFA) || 0)} FCFA</span>
+            </div>
+          ))}
+          <div class="cnt__i">
+            <span class="canal"><i style="background:#46BE8A"></i>HelloAsso (carte bancaire) — automatique</span>
+            <span class="st" id="c-ha">identifiants API à configurer</span>
+          </div>
+        </div>
+
+        <script is:inline define:vars={{ manuelFCFA: manuelFCFA ?? 0, objectifFCFA }}>
+          // Part HelloAsso en direct : /api/collecte (cache serveur 1 h).
+          fetch('/api/collecte').then(function (r) { return r.json(); }).then(function (d) {
+            var ha = document.getElementById('c-ha');
+            if (!d || !d.eur || d.eur <= 0) return;
+            var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };
+            var haFCFA = Math.round(d.eur * 655.957);
+            if (ha) { ha.textContent = fmt(d.eur) + ' € ≈ ' + fmt(haFCFA) + ' FCFA'; ha.style.color = 'var(--vert)'; }
+            var total = manuelFCFA + haFCFA;
+            var t = document.getElementById('c-total');
+            if (t) t.textContent = fmt(total) + ' FCFA';
+            if (objectifFCFA > 0) {
+              var pct = Math.min(100, Math.round((total / objectifFCFA) * 1000) / 10);
+              var b = document.getElementById('c-bar');
+              if (b) b.style.width = pct + '%';
+              var p = document.getElementById('c-pct');
+              if (p) p.textContent = String(pct).replace('.', ',') + ' %';
+            }
+          }).catch(function () {});
+        </script>
       </section>
 
       <section class="card" aria-labelledby="t-dons">
