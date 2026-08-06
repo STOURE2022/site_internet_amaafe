@@ -122,6 +122,16 @@ collections:
                 fields:
                   - { name: valeur, label: "Chiffre", widget: string }
                   - { name: libelle, label: "Libellé", widget: string }
+          - name: documentsPublies
+            label: "Documents à télécharger (page Transparence)"
+            widget: list
+            required: false
+            hint: "Téléversez le PDF (compressé si possible) et donnez-lui un titre clair. Les documents apparaissent sur la page Transparence, dans le tableau de bord et dans l'assistant."
+            fields:
+              - { name: titre, label: "Titre (ex. Statuts de l'association)", widget: string }
+              - { name: description, label: "Description courte", widget: string, required: false }
+              - { name: fichier, label: "Fichier PDF", widget: file,
+                  media_folder: "/public/documents", public_folder: "/documents" }
           - name: galerieActions
             label: "Galerie des actions (page L'AMAAFE)"
             widget: list

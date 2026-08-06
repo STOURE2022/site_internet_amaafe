@@ -5,15 +5,15 @@ import { getCollection } from 'astro:content';
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
 import { fmtNombre, pourcentageCollecte } from '../../../lib/format.js';
-import { CMS, versConfigSection, listeACompleter, etatCanaux, lireDocuments } from '../../../lib/admin.js';
+import { CMS, versConfigSection, listeACompleter, etatCanaux, statutsPublies } from '../../../lib/admin.js';
 
 const actus = await getCollection('actualites', ({ data }) => data.publie);
 const temoignages = await getCollection('temoignages', ({ data }) => data.publie);
 const enfants = await getCollection('enfants', ({ data }) => data.publie);
 const derniereActu = [...actus].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''))[0];
 
-const documents = lireDocuments();
-const statutsPresents = documents.some((f) => f.toLowerCase().includes('statut'));
+const documents = config.documentsPublies ?? [];
+const statutsPresents = statutsPublies(config);
 const aCompleter = listeACompleter(config, enfants.length);
 const manquesPaiement = aCompleter.filter((t) => t.sev === 'r').length;
 const canaux = etatCanaux(config);
@@ -106,7 +106,7 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
             <span class="st" style={enfants.length === 0 ? 'color:var(--rouge)' : ''}>{enfants.length === 0 ? 'à compléter' : `${enfants.length} publiée${enfants.length > 1 ? 's' : ''}`}</span>
           </div>
           <div class="cnt__i">
-            <span><b>Documents</b> · téléchargeables sur la page Transparence</span>
+            <span><b><a href="/admin/tableau-de-bord/documents/" style="text-decoration:underline;text-underline-offset:3px">Documents</a></b> · téléchargeables sur la page Transparence</span>
             <span class="st" style={statutsPresents ? '' : 'color:var(--rouge)'}>{documents.length} PDF{statutsPresents ? '' : ' · statuts manquants'}</span>
           </div>
         </div>

@@ -34,13 +34,18 @@
       "legende": "Yirimadjo, Opération ramadan"
     }
   ],
+  "documentsPublies": [
+    { "titre": "État financier 2024/2025", "description": "Recettes, dépenses et réalisations de l'exercice", "fichier": "/documents/etat-financier-2024-2025.pdf" },
+    { "titre": "Rapport d'impact 2010-2025", "description": "Quinze ans d'actions et de résultats", "fichier": "/documents/rapport-impact-2010-2025.pdf" },
+    { "titre": "Présentation du Centre Rahma", "description": "16 diapositives : historique, fonctionnement, chiffres et besoins du centre", "fichier": "/documents/presentation-centre-rahma.pdf" }
+  ],
   "entites": {
     "mali": {
       "nom": "AMAAFE / Mali",
       "dateCreation": "30 septembre 2010",
       "reference": "Récépissé n° 1811/MATCL-DNI",
       "siege": "Yirimadio, Bamako (Mali)",
-      "regime": "Association malienne"
+      "regime": "Association déclarée"
     },
     "france": {
       "nom": "AMAAFE / France",

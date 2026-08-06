@@ -2,8 +2,11 @@
 import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
 import { fmtNombre } from '../lib/format.js';
+import { lireDocumentsPublies, statutsPublies, fmtTaille } from '../lib/admin.js';
 
 const { mali, france } = config.entites;
+const documents = lireDocumentsPublies(config);
+const statutsPresents = statutsPublies(config);
 ---
 <Base
   titre="Transparence — Références légales et documents | Centre Coranique Rahma"
@@ -125,26 +128,20 @@ const { mali, france } = config.entites;
         <p class="lead" style="max-width:42ch">Les autres documents seront mis en ligne au fur et à mesure de leur validation par les instances de l'association.</p>
       </div>
       <div class="g3 rv">
-        <a class="card entity" href="/documents/etat-financier-2024-2025.pdf">
-          <div class="entity__t">PDF — 140 Ko</div>
-          <h3 style="font-size:18px">État financier 2024/2025</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Recettes, dépenses et réalisations de l'exercice — Télécharger →</p>
-        </a>
-        <a class="card entity" href="/documents/rapport-impact-2010-2025.pdf">
-          <div class="entity__t">PDF — 290 Ko</div>
-          <h3 style="font-size:18px">Rapport d'impact 2010-2025</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">Quinze ans d'actions et de résultats — Télécharger →</p>
-        </a>
-        <a class="card entity" href="/documents/presentation-centre-rahma.pdf">
-          <div class="entity__t">PDF — 3,7 Mo</div>
-          <h3 style="font-size:18px">Présentation du Centre Rahma</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">16 diapositives : historique, fonctionnement, chiffres et besoins du centre — Télécharger →</p>
-        </a>
-        <div class="card entity">
-          <div class="entity__t">Document</div>
-          <h3 style="font-size:18px">Statuts de l'association</h3>
-          <p style="font-size:13.5px;color:var(--gris);margin-top:8px">PDF à publier — <span class="tbd">à téléverser</span></p>
-        </div>
+        {documents.map((d) => (
+          <a class="card entity" href={d.href}>
+            <div class="entity__t">PDF{d.taille != null && ` — ${fmtTaille(d.taille)}`}</div>
+            <h3 style="font-size:18px">{d.titre}</h3>
+            <p style="font-size:13.5px;color:var(--gris);margin-top:8px">{d.description ? `${d.description} — ` : ''}Télécharger →</p>
+          </a>
+        ))}
+        {!statutsPresents && (
+          <div class="card entity">
+            <div class="entity__t">Document</div>
+            <h3 style="font-size:18px">Statuts de l'association</h3>
+            <p style="font-size:13.5px;color:var(--gris);margin-top:8px">PDF à publier — <span class="tbd">à téléverser</span></p>
+          </div>
+        )}
       </div>
     </div>
   </section>

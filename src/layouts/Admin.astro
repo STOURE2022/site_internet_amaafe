@@ -4,14 +4,14 @@
     défaut et leurs boutons d'en-tête via le slot « actions ». */
 import { getCollection } from 'astro:content';
 import config from '../../content/config.json';
-import { CMS, versConfig, lireDocuments, lireMedias, listeACompleter } from '../lib/admin.js';
+import { CMS, versConfig, lireMedias, listeACompleter } from '../lib/admin.js';
 
 const { titre, sousTitre, actif = 'accueil' } = Astro.props;
 
 const actusPub = await getCollection('actualites', ({ data }) => data.publie);
 const temoignagesPub = await getCollection('temoignages', ({ data }) => data.publie);
 const enfantsPub = await getCollection('enfants', ({ data }) => data.publie);
-const documents = lireDocuments();
+const documents = config.documentsPublies ?? [];
 const medias = lireMedias();
 const manquesPaiement = listeACompleter(config, enfantsPub.length).filter((t) => t.sev === 'r').length;
 const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}`;

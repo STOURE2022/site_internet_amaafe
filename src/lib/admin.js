@@ -42,19 +42,24 @@ export function lireDocuments() {
   return readdirSync(new URL('../../public/documents/', import.meta.url)).filter((f) => f.endsWith('.pdf'));
 }
 
-/** Titres lisibles des documents publiés, par nom de fichier. */
-export const NOMS_DOCUMENTS = {
-  'etat-financier-2024-2025.pdf': '📊 État financier 2024/2025',
-  'rapport-impact-2010-2025.pdf': "📈 Rapport d'impact 2010-2025",
-  'presentation-centre-rahma.pdf': '🎞️ Présentation du Centre Rahma',
-};
-
-/** PDF de public/documents/ avec leur taille et leur URL publique. */
-export function lireDocumentsDetail() {
+/** Documents publiés : la liste vit dans config.documentsPublies (gérée
+    dans l'admin, PDF téléversés dans public/documents) ; la taille est
+    lue sur le disque quand le fichier existe. */
+export function lireDocumentsPublies(config) {
   const dossier = new URL('../../public/documents/', import.meta.url);
-  return readdirSync(dossier)
-    .filter((f) => f.endsWith('.pdf'))
-    .map((f) => ({ nom: f, taille: statSync(new URL(f, dossier)).size, href: `/documents/${f}` }));
+  return (config.documentsPublies ?? []).map((d) => {
+    let taille = null;
+    try {
+      taille = statSync(new URL(encodeURIComponent((d.fichier ?? '').split('/').pop()), dossier)).size;
+    } catch { /* fichier introuvable : la carte s'affiche sans taille */ }
+    return { titre: d.titre, description: d.description ?? null, href: d.fichier, taille };
+  });
+}
+
+/** Y a-t-il des statuts parmi les documents publiés ? */
+export function statutsPublies(config) {
+  return (config.documentsPublies ?? []).some((d) =>
+    `${d.titre ?? ''} ${d.fichier ?? ''}`.toLowerCase().includes('statut'));
 }
 
 /** Images de la médiathèque (public/images/uploads/), avec taille et URL. */
@@ -75,7 +80,7 @@ export function fmtTaille(octets) {
 /** Données manquantes sur le site, avec sévérité (r = canal de don bloqué). */
 export function listeACompleter(config, nbFichesEnfants) {
   const p = config.paiement;
-  const statutsPresents = lireDocuments().some((f) => f.toLowerCase().includes('statut'));
+  const statutsPresents = statutsPublies(config);
   const photosManquantes = PHOTOS_SITE.filter((ph) => !(config.photos ?? {})[ph.cle]).length;
   return [
     !p.wave.numero && { titre: 'Numéro Wave', detail: 'Le canal affiche « à communiquer » sur la page don.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
@@ -85,7 +90,7 @@ export function listeACompleter(config, nbFichesEnfants) {
     !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
     !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
     config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la jauge d’avancement de la collecte.', sev: 'o', href: versConfigSection('Projet de médersa') },
-    !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Déposer le PDF dans public/documents sur GitHub.', sev: 'o', href: versDocumentsGitHub },
+    !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Téléversez le PDF depuis l’admin, section Documents.', sev: 'o', href: versConfigSection('Documents à télécharger (page Transparence)') },
     photosManquantes > 0 && { titre: 'Photos du site', detail: `${photosManquantes} emplacement${photosManquantes > 1 ? 's' : ''} hachuré${photosManquantes > 1 ? 's' : ''} en attente d’une photo.`, sev: 'o', href: '/admin/tableau-de-bord/medias/' },
     nbFichesEnfants === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },
     !config.formulaires.declarationDonUrl && { titre: 'Formulaires externes', detail: 'Déclaration de don, parrainage, contact, newsletter.', sev: 'o', href: versConfigSection('Formulaires externes (URLs)') },

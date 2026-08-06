@@ -1,21 +1,19 @@
 ---
-/** Vue interne des documents téléchargeables (public/documents/),
-    avec leur taille et l'accès au dépôt GitHub pour en ajouter. */
+/** Vue interne des documents téléchargeables : la liste vit dans la
+    configuration (admin → section Documents), les PDF sont téléversés
+    directement depuis l'éditeur dans public/documents. */
 import Admin from '../../../layouts/Admin.astro';
-import { lireDocumentsDetail, fmtTaille, versDocumentsGitHub, REPO } from '../../../lib/admin.js';
+import config from '../../../../content/config.json';
+import { lireDocumentsPublies, statutsPublies, fmtTaille, versConfigSection } from '../../../lib/admin.js';
 
-const NOMS = {
-  'etat-financier-2024-2025.pdf': 'État financier 2024/2025',
-  'rapport-impact-2010-2025.pdf': "Rapport d'impact 2010-2025",
-  'presentation-centre-rahma.pdf': 'Présentation du Centre Rahma (diapos)',
-};
-const documents = lireDocumentsDetail();
-const statutsPresents = documents.some((d) => d.nom.toLowerCase().includes('statut'));
+const documents = lireDocumentsPublies(config);
+const statutsPresents = statutsPublies(config);
+const versDocs = versConfigSection('Documents à télécharger (page Transparence)');
 ---
-<Admin titre="Documents" sousTitre={`${documents.length} PDF téléchargeable${documents.length > 1 ? 's' : ''} sur la page Transparence.`} actif="documents">
+<Admin titre="Documents" sousTitre={`${documents.length} PDF téléchargeable${documents.length > 1 ? 's' : ''} sur la page Transparence — gérés depuis l'éditeur, téléversement compris.`} actif="documents">
   <Fragment slot="actions">
     <a class="btn btn--ghost" href="/transparence/">Voir la page publique ↗</a>
-    <a class="btn btn--or" href={versDocumentsGitHub} rel="noopener">Déposer un PDF (GitHub) ↗</a>
+    <a class="btn btn--or" href={versDocs}>+ Ajouter un document</a>
   </Fragment>
 
   <section class="card" style="margin-top:24px">
@@ -27,12 +25,12 @@ const statutsPresents = documents.some((d) => d.nom.toLowerCase().includes('stat
         <tbody>
           {documents.map((d) => (
             <tr>
-              <td><b>{NOMS[d.nom] ?? d.nom}</b></td>
-              <td class="dt">{d.nom}</td>
-              <td class="dt">{fmtTaille(d.taille)}</td>
+              <td><b>{d.titre}</b>{d.description && <Fragment><br /><span class="muted">{d.description}</span></Fragment>}</td>
+              <td class="dt">{(d.href ?? '').split('/').pop()}</td>
+              <td class="dt">{d.taille != null ? fmtTaille(d.taille) : <span class="chip chip--off">fichier introuvable</span>}</td>
               <td class="act">
                 <a href={d.href} rel="noopener">Voir ↗</a>
-                <a href={`${REPO}/blob/main/public/documents/${d.nom}`} rel="noopener">GitHub ↗</a>
+                <a href={versDocs}>Modifier →</a>
               </td>
             </tr>
           ))}
@@ -41,7 +39,7 @@ const statutsPresents = documents.some((d) => d.nom.toLowerCase().includes('stat
               <td><b>Statuts de l'association</b></td>
               <td><span class="chip chip--off">manquant</span></td>
               <td class="dt">—</td>
-              <td class="act"><a href={versDocumentsGitHub} rel="noopener">Déposer ↗</a></td>
+              <td class="act"><a href={versDocs}>Téléverser →</a></td>
             </tr>
           )}
         </tbody>
@@ -50,7 +48,8 @@ const statutsPresents = documents.some((d) => d.nom.toLowerCase().includes('stat
   </section>
 
   <p style="font-size:13px;color:var(--gris);margin-top:14px">
-    Les PDF déposés dans <span class="dt" style="font-size:12px">public/documents/</span> sur GitHub apparaissent ici et sur la page
-    Transparence après le redéploiement. Compressez les fichiers volumineux avant l'envoi : le site vise les connexions lentes.
+    « Ajouter un document » ouvre l'éditeur à la section <strong>Documents à télécharger</strong> : donnez un titre,
+    téléversez le PDF, enregistrez — il apparaît sur la page Transparence après le redéploiement (2-3 minutes).
+    Compressez les fichiers volumineux avant l'envoi : le site vise les connexions lentes.
   </p>
 </Admin>
