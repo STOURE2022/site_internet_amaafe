@@ -42,6 +42,13 @@ export function lireDocuments() {
   return readdirSync(new URL('../../public/documents/', import.meta.url)).filter((f) => f.endsWith('.pdf'));
 }
 
+/** Titres lisibles des documents publiés, par nom de fichier. */
+export const NOMS_DOCUMENTS = {
+  'etat-financier-2024-2025.pdf': '📊 État financier 2024/2025',
+  'rapport-impact-2010-2025.pdf': "📈 Rapport d'impact 2010-2025",
+  'presentation-centre-rahma.pdf': '🎞️ Présentation du Centre Rahma',
+};
+
 /** PDF de public/documents/ avec leur taille et leur URL publique. */
 export function lireDocumentsDetail() {
   const dossier = new URL('../../public/documents/', import.meta.url);

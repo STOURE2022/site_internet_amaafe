@@ -41,10 +41,71 @@
         ['🤝', 'Parrainer un enfant', 'parrainage'],
         ['🕌', 'Le projet de médersa', 'medersa'],
         ['📖', 'Le centre et ses horaires', 'centre'],
+        ['📞', 'Parler à une vraie personne', 'humain'],
+        ['➕', 'Autres sujets…', 'menu2'],
+      ],
+    },
+    menu2: {
+      moi: 'Autres sujets…',
+      reponses: ['Voici tout ce que je peux vous expliquer :'],
+      choix: [
+        ['📄', 'Documents à télécharger', 'documents'],
+        ['📰', 'Les actualités du centre', 'actus'],
+        ['🔍', "Où va l'argent ?", 'transparence'],
+        ['🏫', 'Inscrire un enfant au centre', 'inscrire'],
+        ['🙋', 'Devenir bénévole ou partenaire', 'benevole'],
+        ['📬', 'Recevoir les nouvelles', 'newsletter'],
         ['🧕', "L'association AMAAFE", 'amaafe'],
         ['📱', 'Nos réseaux sociaux', 'reseaux'],
-        ['📞', 'Parler à une vraie personne', 'humain'],
+        ['🏠', 'Menu principal', 'accueil'],
       ],
+    },
+    documents: {
+      moi: 'Documents à télécharger',
+      reponses: ["Voici les documents publiés par l'association — transparence totale :"],
+      docs: (C.documents || []),
+      choix: [['🔍', "Où va l'argent ?", 'transparence'], ['🏠', 'Autres questions', 'accueil']],
+    },
+    actus: {
+      moi: 'Les actualités du centre',
+      reponses: [
+        (C.derniereActu ? 'La dernière actualité publiée : <b>« ' + C.derniereActu + ' »</b>.<br><br>' : '') +
+        "Sur la page Actualités, vous trouverez la vie du centre, les sorties éducatives et l'avancement du projet de médersa.",
+      ],
+      choix: [['📰', 'Lire les actualités', 'lien:/actualites/'], ['📬', 'Recevoir les nouvelles', 'newsletter'], ['🏠', 'Autres questions', 'accueil']],
+    },
+    transparence: {
+      moi: "Où va l'argent ?",
+      reponses: [
+        "Question légitime — et c'est la fierté de l'association : sur l'exercice 2024/2025, <b>près de 80 % des dépenses sont allées directement aux actions</b> (aide aux familles, orphelinats, fournitures scolaires…), le reste au fonctionnement.",
+        'Le bilan est certifié par le bureau, présenté en assemblée générale et <b>publié intégralement</b> sur la page Transparence, avec les références légales des deux entités (Mali et France).',
+      ],
+      choix: [['🔍', 'Voir la page Transparence', 'lien:/transparence/'], ['📄', 'Télécharger les documents', 'documents'], ['🏠', 'Autres questions', 'accueil']],
+    },
+    inscrire: {
+      moi: 'Inscrire un enfant au centre',
+      reponses: [
+        'Le centre accueille en priorité les enfants des <b>familles démunies de Yirimadio</b>, sans distinction de situation sociale. Tout est <b>gratuit</b> : scolarité, fournitures, uniforme.',
+        'Pour une inscription, le plus simple est de <b>passer au centre</b>' +
+        (C.horaires ? ' (' + C.horaires + ')' : '') +
+        (C.telMali ? ' ou d’appeler le ' + mono(C.telMali) : '') +
+        '. L’équipe étudie chaque situation avec bienveillance.',
+      ],
+      choix: [['🗺️', 'Adresse et contact', 'lien:/contact/'], ['🏠', 'Autres questions', 'accueil']],
+    },
+    benevole: {
+      moi: 'Devenir bénévole ou partenaire',
+      reponses: [
+        "Qu'Allah vous récompense pour cette intention ! L'AMAAFE s'appuie sur <b>" + (C.benevoles || 'des') + ' bénévoles actifs' +
+        (C.membresAdherents ? ' et ' + C.membresAdherents + ' membres adhérents' : '') + '</b> — et accueille volontiers de nouvelles énergies :',
+        '<ul><li><b>Bénévolat</b> : au Mali (terrain) ou en France (relais, collecte)</li><li><b>Adhésion</b> : devenir membre de l’association</li><li><b>Partenariat</b> : associations, entreprises, fondations</li></ul>Écrivez-nous ou contactez l’équipe sur WhatsApp — on vous répond vite.',
+      ],
+      choix: [['💬', "Contacter l'équipe", 'humain'], ['🏠', 'Autres questions', 'accueil']],
+    },
+    newsletter: {
+      moi: 'Recevoir les nouvelles',
+      reponses: ["Une lettre par période : avancement de la médersa, vie des élèves, comptes publiés. L'inscription se fait par un simple message — la page Actualités vous prépare tout (adresse et message à copier, ou envoi direct via Gmail)."],
+      choix: [['📬', "M'inscrire à la lettre", 'lien:/actualites/#newsletter'], ['🏠', 'Autres questions', 'accueil']],
     },
     don: {
       moi: 'Faire un don',
@@ -179,6 +240,15 @@
   function montreChoix(sujet) {
     var wrap = document.createElement('div');
     wrap.className = 'cb__chx';
+    (sujet.docs || []).forEach(function (d) {
+      var a = document.createElement('a');
+      a.href = d.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'doc';
+      a.innerHTML = d.titre + '<small>PDF · ' + d.taille + '</small>';
+      wrap.appendChild(a);
+    });
     (sujet.liens || []).forEach(function (l) {
       var a = document.createElement('a');
       a.href = l[2];

@@ -4,8 +4,18 @@
     (inclus par le layout Base). Les réponses sont construites par
     /public/js/assistant.js à partir des données injectées ci-dessous,
     donc toujours alignées sur la configuration admin. */
+import { getCollection } from 'astro:content';
 import config from '../../content/config.json';
 import { pourcentageCollecte } from '../lib/format.js';
+import { lireDocumentsDetail, fmtTaille, NOMS_DOCUMENTS } from '../lib/admin.js';
+
+const actus = await getCollection('actualites', ({ data }) => data.publie);
+const derniereActu = [...actus].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''))[0];
+const documents = lireDocumentsDetail().map((d) => ({
+  titre: NOMS_DOCUMENTS[d.nom] ?? `📄 ${d.nom.replace(/\.pdf$/, '').replace(/-/g, ' ')}`,
+  href: d.href,
+  taille: fmtTaille(d.taille),
+}));
 
 const cfg = {
   waMali: config.whatsapp.numeroMali,
@@ -26,6 +36,10 @@ const cfg = {
   collecteFCFA: config.medersa.montantCollecteFCFA,
   pctCollecte: pourcentageCollecte(config.medersa),
   reseaux: config.reseaux,
+  documents: documents,
+  derniereActu: derniereActu ? derniereActu.data.titre : null,
+  benevoles: config.chiffres.benevoles,
+  membresAdherents: config.chiffres.membresAdherents,
 };
 ---
 <div class="cb-coucou" id="cb-coucou" hidden aria-hidden="true">

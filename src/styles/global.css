@@ -306,6 +306,8 @@ p{margin:0}
 .cb__chx a{background:#1FAF56;border:1.5px solid #1FAF56;color:#fff}
 .cb__chx a.or{background:var(--or);border-color:var(--or);color:var(--nuit)}
 .cb__chx .em{font-size:16px;flex:none}
+.cb__chx .doc{background:var(--papier-2);border:1.5px dashed var(--or);color:var(--vert)}
+.cb__chx .doc small{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--gris-2);font-weight:400;white-space:nowrap}
 .cb__pied{flex:none;padding:9px 14px;border-top:1px solid var(--ligne);background:var(--papier-2);font-size:11px;color:var(--gris-2);text-align:center}
 @media(max-width:760px){
   .cb-bulle{bottom:86px}
