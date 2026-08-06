@@ -126,9 +126,33 @@ p{margin:0}
 .nav__cta .btn{white-space:nowrap;padding:12px 20px}
 .burger{display:none;width:44px;height:44px;border-radius:10px;background:var(--vert-pale);place-items:center;gap:4.5px}
 .burger span{display:block;width:17px;height:1.8px;background:var(--vert);border-radius:2px}
-.mmenu{display:none;border-top:1px solid var(--ligne);background:var(--papier-2)}
-.mmenu.is-open{display:block}
-.mmenu a{display:block;padding:14px var(--pad);border-bottom:1px solid var(--ligne);font-weight:500}
+/* menu mobile : panneau coulissant depuis la droite, avec voile */
+.mvoile{position:fixed;inset:0;background:rgba(10,27,18,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:74}
+.mvoile.is-open{opacity:1;pointer-events:auto}
+.mmenu{position:fixed;top:0;right:0;bottom:0;width:86%;max-width:330px;background:var(--papier-2);z-index:75;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .32s cubic-bezier(.22,1,.36,1);box-shadow:-24px 0 60px -20px rgba(10,27,18,.45)}
+.mmenu.is-open{transform:none}
+.mmenu__h{display:flex;align-items:center;gap:11px;padding:16px 16px 14px;border-bottom:1px solid var(--ligne);flex:none}
+.mmenu__h b{font-family:var(--serif);font-weight:600;font-size:15px;color:var(--vert)}
+.mmenu__x{margin-left:auto;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ligne);display:grid;place-items:center;font-size:16px;color:var(--gris);transition:border-color .15s,rotate .3s;background:none;cursor:pointer}
+.mmenu__x:hover{border-color:var(--vert);rotate:90deg}
+.mmenu__nav{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column}
+.mmenu__nav a{display:flex;align-items:center;gap:11px;padding:13px 12px;border-radius:11px;font-size:16.5px;font-weight:700;color:var(--encre)}
+.mmenu__nav a:hover{background:var(--vert-pale)}
+.mmenu__nav a.actif{background:var(--vert-pale);color:var(--vert)}
+.mmenu__nav .fl{margin-left:auto;color:var(--gris-2);font-weight:400}
+.mmenu__nav .camp i{width:8px;height:8px;border-radius:50%;background:var(--rouge);font-style:normal;flex:none;animation:camp-pouls 2.4s ease-in-out infinite}
+.mmenu__nav .camp .badge{margin-left:auto;background:var(--rouge);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:3px 9px}
+.mmenu__sep{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-2);padding:14px 12px 5px}
+.mmenu__pied{border-top:1px solid var(--ligne);padding:14px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:none}
+.mmenu__cta{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mmenu__cta a{display:flex;align-items:center;justify-content:center;border-radius:10px;padding:13px;font-weight:700;font-size:14.5px}
+.mmenu__cta .ghost{border:1.5px solid var(--ligne);color:var(--vert);background:var(--papier)}
+.mmenu__cta .plein{background:var(--or);color:var(--nuit)}
+.mmenu__rs{display:flex;gap:8px;justify-content:center}
+.mmenu__rs a{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--ligne);display:grid;place-items:center;color:var(--vert)}
+.mmenu__rs svg{width:17px;height:17px;fill:currentColor}
+.mmenu__tel{text-align:center;font-family:var(--mono);font-size:11px;color:var(--gris-2)}
+body.menu-ouvert{overflow:hidden}
 .topbar{background:var(--vert);color:rgba(255,255,255,.8);font-size:12px}
 .topbar__i{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-block:9px}
 .topbar b{color:var(--or);font-weight:600}
@@ -265,8 +289,8 @@ p{margin:0}
 .rs svg{width:20px;height:20px;fill:currentColor}
 
 /* ---- entrée « Campagne » du menu ---- */
-.menu a.camp,.mmenu a.camp{color:#8A2318}
-.menu a.camp::before,.mmenu a.camp::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rouge);margin-right:7px;vertical-align:1px;animation:camp-pouls 2.4s ease-in-out infinite}
+.menu a.camp,.mmenu__nav a.camp{color:#8A2318}
+.menu a.camp::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rouge);margin-right:7px;vertical-align:1px;animation:camp-pouls 2.4s ease-in-out infinite}
 @keyframes camp-pouls{0%,100%{box-shadow:0 0 0 0 rgba(179,39,30,.45)}50%{box-shadow:0 0 0 5px rgba(179,39,30,0)}}
 
 /* ---- page Campagne ---- */

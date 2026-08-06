@@ -52,16 +52,25 @@ window.lienEmailRahma = function (service, dest, sujet, corps) {
 
   var burger = document.getElementById('burger');
   var mmenu = document.getElementById('mmenu');
+  var mvoile = document.getElementById('mvoile');
+  var mmenuX = document.getElementById('mmenu-x');
   if (burger && mmenu) {
+    var basculeMenu = function (ouvrir) {
+      mmenu.classList.toggle('is-open', ouvrir);
+      if (mvoile) mvoile.classList.toggle('is-open', ouvrir);
+      document.body.classList.toggle('menu-ouvert', ouvrir);
+      burger.setAttribute('aria-expanded', ouvrir ? 'true' : 'false');
+    };
     burger.addEventListener('click', function () {
-      var open = mmenu.classList.toggle('is-open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      basculeMenu(!mmenu.classList.contains('is-open'));
+    });
+    if (mmenuX) mmenuX.addEventListener('click', function () { basculeMenu(false); });
+    if (mvoile) mvoile.addEventListener('click', function () { basculeMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mmenu.classList.contains('is-open')) basculeMenu(false);
     });
     mmenu.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        mmenu.classList.remove('is-open');
-        burger.setAttribute('aria-expanded', 'false');
-      }
+      if (e.target.closest('a')) basculeMenu(false);
     });
   }
 
