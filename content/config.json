@@ -34,11 +34,6 @@
       "legende": "Yirimadjo, Opération ramadan"
     }
   ],
-  "documentsPublies": [
-    { "titre": "État financier 2024/2025", "description": "Recettes, dépenses et réalisations de l'exercice", "fichier": "/documents/etat-financier-2024-2025.pdf" },
-    { "titre": "Rapport d'impact 2010-2025", "description": "Quinze ans d'actions et de résultats", "fichier": "/documents/rapport-impact-2010-2025.pdf" },
-    { "titre": "Présentation du Centre Rahma", "description": "16 diapositives : historique, fonctionnement, chiffres et besoins du centre", "fichier": "/documents/presentation-centre-rahma.pdf" }
-  ],
   "entites": {
     "mali": {
       "nom": "AMAAFE / Mali",
@@ -186,6 +181,27 @@
       "Accompagnement social"
     ]
   },
+  "documentsPublies": [
+    {
+      "titre": "État financier 2024/2025",
+      "description": "Recettes, dépenses et réalisations de l'exercice",
+      "fichier": "/documents/etat-financier-2024-2025.pdf"
+    },
+    {
+      "titre": "Rapport d'impact 2010-2025",
+      "description": "Quinze ans d'actions et de résultats",
+      "fichier": "/documents/rapport-impact-2010-2025.pdf"
+    },
+    {
+      "titre": "Présentation du Centre Rahma",
+      "description": "16 diapositives : historique, fonctionnement, chiffres et besoins du centre",
+      "fichier": "/documents/presentation-centre-rahma.pdf"
+    },
+    {
+      "titre": "Dispo de présentation AMAAFE",
+      "fichier": "https://drive.google.com/file/d/1DIXbMKNWM5eF4EmlNLxMbn-m1JI95Cfh/view?usp=drive_link"
+    }
+  ],
   "whatsapp": {
     "_aide": "Numéros qui reçoivent les déclarations de don sur WhatsApp, au format international SANS le +, sans espaces. Mali : Orange Money, Wave, virement Mali. France : Wero, PayPal, virement France. Si l'un est vide, tout part vers l'autre. Vérifier que chaque numéro est relié à un compte WhatsApp actif et consulté.",
     "numeroMali": "22376337915",
