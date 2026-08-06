@@ -209,8 +209,14 @@ collections:
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, value_type: int, required: false }
-              - { name: montantCollecteFCFA, label: "Montant collecté (FCFA)", widget: number, value_type: int, required: false,
-                  hint: "La jauge d'avancement se calcule automatiquement à partir de ce montant." }
+              - name: collecteHorsLigne
+                label: "Collecte hors ligne — saisies de l'équipe"
+                widget: list
+                required: false
+                hint: "Une ligne par source (Orange Money, Wave, virements, espèces…). La jauge additionne ces montants et, automatiquement, la collecte HelloAsso."
+                fields:
+                  - { name: source, label: "Source (ex. Orange Money — pointé au 5 août)", widget: string }
+                  - { name: montantFCFA, label: "Montant (FCFA)", widget: number, value_type: int }
               - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, value_type: float, required: false }
           - name: photos
             label: "Photos du site"

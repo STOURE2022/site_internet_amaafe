@@ -4,7 +4,7 @@
 import { getCollection } from 'astro:content';
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
-import { fmtNombre, pourcentageCollecte } from '../../../lib/format.js';
+import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../../../lib/format.js';
 import { CMS, versConfigSection, listeACompleter, etatCanaux, statutsPublies } from '../../../lib/admin.js';
 
 const actus = await getCollection('actualites', ({ data }) => data.publie);
@@ -23,6 +23,7 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
   : null;
 const pctCollecte = pourcentageCollecte(config.medersa);
+const manuelFCFA = collecteManuelleFCFA(config.medersa);
 const pctCollecteFr = String(pctCollecte).replace('.', ',');
 const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whatsapp.numeroFrance}`;
 ---
@@ -46,9 +47,9 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
     <div class="kpi">
       <span class="kpi__l">Objectif médersa</span>
       <div class="kpi__v">{config.medersa.budgetTotalEUR != null ? fmtNombre(config.medersa.budgetTotalEUR) : '—'} <small>€</small></div>
-      <p class="kpi__s">{config.medersa.montantCollecteFCFA != null
-        ? <Fragment><b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA</b> collectés</Fragment>
-        : <Fragment>montant collecté <b>à renseigner</b></Fragment>}</p>
+      <p class="kpi__s">{manuelFCFA != null
+        ? <Fragment><b>{fmtNombre(manuelFCFA)} FCFA</b> hors ligne + HelloAsso auto</Fragment>
+        : <Fragment>saisies hors ligne <b>à renseigner</b></Fragment>}</p>
     </div>
     <div class={`kpi${aCompleter.length > 0 ? ' kpi--attention' : ''}`}>
       <span class="kpi__l">Données à compléter</span>
@@ -66,15 +67,15 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
           <a href={versConfigSection('Projet de médersa')}>Mettre à jour →</a>
         </div>
         <div class="obj">
-          {config.medersa.montantCollecteFCFA != null
-            ? <b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA</b>
-            : <span class="tbd">montant collecté à renseigner</span>}
+          {manuelFCFA != null
+            ? <b>{fmtNombre(manuelFCFA)} FCFA</b>
+            : <span class="tbd">saisies hors ligne à renseigner</span>}
           <span>sur l'objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>{objectifFCFAMillions && ` (≈ ${objectifFCFAMillions} millions de FCFA)`}</span>
         </div>
         <div class="bar" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}>
           <i style={`width:${pctCollecte}%`}></i>
         </div>
-        <div class="obj__f"><span>jauge calculée depuis le montant collecté</span><span>{pctCollecteFr} %</span></div>
+        <div class="obj__f"><span>saisies de l'équipe — la part HelloAsso s'ajoute automatiquement sur le site public</span><span>{pctCollecteFr} %</span></div>
       </section>
 
       <section class="card" aria-labelledby="t-dons">

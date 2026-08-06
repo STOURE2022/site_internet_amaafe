@@ -3,7 +3,7 @@
     content/config.json, groupé par thème. L'édition se fait dans Decap. */
 import Admin from '../../../layouts/Admin.astro';
 import config from '../../../../content/config.json';
-import { fmtNombre } from '../../../lib/format.js';
+import { fmtNombre, collecteManuelleFCFA } from '../../../lib/format.js';
 import { versConfig, versConfigSection } from '../../../lib/admin.js';
 
 const c = config;
@@ -34,7 +34,8 @@ const groupes = [
   ]},
   { titre: 'Projet de médersa', cible: 'Projet de médersa', lignes: [
     ['Objectif de collecte', c.medersa.budgetTotalEUR != null ? `${fmtNombre(c.medersa.budgetTotalEUR)} €` : null],
-    ['Montant collecté', c.medersa.montantCollecteFCFA != null ? `${fmtNombre(c.medersa.montantCollecteFCFA)} FCFA` : null],
+    ['Collecte hors ligne', collecteManuelleFCFA(c.medersa) != null ? `${fmtNombre(collecteManuelleFCFA(c.medersa))} FCFA (${(c.medersa.collecteHorsLigne ?? []).length} source${(c.medersa.collecteHorsLigne ?? []).length > 1 ? 's' : ''})` : null],
+    ['Part HelloAsso', 'ajoutée automatiquement (API, cache 1 h)'],
     ['Avancement forcé', c.medersa.pourcentageAvancement != null ? `${c.medersa.pourcentageAvancement} %` : 'calculé automatiquement'],
   ]},
   { titre: "L'AMAAFE", cible: 'AMAAFE', lignes: [

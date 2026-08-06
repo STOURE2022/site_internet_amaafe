@@ -5,7 +5,7 @@ import DonConfig from '../components/DonConfig.astro';
 import Tbd from '../components/Tbd.astro';
 import config from '../../content/config.json';
 import { getCollection } from 'astro:content';
-import { fmtDate, fmtNombre, pourcentageCollecte } from '../lib/format.js';
+import { fmtDate, fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 import Photo from '../components/Photo.astro';
 import CarteEnfant from '../components/CarteEnfant.astro';
 import ParrainerDialog from '../components/ParrainerDialog.astro';
@@ -150,14 +150,18 @@ const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slic
             <div class="room"><i></i>Une salle de prière</div>
             <div class="room"><i></i>Des espaces pour la formation professionnelle</div>
           </div>
-          <div class="bar"><i data-fill={pourcentageCollecte(config.medersa)}></i></div>
-          <div class="sums">
-            <b><Tbd valeur={config.medersa.montantCollecteFCFA} label="montant collecté" suffixe=" FCFA collectés" /></b>
-            <span>sur un objectif de {config.medersa.budgetTotalEUR != null
-              ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>
-              : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
+          <div data-collecte data-objectif-fcfa={config.medersa.budgetTotalEUR != null ? Math.round(config.medersa.budgetTotalEUR * 655.957) : 0} data-manuel-fcfa={collecteManuelleFCFA(config.medersa) ?? 0}>
+            <div class="bar"><i data-fill={pourcentageCollecte(config.medersa)} data-cbar-m></i><i class="bar__ha" data-cbar-h></i></div>
+            <div class="sums">
+              {collecteManuelleFCFA(config.medersa) != null
+                ? <b><span data-ctotal>{fmtNombre(collecteManuelleFCFA(config.medersa))} FCFA</span> collectés</b>
+                : <b><Tbd valeur={null} label="montant collecté" suffixe=" FCFA collectés" /></b>}
+              <span>sur un objectif de {config.medersa.budgetTotalEUR != null
+                ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>
+                : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
+            </div>
+            <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Saisies de l'équipe + collecte HelloAsso, additionnées automatiquement.</p>
           </div>
-          <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Le montant déjà collecté sera publié ici et actualisé régulièrement.</p>
         </div>
         <div class="proj__side">
           <Photo cle="planMedersa" texte="plan ou vue d'artiste de la future médersa" />

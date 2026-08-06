@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
 import config from '../../content/config.json';
-import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
+import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 
 /* Parité fixe FCFA/euro : 1 € = 655,957 FCFA */
 const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
@@ -10,7 +10,7 @@ const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
   : null;
 const pctCollecte = pourcentageCollecte(config.medersa);
 const pctCollecteFr = String(pctCollecte).replace('.', ',');
-const collecteFCFA = config.medersa.montantCollecteFCFA;
+const collecteFCFA = collecteManuelleFCFA(config.medersa);
 const objectifFCFA = config.medersa.budgetTotalEUR != null ? Math.round(config.medersa.budgetTotalEUR * 655.957) : null;
 const resteFCFA = collecteFCFA != null && objectifFCFA != null ? Math.max(0, objectifFCFA - collecteFCFA) : null;
 const resteAffiche = resteFCFA == null
@@ -33,16 +33,18 @@ const resteAffiche = resteFCFA == null
   <!-- ===== AVANCEMENT DE LA COLLECTE ===== -->
   <section class="sec" style="padding-top:8px;padding-bottom:clamp(36px,5vw,56px)">
     <div class="wrap">
-      <div class="collecte rv">
+      <div class="collecte rv" data-collecte data-objectif-fcfa={objectifFCFA ?? 0} data-manuel-fcfa={collecteFCFA ?? 0}>
         <div class="collecte__in">
           <div>
-            <span class="collecte__eb">Collecte — terrain de la médersa</span>
+            <span class="collecte__eb">Collecte — terrain de la médersa <span class="clive" data-clive hidden><i></i>Mise à jour auto</span></span>
             {collecteFCFA != null ? (
               <Fragment>
-                <div class="collecte__m"><b>{fmtNombre(collecteFCFA)} FCFA</b> collectés</div>
+                <div class="collecte__m"><b data-ctotal>{fmtNombre(collecteFCFA)} FCFA</b> collectés</div>
                 <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA)</p>
-                <div class="collecte__jt" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}><i data-fill={pctCollecte}></i></div>
-                <div class="collecte__jf"><span>jauge actualisée par le bureau</span><b>{pctCollecteFr} %</b></div>
+                <div class="collecte__jt" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}><i data-fill={pctCollecte} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
+                <div class="collecte__jf"><span>saisies de l'équipe + HelloAsso</span><b data-cpct>{pctCollecteFr} %</b></div>
+                <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso (carte bancaire), automatique<b data-cdet-mnt></b></div>
+                <div class="cmaj" data-cmaj hidden></div>
               </Fragment>
             ) : (
               <Fragment>
@@ -53,7 +55,7 @@ const resteAffiche = resteFCFA == null
           </div>
           <div class="collecte__cta">
             {resteAffiche && resteFCFA > 0 && (
-              <div class="collecte__reste"><b>{resteAffiche}</b><span>restent à réunir pour atteindre l'objectif</span></div>
+              <div class="collecte__reste"><b data-creste>{resteAffiche}</b><span>restent à réunir pour atteindre l'objectif</span></div>
             )}
             <a class="btn btn--or btn--lg" style="justify-content:center" href="/faire-un-don/">Poser une pierre&nbsp;→</a>
             <p class="collecte__sq">Chaque contribution est une <strong>Sadaqa Jâriya</strong> — une aumône continue.</p>

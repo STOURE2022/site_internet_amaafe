@@ -89,7 +89,7 @@ export function listeACompleter(config, nbFichesEnfants) {
     !p.virementFrance.iban && { titre: 'IBAN du compte France', detail: 'Coordonnées du virement bancaire en France.', sev: 'r', href: versConfigSection('Coordonnées de paiement') },
     !p.orangeMoney.titulaire && { titre: 'Titulaire Orange Money', detail: 'Nom affiché au donateur à la validation.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
     !p.wero.titulaire && { titre: 'Titulaire Wero', detail: 'Nom du destinataire à vérifier par le donateur.', sev: 'o', href: versConfigSection('Coordonnées de paiement') },
-    config.medersa.montantCollecteFCFA == null && { titre: 'Montant collecté (médersa)', detail: 'Active la jauge d’avancement de la collecte.', sev: 'o', href: versConfigSection('Projet de médersa') },
+    (config.medersa.collecteHorsLigne ?? []).length === 0 && { titre: 'Collecte hors ligne (médersa)', detail: 'Saisissez les montants collectés par canal — HelloAsso s’ajoute automatiquement.', sev: 'o', href: versConfigSection('Projet de médersa') },
     !statutsPresents && { titre: 'Statuts de l’association (PDF)', detail: 'Téléversez le PDF depuis l’admin, section Documents.', sev: 'o', href: versConfigSection('Documents à télécharger (page Transparence)') },
     photosManquantes > 0 && { titre: 'Photos du site', detail: `${photosManquantes} emplacement${photosManquantes > 1 ? 's' : ''} hachuré${photosManquantes > 1 ? 's' : ''} en attente d’une photo.`, sev: 'o', href: '/admin/tableau-de-bord/medias/' },
     nbFichesEnfants === 0 && { titre: 'Fiches enfants à parrainer', detail: 'Aucune fiche publiée — autorisations parentales signées.', sev: 'o', href: `${CMS}/collections/enfants/new` },

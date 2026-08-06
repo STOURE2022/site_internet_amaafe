@@ -6,7 +6,7 @@
     donc toujours alignées sur la configuration admin. */
 import { getCollection } from 'astro:content';
 import config from '../../content/config.json';
-import { pourcentageCollecte } from '../lib/format.js';
+import { pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 const actus = await getCollection('actualites', ({ data }) => data.publie);
 const derniereActu = [...actus].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''))[0];
 
@@ -26,7 +26,7 @@ const cfg = {
   parrainageEUR: config.parrainage.montantMensuelEUR,
   suiviJusquaAge: config.chiffres.suiviJusquaAge,
   objectifEUR: config.medersa.budgetTotalEUR,
-  collecteFCFA: config.medersa.montantCollecteFCFA,
+  collecteFCFA: collecteManuelleFCFA(config.medersa),
   pctCollecte: pourcentageCollecte(config.medersa),
   reseaux: config.reseaux,
   helloasso: (config.paiement.helloasso ?? {}).lien ?? null,

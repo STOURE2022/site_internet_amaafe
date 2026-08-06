@@ -5,7 +5,7 @@
     inactives s'archivent en bas de page. */
 import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
-import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
+import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 
 const campagnes = config.campagnes ?? [];
 const active = campagnes.find((c) => c.active);
@@ -13,6 +13,8 @@ const passees = campagnes.filter((c) => !c.active);
 
 const pct = pourcentageCollecte(config.medersa);
 const pctFr = String(pct).replace('.', ',');
+const manuelFCFA = collecteManuelleFCFA(config.medersa);
+const objectifFCFA = config.medersa.budgetTotalEUR != null ? Math.round(config.medersa.budgetTotalEUR * 655.957) : 0;
 const lienBouton = active?.lienBouton || '/faire-un-don/';
 const texteBouton = active?.texteBouton || 'Faire un don';
 const externe = Boolean(active?.lienBouton && active.lienBouton.startsWith('http'));
@@ -49,13 +51,15 @@ const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du 
           {externe && <a class="btn btn--ghost btn--full" style="margin-top:9px" href="/faire-un-don/">Orange Money, Wero, virement…</a>}
           <a class="btn btn--full" style="margin-top:9px;background:#1FAF56;color:#fff" href={`https://wa.me/?text=${partage}`} rel="noopener" target="_blank">💬 Partager sur WhatsApp</a>
         </div>
-        <div class="campjauge">
-          <div class="campjauge__t">Collecte — terrain de la médersa</div>
-          {config.medersa.montantCollecteFCFA != null
-            ? <b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA collectés</b>
+        <div class="campjauge" data-collecte data-objectif-fcfa={objectifFCFA} data-manuel-fcfa={manuelFCFA ?? 0}>
+          <div class="campjauge__t">Collecte — terrain de la médersa <span class="clive" data-clive hidden><i></i>Auto</span></div>
+          {manuelFCFA != null
+            ? <b><span data-ctotal>{fmtNombre(manuelFCFA)} FCFA</span> collectés</b>
             : <b>Collecte en cours</b>}
-          <div class="campjauge__b" role="img" aria-label={`Avancement : ${pctFr} pour cent`}><i style={`width:${pct}%`}></i></div>
-          <div class="campjauge__f"><span>objectif {fmtNombre(config.medersa.budgetTotalEUR)} €</span><b>{pctFr} %</b></div>
+          <div class="campjauge__b" role="img" aria-label={`Avancement : ${pctFr} pour cent`}><i style={`width:${pct}%`} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
+          <div class="campjauge__f"><span>objectif {fmtNombre(config.medersa.budgetTotalEUR)} €</span><b data-cpct>{pctFr} %</b></div>
+          <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso, automatique<b data-cdet-mnt></b></div>
+          <div class="cmaj" data-cmaj hidden></div>
         </div>
       </aside>
     </div>

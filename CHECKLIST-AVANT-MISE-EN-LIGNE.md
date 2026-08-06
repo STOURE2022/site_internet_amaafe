@@ -10,7 +10,8 @@ Cocher chaque case ; le README explique où renseigner chaque donnée.
 - [ ] Coût annuel par enfant (`chiffres.coutAnnuelParEnfantFCFA`) — permet d'afficher la grille d'impact des dons
 - [ ] Montant mensuel du parrainage (`parrainage.montantMensuelFCFA` / `montantMensuelEUR`)
 - [ ] Budget du projet de médersa arrêté par le bureau (`medersa.budgetTotalFCFA`)
-- [ ] Montant déjà collecté (`medersa.montantCollecteFCFA`) et pourcentage (`medersa.pourcentageAvancement`)
+- [ ] Saisies de la collecte hors ligne (`medersa.collecteHorsLigne` — remplacer la ligne de test de 10 000 000 FCFA par les vrais montants pointés par canal)
+- [ ] Créer les identifiants **API HelloAsso** (Mon compte → Intégrations et API) et les fournir pour les secrets Cloudflare `HELLOASSO_CLIENT_ID` / `HELLOASSO_CLIENT_SECRET` — active la mise à jour automatique de la jauge
 - [ ] Horaires de visite du centre (`contact.horairesVisite`)
 
 ## 2. Coordonnées de paiement (à vérifier deux fois — argent en jeu)

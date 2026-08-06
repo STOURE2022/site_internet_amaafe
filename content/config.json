@@ -99,9 +99,11 @@
     "anneeCreation": 2023
   },
   "medersa": {
-    "_aide": "Objectif de collecte en euros. La jauge d'avancement se calcule automatiquement depuis montantCollecteFCFA ; ne remplir pourcentageAvancement que pour forcer une autre valeur.",
+    "_aide": "Objectif en euros. La jauge additionne les saisies « collecte hors ligne » (Orange Money, Wave, virements, espèces…) et, automatiquement, le montant HelloAsso. Ne remplir pourcentageAvancement que pour forcer la jauge.",
     "budgetTotalEUR": 30000,
-    "montantCollecteFCFA": 10000000,
+    "collecteHorsLigne": [
+      { "source": "Orange Money, Wave et autres canaux (détail à saisir par l'équipe)", "montantFCFA": 10000000 }
+    ],
     "pourcentageAvancement": null
   },
   "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
