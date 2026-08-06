@@ -240,12 +240,32 @@
     if (e.key === 'Escape' && !cb.hasAttribute('hidden')) ouvreFerme();
   });
 
-  /* petit message d'accueil : une fois par session, après 4 s */
+  /* nuage messager : questions tournantes, une fois par session,
+     disparaît dès que l'assistant a été ouvert */
+  var MESSAGES = [
+    'Assalamu alaykum 👋 Je peux vous aider',
+    'Une question sur les dons ? 💛',
+    'Comment parrainer un enfant ? 🤝',
+    'Où en est la médersa ? 🕌',
+  ];
+  var coucouTxt = document.getElementById('cb-coucou-txt');
+  var iMsg = 0;
+  var rotation = null;
   var dejaVu = false;
   try { dejaVu = sessionStorage.getItem('rahma-coucou') === '1'; } catch (e) {}
-  if (!dejaVu) {
+  if (!dejaVu && coucouTxt) {
     setTimeout(function () {
-      if (cb.hasAttribute('hidden')) coucou.hidden = false;
-    }, 4000);
+      if (!cb.hasAttribute('hidden')) return;
+      coucou.hidden = false;
+      rotation = setInterval(function () {
+        if (coucou.hidden) { clearInterval(rotation); return; }
+        coucouTxt.classList.add('fondu');
+        setTimeout(function () {
+          iMsg = (iMsg + 1) % MESSAGES.length;
+          coucouTxt.textContent = MESSAGES[iMsg];
+          coucouTxt.classList.remove('fondu');
+        }, 300);
+      }, 4200);
+    }, 3500);
   }
 })();
