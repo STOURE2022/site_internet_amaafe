@@ -237,7 +237,9 @@
       "active": true,
       "titre": "Les salles de formation professionnelle",
       "affiche": "/images/uploads/plan_de_la_future_medersa_1.jpeg",
-      "lienBouton": "https://www.helloasso.com/associations/amaafe/collectes/du-hangar-a-la-madrassa"
+      "lienBouton": "https://www.helloasso.com/associations/amaafe/collectes/du-hangar-a-la-madrassa",
+      "description": "Notre ambition est d'offrir à ces enfants un cadre de vie digne, sécurisé et propice à leur épanouissement.",
+      "texteBouton": "Donner sur HelloAsso"
     }
   ],
   "finances": {
