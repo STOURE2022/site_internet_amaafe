@@ -102,7 +102,26 @@
     "_aide": "Objectif en euros. La jauge additionne les saisies « collecte hors ligne » (Orange Money, Wave, virements, espèces…) et, automatiquement, le montant HelloAsso. Ne remplir pourcentageAvancement que pour forcer la jauge.",
     "budgetTotalEUR": 30000,
     "collecteHorsLigne": [
-      { "source": "Orange Money, Wave et autres canaux (détail à saisir par l'équipe)", "montantFCFA": 10000000 }
+      {
+        "source": "Orange Money",
+        "montantFCFA": 10000000
+      },
+      {
+        "source": "wave",
+        "montantFCFA": 4000000
+      },
+      {
+        "source": "Virement bancaire France",
+        "montantFCFA": 896000
+      },
+      {
+        "source": "paypal",
+        "montantFCFA": 700000
+      },
+      {
+        "source": "Wero",
+        "montantFCFA": 2000000
+      }
     ],
     "pourcentageAvancement": null
   },
@@ -186,17 +205,6 @@
       "Accompagnement social"
     ]
   },
-  "campagnes": [
-    {
-      "titre": "Soutenez l'achat du terrain de la future médersa",
-      "description": "Du hangar à la madrassa : aidez les élèves du Centre Rahma à obtenir un vrai lieu d'apprentissage. Chaque contribution est une Sadaqa Jâriya.",
-      "affiche": "/images/uploads/affiche-campagne-terrain-medersa.jpeg",
-      "lienBouton": "https://www.helloasso.com/associations/amaafe/collectes/du-hangar-a-la-madrassa",
-      "texteBouton": "Donner sur HelloAsso",
-      "active": true
-    }
-  ],
-
   "documentsPublies": [
     {
       "titre": "État financier 2024/2025",
@@ -224,6 +232,16 @@
     "numeroFrance": "33666315340",
     "numeroParrainage": "33666315340"
   },
+  "campagnes": [
+    {
+      "titre": "Soutenez l'achat du terrain de la future médersa",
+      "description": "Du hangar à la madrassa : aidez les élèves du Centre Rahma à obtenir un vrai lieu d'apprentissage. Chaque contribution est une Sadaqa Jâriya.",
+      "affiche": "/images/uploads/affiche-campagne-terrain-medersa.jpeg",
+      "lienBouton": "https://www.helloasso.com/associations/amaafe/collectes/du-hangar-a-la-madrassa",
+      "texteBouton": "Donner sur HelloAsso",
+      "active": true
+    }
+  ],
   "finances": {
     "detailDepensesFonctionnement": [
       {
