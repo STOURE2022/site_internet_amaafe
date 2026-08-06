@@ -107,16 +107,8 @@
         "montantFCFA": 10000000
       },
       {
-        "source": "wave",
-        "montantFCFA": 4000000
-      },
-      {
         "source": "Virement bancaire France",
         "montantFCFA": 896000
-      },
-      {
-        "source": "paypal",
-        "montantFCFA": 700000
       },
       {
         "source": "Wero",
