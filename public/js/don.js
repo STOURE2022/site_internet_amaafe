@@ -175,6 +175,14 @@
     if (versDecl) {
       versDecl.href = '/faire-un-don/?freq=' + freq + '&devise=' + cur + '&montant=' + amount + '&canal=' + pay + '#declarer';
     }
+    /* HelloAsso transmet tout à l'association : l'étape 4 devient
+       « rien à déclarer » tant que ce canal est choisi. */
+    var declStd = $('declStd');
+    var declHa = $('declHa');
+    if (declStd && declHa) {
+      declStd.hidden = pay === 'helloasso';
+      declHa.hidden = pay !== 'helloasso';
+    }
     var dest = destWhatsApp();
     if (waLink) {
       waLink.href = dest

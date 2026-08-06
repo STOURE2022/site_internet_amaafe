@@ -436,6 +436,14 @@ body.menu-ouvert{overflow:hidden}
 .pv__btn--mail:hover{background:#C79624}
 .pv__note{margin:14px 0 0;font-size:12px;color:var(--gris-2);text-align:center}
 
+/* ---- étape 4 quand HelloAsso est choisi : rien à déclarer ---- */
+.okha{background:var(--vert-pale);border:1.5px solid #BFD6C6;border-radius:12px;padding:18px 20px;margin-top:18px}
+.okha>b{display:block;font-size:15.5px;color:var(--vert);margin-bottom:12px}
+.okha__l{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--gris);margin-bottom:9px}
+.okha__l:last-child{margin-bottom:0}
+.okha__l i{font-style:normal;flex:none}
+.okha__l strong{color:var(--encre)}
+
 /* ---- destination de la déclaration WhatsApp (équipe Mali ou France) ---- */
 .wadest{display:flex;gap:12px;align-items:flex-start;border-radius:10px;padding:13px 16px;border:1.5px solid;margin-top:14px;transition:background .25s,border-color .25s}
 .wadest--ml{background:var(--vert-pale);border-color:#BFD6C6}
