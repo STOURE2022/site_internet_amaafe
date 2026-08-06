@@ -7,15 +7,8 @@
 import { getCollection } from 'astro:content';
 import config from '../../content/config.json';
 import { pourcentageCollecte } from '../lib/format.js';
-import { lireDocumentsPublies, fmtTaille } from '../lib/admin.js';
-
 const actus = await getCollection('actualites', ({ data }) => data.publie);
 const derniereActu = [...actus].sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''))[0];
-const documents = lireDocumentsPublies(config).map((d) => ({
-  titre: `📄 ${d.titre}`,
-  href: d.href,
-  taille: d.taille != null ? fmtTaille(d.taille) : 'PDF',
-}));
 
 const cfg = {
   waMali: config.whatsapp.numeroMali,
@@ -36,7 +29,6 @@ const cfg = {
   collecteFCFA: config.medersa.montantCollecteFCFA,
   pctCollecte: pourcentageCollecte(config.medersa),
   reseaux: config.reseaux,
-  documents: documents,
   derniereActu: derniereActu ? derniereActu.data.titre : null,
   benevoles: config.chiffres.benevoles,
   membresAdherents: config.chiffres.membresAdherents,

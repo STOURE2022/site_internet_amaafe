@@ -49,7 +49,7 @@
       moi: 'Autres sujets…',
       reponses: ['Voici tout ce que je peux vous expliquer :'],
       choix: [
-        ['📄', 'Documents à télécharger', 'documents'],
+        ['📄', 'Documents à télécharger', 'lien:/transparence/#documents'],
         ['📰', 'Les actualités du centre', 'actus'],
         ['🔍', "Où va l'argent ?", 'transparence'],
         ['🏫', 'Inscrire un enfant au centre', 'inscrire'],
@@ -59,12 +59,6 @@
         ['📱', 'Nos réseaux sociaux', 'reseaux'],
         ['🏠', 'Menu principal', 'accueil'],
       ],
-    },
-    documents: {
-      moi: 'Documents à télécharger',
-      reponses: ["Voici les documents publiés par l'association — transparence totale :"],
-      docs: (C.documents || []),
-      choix: [['🔍', "Où va l'argent ?", 'transparence'], ['🏠', 'Autres questions', 'accueil']],
     },
     actus: {
       moi: 'Les actualités du centre',
@@ -80,7 +74,7 @@
         "Question légitime — et c'est la fierté de l'association : sur l'exercice 2024/2025, <b>près de 80 % des dépenses sont allées directement aux actions</b> (aide aux familles, orphelinats, fournitures scolaires…), le reste au fonctionnement.",
         'Le bilan est certifié par le bureau, présenté en assemblée générale et <b>publié intégralement</b> sur la page Transparence, avec les références légales des deux entités (Mali et France).',
       ],
-      choix: [['🔍', 'Voir la page Transparence', 'lien:/transparence/'], ['📄', 'Télécharger les documents', 'documents'], ['🏠', 'Autres questions', 'accueil']],
+      choix: [['🔍', 'Voir la page Transparence', 'lien:/transparence/'], ['📄', 'Télécharger les documents', 'lien:/transparence/#documents'], ['🏠', 'Autres questions', 'accueil']],
     },
     inscrire: {
       moi: 'Inscrire un enfant au centre',
@@ -240,15 +234,6 @@
   function montreChoix(sujet) {
     var wrap = document.createElement('div');
     wrap.className = 'cb__chx';
-    (sujet.docs || []).forEach(function (d) {
-      var a = document.createElement('a');
-      a.href = d.href;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'doc';
-      a.innerHTML = d.titre + '<small>PDF · ' + d.taille + '</small>';
-      wrap.appendChild(a);
-    });
     (sujet.liens || []).forEach(function (l) {
       var a = document.createElement('a');
       a.href = l[2];
