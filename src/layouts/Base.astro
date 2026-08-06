@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { titre, description, masquerDock = false, noindex = false } = Astro.props;
-const site = Astro.site ?? new URL('https://centre-rahma.pages.dev');
+const site = Astro.site ?? new URL('https://amaafe.org');
 const urlCanonique = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/images/logo-amaafe.png', site).href;
 const chemin = Astro.url.pathname;

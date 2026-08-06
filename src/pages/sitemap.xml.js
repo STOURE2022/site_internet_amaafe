@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 
 // Plan du site généré au build, sans dépendance externe.
 export async function GET(context) {
-  const site = context.site ?? new URL('https://centre-rahma.pages.dev');
+  const site = context.site ?? new URL('https://amaafe.org');
 
   const pages = [
     '/',

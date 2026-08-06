@@ -1,6 +1,6 @@
 // robots.txt généré au build pour pointer vers le bon domaine.
 export function GET(context) {
-  const site = context.site ?? new URL('https://centre-rahma.pages.dev');
+  const site = context.site ?? new URL('https://amaafe.org');
   const contenu = [
     'User-agent: *',
     'Allow: /',
