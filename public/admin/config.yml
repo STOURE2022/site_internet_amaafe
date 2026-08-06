@@ -126,7 +126,7 @@ collections:
             label: "Campagnes"
             widget: list
             required: false
-            hint: "L'affiche est publiée telle quelle, en pleine qualité — recommandé : JPEG de 500 Ko à 1 Mo. La campagne « active » s'affiche en tête de la page Campagne et fait apparaître l'entrée Campagne dans le menu du site."
+            hint: "L'affiche est publiée telle quelle, en pleine qualité — recommandé : JPEG de 500 Ko à 1 Mo. La première campagne active de la liste est « à la une » ; les autres actives s'affichent en dessous (réordonnez la liste pour choisir la une). Les campagnes désactivées s'archivent en bas de page."
             fields:
               - { name: titre, label: "Titre de la campagne", widget: string }
               - { name: description, label: "Description (une ou deux phrases)", widget: text, required: false }

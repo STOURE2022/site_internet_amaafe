@@ -8,7 +8,12 @@ import config from '../../content/config.json';
 import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 
 const campagnes = config.campagnes ?? [];
-const active = campagnes.find((c) => c.active);
+const actives = campagnes.filter((c) => c.active);
+/* La première campagne active de la liste est « à la une » ; les autres
+   actives s'affichent en dessous. L'équipe peut réordonner la liste
+   dans l'éditeur pour choisir la une. */
+const active = actives[0];
+const autresActives = actives.slice(1);
 const passees = campagnes.filter((c) => !c.active);
 
 const pct = pourcentageCollecte(config.medersa);
@@ -63,6 +68,35 @@ const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du 
         </div>
       </aside>
     </div>
+  )}
+
+  {autresActives.length > 0 && (
+    <section class="sec" style="padding-top:0">
+      <div class="wrap">
+        <div class="head rv">
+          <div>
+            <span class="eyebrow eyebrow--d">Également en cours</span>
+            <h2>Nos autres campagnes</h2>
+          </div>
+        </div>
+        <div class="camp-passees rv">
+          {autresActives.map((c) => {
+            const lien = c.lienBouton || '/faire-un-don/';
+            const ext = Boolean(c.lienBouton && c.lienBouton.startsWith('http'));
+            return (
+              <figure class="camp-passee camp-encours">
+                <a href={c.affiche} rel="noopener" target="_blank"><img src={c.affiche} alt={`Affiche : ${c.titre}`} loading="lazy" /></a>
+                <figcaption>
+                  <b>{c.titre}</b>
+                  {c.description && <p>{c.description}</p>}
+                  <a class="btn btn--rouge" href={lien} {...ext ? { target: '_blank', rel: 'noopener' } : {}}>{c.texteBouton || 'Faire un don'}{ext && ' ↗'}</a>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   )}
 
   {passees.length > 0 && (

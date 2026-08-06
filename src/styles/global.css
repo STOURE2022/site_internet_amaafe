@@ -319,6 +319,11 @@ body.menu-ouvert{overflow:hidden}
 .camp-passee{border-radius:12px;overflow:hidden;border:1px solid var(--ligne);background:var(--papier-2);margin:0}
 .camp-passee img{display:block;width:100%;height:auto;opacity:.92}
 .camp-passee figcaption{padding:10px 14px;font-size:13px;font-weight:700;color:var(--gris)}
+.camp-encours img{opacity:1}
+.camp-encours figcaption{display:flex;flex-direction:column;gap:8px;padding:14px 16px 16px}
+.camp-encours figcaption b{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--vert);line-height:1.2}
+.camp-encours figcaption p{margin:0;font-size:13px;font-weight:400;color:var(--gris)}
+.camp-encours .btn{padding:11px 14px;font-size:13.5px}
 .vision{position:fixed;inset:0;background:rgba(10,27,18,.92);display:none;place-items:center;padding:20px;z-index:90;cursor:zoom-out}
 .vision.ouvert{display:grid}
 .vision img{max-width:100%;max-height:calc(100vh - 40px);border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
