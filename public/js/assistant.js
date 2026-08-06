@@ -17,6 +17,7 @@
   if (C.telMali) canauxMali.push('Orange Money ou Wave au ' + mono(C.telMali));
   var canauxEurope = [];
   if (C.telFrance) canauxEurope.push('Wero au ' + mono(C.telFrance));
+  if (C.helloasso) canauxEurope.push('carte bancaire via HelloAsso');
   canauxEurope.push('PayPal ou virement (coordonnées sur la page don)');
 
   var medersaTexte = 'Le projet prioritaire : acquérir un terrain et construire une vraie médersa (salles de classe, bibliothèque, sanitaires, cour sécurisée, salle de prière…).<br><br>';
@@ -202,6 +203,10 @@
       choix: [['🏠', 'Autres questions', 'accueil']],
     },
   };
+
+  if (C.campagneActive) {
+    SUJETS.menu2.choix.unshift(['📢', 'La campagne en cours', 'lien:/campagne/']);
+  }
 
   var flux = document.getElementById('cb-flux');
   var cb = document.getElementById('cb');

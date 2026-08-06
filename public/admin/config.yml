@@ -122,6 +122,18 @@ collections:
                 fields:
                   - { name: valeur, label: "Chiffre", widget: string }
                   - { name: libelle, label: "Libellé", widget: string }
+          - name: campagnes
+            label: "Campagnes"
+            widget: list
+            required: false
+            hint: "L'affiche est publiée telle quelle, en pleine qualité — recommandé : JPEG de 500 Ko à 1 Mo. La campagne « active » s'affiche en tête de la page Campagne et fait apparaître l'entrée Campagne dans le menu du site."
+            fields:
+              - { name: titre, label: "Titre de la campagne", widget: string }
+              - { name: description, label: "Description (une ou deux phrases)", widget: text, required: false }
+              - { name: affiche, label: "Affiche (image pleine qualité)", widget: image }
+              - { name: lienBouton, label: "Lien du bouton (HelloAsso, cagnotte…) — vide = page don du site", widget: string, required: false }
+              - { name: texteBouton, label: "Texte du bouton (ex. Donner sur HelloAsso)", widget: string, required: false }
+              - { name: active, label: "Campagne active", widget: boolean, default: true }
           - name: documentsPublies
             label: "Documents à télécharger (page Transparence)"
             widget: list
@@ -245,6 +257,11 @@ collections:
                 widget: object
                 fields:
                   - { name: lien, label: "Lien de paiement (paypal.me) ou adresse e-mail PayPal", widget: string, required: false }
+              - name: helloasso
+                label: "HelloAsso (carte bancaire)"
+                widget: object
+                fields:
+                  - { name: lien, label: "Lien de la collecte HelloAsso", widget: string, required: false }
               - name: virementMali
                 label: "Virement Mali"
                 widget: object

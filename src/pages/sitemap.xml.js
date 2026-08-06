@@ -9,6 +9,7 @@ export async function GET(context) {
     '/le-centre/',
     '/notre-projet/',
     '/parrainage/',
+    '/campagne/',
     '/faire-un-don/',
     '/l-amaafe/',
     '/transparence/',

@@ -29,6 +29,8 @@ const cfg = {
   collecteFCFA: config.medersa.montantCollecteFCFA,
   pctCollecte: pourcentageCollecte(config.medersa),
   reseaux: config.reseaux,
+  helloasso: (config.paiement.helloasso ?? {}).lien ?? null,
+  campagneActive: (config.campagnes ?? []).some((c) => c.active),
   derniereActu: derniereActu ? derniereActu.data.titre : null,
   benevoles: config.chiffres.benevoles,
   membresAdherents: config.chiffres.membresAdherents,

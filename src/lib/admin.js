@@ -105,6 +105,7 @@ export function etatCanaux(config) {
     { nom: 'Wero (Europe)', c: '#7A5CF0', ok: !!p.wero.numero },
     { nom: 'Wave', c: '#1DC3F0', ok: !!p.wave.numero },
     { nom: 'PayPal', c: '#0055B8', ok: !!p.paypal.lien },
+    { nom: 'HelloAsso (carte bancaire)', c: '#46BE8A', ok: !!(p.helloasso ?? {}).lien },
     { nom: 'Virement Mali', c: '#D9A62B', ok: !!p.virementMali.rib },
     { nom: 'Virement France', c: '#0F4A2F', ok: !!p.virementFrance.iban },
   ];

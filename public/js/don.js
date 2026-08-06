@@ -24,11 +24,12 @@
     'vir-ml': 'Virement bancaire (Mali)',
     'vir-fr': 'Virement bancaire (France)',
     wero: 'Wero (Europe)',
-    paypal: 'PayPal'
+    paypal: 'PayPal',
+    helloasso: 'HelloAsso (carte bancaire)'
   };
   /* Équipe qui reçoit la déclaration WhatsApp : celle qui détient les
      relevés du canal. Si son numéro manque, repli vers l'autre équipe. */
-  var EQUIPE_CANAL = { om: 'ml', wave: 'ml', 'vir-ml': 'ml', 'vir-fr': 'fr', wero: 'fr', paypal: 'fr' };
+  var EQUIPE_CANAL = { om: 'ml', wave: 'ml', 'vir-ml': 'ml', 'vir-fr': 'fr', wero: 'fr', paypal: 'fr', helloasso: 'fr' };
 
   function destWhatsApp() {
     var w = CFG.whatsapp || {};
@@ -84,6 +85,11 @@
                  s: p.paypal.lien
                    ? 'Ouvrez ce lien (ou copiez-le) pour envoyer votre don via PayPal. Indiquez en note : ' + motif + '.'
                    : NOTE_TBD };
+      case 'helloasso':
+        return { t: 'HelloAsso — carte bancaire', lienExterne: (p.helloasso || {}).lien,
+                 s: (p.helloasso || {}).lien
+                   ? 'Paiement en ligne sécurisé par carte bancaire. HelloAsso vous envoie automatiquement un reçu — inutile de déclarer votre don ensuite.'
+                   : NOTE_TBD };
       case 'wero':
         return { t: 'Wero — Europe (EUR)', v: p.wero.numero,
                  s: p.wero.numero
@@ -98,6 +104,12 @@
     if (!paybox) return;
     var c = infosCanal();
     var html = '<span>' + esc(c.t) + '</span>';
+    if (c.lienExterne) {
+      html += '<a class="btn btn--or" style="display:inline-flex;margin-block:10px 8px" href="' + esc(c.lienExterne) + '" target="_blank" rel="noopener">Ouvrir HelloAsso ↗</a><br>';
+      html += '<span>' + esc(c.s) + '</span>';
+      paybox.innerHTML = html;
+      return;
+    }
     if (c.v) {
       html += '<b>' + esc(c.v) + '</b>';
       html += '<span>' + esc(c.s) + '</span><br>';

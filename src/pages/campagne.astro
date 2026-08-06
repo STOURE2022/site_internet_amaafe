@@ -1,0 +1,99 @@
+---
+/** Page Campagne : l'affiche de la campagne active en grand format et
+    pleine qualité (jamais rognée ni recompressée), avec appel au don et
+    partage. Les campagnes vivent dans config.campagnes (admin) ; les
+    inactives s'archivent en bas de page. */
+import Base from '../layouts/Base.astro';
+import config from '../../content/config.json';
+import { fmtNombre, pourcentageCollecte } from '../lib/format.js';
+
+const campagnes = config.campagnes ?? [];
+const active = campagnes.find((c) => c.active);
+const passees = campagnes.filter((c) => !c.active);
+
+const pct = pourcentageCollecte(config.medersa);
+const pctFr = String(pct).replace('.', ',');
+const lienBouton = active?.lienBouton || '/faire-un-don/';
+const texteBouton = active?.texteBouton || 'Faire un don';
+const externe = Boolean(active?.lienBouton && active.lienBouton.startsWith('http'));
+const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du Centre Coranique Rahma'} — https://amaafe.org/campagne/`);
+---
+<Base
+  titre={`${active ? active.titre : 'Campagnes'} | Centre Coranique Rahma`}
+  description={active?.description ?? "Les campagnes de collecte du Centre Coranique Rahma et de l'AMAAFE."}
+>
+
+  <section class="wrap phero" style="text-align:center">
+    <span class="eyebrow eyebrow--r" style="color:#8A2318">Campagne en cours</span>
+    <h1 style="max-width:22ch;margin-inline:auto">{active ? active.titre : 'Aucune campagne en cours'}</h1>
+    {active?.description && <p class="lead" style="max-width:60ch;margin-inline:auto">{active.description}</p>}
+    {!active && <p class="lead" style="max-width:60ch;margin-inline:auto">Revenez bientôt — et suivez nos actions sur les réseaux ou dans les <a href="/actualites/" style="color:var(--vert);text-decoration:underline">actualités</a>.</p>}
+  </section>
+
+  {active && (
+    <div class="wrap campg">
+      <div class="rv">
+        <figure class="affiche" id="affiche-active">
+          <img src={active.affiche} alt={`Affiche de la campagne : ${active.titre}`} width="1133" height="1600" />
+          <span class="affiche__zoom">🔍 Agrandir l'affiche</span>
+        </figure>
+        <p class="affiche__note">Affiche en pleine qualité — cliquez pour l'agrandir.</p>
+      </div>
+
+      <aside class="campact rv">
+        <div class="campact__c">
+          <div class="campact__t">Participer</div>
+          <h2>Faites un don pour cette campagne</h2>
+          <p>{externe ? 'En ligne par carte bancaire (reçu automatique), ou par les canaux habituels du centre.' : 'Par les canaux du centre : Orange Money, Wave, Wero, PayPal ou virement.'}</p>
+          <a class="btn btn--rouge btn--full" href={lienBouton} {...externe ? { target: '_blank', rel: 'noopener' } : {}}>💛 {texteBouton}{externe && ' ↗'}</a>
+          {externe && <a class="btn btn--ghost btn--full" style="margin-top:9px" href="/faire-un-don/">Orange Money, Wero, virement…</a>}
+          <a class="btn btn--full" style="margin-top:9px;background:#1FAF56;color:#fff" href={`https://wa.me/?text=${partage}`} rel="noopener" target="_blank">💬 Partager sur WhatsApp</a>
+        </div>
+        <div class="campjauge">
+          <div class="campjauge__t">Collecte — terrain de la médersa</div>
+          {config.medersa.montantCollecteFCFA != null
+            ? <b>{fmtNombre(config.medersa.montantCollecteFCFA)} FCFA collectés</b>
+            : <b>Collecte en cours</b>}
+          <div class="campjauge__b" role="img" aria-label={`Avancement : ${pctFr} pour cent`}><i style={`width:${pct}%`}></i></div>
+          <div class="campjauge__f"><span>objectif {fmtNombre(config.medersa.budgetTotalEUR)} €</span><b>{pctFr} %</b></div>
+        </div>
+      </aside>
+    </div>
+  )}
+
+  {passees.length > 0 && (
+    <section class="sec" style="background:var(--blanc);border-top:1px solid var(--ligne)">
+      <div class="wrap">
+        <div class="head rv">
+          <div>
+            <span class="eyebrow eyebrow--d">Archives</span>
+            <h2>Campagnes précédentes</h2>
+          </div>
+        </div>
+        <div class="camp-passees rv">
+          {passees.map((c) => (
+            <figure class="camp-passee">
+              <a href={c.affiche} rel="noopener" target="_blank"><img src={c.affiche} alt={`Affiche : ${c.titre}`} loading="lazy" /></a>
+              <figcaption>{c.titre}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {active && (
+    <Fragment>
+      <div class="vision" id="vision"><button type="button" class="vision__x" aria-label="Fermer">✕</button><img src={active.affiche} alt="" /></div>
+      <script is:inline>
+        (function () {
+          var v = document.getElementById('vision');
+          document.getElementById('affiche-active').addEventListener('click', function () { v.classList.add('ouvert'); });
+          v.addEventListener('click', function () { v.classList.remove('ouvert'); });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') v.classList.remove('ouvert'); });
+        })();
+      </script>
+    </Fragment>
+  )}
+
+</Base>

@@ -263,6 +263,42 @@ p{margin:0}
 .rs a:hover{background:var(--vert);color:#fff;border-color:var(--vert);translate:0 -2px}
 .rs svg{width:20px;height:20px;fill:currentColor}
 
+/* ---- entrée « Campagne » du menu ---- */
+.menu a.camp,.mmenu a.camp{color:#8A2318}
+.menu a.camp::before,.mmenu a.camp::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rouge);margin-right:7px;vertical-align:1px;animation:camp-pouls 2.4s ease-in-out infinite}
+@keyframes camp-pouls{0%,100%{box-shadow:0 0 0 0 rgba(179,39,30,.45)}50%{box-shadow:0 0 0 5px rgba(179,39,30,0)}}
+
+/* ---- page Campagne ---- */
+.campg{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,3.5vw,40px);align-items:start;padding-bottom:70px}
+.affiche{position:relative;border-radius:16px;overflow:hidden;background:var(--papier-2);border:1px solid var(--ligne);box-shadow:0 44px 80px -44px rgba(10,27,18,.55);cursor:zoom-in;margin:0}
+.affiche img{display:block;width:100%;height:auto}
+.affiche__zoom{position:absolute;right:14px;bottom:14px;background:rgba(10,27,18,.7);color:#fff;font-size:12.5px;font-weight:700;border-radius:99px;padding:8px 15px;pointer-events:none}
+.affiche__note{font-family:var(--mono);font-size:11.5px;color:var(--gris-2);margin-top:10px;text-align:center}
+.campact{position:sticky;top:86px;display:flex;flex-direction:column;gap:16px}
+.campact__c{background:var(--papier-2);border:1px solid var(--ligne);border-radius:16px;padding:22px 24px}
+.campact__t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A6D12;margin-bottom:10px}
+.campact__c h2{font-size:22px;color:var(--vert);margin-bottom:8px;line-height:1.15}
+.campact__c p{font-size:14px;color:var(--gris);margin-bottom:14px}
+.btn--rouge{background:var(--rouge);color:#fff}
+.btn--rouge:hover{background:#9C1F17;color:#fff}
+.campjauge{background:linear-gradient(155deg,#0D3A25,var(--nuit) 78%);border-radius:16px;padding:20px 22px;color:#fff}
+.campjauge__t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#F3C75C}
+.campjauge b{display:block;font-family:var(--serif);font-weight:600;font-size:26px;margin-top:8px}
+.campjauge__b{height:11px;border-radius:99px;background:rgba(233,239,233,.15);overflow:hidden;margin-top:12px}
+.campjauge__b i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#B98C1E,var(--or) 55%,#F3C75C);box-shadow:0 0 14px rgba(217,166,43,.5);transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.campjauge__f{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,.65);margin-top:8px}
+.campjauge__f b{display:inline;font-size:12.5px;color:#F3C75C;font-family:var(--mono);margin:0}
+.camp-passees{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.camp-passee{border-radius:12px;overflow:hidden;border:1px solid var(--ligne);background:var(--papier-2);margin:0}
+.camp-passee img{display:block;width:100%;height:auto;opacity:.92}
+.camp-passee figcaption{padding:10px 14px;font-size:13px;font-weight:700;color:var(--gris)}
+.vision{position:fixed;inset:0;background:rgba(10,27,18,.92);display:none;place-items:center;padding:20px;z-index:90;cursor:zoom-out}
+.vision.ouvert{display:grid}
+.vision img{max-width:100%;max-height:calc(100vh - 40px);border-radius:8px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.vision__x{position:fixed;top:16px;right:18px;width:40px;height:40px;border-radius:50%;background:rgba(252,250,245,.14);color:#fff;font-size:17px;display:grid;place-items:center}
+@media(max-width:860px){.campg{grid-template-columns:1fr}.campact{position:static}.camp-passees{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.camp-passees{grid-template-columns:1fr}}
+
 /* ---- assistant Rahma (chatbot guidé) ---- */
 .cb-bulle{position:fixed;right:18px;bottom:18px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--vert);display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(10,27,18,.5);transition:translate .2s,box-shadow .2s;animation:cb-pouls 3.4s ease-in-out infinite;border:0;cursor:pointer}
 .cb-bulle:hover{translate:0 -3px}

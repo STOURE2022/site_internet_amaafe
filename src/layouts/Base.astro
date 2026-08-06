@@ -16,11 +16,14 @@ const urlCanonique = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/images/logo-amaafe.png', site).href;
 const chemin = Astro.url.pathname;
 
+const campagneActive = (config.campagnes ?? []).some((c) => c.active);
 const menu = [
   { href: '/le-centre/', label: 'Le centre' },
   { href: '/notre-projet/', label: 'Notre projet' },
   { href: '/parrainage/', label: 'Parrainage' },
   { href: '/l-amaafe/', label: "L'AMAAFE" },
+  // L'entrée Campagne n'apparaît que lorsqu'une campagne est active.
+  ...(campagneActive ? [{ href: '/campagne/', label: 'Campagne', camp: true }] : []),
   { href: '/actualites/', label: 'Actualités' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -107,7 +110,7 @@ const jsonLd = {
       </a>
       <nav class="menu" aria-label="Navigation principale">
         {menu.map((item) => (
-          <a href={item.href} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
+          <a href={item.href} class:list={[{ camp: item.camp }]} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
       </nav>
       <div class="nav__cta">
@@ -118,7 +121,7 @@ const jsonLd = {
     </div>
     <nav class="mmenu" id="mmenu" aria-label="Navigation mobile">
       {menuMobile.map((item) => (
-        <a href={item.href} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
+        <a href={item.href} class:list={[{ camp: item.camp }]} aria-current={estActif(item.href) ? 'page' : undefined}>{item.label}</a>
       ))}
     </nav>
   </header>
