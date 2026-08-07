@@ -2,12 +2,12 @@
 titre: Fiche 0007
 prenom: Aïchata Diallo
 matricule: N° 0007-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0007-aichata-diallo.png
-parraine: false
 publie: true
 ---
 
