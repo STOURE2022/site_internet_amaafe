@@ -109,8 +109,19 @@ import { fmtNombre } from '../lib/format.js';
       </div>
 
       <div id="declStd">
-      <label class="fl" for="d-nom">Votre nom</label>
-      <div class="input"><input id="d-nom" type="text" autocomplete="name" placeholder="Nom et prénom"></div>
+      <label class="anon" for="d-anon">
+        <input type="checkbox" id="d-anon">
+        <span>
+          <b>🕶️ Je souhaite rester anonyme</b>
+          <p>Votre nom ne sera pas demandé. Seule l'équipe verra votre numéro pour pointer le relevé —
+          il n'est jamais publié, et le centre ne cite jamais un donateur sans son accord.</p>
+        </span>
+      </label>
+
+      <div id="d-champ-nom">
+        <label class="fl" for="d-nom">Votre nom</label>
+        <div class="input"><input id="d-nom" type="text" autocomplete="name" placeholder="Nom et prénom"></div>
+      </div>
 
       <label class="fl" for="d-num">Numéro émetteur (le numéro qui a envoyé l'argent)</label>
       <div class="input"><input id="d-num" type="tel" inputmode="tel" placeholder="Ex. +223 …"></div>

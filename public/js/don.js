@@ -89,7 +89,7 @@
       case 'helloasso':
         return { t: 'HelloAsso — carte bancaire', lienExterne: (p.helloasso || {}).lien,
                  s: (p.helloasso || {}).lien
-                   ? 'Paiement en ligne sécurisé par carte bancaire. HelloAsso vous envoie automatiquement un reçu — inutile de déclarer votre don ensuite.'
+                   ? 'Paiement en ligne sécurisé par carte bancaire. HelloAsso vous envoie automatiquement un reçu — inutile de déclarer votre don ensuite. Pour rester discret, cochez-y la case « je souhaite que mon don reste anonyme ».'
                    : NOTE_TBD };
       case 'wero':
         return { t: 'Wero — Europe (EUR)', v: p.wero.numero,
@@ -123,7 +123,10 @@
   }
 
   function messageWhatsApp() {
-    var nom = ($('d-nom') && $('d-nom').value.trim()) || '…';
+    var anonyme = $('d-anon') && $('d-anon').checked;
+    var nom = anonyme
+      ? 'Donateur anonyme (souhaite le rester)'
+      : ($('d-nom') && $('d-nom').value.trim()) || '…';
     var num = ($('d-num') && $('d-num').value.trim()) || '…';
     var date = ($('d-date') && $('d-date').value) || '…';
     return 'Bonjour, je déclare un don au Centre Coranique Rahma.\n' +
@@ -176,7 +179,8 @@
     }
     renderPaybox();
     if (versDecl) {
-      versDecl.href = '/faire-un-don/?freq=' + freq + '&devise=' + cur + '&montant=' + amount + '&canal=' + pay + '#declarer';
+      versDecl.href = '/faire-un-don/?freq=' + freq + '&devise=' + cur + '&montant=' + amount + '&canal=' + pay +
+        (($('don-anon') && $('don-anon').checked) ? '&anonyme=1' : '') + '#declarer';
     }
     /* HelloAsso transmet tout à l'association : l'étape 4 devient
        « rien à déclarer » tant que ce canal est choisi. */
@@ -283,6 +287,22 @@
     var el = $(id);
     if (el) el.addEventListener('input', render);
   });
+
+  /* ---- anonymat : masque le champ nom et adapte la déclaration.
+     La case du bloc don de l'accueil transmet le choix via ?anonyme=1. ---- */
+  var anonEl = $('d-anon');
+  if (anonEl) {
+    if (params.get('anonyme') === '1') anonEl.checked = true;
+    var majAnonyme = function () {
+      var champ = $('d-champ-nom');
+      if (champ) champ.hidden = anonEl.checked;
+      render();
+    };
+    anonEl.addEventListener('change', majAnonyme);
+    majAnonyme();
+  }
+  var donAnon = $('don-anon');
+  if (donAnon) donAnon.addEventListener('change', render);
 
   /* ---- boutons « Copier » (délégation, le contenu est re-rendu) ---- */
   document.addEventListener('click', function (e) {
