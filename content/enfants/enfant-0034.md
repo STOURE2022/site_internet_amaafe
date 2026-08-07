@@ -2,12 +2,12 @@
 titre: Fiche 0034
 prenom: Asseniyé Tirera
 matricule: N° 0034-ML-CR-P1
+parraine: true
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0034-asseniye-tirera.jpg
-parraine: false
 publie: true
 ---
 
