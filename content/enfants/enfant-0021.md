@@ -2,12 +2,12 @@
 titre: Fiche 0021
 prenom: Djouma Sarré
 matricule: N° 0021-ML-CR-P1
+parraine: true
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0021-djouma-sarre.png
-parraine: false
 publie: true
 ---
 
