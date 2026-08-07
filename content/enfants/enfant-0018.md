@@ -2,12 +2,12 @@
 titre: Fiche 0018
 prenom: Boubacar Sanogo
 matricule: N° 0018-ML-CR-P1
+parraine: true
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0018-boubacar-sanogo.png
-parraine: false
 publie: true
 ---
 
