@@ -4,6 +4,7 @@
     partage. Les campagnes vivent dans config.campagnes (admin) ; les
     inactives s'archivent en bas de page. */
 import Base from '../layouts/Base.astro';
+import Fiabilite from '../components/Fiabilite.astro';
 import config from '../../content/config.json';
 import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 
@@ -55,6 +56,7 @@ const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du 
           <a class="btn btn--rouge btn--full" href={lienBouton} {...externe ? { target: '_blank', rel: 'noopener' } : {}}>💛 {texteBouton}{externe && ' ↗'}</a>
           {externe && <a class="btn btn--ghost btn--full" style="margin-top:9px" href="/faire-un-don/">Orange Money, Wero, virement…</a>}
           <a class="btn btn--full" style="margin-top:9px;background:#1FAF56;color:#fff" href={`https://wa.me/?text=${partage}`} rel="noopener" target="_blank">💬 Partager sur WhatsApp</a>
+          <Fiabilite />
         </div>
         <div class="campjauge" data-collecte data-objectif-fcfa={objectifFCFA} data-manuel-fcfa={manuelFCFA ?? 0}>
           <div class="campjauge__t">Collecte — terrain de la médersa <span class="clive" data-clive hidden><i></i>Auto</span></div>
@@ -62,7 +64,7 @@ const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du 
             ? <b><span data-ctotal>{fmtNombre(manuelFCFA)} FCFA</span> collectés</b>
             : <Fragment><b data-cprep>Collecte en cours</b><b hidden data-cjauge><span data-ctotal>0 FCFA</span> collectés</b></Fragment>}
           <div class="campjauge__b" role="img" aria-label={`Avancement : ${pctFr} pour cent`}><i style={`width:${pct}%`} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
-          <div class="campjauge__f"><span>objectif {fmtNombre(config.medersa.budgetTotalEUR)} €</span><b data-cpct>{pctFr} %</b></div>
+          <div class="campjauge__f"><span>objectif {fmtNombre(objectifFCFA)} FCFA ({fmtNombre(config.medersa.budgetTotalEUR)} €)</span><b data-cpct>{pctFr} %</b></div>
           <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso, automatique<b data-cdet-mnt></b></div>
           <div class="cmaj" data-cmaj hidden></div>
         </div>
