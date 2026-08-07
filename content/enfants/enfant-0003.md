@@ -2,12 +2,12 @@
 titre: Fiche 0003
 prenom: Awa Coulibaly
 matricule: N° 0003-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0003-awa-coulibaly.png
-parraine: false
 publie: true
 ---
 
