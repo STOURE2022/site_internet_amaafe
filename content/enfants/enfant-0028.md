@@ -2,12 +2,12 @@
 titre: Fiche 0028
 prenom: Mahamadou Traoré
 matricule: N° 0028-ML-CR-P1
+parraine: true
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0028-mahamadou-traore.png
-parraine: false
 publie: true
 ---
 
