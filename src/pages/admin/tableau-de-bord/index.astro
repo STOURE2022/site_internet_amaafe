@@ -101,18 +101,23 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
           ))}
           <div class="cnt__i">
             <span class="canal"><i style="background:#46BE8A"></i>HelloAsso (carte bancaire) — automatique</span>
-            <span class="st" id="c-ha">identifiants API à configurer</span>
+            <span class="st" id="c-ha">connexion à HelloAsso…</span>
           </div>
         </div>
 
         <script is:inline define:vars={{ manuelFCFA: manuelFCFA ?? 0, objectifFCFA }}>
           // Part HelloAsso en direct : /api/collecte (cache serveur 1 h).
+          // L'API distingue trois cas : secrets absents (etat « non-configure »),
+          // identifiants refusés ou panne (etat « erreur »), sinon le montant en euros.
           fetch('/api/collecte').then(function (r) { return r.json(); }).then(function (d) {
             var ha = document.getElementById('c-ha');
-            if (!d || !d.eur || d.eur <= 0) return;
+            if (!ha) return;
+            if (!d || d.etat === 'non-configure') { ha.textContent = 'identifiants API à configurer'; return; }
+            if (d.etat === 'erreur') { ha.textContent = 'erreur HelloAsso — vérifier les identifiants API'; ha.style.color = 'var(--rouge)'; return; }
+            if (!d.eur || d.eur <= 0) { ha.textContent = '0 € collecté pour l\'instant'; ha.style.color = 'var(--vert)'; return; }
             var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };
             var haFCFA = Math.round(d.eur * 655.957);
-            if (ha) { ha.textContent = fmt(d.eur) + ' € ≈ ' + fmt(haFCFA) + ' FCFA'; ha.style.color = 'var(--vert)'; }
+            ha.textContent = fmt(d.eur) + ' € ≈ ' + fmt(haFCFA) + ' FCFA'; ha.style.color = 'var(--vert)';
             var total = manuelFCFA + haFCFA;
             var t = document.getElementById('c-total');
             if (t) t.textContent = fmt(total) + ' FCFA';
@@ -123,7 +128,10 @@ const lienWhatsApp = `https://wa.me/${config.whatsapp.numeroMali || config.whats
               var p = document.getElementById('c-pct');
               if (p) p.textContent = String(pct).replace('.', ',') + ' %';
             }
-          }).catch(function () {});
+          }).catch(function () {
+            var ha = document.getElementById('c-ha');
+            if (ha) ha.textContent = 'HelloAsso injoignable pour l\'instant';
+          });
         </script>
       </section>
 

@@ -92,7 +92,7 @@ async function apiCollecte(env) {
     });
 
   if (!env.HELLOASSO_CLIENT_ID || !env.HELLOASSO_CLIENT_SECRET) {
-    return enJson({ eur: null }, 3600);
+    return enJson({ eur: null, etat: 'non-configure' }, 3600);
   }
 
   const cache = caches.default;
@@ -106,8 +106,9 @@ async function apiCollecte(env) {
     await cache.put(cle, reponse.clone());
     return reponse;
   } catch {
-    // Panne ou réponse inattendue : la jauge retombe sur les saisies manuelles.
-    return enJson({ eur: null }, 300);
+    // Identifiants refusés, panne ou réponse inattendue : la jauge retombe
+    // sur les saisies manuelles et le tableau de bord signale l'erreur.
+    return enJson({ eur: null, etat: 'erreur' }, 300);
   }
 }
 
