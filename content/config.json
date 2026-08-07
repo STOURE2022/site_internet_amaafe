@@ -331,7 +331,7 @@
     "_aide": "Sources : rapport d'impact 2010-2025 et document métier 2026.",
     "enfants": 33,
     "coutMensuelParEnfantFCFA": 20000,
-    "suiviJusquaAge": 16,
+    "suiviJusquaAge": 21,
     "coutAnnuelParEnfantFCFA": 240000
   },
   "formulaires": {
