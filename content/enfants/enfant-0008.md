@@ -2,12 +2,12 @@
 titre: Fiche 0008
 prenom: Drissa Koïta
 matricule: N° 0008-ML-CR-P1
+parraine: false
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0008-drissa-koita.png
-parraine: false
 publie: true
 ---
 
