@@ -669,9 +669,10 @@ body.menu-ouvert{overflow:hidden}
 .foot{background:var(--vert);color:#fff;padding-block:clamp(46px,6vw,72px) 24px}
 .foot__g{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(26px,4vw,50px)}
 .foot .mark{background:var(--or);color:var(--vert)}
-/* sur le fond vert du pied de page, le texte noir du logo impose de garder
-   la pastille blanche — agrandie à 60 px */
-.foot .mark-img{width:60px;height:60px;margin:0;background:#fff;border-radius:12px;padding:2px;border:1px solid rgba(255,255,255,.25)}
+/* pied de page : même traitement que l'en-tête (sans cadre, recadré) ;
+   un léger halo clair garde lisibles le texte et les silhouettes noirs
+   du logo sur le fond vert sombre */
+.foot .mark-img{filter:drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 0 7px rgba(255,255,255,.4))}
 .foot .brand__n{color:#fff}
 .foot .brand__s{color:rgba(255,255,255,.5)}
 .foot__d{font-size:13.8px;color:rgba(255,255,255,.68);margin-top:16px;max-width:36ch}
