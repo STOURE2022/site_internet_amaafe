@@ -95,9 +95,11 @@ p{margin:0}
 /* ---- logos ---- */
 .mark{width:46px;height:46px;flex:none;border-radius:10px;background:var(--vert);display:grid;place-items:center;
   color:var(--or);font-family:var(--arabe);font-size:23px;line-height:1;padding-bottom:3px}
-/* logo AMAAFE dans la barre de marque (en-tête et pied de page) */
-.mark-img{width:46px;height:46px;flex:none;border-radius:10px;background:#fff;padding:3px;object-fit:contain;
-  border:1px solid var(--ligne)}
+/* logo AMAAFE dans la barre de marque (en-tête et menu mobile) : sans cadre,
+   le fichier contient ~30 % de marge transparente — les marges négatives la
+   recadrent pour une empreinte d'environ 60 px dans la barre */
+.mark-img{width:84px;height:84px;flex:none;margin:-12px;object-fit:contain}
+@media (max-width:480px){.mark-img{width:72px;height:72px;margin:-10px}}
 .logo-amaafe{display:block;width:120px;height:auto}
 /* bandeau « initiative de l'AMAAFE » (accueil) */
 .bande-amaafe{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(24px,4vw,48px);align-items:center;
@@ -661,6 +663,9 @@ body.menu-ouvert{overflow:hidden}
 .foot{background:var(--vert);color:#fff;padding-block:clamp(46px,6vw,72px) 24px}
 .foot__g{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(26px,4vw,50px)}
 .foot .mark{background:var(--or);color:var(--vert)}
+/* sur le fond vert du pied de page, le texte noir du logo impose de garder
+   la pastille blanche — agrandie à 60 px */
+.foot .mark-img{width:60px;height:60px;margin:0;background:#fff;border-radius:12px;padding:2px;border:1px solid rgba(255,255,255,.25)}
 .foot .brand__n{color:#fff}
 .foot .brand__s{color:rgba(255,255,255,.5)}
 .foot__d{font-size:13.8px;color:rgba(255,255,255,.68);margin-top:16px;max-width:36ch}
