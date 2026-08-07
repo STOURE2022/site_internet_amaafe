@@ -333,6 +333,7 @@
     "enfants": 29,
     "coutMensuelParEnfantFCFA": 20000,
     "suiviJusquaAge": 21,
+    "ageOrientation": 16,
     "coutAnnuelParEnfantFCFA": 240000
   },
   "formulaires": {

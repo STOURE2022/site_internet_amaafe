@@ -5,9 +5,6 @@ import config from '../../content/config.json';
 import { fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 
 /* Parité fixe FCFA/euro : 1 € = 655,957 FCFA */
-const objectifFCFAMillions = config.medersa.budgetTotalEUR != null
-  ? (config.medersa.budgetTotalEUR * 655.957 / 1e6).toFixed(1).replace('.', ',')
-  : null;
 const pctCollecte = pourcentageCollecte(config.medersa);
 const pctCollecteFr = String(pctCollecte).replace('.', ',');
 const collecteFCFA = collecteManuelleFCFA(config.medersa);
@@ -40,7 +37,7 @@ const resteAffiche = resteFCFA == null
             {collecteFCFA != null ? (
               <Fragment>
                 <div class="collecte__m"><b data-ctotal>{fmtNombre(collecteFCFA)} FCFA</b> collectés</div>
-                <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA)</p>
+                <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(objectifFCFA)} FCFA</strong> ({fmtNombre(config.medersa.budgetTotalEUR)} €)</p>
                 <div class="collecte__jt" role="img" aria-label={`Avancement de la collecte : ${pctCollecteFr} pour cent`}><i data-fill={pctCollecte} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
                 <div class="collecte__jf"><span>saisies de l'équipe + HelloAsso</span><b data-cpct>{pctCollecteFr} %</b></div>
                 <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso (carte bancaire), automatique<b data-cdet-mnt></b></div>
@@ -53,11 +50,11 @@ const resteAffiche = resteFCFA == null
                     jauge complète ci-dessous (data-cprep ↔ data-cjauge). */}
                 <div data-cprep>
                   <div class="collecte__m">Collecte en <b>préparation</b></div>
-                  <p class="collecte__obj">Objectif : <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA). Le montant déjà collecté sera publié ici dès les premiers dons.</p>
+                  <p class="collecte__obj">Objectif : <strong>{fmtNombre(objectifFCFA)} FCFA</strong> ({fmtNombre(config.medersa.budgetTotalEUR)} €). Le montant déjà collecté sera publié ici dès les premiers dons.</p>
                 </div>
                 <div hidden data-cjauge>
                   <div class="collecte__m"><b data-ctotal>0 FCFA</b> collectés</div>
-                  <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA)</p>
+                  <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(objectifFCFA)} FCFA</strong> ({fmtNombre(config.medersa.budgetTotalEUR)} €)</p>
                   <div class="collecte__jt" role="img" aria-label="Avancement de la collecte"><i data-fill={0} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
                   <div class="collecte__jf"><span>saisies de l'équipe + HelloAsso</span><b data-cpct>0 %</b></div>
                   <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso (carte bancaire), automatique<b data-cdet-mnt></b></div>
@@ -125,7 +122,7 @@ const resteAffiche = resteFCFA == null
             <div class="room"><i></i>Une salle de prière</div>
             <div class="room"><i></i>Des espaces pour la formation professionnelle</div>
           </div>
-          <p class="lead" style="font-size:15px">Ces espaces de formation prépareront la dernière étape du parcours des élèves : l'apprentissage d'un métier à partir de {config.chiffres.suiviJusquaAge} ans.</p>
+          <p class="lead" style="font-size:15px">Ces espaces de formation prépareront la dernière étape du parcours des élèves : l'apprentissage d'un métier à partir de {config.chiffres.ageOrientation} ans.</p>
         </div>
         <div class="proj__side">
           <Photo cle="planMedersa" texte="plan ou vue d'artiste de la future médersa" />

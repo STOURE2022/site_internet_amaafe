@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import DonConfig from '../components/DonConfig.astro';
+import Fiabilite from '../components/Fiabilite.astro';
 import config from '../../content/config.json';
 import { fmtNombre } from '../lib/format.js';
 ---
@@ -87,6 +88,7 @@ import { fmtNombre } from '../lib/format.js';
       <div class="note">
         <strong>Pour les virements :</strong> indiquez impérativement le motif <strong>« {config.paiement.motif} »</strong> pour que le centre puisse rattacher votre virement à votre déclaration.
       </div>
+      <Fiabilite />
     </section>
 
     <!-- ===== ÉTAPE 4 : DÉCLARATION ===== -->

@@ -111,6 +111,13 @@ p{margin:0}
 .foot__logo{display:inline-block;background:#fff;border-radius:12px;padding:10px 12px;margin-top:18px}
 .foot__logo img{display:block;width:82px;height:auto}
 
+/* ---- gages de confiance des blocs de don ---- */
+.fiab{list-style:none;margin:18px 0 0;padding:14px 16px;display:grid;gap:10px;background:var(--papier-2);
+  border:1px solid var(--ligne);border-radius:12px}
+.fiab li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--gris)}
+.fiab li b{color:var(--encre);font-weight:700}
+.fiab svg{width:16px;height:16px;flex:none;margin-top:2px;fill:var(--vert-2)}
+
 /* ---- nav ---- */
 .nav{position:sticky;top:0;z-index:60;background:rgba(244,241,232,.93);backdrop-filter:blur(12px);
   border-bottom:1px solid transparent;transition:border-color .25s,box-shadow .25s}

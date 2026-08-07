@@ -4,6 +4,7 @@
     la déclaration. Le JS associé est /public/js/don.js (via DonConfig). */
 import config from '../../content/config.json';
 import { fmtNombre } from '../lib/format.js';
+import Fiabilite from './Fiabilite.astro';
 ---
 <section class="sec give" id="don">
   <div class="wrap give__g">
@@ -55,7 +56,7 @@ import { fmtNombre } from '../lib/format.js';
       <div class="paybox" id="paybox"></div>
 
       <a class="btn btn--or btn--full btn--lg" id="versDeclaration" href="/faire-un-don/#declarer">J'ai envoyé mon don — je le déclare</a>
-      <p class="form__sec">Le centre ne conserve aucune donnée bancaire.</p>
+      <Fiabilite />
     </div>
   </div>
 </section>

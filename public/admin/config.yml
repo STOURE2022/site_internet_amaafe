@@ -228,6 +228,12 @@ collections:
                   widget: number,
                   value_type: int,
                 }
+              - {
+                  name: ageOrientation,
+                  label: "Âge d'orientation",
+                  widget: number,
+                  value_type: int,
+                }
           - name: impact
             label: "Réalisations AMAAFE (depuis 2010)"
             widget: object

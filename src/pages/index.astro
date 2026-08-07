@@ -99,7 +99,7 @@ const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slic
         <div class="step rv"><div class="step__d">1</div><b>Enseignement coranique</b><p>Apprentissage, mémorisation du Saint Coran et études islamiques, encadrés au quotidien.</p></div>
         <div class="step rv"><div class="step__d">2</div><b>Éducation morale et citoyenne</b><p>Discipline, solidarité et respect, appris et pratiqués chaque jour.</p></div>
         <div class="step rv"><div class="step__d">3</div><b>Suivi jusqu'à {config.chiffres.suiviJusquaAge} ans</b><p>L'enfant est accompagné sans interruption tout au long de son parcours.</p></div>
-        <div class="step step--last rv"><div class="step__d">4</div><b>Formation professionnelle</b><p>À partir de {config.chiffres.suiviJusquaAge} ans, orientation vers un métier adapté à ses aptitudes.</p></div>
+        <div class="step step--last rv"><div class="step__d">4</div><b>Formation professionnelle</b><p>À partir de {config.chiffres.ageOrientation} ans, orientation vers un métier adapté à ses aptitudes.</p></div>
       </div>
       <p class="lead rv" style="margin-top:34px;text-align:center;max-width:60ch;margin-inline:auto">
         Cette dernière étape est décisive : elle donne au jeune une autonomie financière et fait de lui un adulte capable de subvenir à ses besoins et de contribuer au développement de sa communauté.
@@ -157,7 +157,7 @@ const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slic
                 ? <b><span data-ctotal>{fmtNombre(collecteManuelleFCFA(config.medersa))} FCFA</span> collectés</b>
                 : <Fragment><b data-cprep><Tbd valeur={null} label="montant collecté" suffixe=" FCFA collectés" /></b><b hidden data-cjauge><span data-ctotal>0 FCFA</span> collectés</b></Fragment>}
               <span>sur un objectif de {config.medersa.budgetTotalEUR != null
-                ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>
+                ? <Fragment><strong>{fmtNombre(Math.round(config.medersa.budgetTotalEUR * 655.957))} FCFA</strong> ({fmtNombre(config.medersa.budgetTotalEUR)} €)</Fragment>
                 : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
             </div>
             <p style="font-size:13px;color:var(--gris-2);margin-top:14px">Saisies de l'équipe + collecte HelloAsso, additionnées automatiquement.</p>
