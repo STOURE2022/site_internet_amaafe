@@ -134,14 +134,15 @@
   }
 
   /* ---- grille d'impact : équivalence en mois de prise en charge d'un enfant.
-     Calculée pour le FCFA et l'euro (parité fixe 1 € = 655,957 FCFA) ;
-     texte générique pour le dollar, dont le cours varie. ---- */
+     Parité fixe 1 € = 655,957 FCFA ; le dollar flotte, on applique un cours
+     indicatif arrondi, rappelé dans la note sous le texte. ---- */
   var COUT_MOIS = CFG.coutMensuelEnfantFCFA || null;
   var EUR_FCFA = 655.957;
+  var USD_FCFA = 600;
 
   function descImpact(mensuel) {
     var generique = 'une part concrète de la scolarité d’un enfant';
-    var enFCFA = cur === 'FCFA' ? amount : cur === 'EUR' ? amount * EUR_FCFA : null;
+    var enFCFA = cur === 'FCFA' ? amount : cur === 'EUR' ? amount * EUR_FCFA : cur === 'USD' ? amount * USD_FCFA : null;
     if (!COUT_MOIS || !enFCFA) return generique;
     var mois = Math.floor(enFCFA / COUT_MOIS);
     if (mensuel) {
@@ -169,6 +170,7 @@
         ? 'Le don mensuel sera à renouveler manuellement tant que le prélèvement automatique n’est pas en place.'
         : COUT_MOIS
           ? 'Base : ' + fmt(COUT_MOIS) + ' FCFA par mois et par enfant, soit ' + fmt(COUT_MOIS * 12) + ' FCFA par an — scolarité, fournitures et accompagnement.'
+            + (cur === 'USD' ? ' Cours indicatif : 1 USD ≈ ' + fmt(USD_FCFA) + ' FCFA.' : '')
           : 'La grille d’impact précise sera affichée dès que le coût annuel par enfant aura été communiqué par le centre.';
     }
     renderPaybox();
