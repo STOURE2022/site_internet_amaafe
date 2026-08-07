@@ -2,6 +2,7 @@
 titre: Fiche 0009
 prenom: Ramatou Koïta
 matricule: N° 0009-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

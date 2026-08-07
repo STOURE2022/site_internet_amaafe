@@ -18,7 +18,7 @@ const meta = [
 const prixFCFA = config.parrainage.montantMensuelFCFA;
 const prixEUR = config.parrainage.montantMensuelEUR;
 ---
-<article class:list={['cenf', 'rv', { 'cenf--p': parraine }]}>
+<article class:list={['cenf', 'rv', { 'cenf--p': parraine }]} data-sexe={d.sexe ?? ''} data-parraine={parraine ? '1' : '0'}>
   {complete && <a class="cenf__lien" href={`/parrainage/${enfant.id}/`} aria-label={`Découvrir l'histoire de ${d.prenom}`}></a>}
   <div class:list={['cenf__ph', { 'cenf__ph--vide': !d.photo }]}>
     <span class:list={['cenf__chip', { 'cenf__chip--brille': complete && !parraine }]}>{parraine ? 'Parrainé ✓' : complete ? 'Cherche un parrain' : 'Fiche en préparation'}</span>

@@ -2,6 +2,7 @@
 titre: Fiche 0006
 prenom: Ousmane Dembélé
 matricule: N° 0006-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

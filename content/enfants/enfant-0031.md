@@ -2,6 +2,7 @@
 titre: Fiche 0031
 prenom: Seydou Mallé
 matricule: N° 0031-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

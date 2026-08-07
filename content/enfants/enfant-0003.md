@@ -2,6 +2,7 @@
 titre: Fiche 0003
 prenom: Awa Coulibaly
 matricule: N° 0003-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

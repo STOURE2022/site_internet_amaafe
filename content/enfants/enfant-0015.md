@@ -2,6 +2,7 @@
 titre: Fiche 0015
 prenom: Dipa Nimaga
 matricule: N° 0015-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

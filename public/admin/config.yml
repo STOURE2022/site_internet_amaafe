@@ -813,6 +813,18 @@ collections:
           hint: "Cochez quand l'enfant a trouvé son parrain ou sa marraine — il passe en « Déjà parrainé » sur le site.",
         }
       - {
+          name: sexe,
+          label: "Fille ou garçon",
+          widget: select,
+          options:
+            [
+              { label: "Fille", value: "fille" },
+              { label: "Garçon", value: "garcon" },
+            ],
+          required: false,
+          hint: "Alimente le filtre Filles / Garçons de la grille publique.",
+        }
+      - {
           name: age,
           label: "Âge",
           widget: number,

@@ -2,6 +2,7 @@
 titre: Fiche 0026
 prenom: Youssouf Sidibé
 matricule: N° 0026-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

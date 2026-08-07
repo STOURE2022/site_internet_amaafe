@@ -2,6 +2,7 @@
 titre: Fiche 0033
 prenom: Naffoufa Diarra
 matricule: N° 0033-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

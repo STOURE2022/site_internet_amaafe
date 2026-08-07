@@ -2,6 +2,7 @@
 titre: Fiche 0007
 prenom: Aïchata Diallo
 matricule: N° 0007-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

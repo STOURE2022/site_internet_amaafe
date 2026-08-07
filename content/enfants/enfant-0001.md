@@ -2,6 +2,7 @@
 titre: Fiche 0001
 prenom: Modibo Barry
 matricule: N° 0001-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

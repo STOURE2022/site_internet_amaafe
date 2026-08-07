@@ -2,6 +2,7 @@
 titre: Fiche 0010
 prenom: Moussa Konaté
 matricule: N° 0010-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

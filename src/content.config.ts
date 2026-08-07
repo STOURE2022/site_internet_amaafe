@@ -34,6 +34,8 @@ const enfants = defineCollection({
     prenom: z.string().nullable().optional(),
     // Numéro officiel du centre (ex. « N° 0001-ML-CR-P1 ») — ne jamais le modifier.
     matricule: z.string().nullable().optional(),
+    // « fille » ou « garcon » — alimente le filtre de la grille publique.
+    sexe: z.string().nullable().optional(),
     age: nombreSouple.optional(),
     niveau: z.string().nullable().optional(),
     anneeEntree: nombreSouple.optional(),

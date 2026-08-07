@@ -2,6 +2,7 @@
 titre: Fiche 0030
 prenom: Moulaye Traoré
 matricule: N° 0030-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

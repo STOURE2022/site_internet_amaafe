@@ -2,6 +2,7 @@
 titre: Fiche 0014
 prenom: Aïché Nimaga
 matricule: N° 0014-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

@@ -2,6 +2,7 @@
 titre: Fiche 0012
 prenom: Salimata Koné
 matricule: N° 0012-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

@@ -2,6 +2,7 @@
 titre: Fiche 0013
 prenom: Aminata Lougué
 matricule: N° 0013-ML-CR-P1
+sexe: fille
 age: null
 niveau: null
 anneeEntree: null

@@ -2,6 +2,7 @@
 titre: Fiche 0002
 prenom: Ismaël Barry
 matricule: N° 0002-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

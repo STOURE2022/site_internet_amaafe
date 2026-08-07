@@ -2,6 +2,7 @@
 titre: Fiche 0016
 prenom: Adama Sangaré
 matricule: N° 0016-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null

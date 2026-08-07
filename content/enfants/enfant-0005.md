@@ -2,6 +2,7 @@
 titre: Fiche 0005
 prenom: Ismail Dembélé
 matricule: N° 0005-ML-CR-P1
+sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
