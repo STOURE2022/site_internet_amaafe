@@ -30,9 +30,15 @@ const temoignagesRendus = await Promise.all(
   description="L'Association Malienne d'Aide et d'Accompagnement de la Femme et de l'Enfant (AMAAFE) agit depuis 2010 pour les femmes et les enfants au Mali. Elle porte le Centre Coranique Rahma."
 >
 
-  <section class="wrap phero">
+  <section class="wrap phero phero--centre">
+    <span class="eyebrow eyebrow--d eyebrow--milieu">L'association porteuse</span>
+    <h1>{config.amaafe.slogan}</h1>
+    <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
+    <div class="tags">
+      {config.amaafe.valeurs.map((valeur) => <span class="tag">{valeur}</span>)}
+    </div>
     {reseauxBulles.length > 0 && (
-      <div class="rs" style="margin-bottom:20px">
+      <div class="rs">
         <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
           <linearGradient id="feu-rs" x1="0" y1="1" x2="0" y2="0">
             <stop offset="0" stop-color="#B3271E" /><stop offset=".55" stop-color="#D9A62B" /><stop offset="1" stop-color="#F3C75C" />
@@ -46,12 +52,6 @@ const temoignagesRendus = await Promise.all(
         ))}
       </div>
     )}
-    <span class="eyebrow eyebrow--d">L'association porteuse</span>
-    <h1>{config.amaafe.slogan}</h1>
-    <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
-    <div class="tags">
-      {config.amaafe.valeurs.map((valeur) => <span class="tag">{valeur}</span>)}
-    </div>
   </section>
 
   <!-- ===== PRÉSENTATION + DOMAINES ===== -->

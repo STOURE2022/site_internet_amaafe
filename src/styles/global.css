@@ -184,6 +184,21 @@ body.menu-ouvert{overflow:hidden}
 .phero{padding-block:clamp(44px,6vw,80px) clamp(36px,5vw,64px)}
 .phero h1{color:var(--vert);max-width:22ch;margin-top:16px;font-size:clamp(32px,4.4vw,52px)}
 .phero .lead{margin-top:18px;max-width:64ch}
+/* variante centrée du haut de page (page L'AMAAFE) : le slogan est le titre */
+.phero--centre{text-align:center}
+.phero--centre h1{margin-inline:auto;max-width:24ch}
+.phero--centre .lead{margin-inline:auto}
+.phero--centre .tags{justify-content:center}
+.phero--centre .rs{justify-content:center;margin-top:26px}
+/* libellé centré : losange or des deux côtés */
+.eyebrow--milieu::after{content:"";width:7px;height:7px;background:var(--or);transform:rotate(45deg);flex:none}
+/* bandeau devise centré sous l'en-tête (page Le centre) */
+.bandeau-devise{text-align:center;padding-top:clamp(30px,4vw,46px)}
+.bandeau-devise .devise{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(19px,2.2vw,25px);
+  color:var(--vert);margin:12px auto 0;letter-spacing:.01em}
+.bandeau-devise .devise i{font-style:normal;color:var(--or);font-size:12px;vertical-align:2px;padding-inline:12px}
+.bandeau-devise hr{border:0;border-top:1px solid var(--ligne);max-width:340px;margin:26px auto 0}
+.bandeau-devise+.phero{padding-top:clamp(26px,3.5vw,40px)}
 
 /* ---- bandeaux ---- */
 .proof{background:var(--blanc);border-block:1px solid var(--ligne)}
