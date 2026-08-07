@@ -2,12 +2,12 @@
 titre: Fiche 0035
 prenom: Salimata Tolo
 matricule: N° 0035-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0035-salimata-tolo.jpg
-parraine: false
 publie: true
 ---
 
