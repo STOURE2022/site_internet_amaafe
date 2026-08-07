@@ -2,12 +2,12 @@
 titre: Fiche 0017
 prenom: Sira Sacko
 matricule: N° 0017-ML-CR-P1
+parraine: true
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0017-sira-sacko.png
-parraine: false
 publie: true
 ---
 
