@@ -2,12 +2,12 @@
 titre: Fiche 0019
 prenom: Awa Sarré
 matricule: N° 0019-ML-CR-P1
+parraine: true
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0019-awa-sarre.jpg
-parraine: false
 publie: true
 ---
 
