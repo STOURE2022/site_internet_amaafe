@@ -149,9 +149,9 @@
       "lien": "https://www.helloasso.com/associations/amaafe/collectes/du-hangar-a-la-madrassa"
     },
     "virementMali": {
-      "banque": null,
-      "rib": null,
-      "titulaire": null
+      "banque": "BMS (Banque Malienne de Solidarité)",
+      "rib": "Code Banque : ML102 ; Code Guichet : 01007 ; Numéro de compte : 31689501401 ; Clef : 61 ; Code Wift : BMSMMLBA",
+      "titulaire": "AMAAFE"
     },
     "virementFrance": {
       "iban": "FR76 1027 8063 1800 0216 5210 105",
