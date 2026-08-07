@@ -2,12 +2,12 @@
 titre: Fiche 0031
 prenom: Seydou Mallé
 matricule: N° 0031-ML-CR-P1
+parraine: false
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0031-seydou-malle.jpg
-parraine: false
 publie: true
 ---
 
