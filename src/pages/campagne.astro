@@ -60,7 +60,7 @@ const partage = encodeURIComponent(`${active ? active.titre : 'Les campagnes du 
           <div class="campjauge__t">Collecte — terrain de la médersa <span class="clive" data-clive hidden><i></i>Auto</span></div>
           {manuelFCFA != null
             ? <b><span data-ctotal>{fmtNombre(manuelFCFA)} FCFA</span> collectés</b>
-            : <b>Collecte en cours</b>}
+            : <Fragment><b data-cprep>Collecte en cours</b><b hidden data-cjauge><span data-ctotal>0 FCFA</span> collectés</b></Fragment>}
           <div class="campjauge__b" role="img" aria-label={`Avancement : ${pctFr} pour cent`}><i style={`width:${pct}%`} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
           <div class="campjauge__f"><span>objectif {fmtNombre(config.medersa.budgetTotalEUR)} €</span><b data-cpct>{pctFr} %</b></div>
           <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso, automatique<b data-cdet-mnt></b></div>

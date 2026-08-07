@@ -48,14 +48,30 @@ const resteAffiche = resteFCFA == null
               </Fragment>
             ) : (
               <Fragment>
-                <div class="collecte__m">Collecte en <b>préparation</b></div>
-                <p class="collecte__obj">Objectif : <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA). Le montant déjà collecté sera publié ici dès les premiers dons.</p>
+                {/* Sans saisie hors ligne, la page est publiée « en préparation » ;
+                    si HelloAsso renvoie un montant, collecte.js bascule sur la
+                    jauge complète ci-dessous (data-cprep ↔ data-cjauge). */}
+                <div data-cprep>
+                  <div class="collecte__m">Collecte en <b>préparation</b></div>
+                  <p class="collecte__obj">Objectif : <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA). Le montant déjà collecté sera publié ici dès les premiers dons.</p>
+                </div>
+                <div hidden data-cjauge>
+                  <div class="collecte__m"><b data-ctotal>0 FCFA</b> collectés</div>
+                  <p class="collecte__obj">sur un objectif de <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong> (≈ {objectifFCFAMillions} millions de FCFA)</p>
+                  <div class="collecte__jt" role="img" aria-label="Avancement de la collecte"><i data-fill={0} data-cbar-m></i><i class="jt-ha" data-cbar-h></i></div>
+                  <div class="collecte__jf"><span>saisies de l'équipe + HelloAsso</span><b data-cpct>0 %</b></div>
+                  <div class="collecte__det" data-cdet hidden><i></i>dont HelloAsso (carte bancaire), automatique<b data-cdet-mnt></b></div>
+                  <div class="cmaj" data-cmaj hidden></div>
+                </div>
               </Fragment>
             )}
           </div>
           <div class="collecte__cta">
             {resteAffiche && resteFCFA > 0 && (
               <div class="collecte__reste"><b data-creste>{resteAffiche}</b><span>restent à réunir pour atteindre l'objectif</span></div>
+            )}
+            {collecteFCFA == null && (
+              <div class="collecte__reste" hidden data-cjauge><b data-creste></b><span>restent à réunir pour atteindre l'objectif</span></div>
             )}
             <a class="btn btn--or btn--lg" style="justify-content:center" href="/faire-un-don/">Poser une pierre&nbsp;→</a>
             <p class="collecte__sq">Chaque contribution est une <strong>Sadaqa Jâriya</strong> — une aumône continue.</p>

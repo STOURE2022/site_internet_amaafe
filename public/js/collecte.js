@@ -10,7 +10,11 @@
      [data-cdet]      ligne de détail HelloAsso (masquée par défaut)
      [data-cdet-mnt]  montant dans la ligne de détail
      [data-clive]     badge « mise à jour auto » (masqué par défaut)
-     [data-cmaj]      mention de fraîcheur (masquée par défaut) */
+     [data-cmaj]      mention de fraîcheur (masquée par défaut)
+     [data-cprep]     variante « collecte en préparation », masquée dès
+                      qu'un montant HelloAsso arrive
+     [data-cjauge]    jauge complète masquée au build (aucune saisie
+                      manuelle), révélée dès qu'un montant arrive */
 (function () {
   var zones = document.querySelectorAll('[data-collecte]');
   if (!zones.length) return;
@@ -34,6 +38,9 @@
         var pctM = Math.min(100, (manuel / objectif) * 100);
         var pctH = Math.min(100 - pctM, (helloFCFA / objectif) * 100);
         var pct = Math.min(100, Math.round((pctM + pctH) * 10) / 10);
+
+        z.querySelectorAll('[data-cprep]').forEach(function (e) { e.hidden = true; });
+        z.querySelectorAll('[data-cjauge]').forEach(function (e) { e.hidden = false; });
 
         var el = function (s) { return z.querySelector(s); };
         var t = el('[data-ctotal]');

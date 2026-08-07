@@ -155,7 +155,7 @@ const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slic
             <div class="sums">
               {collecteManuelleFCFA(config.medersa) != null
                 ? <b><span data-ctotal>{fmtNombre(collecteManuelleFCFA(config.medersa))} FCFA</span> collectés</b>
-                : <b><Tbd valeur={null} label="montant collecté" suffixe=" FCFA collectés" /></b>}
+                : <Fragment><b data-cprep><Tbd valeur={null} label="montant collecté" suffixe=" FCFA collectés" /></b><b hidden data-cjauge><span data-ctotal>0 FCFA</span> collectés</b></Fragment>}
               <span>sur un objectif de {config.medersa.budgetTotalEUR != null
                 ? <strong>{fmtNombre(config.medersa.budgetTotalEUR)} €</strong>
                 : <Tbd valeur={null} label="budget à chiffrer" suffixe=" FCFA" />}</span>
