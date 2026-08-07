@@ -2,12 +2,12 @@
 titre: Fiche 0001
 prenom: Modibo Barry
 matricule: N° 0001-ML-CR-P1
+parraine: true
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0001-modibo-barry.jpg
-parraine: false
 publie: true
 ---
 
