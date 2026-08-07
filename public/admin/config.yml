@@ -26,7 +26,12 @@ collections:
         file: "content/config.json"
         format: json
         fields:
-          - { name: _aide, label: "Aide (ne pas modifier)", widget: string, required: false }
+          - {
+              name: _aide,
+              label: "Aide (ne pas modifier)",
+              widget: string,
+              required: false,
+            }
           - name: site
             label: "Site"
             widget: object
@@ -34,7 +39,12 @@ collections:
               - { name: nom, label: "Nom du centre", widget: string }
               - { name: devise, label: "Devise", widget: string }
               - { name: lieu, label: "Lieu", widget: string }
-              - { name: anneeCreation, label: "Année de création", widget: number, value_type: int }
+              - {
+                  name: anneeCreation,
+                  label: "Année de création",
+                  widget: number,
+                  value_type: int,
+                }
           - name: amaafe
             label: "AMAAFE"
             widget: object
@@ -42,10 +52,22 @@ collections:
               - { name: nomComplet, label: "Nom complet", widget: string }
               - { name: sigle, label: "Sigle", widget: string }
               - { name: slogan, label: "Slogan", widget: string }
-              - { name: zoneIntervention, label: "Zone d'intervention", widget: string }
+              - {
+                  name: zoneIntervention,
+                  label: "Zone d'intervention",
+                  widget: string,
+                }
               - { name: valeurs, label: "Valeurs", widget: list }
-              - { name: perspectives2030, label: "Perspectives 2030", widget: list }
-              - { name: domainesAction, label: "Domaines d'action", widget: list }
+              - {
+                  name: perspectives2030,
+                  label: "Perspectives 2030",
+                  widget: list,
+                }
+              - {
+                  name: domainesAction,
+                  label: "Domaines d'action",
+                  widget: list,
+                }
           - name: entites
             label: "Entités déclarées"
             widget: object
@@ -55,8 +77,16 @@ collections:
                 widget: object
                 fields:
                   - { name: nom, label: "Nom", widget: string }
-                  - { name: dateCreation, label: "Date de création", widget: string }
-                  - { name: reference, label: "Référence légale", widget: string }
+                  - {
+                      name: dateCreation,
+                      label: "Date de création",
+                      widget: string,
+                    }
+                  - {
+                      name: reference,
+                      label: "Référence légale",
+                      widget: string,
+                    }
                   - { name: siege, label: "Siège social", widget: string }
                   - { name: regime, label: "Régime", widget: string }
               - name: france
@@ -64,8 +94,16 @@ collections:
                 widget: object
                 fields:
                   - { name: nom, label: "Nom", widget: string }
-                  - { name: dateCreation, label: "Date de création", widget: string }
-                  - { name: reference, label: "Référence légale", widget: string }
+                  - {
+                      name: dateCreation,
+                      label: "Date de création",
+                      widget: string,
+                    }
+                  - {
+                      name: reference,
+                      label: "Référence légale",
+                      widget: string,
+                    }
                   - { name: siege, label: "Siège social", widget: string }
                   - { name: regime, label: "Régime", widget: string }
                   - { name: email, label: "Courriel", widget: string }
@@ -76,10 +114,22 @@ collections:
               - { name: _aide, label: "Aide", widget: string, required: false }
               - { name: fondatrice, label: "Fondatrice", widget: string }
               - { name: presidente, label: "Présidente", widget: string }
-              - { name: vicePresidente, label: "Vice-présidente", widget: string }
-              - { name: secretaireGeneral, label: "Secrétaire général", widget: string }
+              - {
+                  name: vicePresidente,
+                  label: "Vice-présidente",
+                  widget: string,
+                }
+              - {
+                  name: secretaireGeneral,
+                  label: "Secrétaire général",
+                  widget: string,
+                }
               - { name: tresorier, label: "Trésorier", widget: string }
-              - { name: responsablesCommunication, label: "Responsables communication", widget: list }
+              - {
+                  name: responsablesCommunication,
+                  label: "Responsables communication",
+                  widget: list,
+                }
           - name: contact
             label: "Contact"
             widget: object
@@ -88,29 +138,96 @@ collections:
               - { name: telMali, label: "Téléphone Mali", widget: string }
               - { name: telFrance, label: "Téléphone France", widget: string }
               - { name: adresse, label: "Adresse", widget: string }
-              - { name: horairesVisite, label: "Horaires de visite", widget: string, required: false }
+              - {
+                  name: horairesVisite,
+                  label: "Horaires de visite",
+                  widget: string,
+                  required: false,
+                }
           - name: whatsapp
             label: "WhatsApp (déclarations de don)"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: numeroMali, label: "Numéro équipe Mali (sans +, sans espaces) — Orange Money, Wave, virement Mali", widget: string, required: false }
-              - { name: numeroFrance, label: "Numéro équipe France (sans +, sans espaces) — Wero, PayPal, virement France", widget: string, required: false }
-              - { name: numeroParrainage, label: "Numéro parrainage (sans +, sans espaces) — messages « Parrainer un enfant »", widget: string, required: false,
-                  hint: "Laisser vide pour utiliser le numéro de l'équipe Mali." }
+              - {
+                  name: numeroMali,
+                  label: "Numéro équipe Mali (sans +, sans espaces) — Orange Money, Wave, virement Mali",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: numeroFrance,
+                  label: "Numéro équipe France (sans +, sans espaces) — Wero, PayPal, virement France",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: numeroParrainage,
+                  label: "Numéro parrainage (sans +, sans espaces) — messages « Parrainer un enfant »",
+                  widget: string,
+                  required: false,
+                  hint: "Laisser vide pour utiliser le numéro de l'équipe Mali.",
+                }
           - name: chiffres
             label: "Chiffres clés"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: enfants, label: "Nombre d'enfants", widget: number, value_type: int, required: false }
-              - { name: enseignants, label: "Nombre d'enseignants", widget: number, value_type: int, required: false }
-              - { name: parrainsActifs, label: "Parrains actifs", widget: number, value_type: int, required: false }
-              - { name: benevoles, label: "Bénévoles", widget: number, value_type: int, required: false }
-              - { name: membresAdherents, label: "Membres adhérents", widget: number, value_type: int, required: false }
-              - { name: coutMensuelParEnfantFCFA, label: "Coût mensuel par enfant (FCFA)", widget: number, value_type: int, required: false }
-              - { name: coutAnnuelParEnfantFCFA, label: "Coût annuel par enfant (FCFA)", widget: number, value_type: int, required: false }
-              - { name: suiviJusquaAge, label: "Suivi jusqu'à (âge)", widget: number, value_type: int }
+              - {
+                  name: enfants,
+                  label: "Nombre d'enfants",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: enseignants,
+                  label: "Nombre d'enseignants",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: parrainsActifs,
+                  label: "Parrains actifs",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: benevoles,
+                  label: "Bénévoles",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: membresAdherents,
+                  label: "Membres adhérents",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: coutMensuelParEnfantFCFA,
+                  label: "Coût mensuel par enfant (FCFA)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: coutAnnuelParEnfantFCFA,
+                  label: "Coût annuel par enfant (FCFA)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: suiviJusquaAge,
+                  label: "Suivi jusqu'à (âge)",
+                  widget: number,
+                  value_type: int,
+                }
           - name: impact
             label: "Réalisations AMAAFE (depuis 2010)"
             widget: object
@@ -129,21 +246,59 @@ collections:
             hint: "L'affiche est publiée telle quelle, en pleine qualité — recommandé : JPEG de 500 Ko à 1 Mo. La première campagne active de la liste est « à la une » ; les autres actives s'affichent en dessous (réordonnez la liste pour choisir la une). Les campagnes désactivées s'archivent en bas de page."
             fields:
               - { name: titre, label: "Titre de la campagne", widget: string }
-              - { name: description, label: "Description (une ou deux phrases)", widget: text, required: false }
-              - { name: affiche, label: "Affiche (image pleine qualité)", widget: image }
-              - { name: lienBouton, label: "Lien du bouton (HelloAsso, cagnotte…) — vide = page don du site", widget: string, required: false }
-              - { name: texteBouton, label: "Texte du bouton (ex. Donner sur HelloAsso)", widget: string, required: false }
-              - { name: active, label: "Campagne active", widget: boolean, default: true }
+              - {
+                  name: description,
+                  label: "Description (une ou deux phrases)",
+                  widget: text,
+                  required: false,
+                }
+              - {
+                  name: affiche,
+                  label: "Affiche (image pleine qualité)",
+                  widget: image,
+                }
+              - {
+                  name: lienBouton,
+                  label: "Lien du bouton (HelloAsso, cagnotte…) — vide = page don du site",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: texteBouton,
+                  label: "Texte du bouton (ex. Donner sur HelloAsso)",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: active,
+                  label: "Campagne active",
+                  widget: boolean,
+                  default: true,
+                }
           - name: documentsPublies
             label: "Documents à télécharger (page Transparence)"
             widget: list
             required: false
             hint: "Téléversez le PDF (compressé si possible) et donnez-lui un titre clair. Les documents apparaissent sur la page Transparence, dans le tableau de bord et dans l'assistant."
             fields:
-              - { name: titre, label: "Titre (ex. Statuts de l'association)", widget: string }
-              - { name: description, label: "Description courte", widget: string, required: false }
-              - { name: fichier, label: "Fichier PDF", widget: file,
-                  media_folder: "/public/documents", public_folder: "/documents" }
+              - {
+                  name: titre,
+                  label: "Titre (ex. Statuts de l'association)",
+                  widget: string,
+                }
+              - {
+                  name: description,
+                  label: "Description courte",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: fichier,
+                  label: "Fichier PDF",
+                  widget: file,
+                  media_folder: "/public/documents",
+                  public_folder: "/documents",
+                }
           - name: galerieActions
             label: "Galerie des actions (page L'AMAAFE)"
             widget: list
@@ -152,7 +307,12 @@ collections:
             fields:
               - { name: image, label: "Photo", widget: image }
               - { name: titre, label: "Titre", widget: string }
-              - { name: legende, label: "Légende (lieu, opération, partenaire…)", widget: string, required: false }
+              - {
+                  name: legende,
+                  label: "Légende (lieu, opération, partenaire…)",
+                  widget: string,
+                  required: false,
+                }
           - name: partenaires
             label: "Partenaires"
             widget: list
@@ -180,62 +340,186 @@ collections:
                 fields:
                   - { name: libelle, label: "Libellé", widget: string }
                   - { name: montantEUR, label: "Montant (€)", widget: string }
-              - { name: sousTotalActionsEUR, label: "Sous-total actions (€)", widget: string }
+              - {
+                  name: sousTotalActionsEUR,
+                  label: "Sous-total actions (€)",
+                  widget: string,
+                }
               - name: detailDepensesFonctionnement
                 label: "Dépenses — fonctionnement"
                 widget: list
                 fields:
                   - { name: libelle, label: "Libellé", widget: string }
                   - { name: montantEUR, label: "Montant (€)", widget: string }
-              - { name: sousTotalFonctionnementEUR, label: "Sous-total fonctionnement (€)", widget: string }
+              - {
+                  name: sousTotalFonctionnementEUR,
+                  label: "Sous-total fonctionnement (€)",
+                  widget: string,
+                }
           - name: financesMali
             label: "Budget AMAAFE / Mali"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: cotisationsAnnuellesFCFA, label: "Cotisations annuelles (FCFA)", widget: number, value_type: int, required: false }
-              - { name: partFonctionnementCouturePct, label: "Part fonctionnement centre de couture (%)", widget: number, value_type: int, required: false }
-              - { name: partActionsPct, label: "Part activités humanitaires (%)", widget: number, value_type: int, required: false }
+              - {
+                  name: cotisationsAnnuellesFCFA,
+                  label: "Cotisations annuelles (FCFA)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: partFonctionnementCouturePct,
+                  label: "Part fonctionnement centre de couture (%)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: partActionsPct,
+                  label: "Part activités humanitaires (%)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
           - name: parrainage
             label: "Parrainage"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: montantMensuelFCFA, label: "Montant mensuel (FCFA)", widget: number, value_type: int, required: false }
-              - { name: montantMensuelEUR, label: "Montant mensuel (EUR)", widget: number, value_type: int, required: false }
+              - {
+                  name: montantMensuelFCFA,
+                  label: "Montant mensuel (FCFA)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
+              - {
+                  name: montantMensuelEUR,
+                  label: "Montant mensuel (EUR)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
           - name: medersa
             label: "Projet de médersa"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: budgetTotalEUR, label: "Objectif de collecte (€)", widget: number, value_type: int, required: false }
+              - {
+                  name: budgetTotalEUR,
+                  label: "Objectif de collecte (€)",
+                  widget: number,
+                  value_type: int,
+                  required: false,
+                }
               - name: collecteHorsLigne
                 label: "Collecte hors ligne — saisies de l'équipe"
                 widget: list
                 required: false
                 hint: "Une ligne par source (Orange Money, Wave, virements, espèces…). La jauge additionne ces montants et, automatiquement, la collecte HelloAsso."
                 fields:
-                  - { name: source, label: "Source (ex. Orange Money — pointé au 5 août)", widget: string }
-                  - { name: montantFCFA, label: "Montant (FCFA)", widget: number, value_type: int }
-              - { name: pourcentageAvancement, label: "Avancement (%) — laisser vide, sauf pour forcer la jauge", widget: number, value_type: float, required: false }
+                  - {
+                      name: source,
+                      label: "Source (ex. Orange Money — pointé au 5 août)",
+                      widget: string,
+                    }
+                  - {
+                      name: montantFCFA,
+                      label: "Montant (FCFA)",
+                      widget: number,
+                      value_type: int,
+                    }
+              - {
+                  name: pourcentageAvancement,
+                  label: "Avancement (%) — laisser vide, sauf pour forcer la jauge",
+                  widget: number,
+                  value_type: float,
+                  required: false,
+                }
           - name: photos
             label: "Photos du site"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: familleCentre, label: "Accueil — les élèves du centre (photo de famille)", widget: image, required: false }
-              - { name: elevesUniforme, label: "Accueil & Le Centre — les élèves en uniforme", widget: image, required: false }
-              - { name: unCours, label: "Accueil & Le Centre — un cours au centre", widget: image, required: false }
-              - { name: sortieEducative, label: "Accueil, Le Centre & L'AMAAFE — une sortie éducative", widget: image, required: false }
-              - { name: courCentre, label: "Le Centre — la cour du centre", widget: image, required: false }
-              - { name: hangar, label: "Accueil, Le Centre & Notre projet — les cours sous le hangar en tôle", widget: image, required: false }
-              - { name: remiseFournitures, label: "Le Centre — remise des fournitures", widget: image, required: false }
-              - { name: recitation, label: "Le Centre — la récitation", widget: image, required: false }
-              - { name: uniformes, label: "Le Centre — les uniformes", widget: image, required: false }
-              - { name: detente, label: "Le Centre — moment de détente", widget: image, required: false }
-              - { name: sensibilisation, label: "L'AMAAFE — une action de sensibilisation", widget: image, required: false }
-              - { name: equipeAmaafe, label: "L'AMAAFE — l'équipe", widget: image, required: false }
-              - { name: planMedersa, label: "Accueil & Notre projet — plan ou vue d'artiste de la médersa", widget: image, required: false }
+              - {
+                  name: familleCentre,
+                  label: "Accueil — les élèves du centre (photo de famille)",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: elevesUniforme,
+                  label: "Accueil & Le Centre — les élèves en uniforme",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: unCours,
+                  label: "Accueil & Le Centre — un cours au centre",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: sortieEducative,
+                  label: "Accueil, Le Centre & L'AMAAFE — une sortie éducative",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: courCentre,
+                  label: "Le Centre — la cour du centre",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: hangar,
+                  label: "Accueil, Le Centre & Notre projet — les cours sous le hangar en tôle",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: remiseFournitures,
+                  label: "Le Centre — remise des fournitures",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: recitation,
+                  label: "Le Centre — la récitation",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: uniformes,
+                  label: "Le Centre — les uniformes",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: detente,
+                  label: "Le Centre — moment de détente",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: sensibilisation,
+                  label: "L'AMAAFE — une action de sensibilisation",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: equipeAmaafe,
+                  label: "L'AMAAFE — l'équipe",
+                  widget: image,
+                  required: false,
+                }
+              - {
+                  name: planMedersa,
+                  label: "Accueil & Notre projet — plan ou vue d'artiste de la médersa",
+                  widget: image,
+                  required: false,
+                }
           - name: paiement
             label: "Coordonnées de paiement"
             widget: object
@@ -244,64 +528,179 @@ collections:
                 label: "Orange Money"
                 widget: object
                 fields:
-                  - { name: numero, label: "Numéro", widget: string, required: false }
-                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+                  - {
+                      name: numero,
+                      label: "Numéro",
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      name: titulaire,
+                      label: "Titulaire",
+                      widget: string,
+                      required: false,
+                    }
               - name: wave
                 label: "Wave"
                 widget: object
                 fields:
-                  - { name: numero, label: "Numéro", widget: string, required: false }
-                  - { name: lienPaiement, label: "Lien de paiement", widget: string, required: false }
+                  - {
+                      name: numero,
+                      label: "Numéro",
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      name: lienPaiement,
+                      label: "Lien de paiement",
+                      widget: string,
+                      required: false,
+                    }
               - name: wero
                 label: "Wero (Europe)"
                 widget: object
                 fields:
-                  - { name: numero, label: "Numéro de téléphone lié au compte", widget: string, required: false }
-                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+                  - {
+                      name: numero,
+                      label: "Numéro de téléphone lié au compte",
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      name: titulaire,
+                      label: "Titulaire",
+                      widget: string,
+                      required: false,
+                    }
               - name: paypal
                 label: "PayPal"
                 widget: object
                 fields:
-                  - { name: lien, label: "Lien de paiement (paypal.me) ou adresse e-mail PayPal", widget: string, required: false }
+                  - {
+                      name: lien,
+                      label: "Lien de paiement (paypal.me) ou adresse e-mail PayPal",
+                      widget: string,
+                      required: false,
+                    }
               - name: helloasso
                 label: "HelloAsso (carte bancaire)"
                 widget: object
                 fields:
-                  - { name: lien, label: "Lien de la collecte HelloAsso", widget: string, required: false }
+                  - {
+                      name: lien,
+                      label: "Lien de la collecte HelloAsso",
+                      widget: string,
+                      required: false,
+                    }
               - name: virementMali
                 label: "Virement Mali"
                 widget: object
                 fields:
-                  - { name: banque, label: "Banque", widget: string, required: false }
+                  - {
+                      name: banque,
+                      label: "Banque",
+                      widget: string,
+                      required: false,
+                    }
                   - { name: rib, label: "RIB", widget: string, required: false }
-                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
+                  - {
+                      name: code_swift,
+                      label: "Code SWIFT",
+                      widget: string,
+                      required: false,
+                    }
+                  - {
+                      name: titulaire,
+                      label: "Titulaire",
+                      widget: string,
+                      required: false,
+                    }
               - name: virementFrance
                 label: "Virement France"
                 widget: object
                 fields:
-                  - { name: iban, label: "IBAN", widget: string, required: false }
+                  - {
+                      name: iban,
+                      label: "IBAN",
+                      widget: string,
+                      required: false,
+                    }
                   - { name: bic, label: "BIC", widget: string, required: false }
-                  - { name: titulaire, label: "Titulaire", widget: string, required: false }
-              - { name: motif, label: "Motif imposé des virements", widget: string }
+                  - {
+                      name: titulaire,
+                      label: "Titulaire",
+                      widget: string,
+                      required: false,
+                    }
+              - {
+                  name: motif,
+                  label: "Motif imposé des virements",
+                  widget: string,
+                }
           - name: formulaires
             label: "Formulaires externes (URLs)"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: declarationDonUrl, label: "URL formulaire de déclaration de don", widget: string, required: false }
-              - { name: parrainageUrl, label: "URL formulaire de parrainage", widget: string, required: false }
-              - { name: contactUrl, label: "URL formulaire de contact", widget: string, required: false }
-              - { name: newsletterUrl, label: "URL inscription newsletter", widget: string, required: false }
+              - {
+                  name: declarationDonUrl,
+                  label: "URL formulaire de déclaration de don",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: parrainageUrl,
+                  label: "URL formulaire de parrainage",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: contactUrl,
+                  label: "URL formulaire de contact",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: newsletterUrl,
+                  label: "URL inscription newsletter",
+                  widget: string,
+                  required: false,
+                }
           - name: reseaux
             label: "Réseaux sociaux"
             widget: object
             fields:
               - { name: _aide, label: "Aide", widget: string, required: false }
-              - { name: facebook, label: "Facebook", widget: string, required: false }
-              - { name: instagram, label: "Instagram", widget: string, required: false }
-              - { name: whatsapp, label: "WhatsApp (lien)", widget: string, required: false }
-              - { name: youtube, label: "YouTube", widget: string, required: false }
-              - { name: tiktok, label: "TikTok", widget: string, required: false }
+              - {
+                  name: facebook,
+                  label: "Facebook",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: instagram,
+                  label: "Instagram",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: whatsapp,
+                  label: "WhatsApp (lien)",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: youtube,
+                  label: "YouTube",
+                  widget: string,
+                  required: false,
+                }
+              - {
+                  name: tiktok,
+                  label: "TikTok",
+                  widget: string,
+                  required: false,
+                }
 
   # ---- Les actualités ----
   - name: actualites
@@ -312,13 +711,27 @@ collections:
     slug: "{{slug}}"
     fields:
       - { name: titre, label: "Titre", widget: string }
-      - { name: categorie, label: "Catégorie", widget: select,
-          options: ["Vie du centre", "Sortie éducative", "Le projet", "AMAAFE"] }
+      - {
+          name: categorie,
+          label: "Catégorie",
+          widget: select,
+          options: ["Vie du centre", "Sortie éducative", "Le projet", "AMAAFE"],
+        }
       - { name: extrait, label: "Extrait (1 ou 2 phrases)", widget: text }
-      - { name: date, label: "Date (laisser vide si inconnue)", widget: string, required: false,
-          hint: "Format AAAA-MM-JJ, ex. 2026-03-12" }
-      - { name: image, label: "Image (avec autorisation uniquement)", widget: image, required: false,
-          hint: "Compresser l'image avant l'envoi (squoosh.app, format WebP ou JPEG, moins de 200 Ko) — le site doit rester léger pour les connexions lentes." }
+      - {
+          name: date,
+          label: "Date (laisser vide si inconnue)",
+          widget: string,
+          required: false,
+          hint: "Format AAAA-MM-JJ, ex. 2026-03-12",
+        }
+      - {
+          name: image,
+          label: "Image (avec autorisation uniquement)",
+          widget: image,
+          required: false,
+          hint: "Compresser l'image avant l'envoi (squoosh.app, format WebP ou JPEG, moins de 200 Ko) — le site doit rester léger pour les connexions lentes.",
+        }
       - { name: publie, label: "Publié", widget: boolean, default: true }
       - { name: body, label: "Texte de l'article", widget: markdown }
 
@@ -333,12 +746,28 @@ collections:
     summary: "{{nom}} — {{role}}"
     fields:
       - { name: nom, label: "Nom", widget: string }
-      - { name: role, label: "Rôle (ex. Parrain, Parent d'élève, Partenaire…)", widget: string }
-      - { name: contexte, label: "Page d'affichage", widget: select,
-          options: [{ label: "Page Parrainage", value: "parrainage" }, { label: "Page L'AMAAFE", value: "amaafe" }] }
+      - {
+          name: role,
+          label: "Rôle (ex. Parrain, Parent d'élève, Partenaire…)",
+          widget: string,
+        }
+      - {
+          name: contexte,
+          label: "Page d'affichage",
+          widget: select,
+          options:
+            [
+              { label: "Page Parrainage", value: "parrainage" },
+              { label: "Page L'AMAAFE", value: "amaafe" },
+            ],
+        }
       - { name: ordre, label: "Ordre d'affichage", widget: number, default: 99 }
       - { name: publie, label: "Publié", widget: boolean, default: true }
-      - { name: body, label: "Texte du témoignage (sans guillemets)", widget: markdown }
+      - {
+          name: body,
+          label: "Texte du témoignage (sans guillemets)",
+          widget: markdown,
+        }
 
   # ---- Les fiches de parrainage ----
   - name: enfants
@@ -350,14 +779,44 @@ collections:
     slug: "{{slug}}"
     summary: "{{titre}} — {{prenom}}"
     fields:
-      - { name: titre, label: "Référence de la fiche (ex. Fiche 5)", widget: string,
-          hint: "Sert à nommer le fichier et à retrouver la fiche dans cette liste — jamais affiché sur le site." }
-      - { name: prenom, label: "Prénom (avec autorisation écrite uniquement)", widget: string, required: false }
-      - { name: age, label: "Âge", widget: number, value_type: int, required: false }
+      - {
+          name: titre,
+          label: "Référence de la fiche (ex. Fiche 5)",
+          widget: string,
+          hint: "Sert à nommer le fichier et à retrouver la fiche dans cette liste — jamais affiché sur le site.",
+        }
+      - {
+          name: prenom,
+          label: "Prénom (avec autorisation écrite uniquement)",
+          widget: string,
+          required: false,
+        }
+      - {
+          name: age,
+          label: "Âge",
+          widget: number,
+          value_type: int,
+          required: false,
+        }
       - { name: niveau, label: "Niveau", widget: string, required: false }
-      - { name: anneeEntree, label: "Année d'entrée au centre", widget: number, value_type: int, required: false }
-      - { name: photo, label: "Photo (avec autorisation écrite uniquement)", widget: image, required: false,
-          hint: "Compresser la photo avant l'envoi (squoosh.app, moins de 200 Ko). Elle s'affiche en rond sur les fiches." }
+      - {
+          name: anneeEntree,
+          label: "Année d'entrée au centre",
+          widget: number,
+          value_type: int,
+          required: false,
+        }
+      - {
+          name: photo,
+          label: "Photo (avec autorisation écrite uniquement)",
+          widget: image,
+          required: false,
+          hint: "Compresser la photo avant l'envoi (squoosh.app, moins de 200 Ko). Elle s'affiche en rond sur les fiches.",
+        }
       - { name: publie, label: "Publié", widget: boolean, default: true }
-      - { name: body, label: "Son histoire (affichée sur la fiche publique de l'enfant)", widget: markdown,
-          hint: "Deux ou trois paragraphes : son parcours, ses progrès, ce que le parrain recevra. Sans nom de famille des parents ni information sensible." }
+      - {
+          name: body,
+          label: "Son histoire (affichée sur la fiche publique de l'enfant)",
+          widget: markdown,
+          hint: "Deux ou trois paragraphes : son parcours, ses progrès, ce que le parrain recevra. Sans nom de famille des parents ni information sensible.",
+        }

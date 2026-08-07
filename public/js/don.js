@@ -75,6 +75,7 @@
       case 'vir-ml':
         return { t: 'Virement — compte Mali', v: p.virementMali.rib,
                  s: (p.virementMali.banque ? 'Banque : ' + p.virementMali.banque + '. ' : '') +
+                    (p.virementMali.code_swift ? 'Code SWIFT : ' + p.virementMali.code_swift + '. ' : '') +
                     'Motif à indiquer : ' + motif + '.', tbdSeul: !p.virementMali.rib };
       case 'vir-fr':
         return { t: 'Virement — compte France (EUR)', v: p.virementFrance.iban,
