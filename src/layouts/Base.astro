@@ -18,10 +18,10 @@ const chemin = Astro.url.pathname;
 
 const campagneActive = (config.campagnes ?? []).some((c) => c.active);
 const menu = [
+  { href: '/l-amaafe/', label: "L'AMAAFE" },
   { href: '/le-centre/', label: 'Le centre' },
   { href: '/notre-projet/', label: 'Notre projet' },
   { href: '/parrainage/', label: 'Parrainage' },
-  { href: '/l-amaafe/', label: "L'AMAAFE" },
   // L'entrée Campagne n'apparaît que lorsqu'une campagne est active.
   ...(campagneActive ? [{ href: '/campagne/', label: 'Campagne', camp: true }] : []),
   { href: '/actualites/', label: 'Actualités' },
@@ -131,6 +131,7 @@ const jsonLd = {
       </div>
       <div class="mmenu__nav">
         <a href="/" class:list={[{ actif: chemin === '/' }]}>Accueil</a>
+        <a href="/l-amaafe/" class:list={[{ actif: estActif('/l-amaafe/') }]}>L'AMAAFE<span class="fl" aria-hidden="true">›</span></a>
         <a href="/le-centre/" class:list={[{ actif: estActif('/le-centre/') }]}>Le centre<span class="fl" aria-hidden="true">›</span></a>
         <a href="/notre-projet/" class:list={[{ actif: estActif('/notre-projet/') }]}>Notre projet<span class="fl" aria-hidden="true">›</span></a>
         <a href="/parrainage/" class:list={[{ actif: estActif('/parrainage/') }]}>Parrainage<span class="fl" aria-hidden="true">›</span></a>
@@ -138,7 +139,6 @@ const jsonLd = {
           <a href="/campagne/" class="camp" class:list={[{ actif: estActif('/campagne/') }]}><i aria-hidden="true"></i>Campagne<span class="badge">En cours</span></a>
         )}
         <span class="mmenu__sep">L'association</span>
-        <a href="/l-amaafe/" class:list={[{ actif: estActif('/l-amaafe/') }]}>L'AMAAFE<span class="fl" aria-hidden="true">›</span></a>
         <a href="/transparence/" class:list={[{ actif: estActif('/transparence/') }]}>Transparence<span class="fl" aria-hidden="true">›</span></a>
         <a href="/actualites/" class:list={[{ actif: estActif('/actualites/') }]}>Actualités<span class="fl" aria-hidden="true">›</span></a>
         <a href="/contact/" class:list={[{ actif: estActif('/contact/') }]}>Contact<span class="fl" aria-hidden="true">›</span></a>
