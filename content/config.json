@@ -101,20 +101,7 @@
   "medersa": {
     "_aide": "Objectif en euros. La jauge additionne les saisies « collecte hors ligne » (Orange Money, Wave, virements, espèces…) et, automatiquement, le montant HelloAsso. Ne remplir pourcentageAvancement que pour forcer la jauge.",
     "budgetTotalEUR": 30000,
-    "collecteHorsLigne": [
-      {
-        "source": "Orange Money",
-        "montantFCFA": 10000000
-      },
-      {
-        "source": "Virement bancaire France",
-        "montantFCFA": 896000
-      },
-      {
-        "source": "Wero",
-        "montantFCFA": 2000000
-      }
-    ],
+    "collecteHorsLigne": [],
     "pourcentageAvancement": null
   },
   "_aide": "FICHIER CENTRAL DES DONNÉES. Toute valeur à `null` s'affiche sur le site comme un jeton rouge « à confirmer ». Remplacez le null par la vraie valeur (entre guillemets pour du texte, sans guillemets pour un nombre) puis republiez le site.",
