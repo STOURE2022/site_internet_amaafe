@@ -111,6 +111,14 @@ p{margin:0}
 .foot__logo{display:inline-block;background:#fff;border-radius:12px;padding:10px 12px;margin-top:18px}
 .foot__logo img{display:block;width:82px;height:auto}
 
+/* ---- grille enfants : bouton « voir les autres » et carte parrainée ---- */
+.voirplus{display:flex;justify-content:center;margin-top:24px}
+.no-js .g4[hidden]{display:grid}
+.no-js .voirplus{display:none}
+.cenf__mat{font-family:var(--mono);font-size:10.5px;color:var(--gris-2);letter-spacing:.04em;margin-top:3px}
+.cenf--p .cenf__chip{color:var(--vert-2)}
+.cenf--p .cenf__btn--fait{background:var(--vert-pale);color:var(--vert-2);cursor:default}
+
 /* ---- gages de confiance des blocs de don ---- */
 .fiab{list-style:none;margin:18px 0 0;padding:14px 16px;display:grid;gap:10px;background:var(--papier-2);
   border:1px solid var(--ligne);border-radius:12px}

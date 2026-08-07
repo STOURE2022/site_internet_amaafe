@@ -32,10 +32,13 @@ const enfants = defineCollection({
   schema: z.object({
     // Ne renseigner prénom et photo qu'avec l'autorisation écrite des parents.
     prenom: z.string().nullable().optional(),
+    // Numéro officiel du centre (ex. « N° 0001-ML-CR-P1 ») — ne jamais le modifier.
+    matricule: z.string().nullable().optional(),
     age: nombreSouple.optional(),
     niveau: z.string().nullable().optional(),
     anneeEntree: nombreSouple.optional(),
     photo: z.string().nullable().optional(),
+    parraine: z.boolean().default(false),
     publie: z.boolean().default(true),
   }),
 });

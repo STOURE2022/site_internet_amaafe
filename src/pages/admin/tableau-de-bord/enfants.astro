@@ -5,14 +5,15 @@ import { getCollection } from 'astro:content';
 import Admin from '../../../layouts/Admin.astro';
 import { CMS } from '../../../lib/admin.js';
 
-const enfants = (await getCollection('enfants')).sort((a, b) => a.id.localeCompare(b.id));
+const enfants = (await getCollection('enfants')).sort((a, b) => (a.data.matricule ?? a.id).localeCompare(b.data.matricule ?? b.id));
 const nbPubliees = enfants.filter((e) => e.data.publie).length;
 const nbCompletes = enfants.filter((e) => e.data.prenom && e.data.age != null && e.data.niveau).length;
+const nbParraines = enfants.filter((e) => e.data.parraine).length;
 /* Le corps de la fiche sert d'« histoire » sur la page publique de
    l'enfant ; le texte gabarit d'origine compte comme une absence. */
 const aHistoire = (e) => Boolean(e.body?.trim()) && !e.body.trim().startsWith('Fiche à compléter');
 ---
-<Admin titre="Enfants à parrainer" sousTitre={`${enfants.length} fiche${enfants.length > 1 ? 's' : ''}, dont ${nbPubliees} publiée${nbPubliees > 1 ? 's' : ''} — ${nbCompletes} complète${nbCompletes > 1 ? 's' : ''} (prénom, âge, niveau).`} actif="enfants">
+<Admin titre="Enfants à parrainer" sousTitre={`${enfants.length} fiche${enfants.length > 1 ? 's' : ''}, dont ${nbPubliees} publiée${nbPubliees > 1 ? 's' : ''} — ${nbParraines} parrainé${nbParraines > 1 ? 's' : ''}, ${enfants.length - nbParraines} en attente — ${nbCompletes} complète${nbCompletes > 1 ? 's' : ''} (prénom, âge, niveau).`} actif="enfants">
   <Fragment slot="actions">
     <a class="btn btn--ghost" href="/parrainage/">Voir la page publique ↗</a>
     <a class="btn btn--or" href={`${CMS}/collections/enfants/new`}>+ Nouvelle fiche</a>
@@ -22,20 +23,21 @@ const aHistoire = (e) => Boolean(e.body?.trim()) && !e.body.trim().startsWith('F
     <div class="scroll">
       <table class="tbl">
         <thead>
-          <tr><th>Fiche</th><th>Prénom</th><th>Âge</th><th>Niveau</th><th>Au centre depuis</th><th>Photo</th><th>Histoire</th><th>Statut</th><th class="act">Actions</th></tr>
+          <tr><th>Matricule</th><th>Prénom</th><th>Parrainage</th><th>Âge</th><th>Niveau</th><th>Photo</th><th>Histoire</th><th>Statut</th><th class="act">Actions</th></tr>
         </thead>
         <tbody>
           {enfants.map((e) => (
             <tr>
-              <td class="dt">{e.id}</td>
+              <td class="dt">{e.data.matricule ?? e.id}</td>
               <td>{e.data.prenom ? <b>{e.data.prenom}</b> : <span class="chip chip--n">à compléter</span>}</td>
+              <td>{e.data.parraine ? <span class="chip chip--ok">Parrainé ✓</span> : <span class="chip chip--n">en attente</span>}</td>
               <td class="dt">{e.data.age ?? '—'}</td>
               <td>{e.data.niveau ?? <span class="muted">—</span>}</td>
-              <td class="dt">{e.data.anneeEntree ?? '—'}</td>
               <td>{e.data.photo ? <span class="chip chip--ok">oui</span> : <span class="chip chip--n">aucune</span>}</td>
               <td>{aHistoire(e) ? <span class="chip chip--ok">rédigée</span> : <span class="chip chip--n">à rédiger</span>}</td>
               <td>{e.data.publie ? <span class="chip chip--ok">Publiée</span> : <span class="chip chip--off">Masquée</span>}</td>
               <td class="act">
+                <a href={`${CMS}/collections/enfants/entries/${e.id}`}><b>{e.data.parraine ? 'Retirer le parrainage →' : 'Déclarer parrainé →'}</b></a>
                 {e.data.publie && e.data.prenom && <a href={`/parrainage/${e.id}/`}>Voir ↗</a>}
                 <a href={`${CMS}/collections/enfants/entries/${e.id}`}>Modifier →</a>
               </td>
@@ -47,8 +49,12 @@ const aHistoire = (e) => Boolean(e.body?.trim()) && !e.body.trim().startsWith('F
   </section>
 
   <p style="font-size:13px;color:var(--gris);margin-top:14px">
-    <strong>Protection des enfants :</strong> ne renseignez le prénom et la photo qu'avec l'autorisation
-    écrite des parents. Une fiche incomplète s'affiche sur le site sans photo ni nom, avec la mention
-    « fiche à compléter ».
+    <strong>Déclarer un parrainage :</strong> cliquez sur « Déclarer parrainé », cochez la case
+    <strong>« Parrainé »</strong> dans la fiche qui s'ouvre, puis Enregistrer — le site se republie
+    tout seul (~2 min) et l'enfant passe en « Déjà parrainé » partout. Même chemin pour retirer un parrainage.
+  </p>
+  <p style="font-size:13px;color:var(--gris);margin-top:8px">
+    <strong>Protection des enfants :</strong> ne renseignez la photo qu'avec l'autorisation
+    écrite des parents. <strong>Ne modifiez jamais le matricule</strong> — c'est le numéro officiel du centre.
   </p>
 </Admin>

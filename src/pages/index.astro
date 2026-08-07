@@ -7,12 +7,11 @@ import config from '../../content/config.json';
 import { getCollection } from 'astro:content';
 import { fmtDate, fmtNombre, pourcentageCollecte, collecteManuelleFCFA } from '../lib/format.js';
 import Photo from '../components/Photo.astro';
-import CarteEnfant from '../components/CarteEnfant.astro';
+import GrilleEnfants from '../components/GrilleEnfants.astro';
 import ParrainerDialog from '../components/ParrainerDialog.astro';
 import BlocEmail from '../components/BlocEmail.astro';
 
 const actualites = (await getCollection('actualites', ({ data }) => data.publie)).slice(0, 3);
-const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slice(0, 4);
 ---
 <Base
   titre="Centre Coranique Rahma — École coranique gratuite à Yirimadio, Bamako | AMAAFE"
@@ -182,9 +181,7 @@ const enfants = (await getCollection('enfants', ({ data }) => data.publie)).slic
         </div>
         <p class="lead" style="max-width:40ch">Chaque parrain ou marraine finance la scolarité, les fournitures et l'accompagnement éducatif d'un ou plusieurs enfants. C'est ce qui garantit la continuité de leur parcours.</p>
       </div>
-      <div class="g4">
-        {enfants.map((enfant) => <CarteEnfant enfant={enfant} lien="/parrainage/" />)}
-      </div>
+      <GrilleEnfants lien="/parrainage/" id="enfants-accueil" />
       <p class="rv" style="margin-top:26px;font-size:13.5px;color:var(--gris-2);text-align:center">
         Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants seront présentés sans photo ni nom complet.
       </p>

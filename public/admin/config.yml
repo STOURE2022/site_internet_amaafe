@@ -798,6 +798,21 @@ collections:
           required: false,
         }
       - {
+          name: matricule,
+          label: "Matricule (ne pas modifier)",
+          widget: string,
+          required: false,
+          hint: "Numéro officiel du centre (ex. N° 0001-ML-CR-P1) — ne jamais le changer.",
+        }
+      - {
+          name: parraine,
+          label: "Parrainé",
+          widget: boolean,
+          default: false,
+          required: false,
+          hint: "Cochez quand l'enfant a trouvé son parrain ou sa marraine — il passe en « Déjà parrainé » sur le site.",
+        }
+      - {
           name: age,
           label: "Âge",
           widget: number,

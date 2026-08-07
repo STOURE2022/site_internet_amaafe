@@ -3,10 +3,9 @@ import Base from '../layouts/Base.astro';
 import config from '../../content/config.json';
 import { getCollection, render } from 'astro:content';
 import { fmtNombre } from '../lib/format.js';
-import CarteEnfant from '../components/CarteEnfant.astro';
+import GrilleEnfants from '../components/GrilleEnfants.astro';
 import ParrainerDialog from '../components/ParrainerDialog.astro';
 
-const enfants = await getCollection('enfants', ({ data }) => data.publie);
 const temoignages = (await getCollection('temoignages', ({ data }) => data.publie && data.contexte === 'parrainage'))
   .sort((a, b) => a.data.ordre - b.data.ordre);
 const temoignagesRendus = await Promise.all(
@@ -71,9 +70,7 @@ const lienWa = `https://wa.me/${config.whatsapp.numeroParrainage || config.whats
           <h2>Ils attendent un parrain ou une marraine</h2>
         </div>
       </div>
-      <div class="g4">
-        {enfants.map((enfant) => <CarteEnfant enfant={enfant} lien="#devenir-parrain" />)}
-      </div>
+      <GrilleEnfants lien="#devenir-parrain" id="enfants-parrainage" />
       <div class="note rv" style="max-width:760px;margin-inline:auto">
         <strong>Protection des enfants.</strong> Les fiches ne seront publiées qu'avec l'autorisation écrite des parents. À défaut, les enfants sont présentés sans photo ni nom complet — comme c'est le cas actuellement.
       </div>

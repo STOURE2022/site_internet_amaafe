@@ -1,0 +1,48 @@
+---
+/** Grille des enfants à parrainer (maquette validée) : les 4 premiers
+    enfants en attente d'abord, le reste (en attente, puis parrainés en fin
+    de liste) révélé sur place par un bouton. Tri par matricule. */
+import { getCollection } from 'astro:content';
+import CarteEnfant from './CarteEnfant.astro';
+
+const { lien = '/parrainage/#devenir-parrain', id = 'enfants' } = Astro.props;
+
+const tous = (await getCollection('enfants', ({ data }) => data.publie))
+  .sort((a, b) => (a.data.matricule ?? a.id).localeCompare(b.data.matricule ?? b.id));
+const attente = tous.filter((e) => !e.data.parraine);
+const parraines = tous.filter((e) => e.data.parraine);
+const apercu = attente.slice(0, 4);
+const suite = [...attente.slice(4), ...parraines];
+const libelle = [
+  attente.length > 4 ? `${attente.length - 4} en attente` : null,
+  parraines.length > 0 ? `${parraines.length} parrainé${parraines.length > 1 ? 's' : ''}` : null,
+].filter(Boolean).join(' et ');
+---
+<div class="g4">
+  {apercu.map((enfant) => <CarteEnfant enfant={enfant} lien={lien} />)}
+</div>
+{suite.length > 0 && (
+  <Fragment>
+    <div class="g4" id={`${id}-suite`} hidden style="margin-top:20px">
+      {suite.map((enfant) => <CarteEnfant enfant={enfant} lien={lien} />)}
+    </div>
+    <div class="voirplus rv">
+      <button type="button" class="btn btn--ghost btn--lg" data-voirplus={`${id}-suite`}
+        aria-expanded="false" aria-controls={`${id}-suite`}>Voir les autres enfants — {libelle} ↓</button>
+    </div>
+    <script is:inline>
+      document.querySelectorAll('[data-voirplus]').forEach(function (b) {
+        if (b.dataset.vpInit) return;
+        b.dataset.vpInit = '1';
+        b.addEventListener('click', function () {
+          var suite = document.getElementById(b.dataset.voirplus);
+          if (!suite) return;
+          suite.hidden = false;
+          suite.querySelectorAll('.rv').forEach(function (el) { el.classList.add('is-in'); });
+          b.setAttribute('aria-expanded', 'true');
+          b.closest('.voirplus').hidden = true;
+        });
+      });
+    </script>
+  </Fragment>
+)}
