@@ -2,12 +2,12 @@
 titre: Fiche 0025
 prenom: Sitan Sidibé
 matricule: N° 0025-ML-CR-P1
+parraine: true
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0025-sitan-sidibe.png
-parraine: false
 publie: true
 ---
 
