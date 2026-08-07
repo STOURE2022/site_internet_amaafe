@@ -2,12 +2,12 @@
 titre: Fiche 0011
 prenom: Oumou Koné
 matricule: N° 0011-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0011-oumou-kone.png
-parraine: false
 publie: true
 ---
 
