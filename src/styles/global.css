@@ -127,9 +127,11 @@ p{margin:0}
 .cenf__mat{font-family:var(--mono);font-size:10.5px;color:var(--gris-2);letter-spacing:.04em;margin-top:3px}
 .cenf--p .cenf__chip{color:var(--vert-2)}
 .cenf--p .cenf__btn--fait{background:var(--vert-pale);color:var(--vert-2);cursor:default}
-/* cartes au-delà des 4 premières : masquées jusqu'au clic sur « voir les autres » */
-.cenf--cache{display:none}
-.no-js .cenf--cache{display:flex}
+/* cartes au-delà des 4 premières : masquées jusqu'au clic sur « voir les
+   autres ». Doublement de la classe pour l'emporter sur .cenf{display:flex},
+   défini plus bas dans la feuille. */
+.cenf.cenf--cache{display:none}
+.no-js .cenf.cenf--cache{display:flex}
 
 /* ---- gages de confiance des blocs de don ---- */
 .fiab{list-style:none;margin:18px 0 0;padding:14px 16px;display:grid;gap:10px;background:var(--papier-2);
