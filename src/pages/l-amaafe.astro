@@ -24,6 +24,13 @@ const temoignages = (await getCollection('temoignages', ({ data }) => data.publi
 const temoignagesRendus = await Promise.all(
   temoignages.map(async (t) => ({ ...t, Contenu: (await render(t)).Content }))
 );
+
+/* Le slogan se coupe juste avant « au cœur » (deux lignes équilibrées) ;
+   s'il change un jour dans l'admin, il s'affiche simplement d'un bloc. */
+const slogan = config.amaafe.slogan ?? '';
+const sloganLignes = slogan.includes(' au cœur')
+  ? [slogan.slice(0, slogan.indexOf(' au cœur')), slogan.slice(slogan.indexOf(' au cœur') + 1)]
+  : [slogan];
 ---
 <Base
   titre="L'AMAAFE — L'association qui porte le Centre Rahma"
@@ -32,7 +39,7 @@ const temoignagesRendus = await Promise.all(
 
   <section class="wrap phero phero--centre">
     <span class="eyebrow eyebrow--d eyebrow--milieu">L'association porteuse</span>
-    <h1>{config.amaafe.slogan}</h1>
+    <h1>{sloganLignes[0]}{sloganLignes[1] && <Fragment><br />{sloganLignes[1]}</Fragment>}</h1>
     <p class="lead">L'{config.amaafe.nomComplet} ({config.amaafe.sigle}) est une association à but non lucratif et apolitique, née du constat des conditions de vie des femmes et des enfants au Mali. Elle est reconnue légalement au Mali et en France.</p>
     <div class="tags">
       {config.amaafe.valeurs.map((valeur) => <span class="tag">{valeur}</span>)}
