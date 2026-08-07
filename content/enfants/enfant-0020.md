@@ -2,12 +2,12 @@
 titre: Fiche 0020
 prenom: Bintou Sarré
 matricule: N° 0020-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0020-bintou-sarre.png
-parraine: false
 publie: true
 ---
 
