@@ -127,6 +127,9 @@ p{margin:0}
 .cenf__mat{font-family:var(--mono);font-size:10.5px;color:var(--gris-2);letter-spacing:.04em;margin-top:3px}
 .cenf--p .cenf__chip{color:var(--vert-2)}
 .cenf--p .cenf__btn--fait{background:var(--vert-pale);color:var(--vert-2);cursor:default}
+/* cartes au-delà des 4 premières : masquées jusqu'au clic sur « voir les autres » */
+.cenf--cache{display:none}
+.no-js .cenf--cache{display:flex}
 
 /* ---- gages de confiance des blocs de don ---- */
 .fiab{list-style:none;margin:18px 0 0;padding:14px 16px;display:grid;gap:10px;background:var(--papier-2);
@@ -293,8 +296,10 @@ body.menu-ouvert{overflow:hidden}
 /* ---- fiche individuelle d'un enfant à parrainer ---- */
 .fiche{background:var(--papier-2);border:1px solid var(--ligne);border-radius:16px;overflow:hidden;box-shadow:0 30px 60px -44px rgba(10,27,18,.35)}
 .fiche__hero{display:grid;grid-template-columns:.9fr 1.1fr}
-.fiche__ph{position:relative;min-height:340px;background:var(--vert-pale)}
-.fiche__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fiche__ph{position:relative;min-height:340px;background:var(--vert-pale);overflow:hidden}
+.fiche__fond{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(20px) saturate(1.05);transform:scale(1.15);opacity:.8}
+.fiche__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}
+.fiche__ph img.fiche__fond{object-fit:cover;z-index:auto}
 .fiche__c{padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .fiche__retour{font-size:13px;font-weight:700;color:var(--vert-2)}
 .fiche__retour:hover{text-decoration:underline;text-underline-offset:3px}
@@ -542,10 +547,13 @@ body.menu-ouvert{overflow:hidden}
 .cenf{display:flex;flex-direction:column;background:var(--papier-2);border:1px solid var(--ligne);border-radius:14px;overflow:hidden;transition:translate .22s cubic-bezier(.22,1,.36,1),box-shadow .22s,border-color .22s}
 .cenf.rv{transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),translate .22s cubic-bezier(.22,1,.36,1),box-shadow .22s,border-color .22s}
 .cenf:hover{translate:0 -5px;border-color:#D8C089;box-shadow:0 24px 40px -24px rgba(10,27,18,.35),0 6px 14px -8px rgba(10,27,18,.12)}
-.cenf__ph{position:relative;aspect-ratio:4/3.4;background:var(--vert-pale);overflow:hidden}
-.cenf__ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
-.cenf:hover .cenf__ph img{transform:scale(1.045)}
-.cenf__ph::after{content:"";position:absolute;inset:auto 0 0 0;height:44%;background:linear-gradient(transparent,rgba(10,27,18,.28))}
+/* Cadre vertical ; la photo s'affiche entière (object-fit:contain) sur sa
+   propre version agrandie et floutée — jamais recadrée (option B validée). */
+.cenf__ph{position:relative;aspect-ratio:4/4.6;background:var(--vert-pale);overflow:hidden}
+.cenf__fond{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(18px) saturate(1.05);transform:scale(1.15);opacity:.8}
+.cenf__devant{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.cenf:hover .cenf__devant{transform:scale(1.03)}
+.cenf__ph::after{content:"";position:absolute;inset:auto 0 0 0;height:44%;background:linear-gradient(transparent,rgba(10,27,18,.28));z-index:1}
 .cenf__ph--vide{display:grid;place-items:center;background:repeating-linear-gradient(135deg,rgba(15,74,47,.06) 0 1px,transparent 1px 11px),var(--vert-pale)}
 .cenf__ph--vide::after{display:none}
 .cenf__chip{position:absolute;top:12px;left:12px;z-index:2;background:rgba(252,250,245,.94);color:#8A6D12;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:5px 12px;display:flex;align-items:center;gap:6px;overflow:hidden;pointer-events:none}

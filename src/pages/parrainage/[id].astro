@@ -37,7 +37,10 @@ const prixEUR = config.parrainage.montantMensuelEUR;
         <div class="fiche__hero">
           <div class="fiche__ph">
             {d.photo
-              ? <img src={d.photo} alt={`Photo de ${d.prenom}`} />
+              ? <Fragment>
+                  <img class="fiche__fond" src={d.photo} alt="" aria-hidden="true" />
+                  <img src={d.photo} alt={`Photo de ${d.prenom}`} />
+                </Fragment>
               : <span class="cenf__sil" style="position:absolute;inset:0;margin:auto" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="16" r="8"/><path d="M8 38c2.5-8 8-11.5 14-11.5S33.5 30 36 38"/></svg></span>}
           </div>
           <div class="fiche__c">

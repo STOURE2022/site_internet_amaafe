@@ -1,8 +1,9 @@
 ---
-/** Grille des enfants à parrainer (maquette validée) : les 4 premiers
-    enfants en attente d'abord, le reste (en attente, puis parrainés en fin
-    de liste) révélé sur place par un bouton. Tri par matricule, filtres
-    Tous / Filles / Garçons / Déjà parrainés. */
+/** Grille des enfants à parrainer (maquette validée) : une seule grille —
+    les 4 premiers enfants en attente visibles, le reste (en attente, puis
+    parrainés en fin de liste) masqué par carte (cenf--cache) et révélé par
+    le bouton ou par un filtre, sans laisser de trous. Tri par matricule,
+    filtres Tous / Filles / Garçons / Déjà parrainés. */
 import { getCollection } from 'astro:content';
 import CarteEnfant from './CarteEnfant.astro';
 
@@ -12,8 +13,8 @@ const tous = (await getCollection('enfants', ({ data }) => data.publie))
   .sort((a, b) => (a.data.matricule ?? a.id).localeCompare(b.data.matricule ?? b.id));
 const attente = tous.filter((e) => !e.data.parraine);
 const parraines = tous.filter((e) => e.data.parraine);
-const apercu = attente.slice(0, 4);
-const suite = [...attente.slice(4), ...parraines];
+const ordonnes = [...attente, ...parraines];
+const nbCaches = Math.max(0, ordonnes.length - 4);
 const nbFilles = tous.filter((e) => e.data.sexe === 'fille').length;
 const nbGarcons = tous.filter((e) => e.data.sexe === 'garcon').length;
 const libelle = [
@@ -29,27 +30,26 @@ const libelle = [
     {parraines.length > 0 && <button type="button" data-filtre="parraine">Déjà parrainés ({parraines.length})</button>}
   </div>
 )}
-<div class="g4" id={`${id}-apercu`}>
-  {apercu.map((enfant) => <CarteEnfant enfant={enfant} lien={lien} />)}
+<div class="g4" id={id}>
+  {ordonnes.map((enfant, i) => <CarteEnfant enfant={enfant} lien={lien} cache={i >= 4} />)}
 </div>
-{suite.length > 0 && (
+{nbCaches > 0 && (
   <Fragment>
-    <div class="g4" id={`${id}-suite`} hidden style="margin-top:20px">
-      {suite.map((enfant) => <CarteEnfant enfant={enfant} lien={lien} />)}
-    </div>
     <div class="voirplus rv">
-      <button type="button" class="btn btn--ghost btn--lg" data-voirplus={`${id}-suite`}
-        aria-expanded="false" aria-controls={`${id}-suite`}>Voir les autres enfants — {libelle} ↓</button>
+      <button type="button" class="btn btn--ghost btn--lg" data-voirplus={id}
+        aria-expanded="false" aria-controls={id}>Voir les autres enfants — {libelle} ↓</button>
     </div>
     <script is:inline>
       (function () {
-        function revele(idSuite) {
-          var suite = document.getElementById(idSuite);
-          if (suite) {
-            suite.hidden = false;
-            suite.querySelectorAll('.rv').forEach(function (el) { el.classList.add('is-in'); });
+        function revele(idGrille) {
+          var grille = document.getElementById(idGrille);
+          if (grille) {
+            grille.querySelectorAll('.cenf--cache').forEach(function (c) {
+              c.classList.remove('cenf--cache');
+              c.classList.add('is-in');
+            });
           }
-          var vp = document.querySelector('[data-voirplus="' + idSuite + '"]');
+          var vp = document.querySelector('[data-voirplus="' + idGrille + '"]');
           if (vp) vp.closest('.voirplus').hidden = true;
         }
         document.querySelectorAll('[data-voirplus]').forEach(function (b) {
@@ -67,9 +67,9 @@ const libelle = [
           bar.querySelectorAll('button').forEach(function (btn) {
             btn.addEventListener('click', function () {
               bar.querySelectorAll('button').forEach(function (x) { x.classList.toggle('actif', x === btn); });
-              revele(base + '-suite');
+              revele(base);
               var f = btn.dataset.filtre;
-              document.querySelectorAll('#' + base + '-apercu .cenf, #' + base + '-suite .cenf').forEach(function (c) {
+              document.querySelectorAll('#' + base + ' .cenf').forEach(function (c) {
                 var ok = f === 'tous' || (f === 'parraine' ? c.dataset.parraine === '1' : c.dataset.sexe === f);
                 c.style.display = ok ? '' : 'none';
               });
