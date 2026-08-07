@@ -2,12 +2,12 @@
 titre: Fiche 0009
 prenom: Ramatou Koïta
 matricule: N° 0009-ML-CR-P1
+parraine: false
 sexe: fille
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0009-ramatou-koita.jpg
-parraine: false
 publie: true
 ---
 
