@@ -2,12 +2,12 @@
 titre: Fiche 0022
 prenom: Mahamadou Sarré
 matricule: N° 0022-ML-CR-P1
+parraine: true
 sexe: garcon
 age: null
 niveau: null
-anneeEntree: null
+anneeEntree: 2023
 photo: /images/uploads/enfant-0022-mahamadou-sarre.png
-parraine: false
 publie: true
 ---
 
