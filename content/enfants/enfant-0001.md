@@ -6,7 +6,7 @@ sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0001-modibo-barry.jpg
 parraine: false
 publie: true
 ---

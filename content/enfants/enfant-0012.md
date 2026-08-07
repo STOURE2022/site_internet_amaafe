@@ -6,7 +6,7 @@ sexe: fille
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0012-salimata-kone.jpg
 parraine: false
 publie: true
 ---

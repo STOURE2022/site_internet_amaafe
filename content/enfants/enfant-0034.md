@@ -6,7 +6,7 @@ sexe: fille
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0034-asseniye-tirera.jpg
 parraine: false
 publie: true
 ---

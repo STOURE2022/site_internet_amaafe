@@ -6,7 +6,7 @@ sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0030-moulaye-traore.png
 parraine: false
 publie: true
 ---

@@ -6,7 +6,7 @@ sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0031-seydou-malle.jpg
 parraine: false
 publie: true
 ---

@@ -6,7 +6,7 @@ sexe: fille
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0035-salimata-tolo.jpg
 parraine: false
 publie: true
 ---

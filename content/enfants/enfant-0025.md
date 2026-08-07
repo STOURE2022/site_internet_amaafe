@@ -6,7 +6,7 @@ sexe: fille
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0025-sitan-sidibe.png
 parraine: false
 publie: true
 ---

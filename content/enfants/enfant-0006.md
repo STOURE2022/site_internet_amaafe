@@ -6,7 +6,7 @@ sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0006-ousmane-dembele.jpg
 parraine: false
 publie: true
 ---

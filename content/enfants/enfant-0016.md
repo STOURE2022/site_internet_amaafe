@@ -6,7 +6,7 @@ sexe: garcon
 age: null
 niveau: null
 anneeEntree: null
-photo: null
+photo: /images/uploads/enfant-0016-adama-sangare.jpg
 parraine: false
 publie: true
 ---
