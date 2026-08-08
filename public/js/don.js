@@ -129,7 +129,7 @@
       : ($('d-nom') && $('d-nom').value.trim()) || '…';
     var num = ($('d-num') && $('d-num').value.trim()) || '…';
     var date = ($('d-date') && $('d-date').value) || '…';
-    return 'Bonjour, je déclare un don au Centre Coranique Rahma.\n' +
+    return 'Bonjour, je déclare un don à AMAAFE.\n' +
       'Montant : ' + fmt(amount) + ' ' + cur + (freq === 'month' ? ' (don mensuel)' : ' (don ponctuel)') + '\n' +
       'Canal : ' + NOMS_CANAL[pay] + '\n' +
       'Numéro émetteur : ' + num + '\n' +
